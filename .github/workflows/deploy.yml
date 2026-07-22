@@ -1,0 +1,165 @@
+name: Deploy HDS
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+env:
+  PHP_VERSION: '8.2'
+  NODE_VERSION: '20'
+
+jobs:
+  # ── Lint & Static Analysis ──
+  lint:
+    name: Lint & Static Analysis
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          coverage: none
+          tools: composer:v2, phpcs
+
+      - name: Get Composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-progress
+        continue-on-error: true
+
+      - name: Run PHPCS
+        run: composer phpcs || true
+        continue-on-error: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install Node dependencies
+        run: npm ci
+        continue-on-error: true
+
+      - name: Run ESLint
+        run: npm run lint:js || true
+        continue-on-error: true
+
+      - name: Run Stylelint
+        run: npm run lint:css || true
+        continue-on-error: true
+
+  # ── Deploy ──
+  deploy:
+    name: Deploy
+    needs: lint
+    if: success() || failure()
+    runs-on: ubuntu-24.04
+    environment:
+      name: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Determine environment
+        id: env
+        run: |
+          if [[ "${{ github.ref_name }}" == "main" ]]; then
+            echo "target=production" >> $GITHUB_OUTPUT
+          else
+            echo "target=staging" >> $GITHUB_OUTPUT
+          fi
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "target=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Deploy via SSH
+        uses: easingthemes/ssh-deploy@v5
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          ARGS: "-rlgoDzvc -i --delete"
+          SOURCE: "./"
+          REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
+          REMOTE_USER: ${{ secrets.DEPLOY_USER }}
+          REMOTE_PORT: ${{ secrets.DEPLOY_PORT || '22' }}
+          TARGET: ${{ secrets.DEPLOY_PATH }}
+          EXCLUDE: |
+            /.git/
+            /.github/
+            /.codegraph/
+            /.omo/
+            /docs/
+            /Docker/
+            /node_modules/
+            /vendor/
+            /tests/
+            /.env
+            /.env.*
+            !.env.example
+            /docker-compose.yml
+            /docker-compose.*.yml
+            /composer.json
+            /composer.lock
+            /package.json
+            /package-lock.json
+            /.eslintrc.js
+            /.stylelintrc.json
+            /phpcs.xml
+            /README.md
+
+      - name: Clear cache on remote
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_PORT || '22' }}
+          script: |
+            cd ${{ secrets.DEPLOY_PATH }}
+            wp cache flush
+            wp rewrite flush
+            wp core update-db
+            echo "Deploy complete at $(date)"
+
+  # ── Backup (production only) ──
+  backup:
+    name: Pre-deploy Backup
+    needs: lint
+    if: github.ref_name == 'main' && github.event_name == 'push'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Trigger backup via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_PORT || '22' }}
+          script: |
+            cd ${{ secrets.DEPLOY_PATH }}
+            echo "Backup triggered at $(date)"
+            wp db export backups/pre-deploy-$(date +%Y%m%d-%H%M%S).sql

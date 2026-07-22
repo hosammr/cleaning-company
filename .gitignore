@@ -1,0 +1,74 @@
+# === WordPress Core ===
+/
+/wp-admin/
+/wp-includes/
+/wp-content/languages/
+/wp-content/upgrade/
+/wp-content/uploads/
+/wp-content/plugins/wordfence/
+/wp-content/plugins/wordfence*/
+
+# === WordPress Config ===
+wp-config.php
+wp-config-local.php
+wp-config-staging.php
+wp-config-production.php
+
+# === Environment ===
+.env
+.env.local
+.env.staging
+.env.production
+
+# === Dependencies ===
+/node_modules/
+/vendor/
+package-lock.json
+composer.lock
+
+# === Build artifacts ===
+/dist/
+/build/
+wp-content/themes/hds/assets/css/*.css.map
+wp-content/themes/hds/assets/js/*.js.map
+
+# === IDE / Editor ===
+.idea/
+.vscode/
+*.sublime-*
+*.swp
+*.swo
+*~
+
+# === OS ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === Logs ===
+*.log
+/debug.log
+/error.log
+/wp-content/debug.log
+
+# === Cache ===
+/wp-content/cache/
+/wp-content/wflogs/
+
+# === Testing ===
+/tests/_output/
+/coverage/
+
+# === Docker ===
+/mysql/
+/.docker/
+
+# === Backup files ===
+*.sql
+*.sql.gz
+*.tar.gz
+*.zip
+
+# === System ===
+/.codegraph/
+/.omo/

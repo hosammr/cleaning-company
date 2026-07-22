@@ -1,0 +1,341 @@
+/*
+ * HDS Onderhoudsdiensten — Main Stylesheet
+ * Design system tokens and base styles generated from theme.json.
+ */
+
+:root {
+	--hds-spacing: var(--wp--preset--spacing--4);
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* ── Accessibility ── */
+.screen-reader-text {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal;
+}
+
+.skip-link {
+	background: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--white);
+	padding: 0.5rem 1rem;
+	text-decoration: none;
+	z-index: 10000;
+}
+.skip-link:focus {
+	clip: auto;
+	clip-path: none;
+	height: auto;
+	left: 1rem;
+	top: 1rem;
+	width: auto;
+}
+
+/* ── Layout ── */
+.container {
+	margin-inline: auto;
+	max-width: var(--wp--style--global--wide-size);
+	padding-inline: var(--wp--preset--spacing--4);
+	width: 100%;
+}
+
+.site-main {
+	min-height: 60vh;
+	padding-block: var(--wp--preset--spacing--8);
+}
+
+/* ── Header ── */
+.site-header {
+	background: var(--wp--preset--color--white);
+	border-bottom: 1px solid var(--wp--preset--color--light-gray);
+	padding-block: var(--wp--preset--spacing--4);
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+}
+
+.site-header-inner {
+	align-items: center;
+	display: flex;
+	gap: var(--wp--preset--spacing--6);
+	justify-content: space-between;
+}
+
+.site-branding {
+	flex-shrink: 0;
+}
+
+.site-title a {
+	color: var(--wp--preset--color--black);
+	font-size: var(--wp--preset--font-size--xl);
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.main-navigation .primary-menu {
+	display: flex;
+	gap: var(--wp--preset--spacing--4);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.main-navigation a {
+	color: var(--wp--preset--color--dark-gray);
+	text-decoration: none;
+}
+.main-navigation a:hover,
+.main-navigation a:focus {
+	color: var(--wp--preset--color--primary);
+}
+
+.header-phone {
+	align-items: center;
+	color: var(--wp--preset--color--primary);
+	display: flex;
+	font-weight: 600;
+	gap: 0.25rem;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.menu-toggle {
+	display: none;
+}
+
+/* ── Footer ── */
+.site-footer {
+	background: var(--wp--preset--color--dark-gray);
+	color: var(--wp--preset--color--white);
+	padding-block: var(--wp--preset--spacing--12);
+}
+
+.footer-grid {
+	display: grid;
+	gap: var(--wp--preset--spacing--8);
+	grid-template-columns: repeat(5, 1fr);
+}
+
+.footer-heading {
+	color: var(--wp--preset--color--white);
+	font-size: var(--wp--preset--font-size--l);
+	margin-bottom: var(--wp--preset--spacing--4);
+}
+
+.footer-menu {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.footer-menu a {
+	color: var(--wp--preset--color--light-gray);
+	text-decoration: none;
+}
+.footer-menu a:hover {
+	color: var(--wp--preset--color--white);
+}
+
+.footer-contact a {
+	color: var(--wp--preset--color--light-gray);
+	text-decoration: none;
+}
+
+.footer-bottom {
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--4);
+	justify-content: space-between;
+	margin-top: var(--wp--preset--spacing--8);
+	padding-top: var(--wp--preset--spacing--6);
+}
+
+/* ── Buttons ── */
+.btn {
+	display: inline-block;
+	font-weight: 600;
+	padding: 0.75rem 1.5rem;
+	text-decoration: none;
+}
+.btn-cta {
+	background: var(--wp--preset--color--primary);
+	border-radius: 4px;
+	color: var(--wp--preset--color--white);
+	font-size: var(--wp--preset--font-size--l);
+}
+.btn-cta:hover {
+	background: var(--wp--preset--color--primary-dark);
+}
+
+/* ── Breadcrumbs ── */
+.breadcrumbs {
+	margin-bottom: var(--wp--preset--spacing--6);
+}
+.breadcrumbs ol {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.breadcrumbs li:not(:last-child)::after {
+	color: var(--wp--preset--color--gray);
+	content: "/";
+	margin-inline: 0.5rem;
+}
+.breadcrumbs a {
+	color: var(--wp--preset--color--gray);
+	text-decoration: none;
+}
+.breadcrumbs a:hover {
+	color: var(--wp--preset--color--primary);
+}
+
+/* ── CTA Banner ── */
+.cta-banner {
+	background: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--white);
+	padding-block: var(--wp--preset--spacing--12);
+	text-align: center;
+}
+.cta-banner h2 {
+	color: var(--wp--preset--color--white);
+}
+.cta-banner .btn-cta {
+	background: var(--wp--preset--color--white);
+	color: var(--wp--preset--color--primary);
+}
+
+/* ── Service Hero ── */
+.service-hero {
+	background: var(--wp--preset--color--light-gray);
+	background-position: center;
+	background-size: cover;
+	padding-block: var(--wp--preset--spacing--16);
+	text-align: center;
+}
+.service-subtitle {
+	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--l);
+}
+
+/* ── Contact Layout ── */
+.contact-layout {
+	display: grid;
+	gap: var(--wp--preset--spacing--8);
+	grid-template-columns: 3fr 2fr;
+}
+
+.contact-info-block {
+	background: var(--wp--preset--color--light-gray);
+	border-radius: 8px;
+	padding: var(--wp--preset--spacing--6);
+}
+
+.contact-info-item {
+	margin-bottom: var(--wp--preset--spacing--4);
+}
+
+.contact-info-item h3 {
+	font-size: var(--wp--preset--font-size--m);
+	margin-bottom: 0.25rem;
+}
+
+/* ── 404 ── */
+.error-404 {
+	max-width: 600px;
+	margin-inline: auto;
+	padding-block: var(--wp--preset--spacing--16);
+	text-align: center;
+}
+.error-404-search {
+	margin-bottom: var(--wp--preset--spacing--8);
+}
+.error-404-links {
+	margin-bottom: var(--wp--preset--spacing--8);
+}
+.error-404-links ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* ── Block Styles ── */
+.is-style-card {
+	background: var(--wp--preset--color--white);
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.is-style-banner {
+	background: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--white);
+}
+
+.is-style-cta {
+	display: inline-flex;
+	font-size: var(--wp--preset--font-size--l);
+}
+
+.is-style-icon-list {
+	list-style: none;
+	padding-left: 0;
+}
+.is-style-icon-list li {
+	padding-left: 1.5rem;
+	position: relative;
+}
+.is-style-icon-list li::before {
+	content: "✓";
+	left: 0;
+	position: absolute;
+}
+
+.is-style-no-bullet {
+	list-style: none;
+	padding-left: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1023px) {
+	.footer-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.contact-layout {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 767px) {
+	.footer-grid {
+		grid-template-columns: 1fr;
+	}
+	.footer-bottom {
+		flex-direction: column;
+		text-align: center;
+	}
+	.main-navigation .primary-menu {
+		display: none;
+	}
+	.menu-toggle {
+		display: block;
+	}
+	.header-phone-number {
+		display: none;
+	}
+}

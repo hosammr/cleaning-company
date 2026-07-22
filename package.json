@@ -1,0 +1,30 @@
+{
+  "name": "hds-onderhoudsdiensten",
+  "private": true,
+  "scripts": {
+    "build:css": "postcss wp-content/themes/hds/assets/css/main.css -o wp-content/themes/hds/assets/css/main.min.css",
+    "build:js": "esbuild wp-content/themes/hds/assets/js/main.js --bundle --minify --outfile=wp-content/themes/hds/assets/js/main.min.js",
+    "build": "npm run build:css && npm run build:js",
+    "lint:css": "stylelint 'wp-content/themes/hds/assets/css/**/*.css'",
+    "lint:js": "eslint 'wp-content/themes/hds/assets/js/**/*.js'",
+    "lint": "npm run lint:css && npm run lint:js",
+    "fix:css": "stylelint 'wp-content/themes/hds/assets/css/**/*.css' --fix",
+    "fix:js": "eslint 'wp-content/themes/hds/assets/js/**/*.js' --fix"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "postcss": "^8.4.0",
+    "postcss-cli": "^11.0.0",
+    "prettier": "^3.0.0",
+    "stylelint": "^16.0.0",
+    "stylelint-config-standard": "^36.0.0"
+  },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "Firefox ESR",
+    "not dead"
+  ]
+}
