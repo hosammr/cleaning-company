@@ -147,12 +147,19 @@ add_action( 'init', 'hds_register_custom_templates' );
  * Include functionality modules.
  */
 require_once HDS_DIR . '/inc/setup.php';
+require_once HDS_DIR . '/inc/config.php';
 require_once HDS_DIR . '/inc/helpers.php';
 require_once HDS_DIR . '/inc/sanitize.php';
 require_once HDS_DIR . '/inc/validation.php';
+require_once HDS_DIR . '/inc/routing.php';
+require_once HDS_DIR . '/inc/error-handler.php';
+require_once HDS_DIR . '/inc/seo.php';
+require_once HDS_DIR . '/inc/analytics.php';
 require_once HDS_DIR . '/inc/components.php';
 require_once HDS_DIR . '/inc/asset-loader.php';
 require_once HDS_DIR . '/inc/security.php';
+require_once HDS_DIR . '/inc/performance.php';
+require_once HDS_DIR . '/inc/woocommerce.php';
 require_once HDS_DIR . '/inc/cpts.php';
 require_once HDS_DIR . '/inc/custom-fields.php';
 require_once HDS_DIR . '/inc/customizer.php';

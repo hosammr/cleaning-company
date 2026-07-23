@@ -110,3 +110,113 @@ function hds_section_has_content( string $content, bool $is_front_page = false )
 
 	return true;
 }
+
+/**
+ * Get a responsive image HTML string.
+ */
+function hds_get_image( int $attachment_id, string $size = 'large', array $attrs = [] ): string {
+	if ( ! $attachment_id ) {
+		return '';
+	}
+	$default_attrs = [ 'loading' => 'lazy', 'decoding' => 'async' ];
+	$attrs = array_merge( $default_attrs, $attrs );
+	return wp_get_attachment_image( $attachment_id, $size, false, $attrs );
+}
+
+/**
+ * Get a formatted phone link.
+ */
+function hds_get_phone_link( string $phone = '', array $attrs = [] ): string {
+	$phone   = $phone ?: hds_get_phone();
+	$url     = 'tel:' . hds_esc_tel( $phone );
+	$text    = esc_html( $phone );
+	$attr_str = 'aria-label="' . esc_attr( sprintf( __( 'Bel %s', 'hds' ), $phone ) ) . '"';
+	foreach ( $attrs as $key => $val ) {
+		$attr_str .= ' ' . esc_attr( $key ) . '="' . esc_attr( $val ) . '"';
+	}
+	return sprintf( '<a href="%s" %s>%s</a>', esc_url( $url ), $attr_str, $text );
+}
+
+/**
+ * Get a formatted email link.
+ */
+function hds_get_email_link( string $email = '', string $subject = '', array $attrs = [] ): string {
+	$email = $email ?: hds_get_email();
+	$url   = 'mailto:' . esc_attr( $email );
+	if ( $subject ) {
+		$url .= '?subject=' . rawurlencode( $subject );
+	}
+	$text = esc_html( $email );
+	$attr_str = 'aria-label="' . esc_attr( sprintf( __( 'E-mail %s', 'hds' ), $email ) ) . '"';
+	foreach ( $attrs as $key => $val ) {
+		$attr_str .= ' ' . esc_attr( $key ) . '="' . esc_attr( $val ) . '"';
+	}
+	return sprintf( '<a href="%s" %s>%s</a>', esc_url( $url ), $attr_str, $text );
+}
+
+/**
+ * Format a date string using WordPress date format.
+ */
+function hds_format_date( string $date, string $format = '' ): string {
+	$format    = $format ?: get_option( 'date_format' );
+	$timestamp = strtotime( $date );
+	if ( ! $timestamp ) {
+		return $date;
+	}
+	return date_i18n( $format, $timestamp );
+}
+
+/**
+ * Format a currency value (EUR by default).
+ */
+function hds_format_currency( float $amount, string $currency = 'EUR' ): string {
+	if ( function_exists( 'wc_price' ) ) {
+		return wc_price( $amount );
+	}
+	return '&euro;' . number_format_i18n( $amount, 2 );
+}
+
+/**
+ * Truncate a string without breaking words.
+ */
+function hds_truncate( string $text, int $length = 100, string $suffix = '...' ): string {
+	$text = wp_strip_all_tags( $text );
+	if ( mb_strlen( $text ) <= $length ) {
+		return $text;
+	}
+	$truncated  = mb_substr( $text, 0, $length );
+	$last_space = mb_strrpos( $truncated, ' ' );
+	if ( $last_space ) {
+		$truncated = mb_substr( $truncated, 0, $last_space );
+	}
+	return $truncated . $suffix;
+}
+
+/**
+ * Get a social media URL from customizer.
+ */
+function hds_get_social_url( string $platform ): string {
+	return get_theme_mod( "hds_{$platform}_url", '' );
+}
+
+/**
+ * Get the company name.
+ */
+function hds_get_company_name(): string {
+	return get_bloginfo( 'name' );
+}
+
+/**
+ * Get the current full URL.
+ */
+function hds_get_current_url(): string {
+	global $wp;
+	return home_url( $wp->request );
+}
+
+/**
+ * Check if we are on a specific page by slug.
+ */
+function hds_is_page_slug( string $slug ): bool {
+	return is_page( $slug );
+}

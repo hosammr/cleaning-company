@@ -1,0 +1,31 @@
+parameters:
+	level: 6
+	paths:
+		- wp-content/themes/hds/
+
+	excludePaths:
+		- vendor/
+		- node_modules/
+		- wp-content/themes/hds/assets/
+
+	bootstrapFiles:
+		- tests/phpstan-bootstrap.php
+
+	scanFiles:
+		- wp-content/themes/hds/functions.php
+		- wp-content/themes/hds/inc/*.php
+
+	reportUnmatchedIgnoredErrors: false
+	checkGenericClassInNonGenericObjectType: false
+	treatPhpDocTypesAsCertain: false
+
+	rules:
+		- level: 2
+			path: wp-content/themes/hds/inc/
+
+	ignoreErrors:
+		- '#Function [a-zA-Z0-9_]+ not found#'
+		- '#Class [a-zA-Z0-9_]+ not found#'
+		- '#Constant [A-Z_]+ not found#'
+		- '#Call to an undefined method#'
+		- '#Access to an undefined property#'
