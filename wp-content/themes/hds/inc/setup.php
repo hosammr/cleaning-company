@@ -1,6 +1,6 @@
 <?php
 /**
- * Theme setup — image sizes, theme supports, disable unused features.
+ * Theme setup — image sizes, theme supports, disabling unused features.
  *
  * @package HDS
  */
@@ -48,14 +48,107 @@ function hds_disable_unused_features(): void {
 }
 add_action( 'init', 'hds_disable_unused_features' );
 
+/**
+ * Remove unnecessary DNS prefetch entries.
+ */
 function hds_remove_dns_prefetch( array $hints, string $relation_type ): array {
-	if ( $relation_type === 'dns-prefetch' ) {
+	if ( 'dns-prefetch' === $relation_type ) {
 		return array_filter( $hints, function ( $hint ) {
-			return strpos( $hint, 'fonts.googleapis.com' ) === false && strpos( $hint, 's.w.org' ) === false;
+			return strpos( $hint, 'fonts.googleapis.com' ) === false
+				&& strpos( $hint, 's.w.org' ) === false;
 		} );
 	}
 	return $hints;
 }
+
+/**
+ * Remove WordPress version generator.
+ */
+function hds_remove_version_generator(): void {
+	remove_action( 'wp_head', 'wp_generator' );
+	add_filter( 'the_generator', '__return_empty_string' );
+}
+add_action( 'init', 'hds_remove_version_generator' );
+
+/**
+ * Remove RSD, wlwmanifest, shortlink from head.
+ */
+function hds_remove_head_links(): void {
+	remove_action( 'wp_head', 'rsd_link' );
+	remove_action( 'wp_head', 'wlwmanifest_link' );
+	remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+	remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+	remove_action( 'wp_head', 'wp_oembed_add_host_js' );
+}
+add_action( 'init', 'hds_remove_head_links' );
+
+/**
+ * Disable XML-RPC.
+ */
+add_filter( 'xmlrpc_enabled', '__return_false' );
+
+/**
+ * Disable Gutenberg full-screen editor by default.
+ */
+function hds_disable_fullscreen_editor(): void {
+	$script = "window.onload = function() { const isFullscreenMode = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fullscreenMode' ); if ( isFullscreenMode ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fullscreenMode' ); } };";
+	wp_add_inline_script( 'wp-blocks', $script );
+}
+add_action( 'enqueue_block_editor_assets', 'hds_disable_fullscreen_editor' );
+
+/**
+ * Limit post revisions to 10.
+ */
+function hds_limit_revisions(): void {
+	if ( ! defined( 'WP_POST_REVISIONS' ) || WP_POST_REVISIONS === true || WP_POST_REVISIONS < 0 ) {
+		add_filter( 'wp_revisions_to_keep', function ( $num, $post ) {
+			return 10;
+		}, 10, 2 );
+	}
+}
+add_action( 'init', 'hds_limit_revisions' );
+
+/**
+ * Set JPEG compression quality to 82 for WebP conversion compatibility.
+ */
+function hds_image_quality(): int {
+	return 82;
+}
+add_filter( 'jpeg_quality', 'hds_image_quality' );
+
+/**
+ * Disable attachment year/month folder structure for cleaner URLs.
+ */
+function hds_attachment_folder_structure(): bool {
+	return true;
+}
+add_filter( 'pre_option_uploads_use_yearmonth_folders', 'hds_attachment_folder_structure' );
+
+/**
+ * Allow SVG uploads (safely).
+ */
+function hds_allow_svg_uploads( array $mimes ): array {
+	$mimes['svg'] = 'image/svg+xml';
+	return $mimes;
+}
+add_filter( 'upload_mimes', 'hds_allow_svg_uploads' );
+
+/**
+ * Sanitize SVG during upload.
+ */
+function hds_sanitize_svg( array $file ): array {
+	if ( 'image/svg+xml' === $file['type'] ) {
+		$svg = file_get_contents( $file['tmp_name'] );
+
+		$svg = preg_replace( '/<script[\s\S]*?>[\s\S]*?<\/script>/i', '', $svg );
+		$svg = preg_replace( '/<(\w+)\s[^>]*on\w+\s*=\s*"[^"]*"[^>]*>/i', '', $svg );
+
+		file_put_contents( $file['tmp_name'], $svg );
+	}
+
+	return $file;
+}
+add_filter( 'wp_handle_upload_prefilter', 'hds_sanitize_svg' );
 
 /**
  * Extend allowed block types to include patterns.
@@ -76,6 +169,5 @@ add_filter( 'allowed_block_types_all', 'hds_allowed_block_types', 10, 2 );
 function hds_theme_activation(): void {
 	hds_register_testimonial_cpt();
 	hds_register_vacancy_cpt();
-	flush_rewrite_rules();
 }
 add_action( 'after_switch_theme', 'hds_theme_activation' );
