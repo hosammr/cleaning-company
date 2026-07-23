@@ -201,5 +201,21 @@ function hds_register_block_patterns(): void {
 <!-- /wp:group -->',
 		]
 	);
+
+	// FAQ Starter
+	register_block_pattern(
+		'hds/faq-starter',
+		[
+			'title'       => __( 'FAQ Starter', 'hds' ),
+			'categories'  => [ 'hds-patterns' ],
+			'content'     => '<!-- wp:group {"layout":{"type":"constrained"}} -->
+<div class="wp-block-group" style="padding:var(--wp--preset--spacing--8) 0">
+<!-- wp:paragraph -->
+<p>Hieronder vindt u antwoorden op veelgestelde vragen. Heeft u een vraag die er niet bij staat? Neem dan gerust <a href="/contact/">contact</a> met ons op.</p>
+<!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->',
+		]
+	);
 }
 add_action( 'init', 'hds_register_block_patterns' );

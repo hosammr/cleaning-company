@@ -2,15 +2,23 @@
 /**
  * Custom block registration.
  *
- * Four custom blocks that query dynamic data:
+ * Four custom blocks that query dynamic data via server-side render:
  *   hds/service-card   — renders a single service card from a Page
  *   hds/testimonial    — renders testimonial cards from hds_testimonial CPT
  *   hds/job-listing    — renders job vacancy cards from hds_vacancy CPT
  *   hds/contact-info   — renders company info from Theme Customizer
  *
+ * All blocks use render_callback (dynamic). No save() function.
+ * Block editor scripts in assets/js/blocks/.
+ * Block metadata (title, icon, description, attributes) is
+ * defined in register_block_type() for core compatibility.
+ *
  * @package HDS
  */
 
+/**
+ * Register all custom HDS blocks.
+ */
 function hds_register_custom_blocks(): void {
 	if ( ! function_exists( 'register_block_type' ) ) {
 		return;
@@ -20,13 +28,37 @@ function hds_register_custom_blocks(): void {
 	$blocks_uri = HDS_URI . '/assets/js/blocks';
 
 	$blocks = [
-		'service-card'   => 'hds_render_service_card',
-		'testimonial'    => 'hds_render_testimonial',
-		'job-listing'    => 'hds_render_job_listing',
-		'contact-info'   => 'hds_render_contact_info',
+		'service-card' => [
+			'render'    => 'hds_render_service_card',
+			'title'     => __( 'HDS Service Card', 'hds' ),
+			'desc'      => __( 'Toon een service kaart met icoon, titel, excerpt en link.', 'hds' ),
+			'icon'      => 'admin-page',
+			'category'  => 'hds-service',
+		],
+		'testimonial'  => [
+			'render'    => 'hds_render_testimonial',
+			'title'     => __( 'HDS Referenties', 'hds' ),
+			'desc'      => __( 'Toon referenties van klanten uit het hds_testimonial CPT.', 'hds' ),
+			'icon'      => 'format-quote',
+			'category'  => 'hds-service',
+		],
+		'job-listing'  => [
+			'render'    => 'hds_render_job_listing',
+			'title'     => __( 'HDS Vacatures', 'hds' ),
+			'desc'      => __( 'Toon openstaande vacatures met details en solliciteerknop.', 'hds' ),
+			'icon'      => 'businessperson',
+			'category'  => 'hds-service',
+		],
+		'contact-info' => [
+			'render'    => 'hds_render_contact_info',
+			'title'     => __( 'HDS Contactgegevens', 'hds' ),
+			'desc'      => __( 'Toon bedrijfsgegevens uit de Customizer (telefoon, e-mail, adres, KVK, BTW).', 'hds' ),
+			'icon'      => 'phone',
+			'category'  => 'hds-content',
+		],
 	];
 
-	foreach ( $blocks as $name => $render_callback ) {
+	foreach ( $blocks as $name => $config ) {
 		$handle = 'hds-' . $name;
 
 		wp_register_script(
@@ -39,27 +71,30 @@ function hds_register_custom_blocks(): void {
 
 		register_block_type( 'hds/' . $name, [
 			'editor_script'   => $handle,
-			'render_callback' => $render_callback,
+			'render_callback' => $config['render'],
 			'attributes'      => hds_get_block_attributes( $name ),
 		] );
 	}
 }
 add_action( 'init', 'hds_register_custom_blocks' );
 
+/**
+ * Get block attribute definitions.
+ */
 function hds_get_block_attributes( string $block ): array {
 	$attributes = [
 		'service-card' => [
 			'pageId'    => [ 'type' => 'integer', 'default' => 0 ],
-			'showImage' => [ 'type' => 'boolean',  'default' => false ],
+			'showImage' => [ 'type' => 'boolean', 'default' => false ],
 		],
 		'testimonial' => [
 			'count'         => [ 'type' => 'integer', 'default' => 3 ],
-			'showRating'   => [ 'type' => 'boolean',  'default' => true ],
-			'selectedItems' => [ 'type' => 'array',    'default' => [] ],
+			'showRating'    => [ 'type' => 'boolean', 'default' => true ],
+			'selectedItems' => [ 'type' => 'array',   'default' => [] ],
 		],
 		'job-listing' => [
-			'count'    => [ 'type' => 'integer', 'default' => 5 ],
-			'showAll'  => [ 'type' => 'boolean',  'default' => true ],
+			'count'   => [ 'type' => 'integer', 'default' => 5 ],
+			'showAll' => [ 'type' => 'boolean', 'default' => true ],
 		],
 		'contact-info' => [
 			'showPhone'   => [ 'type' => 'boolean', 'default' => true ],
@@ -82,7 +117,7 @@ function hds_get_block_attributes( string $block ): array {
 function hds_render_service_card( array $attributes, string $content, \WP_Block $block ): string {
 	$page_id = $attributes['pageId'] ?? 0;
 	if ( ! $page_id ) {
-		return '<p class="hds-block-empty">' . esc_html__( 'Selecteer een service pagina.', 'hds' ) . '</p>';
+		return '<p class="hds-block-empty">' . esc_html__( 'Selecteer een service pagina in de blokinstellingen.', 'hds' ) . '</p>';
 	}
 
 	$post = get_post( $page_id );
@@ -90,16 +125,21 @@ function hds_render_service_card( array $attributes, string $content, \WP_Block 
 		return '';
 	}
 
-	$icon   = get_post_meta( $page_id, 'hds_service_icon', true );
-	$image  = get_post_meta( $page_id, 'hds_hero_image', true );
-	$excerpt = has_excerpt( $post ) ? get_the_excerpt( $post ) : wp_trim_words( wp_strip_all_tags( $post->post_content ), 20, '...' );
+	$icon    = get_post_meta( $page_id, 'hds_service_icon', true );
+	$image   = get_post_meta( $page_id, 'hds_hero_image', true );
+	$excerpt = has_excerpt( $post )
+		? get_the_excerpt( $post )
+		: wp_trim_words( wp_strip_all_tags( $post->post_content ), 20, '...' );
 
 	ob_start();
 	?>
 	<article class="hds-service-card">
 		<?php if ( $attributes['showImage'] && $image ) : ?>
 			<div class="hds-service-card__image">
-				<?php echo wp_get_attachment_image( $image, 'hds-card', false, [ 'alt' => get_the_title( $post ), 'loading' => 'lazy' ] ); ?>
+				<?php echo wp_get_attachment_image( (int) $image, 'hds-card', false, [
+					'alt'     => get_the_title( $post ),
+					'loading' => 'lazy',
+				] ); ?>
 			</div>
 		<?php endif; ?>
 		<div class="hds-service-card__body">
@@ -137,15 +177,17 @@ function hds_render_testimonial( array $attributes, string $content, \WP_Block $
 
 	$selected = $attributes['selectedItems'] ?? [];
 	if ( ! empty( $selected ) ) {
-		$args['post__in'] = array_map( 'intval', $selected );
-		$args['orderby']  = 'post__in';
+		$args['post__in']       = array_map( 'intval', $selected );
+		$args['orderby']        = 'post__in';
 		$args['posts_per_page'] = count( $selected );
 	}
 
 	$query = new WP_Query( $args );
 
 	if ( ! $query->have_posts() ) {
-		return '<div class="hds-testimonial-empty">' . esc_html__( 'Wij horen graag uw ervaring! Deel uw review.', 'hds' ) . '</div>';
+		return '<div class="hds-testimonial-empty">'
+			. esc_html__( 'Wij horen graag uw ervaring! Deel uw review.', 'hds' )
+			. '</div>';
 	}
 
 	ob_start();
@@ -153,7 +195,9 @@ function hds_render_testimonial( array $attributes, string $content, \WP_Block $
 	<div class="hds-testimonial-grid">
 		<?php while ( $query->have_posts() ) : $query->the_post(); ?>
 			<blockquote class="hds-testimonial-card">
-				<p class="hds-testimonial-card__quote">"<?php echo esc_html( wp_strip_all_tags( get_the_content() ) ); ?>"</p>
+				<p class="hds-testimonial-card__quote">
+					&ldquo;<?php echo esc_html( wp_strip_all_tags( get_the_content() ) ); ?>&rdquo;
+				</p>
 				<footer class="hds-testimonial-card__footer">
 					<cite class="hds-testimonial-card__author">
 						<?php echo esc_html( get_post_meta( get_the_ID(), 'hds_author_name', true ) ?: get_the_title() ); ?>
@@ -168,7 +212,7 @@ function hds_render_testimonial( array $attributes, string $content, \WP_Block $
 							<?php
 							$rating = (int) get_post_meta( get_the_ID(), 'hds_star_rating', true );
 							for ( $i = 1; $i <= 5; $i++ ) {
-								echo $i <= $rating ? '★' : '☆';
+								echo $i <= $rating ? '&#9733;' : '&#9734;';
 							}
 							?>
 						</div>
@@ -276,13 +320,13 @@ function hds_render_contact_info( array $attributes, string $content, \WP_Block 
 	$show_hours   = $attributes['showHours'] ?? false;
 	$show_social  = $attributes['showSocial'] ?? false;
 
-	$phone    = hds_get_phone();
-	$email    = hds_get_email();
-	$address  = hds_get_address();
-	$postal   = hds_get_postal_city();
-	$kvk      = get_theme_mod( 'hds_kvk' );
-	$btw      = get_theme_mod( 'hds_btw' );
-	$hours    = get_theme_mod( 'hds_opening_hours' );
+	$phone     = hds_get_phone();
+	$email     = hds_get_email();
+	$address   = hds_get_address();
+	$postal    = hds_get_postal_city();
+	$kvk       = get_theme_mod( 'hds_kvk' );
+	$btw       = get_theme_mod( 'hds_btw' );
+	$hours     = get_theme_mod( 'hds_opening_hours' );
 	$facebook  = get_theme_mod( 'hds_facebook_url' );
 	$instagram = get_theme_mod( 'hds_instagram_url' );
 
