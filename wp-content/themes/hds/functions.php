@@ -150,6 +150,7 @@ require_once HDS_DIR . '/inc/setup.php';
 require_once HDS_DIR . '/inc/helpers.php';
 require_once HDS_DIR . '/inc/sanitize.php';
 require_once HDS_DIR . '/inc/validation.php';
+require_once HDS_DIR . '/inc/components.php';
 require_once HDS_DIR . '/inc/asset-loader.php';
 require_once HDS_DIR . '/inc/security.php';
 require_once HDS_DIR . '/inc/cpts.php';

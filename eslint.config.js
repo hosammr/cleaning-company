@@ -14,6 +14,8 @@ export default [
 				hdsData: 'readonly',
 				window: 'readonly',
 				document: 'readonly',
+				setTimeout: 'readonly',
+				IntersectionObserver: 'readonly',
 			},
 		},
 		rules: {
