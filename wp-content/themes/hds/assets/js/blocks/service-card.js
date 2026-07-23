@@ -1,15 +1,14 @@
 ( function ( wp ) {
 	'use strict';
 
-	var registerBlockType = wp.blocks.registerBlockType;
-	var el = wp.element.createElement;
-	var ServerSideRender = wp.serverSideRender;
-	var InspectorControls = wp.blockEditor.InspectorControls;
-	var PanelBody = wp.components.PanelBody;
-	var ToggleControl = wp.components.ToggleControl;
-	var TextControl = wp.components.TextControl;
-	var SelectControl = wp.components.SelectControl;
-	var useSelect = wp.data.useSelect;
+	const registerBlockType = wp.blocks.registerBlockType;
+	const el = wp.element.createElement;
+	const ServerSideRender = wp.serverSideRender;
+	const InspectorControls = wp.blockEditor.InspectorControls;
+	const PanelBody = wp.components.PanelBody;
+	const ToggleControl = wp.components.ToggleControl;
+	const SelectControl = wp.components.SelectControl;
+	const useSelect = wp.data.useSelect;
 
 	registerBlockType( 'hds/service-card', {
 		title: 'HDS Service Card',
@@ -25,12 +24,12 @@
 			html: false,
 		},
 		edit: function ( props ) {
-			var attributes = props.attributes;
-			var setAttributes = props.setAttributes;
+			const attributes = props.attributes;
+			const setAttributes = props.setAttributes;
 
-			var pages = useSelect( function ( select ) {
-				var query = { per_page: 100, orderby: 'title', order: 'asc' };
-				var items = select( 'core' ).getEntityRecords( 'postType', 'page', query );
+			const pages = useSelect( function ( select ) {
+				const query = { per_page: 100, orderby: 'title', order: 'asc' };
+				const items = select( 'core' ).getEntityRecords( 'postType', 'page', query );
 				if ( ! items ) return [];
 				return items.map( function ( page ) {
 					return { value: page.id, label: page.title.rendered || '(geen titel)' };

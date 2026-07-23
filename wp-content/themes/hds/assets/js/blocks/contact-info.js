@@ -1,12 +1,12 @@
 ( function ( wp ) {
 	'use strict';
 
-	var registerBlockType = wp.blocks.registerBlockType;
-	var el = wp.element.createElement;
-	var ServerSideRender = wp.serverSideRender;
-	var InspectorControls = wp.blockEditor.InspectorControls;
-	var PanelBody = wp.components.PanelBody;
-	var ToggleControl = wp.components.ToggleControl;
+	const registerBlockType = wp.blocks.registerBlockType;
+	const el = wp.element.createElement;
+	const ServerSideRender = wp.serverSideRender;
+	const InspectorControls = wp.blockEditor.InspectorControls;
+	const PanelBody = wp.components.PanelBody;
+	const ToggleControl = wp.components.ToggleControl;
 
 	registerBlockType( 'hds/contact-info', {
 		title: 'HDS Contactgegevens',
@@ -26,8 +26,8 @@
 			html: false,
 		},
 		edit: function ( props ) {
-			var attributes = props.attributes;
-			var setAttributes = props.setAttributes;
+			const attributes = props.attributes;
+			const setAttributes = props.setAttributes;
 
 			return el( 'div', {},
 				el( InspectorControls, {},

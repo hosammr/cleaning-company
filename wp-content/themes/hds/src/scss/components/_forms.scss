@@ -1,0 +1,38 @@
+// Forms
+
+label {
+	display: block;
+	font-weight: 600;
+	margin-bottom: var(--wp--preset--spacing--1);
+}
+
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='url'],
+input[type='search'],
+input[type='password'],
+textarea,
+select {
+	border: 1px solid var(--wp--preset--color--gray);
+	border-radius: 4px;
+	font-family: inherit;
+	font-size: var(--wp--preset--font-size--m);
+	padding: 0.625rem 0.75rem;
+	width: 100%;
+
+	&:focus {
+		border-color: var(--wp--preset--color--primary);
+		outline: none;
+	}
+}
+
+input[type='submit'],
+button[type='submit'] {
+	min-height: 44px;
+	min-width: 44px;
+}
+
+.form-required {
+	color: var(--wp--preset--color--error);
+}

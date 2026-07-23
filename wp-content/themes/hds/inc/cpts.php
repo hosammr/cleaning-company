@@ -54,25 +54,6 @@ function hds_register_vacancy_cpt(): void {
 add_action( 'init', 'hds_register_vacancy_cpt' );
 
 /**
- * Register hds_faq CPT.
+ * FAQ is managed via Yoast/Rank Math FAQ Block on standard Page.
+ * No `hds_faq` CPT. See ADR D-012.
  */
-function hds_register_faq_cpt(): void {
-	register_post_type( 'hds_faq', [
-		'labels' => [
-			'name'          => __( 'FAQ', 'hds' ),
-			'singular_name' => __( 'FAQ Item', 'hds' ),
-			'add_new'       => __( 'Nieuwe vraag', 'hds' ),
-			'add_new_item'  => __( 'Nieuwe vraag toevoegen', 'hds' ),
-		],
-		'public'              => false,
-		'publicly_queryable'  => false,
-		'show_ui'             => true,
-		'show_in_menu'        => true,
-		'show_in_rest'        => true,
-		'has_archive'         => false,
-		'supports'            => [ 'title', 'editor' ],
-		'menu_icon'           => 'dashicons-editor-help',
-		'rewrite'             => false,
-	] );
-}
-add_action( 'init', 'hds_register_faq_cpt' );

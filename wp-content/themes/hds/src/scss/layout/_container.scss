@@ -1,0 +1,13 @@
+// Layout container
+
+.container {
+	margin-inline: auto;
+	max-width: var(--wp--style--global--wide-size);
+	padding-inline: var(--wp--preset--spacing--4);
+	width: 100%;
+}
+
+.site-main {
+	min-height: 60vh;
+	padding-block: var(--wp--preset--spacing--8);
+}

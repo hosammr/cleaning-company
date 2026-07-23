@@ -1,0 +1,28 @@
+// Contact template — page-templates/page-contact.php
+
+.contact-layout {
+	display: grid;
+	gap: var(--wp--preset--spacing--8);
+	grid-template-columns: 3fr 2fr;
+}
+
+.contact-info-block {
+	background: var(--wp--preset--color--light-gray);
+	border-radius: var(--hds-border-radius);
+	padding: var(--wp--preset--spacing--6);
+}
+
+.contact-info-item {
+	margin-bottom: var(--wp--preset--spacing--4);
+
+	h3 {
+		font-size: var(--wp--preset--font-size--m);
+		margin-bottom: 0.25rem;
+	}
+}
+
+@media (max-width: 1023px) {
+	.contact-layout {
+		grid-template-columns: 1fr;
+	}
+}

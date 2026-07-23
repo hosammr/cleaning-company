@@ -1,0 +1,6 @@
+// Responsive — Desktop (1024px+)
+@media (min-width: 1024px) {
+	.footer-grid {
+		grid-template-columns: repeat(5, 1fr);
+	}
+}

@@ -1,0 +1,47 @@
+// Navigation
+
+.main-navigation .primary-menu {
+	display: flex;
+	gap: var(--wp--preset--spacing--4);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	a {
+		color: var(--wp--preset--color--dark-gray);
+		text-decoration: none;
+
+		&:hover,
+		&:focus {
+			color: var(--wp--preset--color--primary);
+		}
+	}
+}
+
+.menu-toggle {
+	background: none;
+	border: none;
+	cursor: pointer;
+	display: none;
+	padding: var(--wp--preset--spacing--2);
+}
+
+@media (max-width: 767px) {
+	.main-navigation .primary-menu {
+		display: none;
+
+		&.is-active {
+			display: flex;
+			flex-direction: column;
+			position: absolute;
+		}
+	}
+
+	.menu-toggle {
+		display: block;
+	}
+
+	.header-phone-number {
+		display: none;
+	}
+}

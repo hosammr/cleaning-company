@@ -1,0 +1,59 @@
+// HDS Onderhoudsdiensten — Main SCSS Entry Point
+// Compiles to assets/css/main.css via PostCSS pipeline
+
+// Configuration
+@import 'config/variables';
+
+// Reset
+@import 'base/reset';
+
+// Accessibility
+@import 'base/accessibility';
+
+// Layout
+@import 'layout/container';
+@import 'layout/grid';
+
+// Typography
+@import 'typography/headings';
+@import 'typography/body';
+
+// Components
+@import 'components/header';
+@import 'components/navigation';
+@import 'components/footer';
+@import 'components/buttons';
+@import 'components/breadcrumbs';
+@import 'components/cards';
+@import 'components/forms';
+@import 'components/cta-banner';
+@import 'components/service-hero';
+
+// Block styles
+@import 'blocks/button-styles';
+@import 'blocks/group-styles';
+@import 'blocks/list-styles';
+@import 'blocks/service-card';
+@import 'blocks/testimonial';
+@import 'blocks/job-listing';
+@import 'blocks/contact-info';
+
+// Templates
+@import 'templates/home';
+@import 'templates/service';
+@import 'templates/contact';
+@import 'templates/faq';
+@import 'templates/legal';
+@import 'templates/about';
+@import 'templates/archive';
+@import 'templates/single';
+@import 'templates/404';
+
+// Responsive
+@import 'responsive/tablet';
+@import 'responsive/desktop';
+@import 'responsive/wide';
+
+// Utilities
+@import 'utilities/print';
+@import 'utilities/reduced-motion';

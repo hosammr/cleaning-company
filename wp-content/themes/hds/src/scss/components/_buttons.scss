@@ -1,0 +1,19 @@
+// Buttons
+
+.btn {
+	display: inline-block;
+	font-weight: 600;
+	padding: 0.75rem 1.5rem;
+	text-decoration: none;
+}
+
+.btn-cta {
+	background: var(--wp--preset--color--primary);
+	border-radius: var(--hds-border-radius);
+	color: var(--wp--preset--color--white);
+	font-size: var(--wp--preset--font-size--l);
+
+	&:hover {
+		background: var(--wp--preset--color--primary-dark);
+	}
+}

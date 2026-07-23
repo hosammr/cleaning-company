@@ -1,0 +1,17 @@
+// Body typography
+
+body {
+	font-family: var(--wp--preset--font-family--body);
+	font-size: var(--wp--preset--font-size--m);
+	line-height: 1.65;
+}
+
+a {
+	color: var(--wp--preset--color--primary);
+	text-decoration: underline;
+
+	&:hover,
+	&:focus {
+		color: var(--wp--preset--color--primary-dark);
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"extends": ["@commitlint/config-conventional"],
+	"rules": {
+		"type-enum": [
+			2,
+			"always",
+			["feat", "fix", "docs", "style", "refactor", "perf", "test", "chore", "ci", "revert"]
+		],
+		"scope-enum": [
+			2,
+			"always",
+			["theme", "blocks", "patterns", "cpts", "forms", "seo", "wc", "config", "docs", "ci"]
+		],
+		"scope-empty": [0, "never"],
+		"subject-case": [2, "always", "lower-case"],
+		"subject-full-stop": [2, "never", "."]
+	}
+}

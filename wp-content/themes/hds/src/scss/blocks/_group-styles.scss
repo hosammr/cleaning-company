@@ -1,0 +1,15 @@
+// Block style: card group
+.is-style-card {
+	background: var(--wp--preset--color--white);
+	border-radius: var(--hds-border-radius);
+	box-shadow: var(--wp--preset--shadow--md);
+	padding: var(--wp--preset--spacing--6);
+}
+
+// Block style: banner group
+.is-style-banner {
+	background: var(--wp--preset--color--primary);
+	border-radius: 0;
+	color: var(--wp--preset--color--white);
+	padding: var(--wp--preset--spacing--10);
+}

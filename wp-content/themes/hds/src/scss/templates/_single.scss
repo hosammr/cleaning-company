@@ -1,0 +1,18 @@
+// Single post template
+
+.single-post {
+	max-width: var(--wp--style--global--content-size);
+	margin-inline: auto;
+
+	.post-thumbnail img {
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+		width: 100%;
+	}
+
+	.entry-meta {
+		color: var(--wp--preset--color--gray);
+		font-size: var(--wp--preset--font-size--s);
+		margin-bottom: var(--wp--preset--spacing--6);
+	}
+}

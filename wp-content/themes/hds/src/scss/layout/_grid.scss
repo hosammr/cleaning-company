@@ -1,0 +1,11 @@
+// Grid utilities
+
+@mixin grid-columns($count) {
+	display: grid;
+	gap: var(--wp--preset--spacing--6);
+	grid-template-columns: repeat($count, 1fr);
+}
+
+.footer-grid {
+	@include grid-columns(5);
+}

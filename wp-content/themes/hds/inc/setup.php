@@ -76,7 +76,6 @@ add_filter( 'allowed_block_types_all', 'hds_allowed_block_types', 10, 2 );
 function hds_theme_activation(): void {
 	hds_register_testimonial_cpt();
 	hds_register_vacancy_cpt();
-	hds_register_faq_cpt();
 	flush_rewrite_rules();
 }
 add_action( 'after_switch_theme', 'hds_theme_activation' );

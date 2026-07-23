@@ -1,0 +1,21 @@
+// Block style: secondary button
+.is-style-secondary .wp-block-button__link {
+	background: transparent;
+	border: 2px solid var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--primary);
+
+	&:hover {
+		background: var(--wp--preset--color--primary);
+		color: var(--wp--preset--color--white);
+	}
+}
+
+// Block style: CTA button
+.is-style-cta {
+	display: inline-flex;
+
+	.wp-block-button__link {
+		font-size: var(--wp--preset--font-size--l);
+		padding: 1rem 2rem;
+	}
+}
