@@ -28,8 +28,8 @@ get_header();
 			<div class="error-404-contact">
 				<p>
 					<?php esc_html_e( 'Of neem direct contact op:', 'hds' ); ?><br>
-					<a href="tel:0164-652846">0164-652846</a><br>
-					<a href="mailto:info@helderduidelijkschoon.nl">info@helderduidelijkschoon.nl</a>
+					<a href="tel:<?php echo esc_attr( hds_esc_tel( hds_get_phone() ) ); ?>"><?php echo esc_html( hds_get_phone() ); ?></a><br>
+					<a href="mailto:<?php echo esc_attr( hds_get_email() ); ?>"><?php echo esc_html( hds_get_email() ); ?></a>
 				</p>
 			</div>
 		</div>

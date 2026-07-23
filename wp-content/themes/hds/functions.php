@@ -153,6 +153,7 @@ require_once HDS_DIR . '/inc/sanitize.php';
 require_once HDS_DIR . '/inc/validation.php';
 require_once HDS_DIR . '/inc/routing.php';
 require_once HDS_DIR . '/inc/error-handler.php';
+require_once HDS_DIR . '/inc/walker-nav.php';
 require_once HDS_DIR . '/inc/seo.php';
 require_once HDS_DIR . '/inc/analytics.php';
 require_once HDS_DIR . '/inc/components.php';

@@ -66,7 +66,7 @@
 					'container'       => false,
 					'fallback_cb'     => false,
 					'depth'           => 3,
-					'walker'          => class_exists( 'HDS_Walker_Nav_Menu' ) ? new HDS_Walker_Nav_Menu() : null,
+					'walker'          => new HDS_Walker_Nav_Menu(),
 				] );
 				?>
 			</nav>
