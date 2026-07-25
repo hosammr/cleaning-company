@@ -98,7 +98,7 @@ jobs:
           fi
 
       - name: Deploy via SSH
-        uses: easingthemes/ssh-deploy@v5
+        uses: easingthemes/ssh-deploy@v1.3.0
         with:
           SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
           ARGS: "-rlgoDzvc -i --delete"
