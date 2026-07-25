@@ -842,18 +842,423 @@ img {
 	border-top: 2px dotted var(--wp--preset--color--gray);
 }
 
+/* ── Service Card ── */
+.hds-service-card {
+	background: var(--wp--preset--color--white);
+	border-radius: var(--hds-border-radius);
+	box-shadow: var(--wp--preset--shadow--md);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	transition: box-shadow var(--hds-transition-speed) var(--hds-transition-easing), transform var(--hds-transition-speed) var(--hds-transition-easing);
+}
+
+.hds-service-card:hover {
+	box-shadow: var(--wp--preset--shadow--lg);
+	transform: translateY(-2px);
+}
+
+.hds-service-card__image img {
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+	width: 100%;
+}
+
+.hds-service-card__body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: var(--wp--preset--spacing--6);
+}
+
+.hds-service-card__icon {
+	color: var(--wp--preset--color--primary);
+	display: block;
+	font-size: var(--wp--preset--font-size--3-xl);
+	margin-bottom: var(--wp--preset--spacing--3);
+}
+
+.hds-service-card__title {
+	font-size: var(--wp--preset--font-size--l);
+	margin-bottom: var(--wp--preset--spacing--2);
+}
+
+.hds-service-card__title a {
+	color: var(--wp--preset--color--black);
+	text-decoration: none;
+}
+
+.hds-service-card__title a:hover,
+.hds-service-card__title a:focus {
+	color: var(--wp--preset--color--primary);
+}
+
+.hds-service-card__excerpt {
+	color: var(--wp--preset--color--gray);
+	flex: 1;
+	font-size: var(--wp--preset--font-size--s);
+	margin-bottom: var(--wp--preset--spacing--4);
+}
+
+.hds-service-card__link {
+	color: var(--wp--preset--color--primary);
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--s);
+	text-decoration: none;
+}
+
+.hds-service-card__link:hover {
+	text-decoration: underline;
+}
+
+/* ── Service Card Grid Section ── */
+.service-card-grid-section {
+	padding-block: var(--wp--preset--spacing--12);
+}
+
+.hds-grid--service-cards {
+	display: grid;
+	gap: var(--wp--preset--spacing--6);
+	grid-template-columns: repeat(var(--hds-grid-columns, 3), 1fr);
+}
+
+/* ── Cross-Sell Section ── */
+.cross-sell-section {
+	background: var(--wp--preset--color--light-gray);
+	padding-block: var(--wp--preset--spacing--12);
+}
+
+.service-cross-sell {
+	margin-top: var(--wp--preset--spacing--12);
+}
+
+/* ── Homepage: Testimonials Section ── */
+.home-testimonials {
+	background: var(--wp--preset--color--light-gray);
+	padding-block: var(--wp--preset--spacing--12);
+}
+
+/* ── Homepage: Latest Posts ── */
+.home-latest-posts {
+	padding-block: var(--wp--preset--spacing--12);
+}
+
+.hds-grid--posts {
+	display: grid;
+	gap: var(--wp--preset--spacing--6);
+	grid-template-columns: repeat(var(--hds-grid-columns, 3), 1fr);
+}
+
+.hds-post-card {
+	background: var(--wp--preset--color--white);
+	border-radius: var(--hds-border-radius);
+	box-shadow: var(--wp--preset--shadow--md);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	transition: box-shadow var(--hds-transition-speed) var(--hds-transition-easing);
+}
+
+.hds-post-card:hover {
+	box-shadow: var(--wp--preset--shadow--lg);
+}
+
+.hds-post-card__image a {
+	display: block;
+}
+
+.hds-post-card__image img {
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+	width: 100%;
+}
+
+.hds-post-card__body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: var(--wp--preset--spacing--6);
+}
+
+.hds-post-card__title {
+	font-size: var(--wp--preset--font-size--l);
+	margin-bottom: var(--wp--preset--spacing--2);
+}
+
+.hds-post-card__title a {
+	color: var(--wp--preset--color--black);
+	text-decoration: none;
+}
+
+.hds-post-card__title a:hover {
+	color: var(--wp--preset--color--primary);
+}
+
+.hds-post-card__date {
+	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--xs);
+	margin-bottom: var(--wp--preset--spacing--2);
+}
+
+.hds-post-card__excerpt {
+	color: var(--wp--preset--color--dark-gray);
+	font-size: var(--wp--preset--font-size--s);
+	margin: 0;
+}
+
+/* ── Quote Page ── */
+.quote-page {
+	max-width: 800px;
+	margin-inline: auto;
+}
+
+.quote-intro {
+	margin-bottom: var(--wp--preset--spacing--8);
+}
+
+.quote-cta-fallback {
+	background: var(--wp--preset--color--light-gray);
+	border-radius: var(--hds-border-radius);
+	margin-top: var(--wp--preset--spacing--8);
+	padding: var(--wp--preset--spacing--6);
+	text-align: center;
+}
+
+.quote-cta-fallback p {
+	margin: 0;
+}
+
+/* ── Thank You Page ── */
+.thank-you-page {
+	margin-inline: auto;
+	max-width: 700px;
+	padding-block: var(--wp--preset--spacing--16);
+	text-align: center;
+}
+
+.thank-you-header {
+	margin-bottom: var(--wp--preset--spacing--8);
+}
+
+.thank-you-message {
+	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--l);
+	margin-top: var(--wp--preset--spacing--4);
+}
+
+.thank-you-fallback {
+	background: var(--wp--preset--color--light-gray);
+	border-radius: var(--hds-border-radius);
+	margin-bottom: var(--wp--preset--spacing--8);
+	padding: var(--wp--preset--spacing--6);
+}
+
+.thank-you-links {
+	align-items: center;
+	display: flex;
+	gap: var(--wp--preset--spacing--4);
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+/* ── Category Landing ── */
+.category-landing-hero {
+	background: var(--wp--preset--color--light-gray);
+	padding-block: var(--wp--preset--spacing--12);
+	text-align: center;
+}
+
+.category-landing-content {
+	margin-bottom: var(--wp--preset--spacing--8);
+}
+
+/* ── Contact Info Address ── */
+.contact-info-item address {
+	font-style: normal;
+	margin: 0;
+}
+
+.contact-info-item strong {
+	font-size: var(--wp--preset--font-size--s);
+}
+
 /* ── Service Hero ── */
 .service-hero {
 	background: var(--wp--preset--color--light-gray);
 	background-position: center;
 	background-size: cover;
 	padding-block: var(--wp--preset--spacing--16);
+	position: relative;
 	text-align: center;
+}
+
+.service-hero::before {
+	background: rgb(0 0 0 / 40%);
+	content: '';
+	inset: 0;
+	position: absolute;
+}
+
+.service-hero:not([style*="background-image"])::before {
+	display: none;
+}
+
+.service-hero .container {
+	position: relative;
+	z-index: 1;
+}
+
+.service-hero[style*="background-image"] .container {
+	color: var(--wp--preset--color--white);
+}
+
+.service-hero:not([style*="background-image"]) .container {
+	color: var(--wp--preset--color--dark-gray);
 }
 
 .service-subtitle {
 	color: var(--wp--preset--color--gray);
 	font-size: var(--wp--preset--font-size--l);
+}
+
+.service-hero .btn-cta {
+	margin-top: var(--wp--preset--spacing--6);
+}
+
+/* ── Testimonial Grid ── */
+.hds-testimonial-grid {
+	display: grid;
+	gap: var(--wp--preset--spacing--6);
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.hds-testimonial-card {
+	background: var(--wp--preset--color--white);
+	border-left: 4px solid var(--wp--preset--color--primary);
+	border-radius: var(--hds-border-radius);
+	box-shadow: var(--wp--preset--shadow--md);
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	padding: var(--wp--preset--spacing--6);
+}
+
+.hds-testimonial-card__quote {
+	flex: 1;
+	font-size: var(--wp--preset--font-size--m);
+	font-style: italic;
+	margin-bottom: var(--wp--preset--spacing--4);
+}
+
+.hds-testimonial-card__footer {
+	border-top: 1px solid var(--wp--preset--color--light-gray);
+	padding-top: var(--wp--preset--spacing--4);
+}
+
+.hds-testimonial-card__author {
+	display: block;
+	font-size: var(--wp--preset--font-size--m);
+	font-style: normal;
+	font-weight: 600;
+}
+
+.hds-testimonial-card__company {
+	color: var(--wp--preset--color--gray);
+	display: block;
+	font-size: var(--wp--preset--font-size--s);
+	margin-bottom: var(--wp--preset--spacing--2);
+}
+
+.hds-testimonial-card__rating {
+	color: var(--wp--preset--color--accent);
+	font-size: var(--wp--preset--font-size--m);
+	letter-spacing: 2px;
+}
+
+.hds-testimonial-empty {
+	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--l);
+	padding: var(--wp--preset--spacing--8);
+	text-align: center;
+}
+
+/* ── Vacancy Cards ── */
+.hds-vacancy-list {
+	display: grid;
+	gap: var(--wp--preset--spacing--6);
+}
+
+.hds-vacancy-card {
+	background: var(--wp--preset--color--white);
+	border: 1px solid var(--wp--preset--color--light-gray);
+	border-radius: var(--hds-border-radius);
+	padding: var(--wp--preset--spacing--6);
+}
+
+.hds-vacancy-card__title {
+	font-size: var(--wp--preset--font-size--l);
+	margin-bottom: var(--wp--preset--spacing--4);
+}
+
+.hds-vacancy-card__meta {
+	display: flex;
+	gap: var(--wp--preset--spacing--6);
+	margin-bottom: var(--wp--preset--spacing--4);
+}
+
+.hds-vacancy-card__meta-item {
+	font-size: var(--wp--preset--font-size--s);
+}
+
+.hds-vacancy-card__meta-item dt {
+	color: var(--wp--preset--color--gray);
+	font-weight: 600;
+}
+
+.hds-vacancy-card__meta-item dd {
+	margin: 0;
+}
+
+.hds-vacancy-card__content {
+	margin-bottom: var(--wp--preset--spacing--4);
+}
+
+.hds-vacancy-card__apply {
+	margin-top: auto;
+}
+
+/* ── Block Empty State ── */
+.hds-block-empty {
+	color: var(--wp--preset--color--gray);
+	font-style: italic;
+	padding: var(--wp--preset--spacing--6);
+	text-align: center;
+}
+
+/* ── Service Icon List Block Pattern ── */
+.wp-block-list.is-style-icon-list {
+	list-style: none;
+	padding-left: 0;
+}
+
+.wp-block-list.is-style-icon-list li {
+	padding-bottom: var(--wp--preset--spacing--2);
+	padding-left: 1.75rem;
+	position: relative;
+}
+
+.wp-block-list.is-style-icon-list li::before {
+	color: var(--wp--preset--color--primary);
+	content: '\2713';
+	font-weight: 700;
+	left: 0;
+	position: absolute;
+}
+
+/* ── No-Bullet List ── */
+.wp-block-list.is-style-no-bullet {
+	list-style: none;
+	padding-left: 0;
 }
 
 /* ── 404 Page ── */
@@ -962,29 +1367,6 @@ img {
 .is-style-cta {
 	display: inline-flex;
 	font-size: var(--wp--preset--font-size--l);
-}
-
-.is-style-icon-list {
-	list-style: none;
-	padding-left: 0;
-}
-
-.is-style-icon-list li {
-	padding-left: 1.5rem;
-	position: relative;
-}
-
-.is-style-icon-list li::before {
-	color: var(--wp--preset--color--success);
-	content: '\2713';
-	font-weight: 700;
-	left: 0;
-	position: absolute;
-}
-
-.is-style-no-bullet {
-	list-style: none;
-	padding-left: 0;
 }
 
 .is-style-dots {

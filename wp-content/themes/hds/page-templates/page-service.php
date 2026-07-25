@@ -41,6 +41,10 @@ get_header();
 		</div>
 	</div>
 
+	<section class="service-cross-sell">
+		<?php echo hds_render_cross_sell_section(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+	</section>
+
 	<section class="cta-banner">
 		<div class="container">
 			<h2><?php esc_html_e( 'Vrijblijvende offerte aanvragen', 'hds' ); ?></h2>

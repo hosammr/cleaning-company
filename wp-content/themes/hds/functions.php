@@ -128,6 +128,7 @@ function hds_register_custom_templates(): void {
 		'about'            => __( 'About', 'hds' ),
 		'legal'            => __( 'Legal', 'hds' ),
 		'faq'              => __( 'FAQ', 'hds' ),
+		'bedankt'          => __( 'Bedankt', 'hds' ),
 	];
 
 	foreach ( $templates as $slug => $label ) {
@@ -170,3 +171,4 @@ require_once HDS_DIR . '/inc/meta-panels.php';
 require_once HDS_DIR . '/inc/patterns.php';
 require_once HDS_DIR . '/inc/blocks.php';
 require_once HDS_DIR . '/inc/schema.php';
+require_once HDS_DIR . '/inc/service-functions.php';

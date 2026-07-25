@@ -21,9 +21,25 @@ get_header();
 				<ul>
 					<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'hds' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/schoonmaakdiensten/' ) ); ?>"><?php esc_html_e( 'Schoonmaakdiensten', 'hds' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/glas-en-gevel/' ) ); ?>"><?php esc_html_e( 'Glas & Gevel', 'hds' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php esc_html_e( 'Contact', 'hds' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/offerte-aanvragen/' ) ); ?>"><?php esc_html_e( 'Offerte Aanvragen', 'hds' ); ?></a></li>
 				</ul>
+				<?php
+				$visible_services = hds_get_visible_service_pages();
+				if ( ! empty( $visible_services ) ) :
+					?>
+					<h3><?php esc_html_e( 'Onze diensten', 'hds' ); ?></h3>
+					<ul>
+						<?php foreach ( $visible_services as $service ) : ?>
+							<li>
+								<a href="<?php echo esc_url( get_permalink( $service ) ); ?>">
+									<?php echo esc_html( get_the_title( $service ) ); ?>
+								</a>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				<?php endif; ?>
 			</div>
 			<div class="error-404-contact">
 				<p>

@@ -28,6 +28,21 @@ get_header();
 		</div>
 	</div>
 
+	<?php
+	$current_slug = get_post_field( 'post_name', get_the_ID() );
+	$groups       = hds_get_service_page_groups();
+	$group_posts  = $groups[ $current_slug ] ?? [];
+
+	if ( ! empty( $group_posts ) ) {
+		echo hds_render_service_card_grid(
+			$group_posts,
+			__( 'Onze diensten', 'hds' ),
+			'',
+			3
+		);
+	}
+	?>
+
 	<section class="cta-banner">
 		<div class="container">
 			<h2><?php esc_html_e( 'Vrijblijvende offerte aanvragen', 'hds' ); ?></h2>

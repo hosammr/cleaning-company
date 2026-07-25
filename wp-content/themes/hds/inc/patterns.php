@@ -217,5 +217,58 @@ function hds_register_block_patterns(): void {
 <!-- /wp:group -->',
 		]
 	);
+
+	// Service Card Grid
+	register_block_pattern(
+		'hds/service-card-grid',
+		[
+			'title'       => __( 'Service Card Grid', 'hds' ),
+			'categories'  => [ 'hds-patterns' ],
+			'content'     => '<!-- wp:group {"className":"service-card-grid-section","layout":{"type":"constrained"}} -->
+<div class="wp-block-group service-card-grid-section" style="padding:var(--wp--preset--spacing--12) 0">
+<!-- wp:heading {"textAlign":"center"} -->
+<h2 class="wp-block-heading has-text-align-center">Onze diensten</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"align":"center"} -->
+<p class="has-text-align-center">Professionele schoonmaak- en onderhoudsdiensten voor uw bedrijf.</p>
+<!-- /wp:paragraph -->
+<!-- wp:columns -->
+<div class="wp-block-columns">
+<!-- wp:column -->
+<div class="wp-block-column">
+<!-- wp:group {"className":"is-style-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|6","bottom":"var:preset|spacing|6","left":"var:preset|spacing|6","right":"var:preset|spacing|6"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group is-style-card" style="padding-top:var(--wp--preset--spacing--6);padding-bottom:var(--wp--preset--spacing--6);padding-left:var(--wp--preset--spacing--6);padding-right:var(--wp--preset--spacing--6)">
+<h3 class="wp-block-heading"><a href="/glasbewassing/">Glasbewassing</a></h3>
+<p>Professionele glasbewassing voor kantoren, winkels en bedrijfspanden.</p>
+</div>
+<!-- /wp:group -->
+</div>
+<!-- /wp:column -->
+<!-- wp:column -->
+<div class="wp-block-column">
+<!-- wp:group {"className":"is-style-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|6","bottom":"var:preset|spacing|6","left":"var:preset|spacing|6","right":"var:preset|spacing|6"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group is-style-card" style="padding-top:var(--wp--preset--spacing--6);padding-bottom:var(--wp--preset--spacing--6);padding-left:var(--wp--preset--spacing--6);padding-right:var(--wp--preset--spacing--6)">
+<h3 class="wp-block-heading"><a href="/gevelreiniging/">Gevelreiniging</a></h3>
+<p>Reiniging en onderhoud van gevels, daken en reclameborden.</p>
+</div>
+<!-- /wp:group -->
+</div>
+<!-- /wp:column -->
+<!-- wp:column -->
+<div class="wp-block-column">
+<!-- wp:group {"className":"is-style-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|6","bottom":"var:preset|spacing|6","left":"var:preset|spacing|6","right":"var:preset|spacing|6"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group is-style-card" style="padding-top:var(--wp--preset--spacing--6);padding-bottom:var(--wp--preset--spacing--6);padding-left:var(--wp--preset--spacing--6);padding-right:var(--wp--preset--spacing--6)">
+<h3 class="wp-block-heading"><a href="/reguliere-schoonmaak/">Reguliere Schoonmaak</a></h3>
+<p>Periodieke schoonmaak voor kantoren en bedrijfsruimtes.</p>
+</div>
+<!-- /wp:group -->
+</div>
+<!-- /wp:column -->
+</div>
+<!-- /wp:columns -->
+</div>
+<!-- /wp:group -->',
+		]
+	);
 }
 add_action( 'init', 'hds_register_block_patterns' );

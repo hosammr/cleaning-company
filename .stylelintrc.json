@@ -1,7 +1,13 @@
 {
 	"extends": ["stylelint-config-standard"],
 	"rules": {
-		"selector-class-pattern": "^[a-z]([a-z0-9-]+)?(__([a-z0-9]+-?)+)?(--([a-z0-9]+-?)+){0,2}$",
+		"selector-class-pattern": [
+			"^[a-z]([a-z0-9_-]+)?(__([a-z0-9]+-?)+)?(--([a-z0-9]+-?)+){0,2}$",
+			{
+				"resolveNestedSelectors": true,
+				"message": "Expected class selector \"%s\" to match pattern \"%s\""
+			}
+		],
 		"custom-property-pattern": null,
 		"function-no-unknown": [true, {
 			"ignoreFunctions": ["theme", "var"]

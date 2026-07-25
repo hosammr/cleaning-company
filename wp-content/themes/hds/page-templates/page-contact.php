@@ -31,21 +31,25 @@ get_header();
 
 						<div class="contact-info-item">
 							<h3><?php esc_html_e( 'Telefoon', 'hds' ); ?></h3>
-							<p><a href="tel:<?php echo esc_attr( hds_get_phone() ); ?>"><?php echo esc_html( hds_get_phone() ); ?></a></p>
+							<p>
+								<?php echo hds_get_phone_link(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							</p>
 						</div>
 
 						<div class="contact-info-item">
 							<h3><?php esc_html_e( 'E-mail', 'hds' ); ?></h3>
-							<p><a href="mailto:<?php echo esc_attr( hds_get_email() ); ?>"><?php echo esc_html( hds_get_email() ); ?></a></p>
+							<p>
+								<?php echo hds_get_email_link(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							</p>
 						</div>
 
-						<?php if ( hds_get_address() ) : ?>
+						<?php if ( hds_get_address() && hds_get_postal_city() ) : ?>
 							<div class="contact-info-item">
 								<h3><?php esc_html_e( 'Adres', 'hds' ); ?></h3>
-								<p>
+								<address>
 									<?php echo esc_html( hds_get_address() ); ?><br>
 									<?php echo esc_html( hds_get_postal_city() ); ?>
-								</p>
+								</address>
 							</div>
 						<?php endif; ?>
 
@@ -56,16 +60,17 @@ get_header();
 							?>
 							<div class="contact-info-item">
 								<?php if ( $kvk ) : ?>
-									<p><?php echo esc_html__( 'KVK:', 'hds' ) . ' ' . esc_html( $kvk ); ?></p>
+									<p><strong><?php esc_html_e( 'KVK', 'hds' ); ?>:</strong> <?php echo esc_html( $kvk ); ?></p>
 								<?php endif; ?>
 								<?php if ( $btw ) : ?>
-									<p><?php echo esc_html__( 'BTW:', 'hds' ) . ' ' . esc_html( $btw ); ?></p>
+									<p><strong><?php esc_html_e( 'BTW', 'hds' ); ?>:</strong> <?php echo esc_html( $btw ); ?></p>
 								<?php endif; ?>
 							</div>
 						<?php endif; ?>
 
 						<?php
 						$hours = get_theme_mod( 'hds_opening_hours' );
+						$gbp   = get_theme_mod( 'hds_gbp_url' );
 						if ( $hours ) :
 							?>
 							<div class="contact-info-item">
