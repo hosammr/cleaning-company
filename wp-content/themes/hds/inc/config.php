@@ -73,7 +73,7 @@ class HDS_Config {
 				'critical_css_enabled' => false,
 			],
 			'features' => [
-				'woocommerce_integration' => false,
+				'woocommerce_integration' => true,
 				'blog_enabled'            => true,
 				'comments_enabled'        => false,
 				'vacancies_enabled'       => true,

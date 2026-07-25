@@ -129,6 +129,7 @@ function hds_register_custom_templates(): void {
 		'legal'            => __( 'Legal', 'hds' ),
 		'faq'              => __( 'FAQ', 'hds' ),
 		'bedankt'          => __( 'Bedankt', 'hds' ),
+		'luchtreiniging'   => __( 'Luchtreiniging Landing', 'hds' ),
 	];
 
 	foreach ( $templates as $slug => $label ) {
