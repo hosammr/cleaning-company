@@ -125,40 +125,9 @@ function hds_render_service_card( array $attributes, string $content, \WP_Block 
 		return '';
 	}
 
-	$icon    = get_post_meta( $page_id, 'hds_service_icon', true );
-	$image   = get_post_meta( $page_id, 'hds_hero_image', true );
-	$excerpt = has_excerpt( $post )
-		? get_the_excerpt( $post )
-		: wp_trim_words( wp_strip_all_tags( $post->post_content ), 20, '...' );
+	$show_image = (bool) ( $attributes['showImage'] ?? false );
 
-	ob_start();
-	?>
-	<article class="hds-service-card">
-		<?php if ( $attributes['showImage'] && $image ) : ?>
-			<div class="hds-service-card__image">
-				<?php echo wp_get_attachment_image( (int) $image, 'hds-card', false, [
-					'alt'     => get_the_title( $post ),
-					'loading' => 'lazy',
-				] ); ?>
-			</div>
-		<?php endif; ?>
-		<div class="hds-service-card__body">
-			<?php if ( $icon ) : ?>
-				<span class="hds-service-card__icon" aria-hidden="true"><?php echo esc_html( $icon ); ?></span>
-			<?php endif; ?>
-			<h3 class="hds-service-card__title">
-				<a href="<?php echo esc_url( get_permalink( $post ) ); ?>">
-					<?php echo esc_html( get_the_title( $post ) ); ?>
-				</a>
-			</h3>
-			<p class="hds-service-card__excerpt"><?php echo esc_html( $excerpt ); ?></p>
-			<a href="<?php echo esc_url( get_permalink( $post ) ); ?>" class="hds-service-card__link">
-				<?php esc_html_e( 'Lees meer', 'hds' ); ?>
-			</a>
-		</div>
-	</article>
-	<?php
-	return ob_get_clean();
+	return hds_render_service_card_core( $post, $show_image, true );
 }
 
 /**

@@ -54,7 +54,7 @@ get_header();
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn btn--primary">
 					<?php esc_html_e( 'Terug naar home', 'hds' ); ?>
 				</a>
-				<a href="<?php echo esc_url( home_url( '/diensten/' ) ); ?>" class="btn btn--outline">
+				<a href="<?php echo esc_url( home_url( '/schoonmaakdiensten/' ) ); ?>" class="btn btn--outline">
 					<?php esc_html_e( 'Bekijk onze diensten', 'hds' ); ?>
 				</a>
 			</div>

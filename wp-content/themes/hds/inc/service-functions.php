@@ -77,12 +77,14 @@ function hds_get_cross_sell_services(): array {
 }
 
 /**
- * Render a single service card.
+ * Render the core service card HTML shared by templates and custom blocks.
  *
- * @param WP_Post $post The service page post object.
+ * @param WP_Post $post       The service page post object.
+ * @param bool    $show_image Whether to render the hero image.
+ * @param bool    $show_icon  Whether to render the service icon.
  * @return string HTML for the service card.
  */
-function hds_render_service_card_html( \WP_Post $post ): string {
+function hds_render_service_card_core( \WP_Post $post, bool $show_image = true, bool $show_icon = true ): string {
 	$icon     = get_post_meta( $post->ID, 'hds_service_icon', true );
 	$image_id = get_post_meta( $post->ID, 'hds_hero_image', true );
 	$excerpt  = has_excerpt( $post )
@@ -92,7 +94,7 @@ function hds_render_service_card_html( \WP_Post $post ): string {
 	ob_start();
 	?>
 	<article class="hds-service-card">
-		<?php if ( $image_id ) : ?>
+		<?php if ( $show_image && $image_id ) : ?>
 			<div class="hds-service-card__image">
 				<?php echo wp_get_attachment_image( (int) $image_id, 'hds-card', false, [
 					'alt'     => get_the_title( $post ),
@@ -101,7 +103,7 @@ function hds_render_service_card_html( \WP_Post $post ): string {
 			</div>
 		<?php endif; ?>
 		<div class="hds-service-card__body">
-			<?php if ( $icon ) : ?>
+			<?php if ( $show_icon && $icon ) : ?>
 				<span class="hds-service-card__icon" aria-hidden="true"><?php echo esc_html( $icon ); ?></span>
 			<?php endif; ?>
 			<h3 class="hds-service-card__title">
@@ -123,6 +125,16 @@ function hds_render_service_card_html( \WP_Post $post ): string {
 }
 
 /**
+ * Render a single service card (template context — always shows icon).
+ *
+ * @param WP_Post $post The service page post object.
+ * @return string HTML for the service card.
+ */
+function hds_render_service_card_html( \WP_Post $post ): string {
+	return hds_render_service_card_core( $post, true, true );
+}
+
+/**
  * Render a service card grid.
  *
  * @param array  $posts       Array of WP_Post service page objects.
@@ -136,9 +148,8 @@ function hds_render_service_card_grid( array $posts, string $title = '', string 
 		return '';
 	}
 
-	$columns       = min( count( $posts ), $max_columns );
-	$grid_style    = '--hds-grid-columns:' . $columns;
-	$section_style = '';
+	$columns    = min( count( $posts ), $max_columns );
+	$grid_style = '--hds-grid-columns:' . $columns;
 
 	ob_start();
 	?>

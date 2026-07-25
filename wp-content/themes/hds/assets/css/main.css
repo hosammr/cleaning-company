@@ -1261,6 +1261,165 @@ img {
 	padding-left: 0;
 }
 
+/* ── About Page ── */
+.about-hero {
+	background: var(--wp--preset--color--light-gray);
+	padding-block: var(--wp--preset--spacing--12);
+	text-align: center;
+}
+
+.about-content {
+	margin-bottom: var(--wp--preset--spacing--8);
+	max-width: 800px;
+	margin-inline: auto;
+}
+
+/* ── FAQ Page ── */
+.faq-page {
+	max-width: 800px;
+	margin-inline: auto;
+}
+
+.faq-intro {
+	background: var(--wp--preset--color--light-gray);
+	border-radius: var(--hds-border-radius);
+	margin-bottom: var(--wp--preset--spacing--8);
+	padding: var(--wp--preset--spacing--6);
+}
+
+.faq-content {
+	margin-bottom: var(--wp--preset--spacing--8);
+}
+
+.faq-cta {
+	background: var(--wp--preset--color--light-gray);
+	border-radius: var(--hds-border-radius);
+	padding: var(--wp--preset--spacing--6);
+	text-align: center;
+}
+
+.faq-cta h2 {
+	margin-bottom: var(--wp--preset--spacing--3);
+}
+
+.faq-cta p {
+	margin-bottom: var(--wp--preset--spacing--4);
+}
+
+/* ── Legal Page ── */
+.legal-page {
+	max-width: 800px;
+	margin-inline: auto;
+}
+
+.legal-content {
+	margin-bottom: var(--wp--preset--spacing--8);
+}
+
+.legal-updated {
+	border-top: 1px solid var(--wp--preset--color--light-gray);
+	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--s);
+	margin-top: var(--wp--preset--spacing--8);
+	padding-top: var(--wp--preset--spacing--4);
+}
+
+/* ── Downloads Page ── */
+.downloads-list {
+	max-width: 800px;
+	margin-inline: auto;
+}
+
+.download-card {
+	margin-bottom: var(--wp--preset--spacing--4);
+	transition: box-shadow var(--hds-transition-speed) var(--hds-transition-easing);
+}
+
+.download-card:hover {
+	box-shadow: var(--wp--preset--shadow--md);
+}
+
+.download-card h3 {
+	margin-bottom: var(--wp--preset--spacing--2);
+}
+
+.download-card .wp-block-button {
+	margin-top: var(--wp--preset--spacing--4);
+}
+
+/* ── Vacancy Archive ── */
+.vacancy-archive {
+	max-width: 800px;
+	margin-inline: auto;
+}
+
+/* ── Vacancy Single ── */
+.single-vacancy {
+	max-width: 800px;
+	margin-inline: auto;
+}
+
+.single-vacancy-meta {
+	background: var(--wp--preset--color--light-gray);
+	border-radius: var(--hds-border-radius);
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--6);
+	margin: var(--wp--preset--spacing--6) 0;
+	padding: var(--wp--preset--spacing--4) var(--wp--preset--spacing--6);
+}
+
+.single-vacancy-meta__item {
+	font-size: var(--wp--preset--font-size--s);
+}
+
+.single-vacancy-meta__item dt {
+	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--xs);
+	font-weight: 600;
+	margin-bottom: var(--wp--preset--spacing--1);
+	text-transform: uppercase;
+}
+
+.single-vacancy-meta__item dd {
+	font-weight: 600;
+	margin: 0;
+}
+
+.single-vacancy-apply {
+	background: var(--wp--preset--color--light-gray);
+	border-radius: var(--hds-border-radius);
+	margin-top: var(--wp--preset--spacing--8);
+	padding: var(--wp--preset--spacing--6);
+}
+
+.single-vacancy-apply h2 {
+	margin-bottom: var(--wp--preset--spacing--3);
+}
+
+/* ── Entry Footer ── */
+.entry-footer {
+	border-top: 1px solid var(--wp--preset--color--light-gray);
+	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--s);
+	margin-top: var(--wp--preset--spacing--8);
+	padding-top: var(--wp--preset--spacing--4);
+}
+
+.entry-categories {
+	margin: 0;
+}
+
+/* ── Referenties / Client Logo Grid ── */
+.referenties-page {
+	max-width: 800px;
+	margin-inline: auto;
+}
+
+.client-logo-grid {
+	text-align: center;
+}
+
 /* ── 404 Page ── */
 .error-404 {
 	margin-inline: auto;

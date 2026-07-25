@@ -270,5 +270,86 @@ function hds_register_block_patterns(): void {
 <!-- /wp:group -->',
 		]
 	);
+
+	// Referenties Page
+	register_block_pattern(
+		'hds/referenties-page',
+		[
+			'title'       => __( 'Referenties Pagina', 'hds' ),
+			'categories'  => [ 'hds-patterns' ],
+			'content'     => '<!-- wp:group {"className":"referenties-page","layout":{"type":"constrained"}} -->
+<div class="wp-block-group referenties-page" style="padding:var(--wp--preset--spacing--8) 0">
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Wat onze klanten zeggen</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>Wij zijn trots op de samenwerking met onze klanten. Hieronder leest u wat zij over HDS Onderhoudsdiensten zeggen.</p>
+<!-- /wp:paragraph -->
+<!-- wp:group {"className":"client-logo-grid","layout":{"type":"constrained"}} -->
+<div class="wp-block-group client-logo-grid" style="padding:var(--wp--preset--spacing--8) 0">
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Onze klanten</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>Logo\'s en namen worden hier geplaatst. Gebruik de Mediagalerij om logo\'s toe te voegen.</p>
+<!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->
+<!-- wp:paragraph -->
+<p>Wilt u ook uw ervaring delen? Wij horen graag van u.</p>
+<!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->',
+		]
+	);
+
+	// Downloads Card List
+	register_block_pattern(
+		'hds/downloads-card-list',
+		[
+			'title'       => __( 'Downloads Kaartenlijst', 'hds' ),
+			'categories'  => [ 'hds-patterns' ],
+			'content'     => '<!-- wp:group {"className":"downloads-list","layout":{"type":"constrained"}} -->
+<div class="wp-block-group downloads-list" style="padding:var(--wp--preset--spacing--8) 0">
+<!-- wp:group {"className":"download-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|6","bottom":"var:preset|spacing|6","left":"var:preset|spacing|6","right":"var:preset|spacing|6"}},"border":{"width":"1px"}},"borderColor":"light-gray","backgroundColor":"white","layout":{"type":"constrained"}} -->
+<div class="wp-block-group download-card has-border-color has-light-gray-border-color has-background has-white-background-color" style="border-width:1px;padding-top:var(--wp--preset--spacing--6);padding-bottom:var(--wp--preset--spacing--6);padding-left:var(--wp--preset--spacing--6);padding-right:var(--wp--preset--spacing--6)">
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Documentnaam</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>Beschrijving van het document. Bestandstype en grootte toevoegen.</p>
+<!-- /wp:paragraph -->
+<!-- wp:buttons -->
+<div class="wp-block-buttons">
+<!-- wp:button {"className":"is-style-secondary"} -->
+<div class="wp-block-button is-style-secondary"><a class="wp-block-button__link wp-element-button" href="#">Download</a></div>
+<!-- /wp:button -->
+</div>
+<!-- /wp:buttons -->
+</div>
+<!-- /wp:group -->
+</div>
+<!-- /wp:group -->',
+		]
+	);
+
+	// Vacancy Page Intro
+	register_block_pattern(
+		'hds/vacancy-intro',
+		[
+			'title'       => __( 'Vacature Pagina Intro', 'hds' ),
+			'categories'  => [ 'hds-patterns' ],
+			'content'     => '<!-- wp:group {"className":"vacancy-intro","layout":{"type":"constrained"}} -->
+<div class="wp-block-group vacancy-intro" style="padding:var(--wp--preset--spacing--8) 0">
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Werken bij HDS</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>HDS Onderhoudsdiensten is een groeiend schoonmaakbedrijf in West-Brabant. Wij zoeken gemotiveerde collega\'s die kwaliteit, veiligheid en klantgerichtheid belangrijk vinden. Bekijk hieronder onze openstaande vacatures.</p>
+<!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->',
+		]
+	);
 }
 add_action( 'init', 'hds_register_block_patterns' );

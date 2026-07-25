@@ -363,3 +363,15 @@ function hds_add_back_to_top_to_footer(): void {
 	echo hds_back_to_top(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 add_action( 'wp_footer', 'hds_add_back_to_top_to_footer', 99 );
+
+/**
+ * Output cookie consent banner fallback.
+ *
+ * Only renders when Complianz Premium is not active.
+ * When Complianz is installed, cmplz_cookiebanner() handles rendering
+ * and this function returns empty.
+ */
+function hds_output_cookie_banner(): void {
+	echo hds_cookie_banner(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+}
+add_action( 'wp_footer', 'hds_output_cookie_banner', 10 );

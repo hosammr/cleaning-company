@@ -109,14 +109,6 @@ function hds_limit_revisions(): void {
 add_action( 'init', 'hds_limit_revisions' );
 
 /**
- * Set JPEG compression quality to 82 for WebP conversion compatibility.
- */
-function hds_image_quality(): int {
-	return 82;
-}
-add_filter( 'jpeg_quality', 'hds_image_quality' );
-
-/**
  * Disable attachment year/month folder structure for cleaner URLs.
  */
 function hds_attachment_folder_structure(): bool {
