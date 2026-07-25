@@ -79,6 +79,23 @@ get_header();
 							</div>
 						<?php endif; ?>
 					</div>
+
+					<?php if ( hds_get_address() && hds_get_postal_city() ) : ?>
+						<div class="contact-map-placeholder">
+							<div class="map-consent-wrapper">
+								<div class="map-placeholder-content">
+									<span class="map-placeholder-icon" aria-hidden="true">&#128205;</span>
+									<p><?php esc_html_e( 'Klik om Google Maps te laden', 'hds' ); ?></p>
+									<p class="map-placeholder-note">
+										<?php esc_html_e( 'Door de kaart te laden accepteert u de privacyvoorwaarden van Google.', 'hds' ); ?>
+									</p>
+									<button type="button" class="btn btn--secondary map-load-button">
+										<?php esc_html_e( 'Kaart laden', 'hds' ); ?>
+									</button>
+								</div>
+							</div>
+						</div>
+					<?php endif; ?>
 				</aside>
 			</div>
 		</div>

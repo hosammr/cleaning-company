@@ -9,6 +9,12 @@
 	--hds-border-radius: 8px;
 	--hds-transition-speed: 300ms;
 	--hds-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+	--hds-transition-fast: 150ms ease;
+	--hds-transition-base: 250ms ease;
+	--hds-transition-slow: 400ms ease;
+	--hds-easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+	--hds-easing-enter: cubic-bezier(0, 0, 0.2, 1);
+	--hds-easing-exit: cubic-bezier(0.4, 0, 1, 1);
 }
 
 /* ── Reset ── */
@@ -1457,6 +1463,7 @@ img {
 	aspect-ratio: 16 / 9;
 	border-radius: var(--hds-border-radius);
 	object-fit: cover;
+	transition: transform var(--hds-transition-base);
 	width: 100%;
 }
 
@@ -1655,6 +1662,112 @@ img {
 		scroll-behavior: auto !important;
 		transition-duration: 0.01ms !important;
 	}
+}
+
+/* ── Contact Map Placeholder ── */
+.contact-map-placeholder {
+	background: var(--wp--preset--color--light-gray);
+	border-radius: var(--hds-border-radius);
+	margin-top: var(--wp--preset--spacing--6);
+	min-height: 240px;
+	overflow: hidden;
+}
+
+.map-consent-wrapper {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	min-height: 240px;
+}
+
+.map-placeholder-content {
+	padding: var(--wp--preset--spacing--6);
+	text-align: center;
+}
+
+.map-placeholder-icon {
+	display: block;
+	font-size: var(--wp--preset--font-size--4-xl);
+	margin-bottom: var(--wp--preset--spacing--3);
+}
+
+.map-placeholder-note {
+	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--xs);
+	margin-bottom: var(--wp--preset--spacing--4);
+	margin-top: var(--wp--preset--spacing--2);
+}
+
+/* ── FAQ Search ── */
+.faq-search {
+	margin-bottom: var(--wp--preset--spacing--6);
+}
+
+.faq-search__wrapper {
+	display: flex;
+	position: relative;
+}
+
+.faq-search__input {
+	border: 2px solid var(--wp--preset--color--gray);
+	border-radius: 4px;
+	flex: 1;
+	font-family: inherit;
+	font-size: var(--wp--preset--font-size--m);
+	min-height: 44px;
+	padding: var(--wp--preset--spacing--2) var(--wp--preset--spacing--4);
+	padding-right: 44px;
+	width: 100%;
+}
+
+.faq-search__input:focus {
+	border-color: var(--wp--preset--color--primary);
+	outline: none;
+}
+
+.faq-search__clear {
+	align-items: center;
+	background: none;
+	border: none;
+	color: var(--wp--preset--color--gray);
+	cursor: pointer;
+	display: flex;
+	font-size: var(--wp--preset--font-size--xl);
+	justify-content: center;
+	min-height: 44px;
+	min-width: 44px;
+	padding: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.faq-search__clear:hover {
+	color: var(--wp--preset--color--dark-gray);
+}
+
+.faq-search__clear[hidden] {
+	display: none;
+}
+
+/* ── Archive Card Hover ── */
+.archive-item {
+	background: var(--wp--preset--color--white);
+	border-radius: var(--hds-border-radius);
+	box-shadow: var(--wp--preset--shadow--sm);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	transition: box-shadow var(--hds-transition-fast), transform var(--hds-transition-fast);
+}
+
+.archive-item:hover {
+	box-shadow: var(--wp--preset--shadow--md);
+	transform: translateY(-2px);
+}
+
+.archive-item:hover .archive-item-image img {
+	transform: scale(1.03);
 }
 
 /* ── WooCommerce: Shop Loop ── */

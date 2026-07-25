@@ -25,6 +25,24 @@ get_header();
 				</p>
 			</div>
 
+			<div class="faq-search">
+				<label for="faq-search-input" class="screen-reader-text">
+					<?php esc_html_e( 'Zoek in veelgestelde vragen', 'hds' ); ?>
+				</label>
+				<div class="faq-search__wrapper">
+					<input
+						type="search"
+						id="faq-search-input"
+						class="faq-search__input"
+						placeholder="<?php esc_attr_e( 'Zoek in vragen...', 'hds' ); ?>"
+						aria-label="<?php esc_attr_e( 'Filter vragen op trefwoord', 'hds' ); ?>"
+					>
+					<button type="button" class="faq-search__clear" aria-label="<?php esc_attr_e( 'Wis zoekopdracht', 'hds' ); ?>" hidden>
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			</div>
+
 			<div class="faq-content">
 				<?php
 				while ( have_posts() ) :

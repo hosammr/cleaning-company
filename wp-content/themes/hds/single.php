@@ -30,26 +30,44 @@ get_header();
 							$location = get_post_meta( get_the_ID(), 'hds_location', true );
 							$hours    = get_post_meta( get_the_ID(), 'hds_hours_per_week', true );
 							$deadline = get_post_meta( get_the_ID(), 'hds_deadline', true );
+							$start    = get_post_meta( get_the_ID(), 'hds_start_date', true );
 
 							if ( $hours ) : ?>
 								<div class="single-vacancy-meta__item">
 									<dt><?php esc_html_e( 'Uren per week', 'hds' ); ?></dt>
-									<dd><?php echo esc_html( $hours ); ?></dd>
+									<dd itemprop="workHours"><?php echo esc_html( $hours ); ?></dd>
 								</div>
 							<?php endif; ?>
 							<?php if ( $location ) : ?>
 								<div class="single-vacancy-meta__item">
 									<dt><?php esc_html_e( 'Locatie', 'hds' ); ?></dt>
-									<dd><?php echo esc_html( $location ); ?></dd>
+									<dd itemprop="jobLocation" itemscope itemtype="https://schema.org/Place">
+										<span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+											<span itemprop="addressLocality"><?php echo esc_html( $location ); ?></span>
+											<meta itemprop="addressCountry" content="NL">
+										</span>
+									</dd>
 								</div>
 							<?php endif; ?>
 							<?php if ( $deadline ) : ?>
 								<div class="single-vacancy-meta__item">
 									<dt><?php esc_html_e( 'Reageren voor', 'hds' ); ?></dt>
-									<dd><?php echo esc_html( $deadline ); ?></dd>
+									<dd><meta itemprop="validThrough" content="<?php echo esc_attr( $deadline ); ?>"><?php echo esc_html( $deadline ); ?></dd>
+								</div>
+							<?php endif; ?>
+							<?php if ( $start ) : ?>
+								<div class="single-vacancy-meta__item">
+									<dt><?php esc_html_e( 'Startdatum', 'hds' ); ?></dt>
+									<dd><?php echo esc_html( $start ); ?></dd>
 								</div>
 							<?php endif; ?>
 						</dl>
+						<meta itemprop="datePosted" content="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
+						<meta itemprop="employmentType" content="PART_TIME">
+						<div itemprop="hiringOrganization" itemscope itemtype="https://schema.org/Organization">
+							<meta itemprop="name" content="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
+							<meta itemprop="url" content="<?php echo esc_url( home_url() ); ?>">
+						</div>
 					</header>
 
 					<div class="entry-content" itemprop="description">
