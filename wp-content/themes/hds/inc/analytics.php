@@ -145,6 +145,10 @@ function hds_woocommerce_add_to_cart_event(): void {
  * WooCommerce purchase event tracking.
  */
 function hds_woocommerce_purchase_event( int $order_id ): void {
+	if ( ! function_exists( 'wc_get_order' ) ) {
+		return;
+	}
+
 	$order = wc_get_order( $order_id );
 	if ( ! $order ) {
 		return;

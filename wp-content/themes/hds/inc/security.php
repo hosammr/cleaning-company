@@ -82,7 +82,7 @@ add_filter( 'login_errors', 'hds_login_error_message' );
 /**
  * Restrict REST API access to authenticated users for sensitive endpoints.
  */
-function hds_rest_authentication_required( \WP_Error|bool $result ): \WP_Error|bool {
+function hds_rest_authentication_required( \WP_Error|bool|null $result ): \WP_Error|bool|null {
 	if ( is_wp_error( $result ) ) {
 		return $result;
 	}

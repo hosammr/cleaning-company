@@ -6,8 +6,15 @@
  * product card styling, cart/checkout hooks, sale badges, stock display,
  * mini-cart support, and template override conventions.
  *
+ * Gracefully degrades when WooCommerce is absent — all registrations
+ * are guarded by `class_exists( 'WooCommerce' )`.
+ *
  * @package HDS
  */
+
+if ( ! class_exists( 'WooCommerce' ) ) {
+	return;
+}
 
 /**
  * Declare WooCommerce theme support.
