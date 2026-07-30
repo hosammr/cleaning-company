@@ -19,8 +19,8 @@ function hds_register_block_patterns(): void {
 		[
 			'title'       => __( 'CTA Banner', 'hds' ),
 			'categories'  => [ 'hds-patterns' ],
-			'content'     => '<!-- wp:group {"style":{"color":{"background":"#1a73e8"}},"className":"is-style-banner","layout":{"type":"constrained"}} -->
-<div class="wp-block-group is-style-banner has-background" style="background-color:#1a73e8;padding:var(--wp--preset--spacing--16) var(--wp--preset--spacing--4)">
+			'content'     => '<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|16","bottom":"var:preset|spacing|16","left":"var:preset|spacing|4","right":"var:preset|spacing|4"}},"color":{"background":"#1a73e8"}},"className":"is-style-banner","layout":{"type":"constrained"}} -->
+<div class="wp-block-group is-style-banner has-background" style="background-color:#1a73e8;padding-top:var(--wp--preset--spacing--16);padding-right:var(--wp--preset--spacing--4);padding-bottom:var(--wp--preset--spacing--16);padding-left:var(--wp--preset--spacing--4)">
 <!-- wp:heading {"textAlign":"center","level":2,"textColor":"white"} -->
 <h2 class="wp-block-heading has-text-align-center has-white-color has-text-color">Wilt u een vrijblijvende offerte? Wij denken graag met u mee.</h2>
 <!-- /wp:heading -->
@@ -42,9 +42,9 @@ function hds_register_block_patterns(): void {
 		[
 			'title'       => __( 'Hero Section', 'hds' ),
 			'categories'  => [ 'hds-patterns' ],
-			'content'     => '<!-- wp:group {"className":"hero-section","layout":{"type":"constrained"}} -->
-<div class="wp-block-group hero-section" style="padding:var(--wp--preset--spacing--20) var(--wp--preset--spacing--4)">
-<!-- wp:heading {"level":1,"textAlign":"center"} -->
+			'content'     => '<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20","left":"var:preset|spacing|4","right":"var:preset|spacing|4"}}},"className":"hero-section","layout":{"type":"constrained"}} -->
+<div class="wp-block-group hero-section" style="padding-top:var(--wp--preset--spacing--20);padding-right:var(--wp--preset--spacing--4);padding-bottom:var(--wp--preset--spacing--20);padding-left:var(--wp--preset--spacing--4)">
+<!-- wp:heading {"anchor":"hero-heading","level":1,"textAlign":"center"} -->
 <h1 class="wp-block-heading has-text-align-center" id="hero-heading">Helder en Duidelijk voor het Schoonste resultaat!</h1>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"align":"center"} -->
@@ -68,8 +68,8 @@ function hds_register_block_patterns(): void {
 		[
 			'title'       => __( 'USP Grid', 'hds' ),
 			'categories'  => [ 'hds-patterns' ],
-			'content'     => '<!-- wp:group {"className":"usp-grid","layout":{"type":"constrained"}} -->
-<div class="wp-block-group usp-grid" style="padding:var(--wp--preset--spacing--16) 0">
+			'content'     => '<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|16","bottom":"var:preset|spacing|16"}}},"className":"usp-grid","layout":{"type":"constrained"}} -->
+<div class="wp-block-group usp-grid" style="padding-top:var(--wp--preset--spacing--16);padding-bottom:var(--wp--preset--spacing--16)">
 <!-- wp:heading {"textAlign":"center"} -->
 <h2 class="wp-block-heading has-text-align-center">Waarom HDS?</h2>
 <!-- /wp:heading -->
@@ -79,8 +79,12 @@ function hds_register_block_patterns(): void {
 <div class="wp-block-column">
 <!-- wp:group {"className":"is-style-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|6","bottom":"var:preset|spacing|6","left":"var:preset|spacing|6","right":"var:preset|spacing|6"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group is-style-card" style="padding-top:var(--wp--preset--spacing--6);padding-bottom:var(--wp--preset--spacing--6);padding-left:var(--wp--preset--spacing--6);padding-right:var(--wp--preset--spacing--6)">
+<!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading">Vast opgeleid personeel</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
 <p>Onze medewerkers zijn in vaste dienst en volledig opgeleid.</p>
+<!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
 </div>
@@ -89,8 +93,12 @@ function hds_register_block_patterns(): void {
 <div class="wp-block-column">
 <!-- wp:group {"className":"is-style-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|6","bottom":"var:preset|spacing|6","left":"var:preset|spacing|6","right":"var:preset|spacing|6"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group is-style-card" style="padding-top:var(--wp--preset--spacing--6);padding-bottom:var(--wp--preset--spacing--6);padding-left:var(--wp--preset--spacing--6);padding-right:var(--wp--preset--spacing--6)">
+<!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading">Veiligheid &amp; Certificering</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
 <p>OSB-gecertificeerd. Wij werken volgens de hoogste veiligheidsnormen.</p>
+<!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
 </div>
@@ -99,8 +107,12 @@ function hds_register_block_patterns(): void {
 <div class="wp-block-column">
 <!-- wp:group {"className":"is-style-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|6","bottom":"var:preset|spacing|6","left":"var:preset|spacing|6","right":"var:preset|spacing|6"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group is-style-card" style="padding-top:var(--wp--preset--spacing--6);padding-bottom:var(--wp--preset--spacing--6);padding-left:var(--wp--preset--spacing--6);padding-right:var(--wp--preset--spacing--6)">
+<!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading">Een aanspreekpunt</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
 <p>U heeft altijd één vast aanspreekpunt voor al uw vragen.</p>
+<!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
 </div>
@@ -189,8 +201,8 @@ function hds_register_block_patterns(): void {
 		[
 			'title'       => __( '404 Content', 'hds' ),
 			'categories'  => [ 'hds-patterns' ],
-			'content'     => '<!-- wp:group {"className":"error-404-content","layout":{"type":"constrained"}} -->
-<div class="wp-block-group error-404-content" style="padding:var(--wp--preset--spacing--20) var(--wp--preset--spacing--4)">
+			'content'     => '<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20","left":"var:preset|spacing|4","right":"var:preset|spacing|4"}}},"className":"error-404-content","layout":{"type":"constrained"}} -->
+<div class="wp-block-group error-404-content" style="padding-top:var(--wp--preset--spacing--20);padding-right:var(--wp--preset--spacing--4);padding-bottom:var(--wp--preset--spacing--20);padding-left:var(--wp--preset--spacing--4)">
 <!-- wp:heading {"level":1} -->
 <h1 class="wp-block-heading">Pagina niet gevonden</h1>
 <!-- /wp:heading -->
@@ -208,8 +220,8 @@ function hds_register_block_patterns(): void {
 		[
 			'title'       => __( 'FAQ Starter', 'hds' ),
 			'categories'  => [ 'hds-patterns' ],
-			'content'     => '<!-- wp:group {"layout":{"type":"constrained"}} -->
-<div class="wp-block-group" style="padding:var(--wp--preset--spacing--8) 0">
+			'content'     => '<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|8","bottom":"var:preset|spacing|8"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--8);padding-bottom:var(--wp--preset--spacing--8)">
 <!-- wp:paragraph -->
 <p>Hieronder vindt u antwoorden op veelgestelde vragen. Heeft u een vraag die er niet bij staat? Neem dan gerust <a href="/contact/">contact</a> met ons op.</p>
 <!-- /wp:paragraph -->
@@ -224,8 +236,8 @@ function hds_register_block_patterns(): void {
 		[
 			'title'       => __( 'Service Card Grid', 'hds' ),
 			'categories'  => [ 'hds-patterns' ],
-			'content'     => '<!-- wp:group {"className":"service-card-grid-section","layout":{"type":"constrained"}} -->
-<div class="wp-block-group service-card-grid-section" style="padding:var(--wp--preset--spacing--12) 0">
+			'content'     => '<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|12","bottom":"var:preset|spacing|12"}}},"className":"service-card-grid-section","layout":{"type":"constrained"}} -->
+<div class="wp-block-group service-card-grid-section" style="padding-top:var(--wp--preset--spacing--12);padding-bottom:var(--wp--preset--spacing--12)">
 <!-- wp:heading {"textAlign":"center"} -->
 <h2 class="wp-block-heading has-text-align-center">Onze diensten</h2>
 <!-- /wp:heading -->
@@ -238,8 +250,12 @@ function hds_register_block_patterns(): void {
 <div class="wp-block-column">
 <!-- wp:group {"className":"is-style-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|6","bottom":"var:preset|spacing|6","left":"var:preset|spacing|6","right":"var:preset|spacing|6"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group is-style-card" style="padding-top:var(--wp--preset--spacing--6);padding-bottom:var(--wp--preset--spacing--6);padding-left:var(--wp--preset--spacing--6);padding-right:var(--wp--preset--spacing--6)">
+<!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/glasbewassing/">Glasbewassing</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
 <p>Professionele glasbewassing voor kantoren, winkels en bedrijfspanden.</p>
+<!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
 </div>
@@ -248,8 +264,12 @@ function hds_register_block_patterns(): void {
 <div class="wp-block-column">
 <!-- wp:group {"className":"is-style-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|6","bottom":"var:preset|spacing|6","left":"var:preset|spacing|6","right":"var:preset|spacing|6"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group is-style-card" style="padding-top:var(--wp--preset--spacing--6);padding-bottom:var(--wp--preset--spacing--6);padding-left:var(--wp--preset--spacing--6);padding-right:var(--wp--preset--spacing--6)">
+<!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/gevelreiniging/">Gevelreiniging</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
 <p>Reiniging en onderhoud van gevels, daken en reclameborden.</p>
+<!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
 </div>
@@ -258,8 +278,12 @@ function hds_register_block_patterns(): void {
 <div class="wp-block-column">
 <!-- wp:group {"className":"is-style-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|6","bottom":"var:preset|spacing|6","left":"var:preset|spacing|6","right":"var:preset|spacing|6"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group is-style-card" style="padding-top:var(--wp--preset--spacing--6);padding-bottom:var(--wp--preset--spacing--6);padding-left:var(--wp--preset--spacing--6);padding-right:var(--wp--preset--spacing--6)">
+<!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading"><a href="/reguliere-schoonmaak/">Reguliere Schoonmaak</a></h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
 <p>Periodieke schoonmaak voor kantoren en bedrijfsruimtes.</p>
+<!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
 </div>
@@ -277,16 +301,16 @@ function hds_register_block_patterns(): void {
 		[
 			'title'       => __( 'Referenties Pagina', 'hds' ),
 			'categories'  => [ 'hds-patterns' ],
-			'content'     => '<!-- wp:group {"className":"referenties-page","layout":{"type":"constrained"}} -->
-<div class="wp-block-group referenties-page" style="padding:var(--wp--preset--spacing--8) 0">
+			'content'     => '<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|8","bottom":"var:preset|spacing|8"}}},"className":"referenties-page","layout":{"type":"constrained"}} -->
+<div class="wp-block-group referenties-page" style="padding-top:var(--wp--preset--spacing--8);padding-bottom:var(--wp--preset--spacing--8)">
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Wat onze klanten zeggen</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
 <p>Wij zijn trots op de samenwerking met onze klanten. Hieronder leest u wat zij over HDS Onderhoudsdiensten zeggen.</p>
 <!-- /wp:paragraph -->
-<!-- wp:group {"className":"client-logo-grid","layout":{"type":"constrained"}} -->
-<div class="wp-block-group client-logo-grid" style="padding:var(--wp--preset--spacing--8) 0">
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|8","bottom":"var:preset|spacing|8"}}},"className":"client-logo-grid","layout":{"type":"constrained"}} -->
+<div class="wp-block-group client-logo-grid" style="padding-top:var(--wp--preset--spacing--8);padding-bottom:var(--wp--preset--spacing--8)">
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading">Onze klanten</h3>
 <!-- /wp:heading -->
@@ -309,8 +333,8 @@ function hds_register_block_patterns(): void {
 		[
 			'title'       => __( 'Downloads Kaartenlijst', 'hds' ),
 			'categories'  => [ 'hds-patterns' ],
-			'content'     => '<!-- wp:group {"className":"downloads-list","layout":{"type":"constrained"}} -->
-<div class="wp-block-group downloads-list" style="padding:var(--wp--preset--spacing--8) 0">
+			'content'     => '<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|8","bottom":"var:preset|spacing|8"}}},"className":"downloads-list","layout":{"type":"constrained"}} -->
+<div class="wp-block-group downloads-list" style="padding-top:var(--wp--preset--spacing--8);padding-bottom:var(--wp--preset--spacing--8)">
 <!-- wp:group {"className":"download-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|6","bottom":"var:preset|spacing|6","left":"var:preset|spacing|6","right":"var:preset|spacing|6"}},"border":{"width":"1px"}},"borderColor":"light-gray","backgroundColor":"white","layout":{"type":"constrained"}} -->
 <div class="wp-block-group download-card has-border-color has-light-gray-border-color has-background has-white-background-color" style="border-width:1px;padding-top:var(--wp--preset--spacing--6);padding-bottom:var(--wp--preset--spacing--6);padding-left:var(--wp--preset--spacing--6);padding-right:var(--wp--preset--spacing--6)">
 <!-- wp:heading {"level":3} -->
@@ -339,8 +363,8 @@ function hds_register_block_patterns(): void {
 		[
 			'title'       => __( 'Vacature Pagina Intro', 'hds' ),
 			'categories'  => [ 'hds-patterns' ],
-			'content'     => '<!-- wp:group {"className":"vacancy-intro","layout":{"type":"constrained"}} -->
-<div class="wp-block-group vacancy-intro" style="padding:var(--wp--preset--spacing--8) 0">
+			'content'     => '<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|8","bottom":"var:preset|spacing|8"}}},"className":"vacancy-intro","layout":{"type":"constrained"}} -->
+<div class="wp-block-group vacancy-intro" style="padding-top:var(--wp--preset--spacing--8);padding-bottom:var(--wp--preset--spacing--8)">
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Werken bij HDS</h2>
 <!-- /wp:heading -->
