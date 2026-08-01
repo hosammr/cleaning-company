@@ -53,24 +53,35 @@ function hds_get_cross_sell_map(): array {
  * @return WP_Post[] Array of service page post objects.
  */
 function hds_get_cross_sell_services(): array {
-	$slug   = get_post_field( 'post_name', get_the_ID() );
-	$map    = hds_get_cross_sell_map();
-	$slugs  = $map[ $slug ] ?? [];
+	$slug       = get_post_field( 'post_name', get_the_ID() );
+	$map        = hds_get_cross_sell_map();
+	$slugs      = $map[ $slug ] ?? [];
+	$current_id = get_the_ID();
 
 	if ( empty( $slugs ) ) {
-		return array_slice( hds_get_service_pages( 3 ), 0, 3 );
+		$services = hds_get_service_pages( 4 );
+		$services = array_filter( $services, function ( $page ) use ( $current_id ) {
+			return $page->ID !== $current_id;
+		} );
+		$services = array_values( $services );
+		return array_slice( $services, 0, 3 );
 	}
 
 	$posts = [];
-	foreach ( $slugs as $slug ) {
-		$page = get_page_by_path( $slug );
+	foreach ( $slugs as $target_slug ) {
+		$page = get_page_by_path( $target_slug );
 		if ( $page && $page->post_status === 'publish' ) {
 			$posts[] = $page;
 		}
 	}
 
 	if ( empty( $posts ) ) {
-		return array_slice( hds_get_service_pages( 3 ), 0, 3 );
+		$services = hds_get_service_pages( 4 );
+		$services = array_filter( $services, function ( $page ) use ( $current_id ) {
+			return $page->ID !== $current_id;
+		} );
+		$services = array_values( $services );
+		return array_slice( $services, 0, 3 );
 	}
 
 	return $posts;

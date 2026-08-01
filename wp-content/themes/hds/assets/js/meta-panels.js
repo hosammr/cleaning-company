@@ -96,8 +96,8 @@ const {
             : null
     );
 }
- 
-{
+
+	function MetaToggleControl( { metaKey, label, help } ) {
 		const metaValue = useSelect( function ( select ) {
 			return select( 'core/editor' ).getEditedPostAttribute( 'meta' )?.[ metaKey ] ?? false;
 		}, [ metaKey ] );
