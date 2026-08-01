@@ -26,7 +26,7 @@ function hds_enqueue_meta_panel_scripts(): void {
 	wp_enqueue_script(
 		'hds-meta-panels',
 		$asset_uri,
-		[ 'wp-plugins', 'wp-edit-post', 'wp-element', 'wp-components', 'wp-data', 'wp-compose', 'wp-i18n', 'wp-core-data' ],
+		[ 'wp-plugins', 'wp-edit-post', 'wp-element', 'wp-components', 'wp-data', 'wp-compose', 'wp-i18n', 'wp-core-data', 'wp-block-editor' ],
 		$asset_ver,
 		true
 	);
