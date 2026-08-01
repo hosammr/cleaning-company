@@ -13,7 +13,16 @@
 	const { registerPlugin } = wp.plugins;
 	const { PluginDocumentSettingPanel } = wp.editPost;
 	const { createElement: el } = wp.element;
-	const { TextControl, ToggleControl } = wp.components;
+	const {
+    TextControl,
+    ToggleControl,
+    Button,
+} = wp.components;
+
+const {
+    MediaUpload,
+    MediaUploadCheck,
+} = wp.blockEditor;
 	const { useSelect, useDispatch } = wp.data;
 	const { __ } = wp.i18n;
 
@@ -39,7 +48,56 @@
 		} );
 	}
 
-	function MetaToggleControl( { metaKey, label, help } ) {
+	function MetaImageControl( { metaKey, label, help } ) {
+    const metaValue = useSelect( function( select ) {
+        return select( 'core/editor' )
+            .getEditedPostAttribute( 'meta' )?.[ metaKey ] ?? 0;
+    }, [ metaKey ] );
+
+    const { editPost } = useDispatch( 'core/editor' );
+
+    return el( 'div', {},
+
+        el( 'label', {}, label ),
+
+        el(
+            MediaUploadCheck,
+            {},
+            el( MediaUpload, {
+                onSelect: function( media ) {
+                    editPost( {
+                        meta: {
+                            [ metaKey ]: media.id,
+                        },
+                    } );
+                },
+
+                allowedTypes: [ 'image' ],
+
+                value: metaValue,
+
+                render: function( { open } ) {
+                    return el(
+                        Button,
+                        {
+                            variant: 'secondary',
+                            onClick: open,
+                        },
+                        metaValue
+                            ? 'Wijzig afbeelding'
+                            : 'Selecteer afbeelding'
+                    );
+                },
+            } )
+        ),
+
+        help
+            ? el( 'p', {}, help )
+            : null
+    );
+}
+ 
+{
 		const metaValue = useSelect( function ( select ) {
 			return select( 'core/editor' ).getEditedPostAttribute( 'meta' )?.[ metaKey ] ?? false;
 		}, [ metaKey ] );
