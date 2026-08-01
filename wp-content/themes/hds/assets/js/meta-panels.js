@@ -139,6 +139,14 @@ const {
 						help: field.description,
 					} );
 				}
+				if ( field.type === 'image' ) {
+    return el( MetaImageControl, {
+        key: key,
+        metaKey: key,
+        label: field.label,
+        help: field.description,
+    } );
+}
 
 				return el( MetaTextControl, {
 					key: key,
