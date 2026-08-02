@@ -1518,6 +1518,15 @@ img {
 	margin-inline: auto;
 }
 
+.about-mission-text {
+	color: var(--wp--preset--color--dark-gray);
+	font-size: var(--wp--preset--font-size--l);
+	line-height: 1.7;
+	margin: 0 auto;
+	max-width: 780px;
+	text-align: center;
+}
+
 /* ── FAQ Page ── */
 .faq-page {
 	max-width: 800px;
