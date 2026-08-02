@@ -707,6 +707,30 @@ img {
 	margin-bottom: var(--wp--preset--spacing--1);
 }
 
+.contact-form-placeholder {
+	background: var(--wp--preset--color--light-gray);
+	border: 2px dashed var(--wp--preset--color--gray);
+	border-radius: var(--hds-border-radius);
+	min-height: 320px;
+	padding: var(--wp--preset--spacing--6);
+}
+
+.contact-form-placeholder__note {
+	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--s);
+	margin: 0;
+	text-align: center;
+}
+
+.contact-service-area-text {
+	color: var(--wp--preset--color--dark-gray);
+	font-size: var(--wp--preset--font-size--l);
+	line-height: 1.7;
+	margin: 0 auto;
+	max-width: 780px;
+	text-align: center;
+}
+
 /* ── Cookie Banner ── */
 .hds-cookie-banner {
 	background: var(--wp--preset--color--white);
