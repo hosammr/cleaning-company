@@ -102,6 +102,56 @@ get_header();
 		<?php echo hds_render_cross_sell_section(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</section>
 
+		<section class="hds-faq-section" aria-labelledby="hds-faq-heading">
+			<div class="container">
+				<header class="hds-faq-header">
+					<h2 id="hds-faq-heading"><?php esc_html_e( 'Veelgestelde vragen', 'hds' ); ?></h2>
+				</header>
+				<div class="hds-faq-list">
+					<details class="hds-faq-item">
+						<summary class="hds-faq-item__question">
+							<?php esc_html_e( 'Hoe vaak adviseren jullie schoonmaak?', 'hds' ); ?>
+						</summary>
+						<div class="hds-faq-item__answer">
+							<p><?php esc_html_e( 'Dit is afhankelijk van uw bedrijf, bezoekersaantallen en wensen. Wij adviseren u graag.', 'hds' ); ?></p>
+						</div>
+					</details>
+					<details class="hds-faq-item">
+						<summary class="hds-faq-item__question">
+							<?php esc_html_e( 'Werken jullie buiten kantooruren?', 'hds' ); ?>
+						</summary>
+						<div class="hds-faq-item__answer">
+							<p><?php esc_html_e( 'Ja. Wij kunnen werkzaamheden uitvoeren buiten uw openingstijden.', 'hds' ); ?></p>
+						</div>
+					</details>
+					<details class="hds-faq-item">
+						<summary class="hds-faq-item__question">
+							<?php esc_html_e( 'Gebruiken jullie milieuvriendelijke producten?', 'hds' ); ?>
+						</summary>
+						<div class="hds-faq-item__answer">
+							<p><?php esc_html_e( 'Ja. Waar mogelijk gebruiken wij professionele en milieubewuste schoonmaakmiddelen.', 'hds' ); ?></p>
+						</div>
+					</details>
+					<details class="hds-faq-item">
+						<summary class="hds-faq-item__question">
+							<?php esc_html_e( 'Kan ik een vrijblijvende offerte aanvragen?', 'hds' ); ?>
+						</summary>
+						<div class="hds-faq-item__answer">
+							<p><?php esc_html_e( 'Ja. Wij maken graag een offerte op maat zonder verplichtingen.', 'hds' ); ?></p>
+						</div>
+					</details>
+					<details class="hds-faq-item">
+						<summary class="hds-faq-item__question">
+							<?php esc_html_e( 'Zijn jullie diensten beschikbaar voor zowel kleine als grote bedrijven?', 'hds' ); ?>
+						</summary>
+						<div class="hds-faq-item__answer">
+							<p><?php esc_html_e( 'Ja. Wij werken voor organisaties van iedere omvang.', 'hds' ); ?></p>
+						</div>
+					</details>
+				</div>
+			</div>
+		</section>
+
 	<section class="cta-banner">
 		<div class="container">
 			<h2><?php esc_html_e( 'Vrijblijvende offerte aanvragen', 'hds' ); ?></h2>
