@@ -68,6 +68,36 @@ get_header();
 			</div>
 		</section>
 
+		<section class="hds-process-section" aria-labelledby="hds-process-heading">
+			<div class="container">
+				<header class="hds-process-header">
+					<h2 id="hds-process-heading"><?php esc_html_e( 'Onze werkwijze', 'hds' ); ?></h2>
+				</header>
+				<ol class="hds-process-steps">
+					<li class="hds-process-step">
+						<span class="hds-process-step__number" aria-hidden="true">1</span>
+						<h3 class="hds-process-step__title"><?php esc_html_e( 'Aanvraag', 'hds' ); ?></h3>
+						<p class="hds-process-step__desc"><?php esc_html_e( 'Neem contact met ons op en vertel ons uw wensen.', 'hds' ); ?></p>
+					</li>
+					<li class="hds-process-step">
+						<span class="hds-process-step__number" aria-hidden="true">2</span>
+						<h3 class="hds-process-step__title"><?php esc_html_e( 'Vrijblijvende offerte', 'hds' ); ?></h3>
+						<p class="hds-process-step__desc"><?php esc_html_e( 'Wij analyseren uw situatie en sturen een duidelijke offerte.', 'hds' ); ?></p>
+					</li>
+					<li class="hds-process-step">
+						<span class="hds-process-step__number" aria-hidden="true">3</span>
+						<h3 class="hds-process-step__title"><?php esc_html_e( 'Planning', 'hds' ); ?></h3>
+						<p class="hds-process-step__desc"><?php esc_html_e( 'Samen plannen we de werkzaamheden op een geschikt moment.', 'hds' ); ?></p>
+					</li>
+					<li class="hds-process-step">
+						<span class="hds-process-step__number" aria-hidden="true">4</span>
+						<h3 class="hds-process-step__title"><?php esc_html_e( 'Uitvoering', 'hds' ); ?></h3>
+						<p class="hds-process-step__desc"><?php esc_html_e( 'Ons team voert de werkzaamheden zorgvuldig en volgens afspraak uit.', 'hds' ); ?></p>
+					</li>
+				</ol>
+			</div>
+		</section>
+
 		<section class="service-cross-sell">
 		<?php echo hds_render_cross_sell_section(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</section>
