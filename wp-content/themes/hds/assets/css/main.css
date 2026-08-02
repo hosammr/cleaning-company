@@ -1093,13 +1093,16 @@ img {
 	background: var(--wp--preset--color--light-gray);
 	background-position: center;
 	background-size: cover;
-	padding-block: var(--wp--preset--spacing--16);
+	display: flex;
+	align-items: center;
+	min-height: 400px;
+	padding-block: clamp(4rem, 10vw, 7rem);
 	position: relative;
 	text-align: center;
 }
 
 .service-hero::before {
-	background: rgb(0 0 0 / 40%);
+	background: rgb(0 0 0 / 55%);
 	content: '';
 	inset: 0;
 	position: absolute;
@@ -1112,6 +1115,7 @@ img {
 .service-hero .container {
 	position: relative;
 	z-index: 1;
+	max-width: 780px;
 }
 
 .service-hero[style*="background-image"] .container {
@@ -1122,13 +1126,52 @@ img {
 	color: var(--wp--preset--color--dark-gray);
 }
 
+.service-hero h1 {
+	font-size: clamp(1.75rem, 5vw, var(--wp--preset--font-size--5-xl));
+	line-height: 1.15;
+	margin: 0 0 var(--wp--preset--spacing--4);
+}
+
 .service-subtitle {
-	color: var(--wp--preset--color--gray);
+	color: inherit;
 	font-size: var(--wp--preset--font-size--l);
+	line-height: 1.6;
+	margin: 0 0 var(--wp--preset--spacing--5);
+	opacity: 0.9;
+}
+
+.service-hero:not([style*="background-image"]) .service-subtitle {
+	color: var(--wp--preset--color--gray);
+	opacity: 1;
 }
 
 .service-hero .btn-cta {
-	margin-top: var(--wp--preset--spacing--6);
+	background: var(--wp--preset--color--accent);
+	border-radius: 4px;
+	color: var(--wp--preset--color--white);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--l);
+	line-height: 1.4;
+	margin-top: var(--wp--preset--spacing--4);
+	min-height: 44px;
+	min-width: 44px;
+	padding: 0.875rem 2.5rem;
+	text-decoration: none;
+	transition: background var(--hds-transition-speed) var(--hds-transition-easing);
+}
+
+.service-hero .btn-cta:hover,
+.service-hero .btn-cta:focus-visible {
+	background: var(--wp--preset--color--primary-dark);
+}
+
+@media (min-width: 782px) {
+	.service-hero {
+		min-height: 500px;
+	}
 }
 
 /* ── Testimonial Grid ── */
