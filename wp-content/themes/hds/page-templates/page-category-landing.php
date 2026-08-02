@@ -43,14 +43,14 @@ get_header();
 	}
 	?>
 
-	<section class="cta-banner">
-		<div class="container">
-			<h2><?php esc_html_e( 'Vrijblijvende offerte aanvragen', 'hds' ); ?></h2>
-			<a href="<?php echo esc_url( home_url( '/offerte-aanvragen/' ) ); ?>" class="btn btn-cta">
-				<?php esc_html_e( 'Offerte aanvragen', 'hds' ); ?>
-			</a>
-		</div>
-	</section>
+	<?php
+	echo hds_cta_section(
+		__( 'Vrijblijvende offerte aanvragen', 'hds' ),
+		'',
+		__( 'Offerte aanvragen', 'hds' ),
+		home_url( '/offerte-aanvragen/' )
+	);
+	?>
 </main>
 
 <?php

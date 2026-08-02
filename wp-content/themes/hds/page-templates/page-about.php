@@ -14,22 +14,14 @@ get_header();
 	<?php hds_breadcrumbs(); ?>
 
 	<?php
-	$subtitle     = get_post_meta( get_the_ID(), 'hds_subtitle', true );
-	$hero_image_id = (int) get_post_meta( get_the_ID(), 'hds_hero_image', true );
-	$hero_image_url = $hero_image_id ? wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ) : '';
+	$hero_title     = get_the_title();
+	$hero_subtitle   = get_post_meta( get_the_ID(), 'hds_subtitle', true );
+	$hero_image_id   = (int) get_post_meta( get_the_ID(), 'hds_hero_image', true );
+	$hero_image_url  = $hero_image_id ? wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ) : '';
+	$hero_cta_text   = __( 'Vrijblijvende offerte', 'hds' );
+	$hero_cta_url    = home_url( '/offerte-aanvragen/' );
+	get_template_part( 'parts/hero' );
 	?>
-
-	<section class="service-hero"<?php echo $hero_image_url ? ' style="background-image:url(' . esc_url( $hero_image_url ) . ')"' : ''; ?>>
-		<div class="container">
-			<h1><?php the_title(); ?></h1>
-			<?php if ( $subtitle ) : ?>
-				<p class="service-subtitle"><?php echo esc_html( $subtitle ); ?></p>
-			<?php endif; ?>
-			<a href="<?php echo esc_url( home_url( '/offerte-aanvragen/' ) ); ?>" class="btn btn-cta">
-				<?php esc_html_e( 'Vrijblijvende offerte', 'hds' ); ?>
-			</a>
-		</div>
-	</section>
 
 	<div class="container">
 		<div class="about-content">

@@ -12,24 +12,15 @@ get_header();
 	<?php hds_breadcrumbs(); ?>
 
 	<?php
-	$subtitle     = get_post_meta( get_the_ID(), 'hds_subtitle', true );
-	$hero_image_id = (int) get_post_meta( get_the_ID(), 'hds_hero_image', true );
-	$cta_override = get_post_meta( get_the_ID(), 'hds_cta_override', true );
-	$cta_text     = $cta_override ?: __( 'Vrijblijvende offerte', 'hds' );
-	$hero_image_url = $hero_image_id ? wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ) : '';
+	$hero_title     = get_the_title();
+	$hero_subtitle   = get_post_meta( get_the_ID(), 'hds_subtitle', true );
+	$hero_image_id   = (int) get_post_meta( get_the_ID(), 'hds_hero_image', true );
+	$hero_image_url  = $hero_image_id ? wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ) : '';
+	$cta_override    = get_post_meta( get_the_ID(), 'hds_cta_override', true );
+	$hero_cta_text   = $cta_override ?: __( 'Vrijblijvende offerte', 'hds' );
+	$hero_cta_url    = home_url( '/offerte-aanvragen/' );
+	get_template_part( 'parts/hero' );
 	?>
-
-	<section class="service-hero"<?php echo $hero_image_url ? ' style="background-image:url(' . esc_url( $hero_image_url ) . ')"' : ''; ?>>
-		<div class="container">
-			<h1><?php the_title(); ?></h1>
-			<?php if ( $subtitle ) : ?>
-				<p class="service-subtitle"><?php echo esc_html( $subtitle ); ?></p>
-			<?php endif; ?>
-			<a href="<?php echo esc_url( home_url( '/offerte-aanvragen/' ) ); ?>" class="btn btn-cta">
-				<?php echo esc_html( $cta_text ); ?>
-			</a>
-		</div>
-	</section>
 
 	<div class="container">
 		<div class="service-content">
@@ -152,15 +143,14 @@ get_header();
 			</div>
 		</section>
 
-	<section class="cta-banner">
-		<div class="container">
-			<h2><?php esc_html_e( 'Vrijblijvende offerte aanvragen', 'hds' ); ?></h2>
-			<p><?php esc_html_e( 'Wij denken graag met u mee over de beste oplossing.', 'hds' ); ?></p>
-			<a href="<?php echo esc_url( home_url( '/offerte-aanvragen/' ) ); ?>" class="btn btn-cta">
-				<?php esc_html_e( 'Offerte aanvragen', 'hds' ); ?>
-			</a>
-		</div>
-	</section>
+	<?php
+	echo hds_cta_section(
+		__( 'Vrijblijvende offerte aanvragen', 'hds' ),
+		__( 'Wij denken graag met u mee over de beste oplossing.', 'hds' ),
+		__( 'Offerte aanvragen', 'hds' ),
+		home_url( '/offerte-aanvragen/' )
+	);
+	?>
 </main>
 
 <?php
