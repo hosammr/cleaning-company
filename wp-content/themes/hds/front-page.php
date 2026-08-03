@@ -64,6 +64,11 @@ get_header();
 				<?php
 				echo do_blocks( '<!-- wp:hds/testimonial {"count":3,"showRating":true} /-->' );
 				?>
+				<p style="margin-top:var(--wp--preset--spacing--6);text-align:center">
+					<a href="<?php echo esc_url( home_url( '/reviews/' ) ); ?>" class="btn btn--outline">
+						<?php esc_html_e( 'Bekijk alle referenties', 'hds' ); ?>
+					</a>
+				</p>
 			</div>
 		</section>
 		<?php
