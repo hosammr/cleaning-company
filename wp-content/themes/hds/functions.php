@@ -130,6 +130,7 @@ function hds_register_custom_templates(): void {
 		'faq'              => __( 'FAQ', 'hds' ),
 		'bedankt'          => __( 'Bedankt', 'hds' ),
 		'luchtreiniging'   => __( 'Luchtreiniging Landing', 'hds' ),
+		'reviews'          => __( 'Reviews', 'hds' ),
 	];
 
 	foreach ( $templates as $slug => $label ) {
