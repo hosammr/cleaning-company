@@ -27,7 +27,7 @@ function hds_register_block_patterns(): void {
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
 <div class="wp-block-buttons">
 <!-- wp:button {"textColor":"primary","backgroundColor":"white","className":"is-style-cta"} -->
-<div class="wp-block-button is-style-cta"><a class="wp-block-button__link has-primary-color has-white-background-color has-text-color has-background wp-element-button" href="/offerte-aanvragen/">Vrijblijvende offerte aanvragen</a></div>
+<div class="wp-block-button is-style-cta"><a class="wp-block-button__link has-primary-color has-white-background-color has-text-color has-background wp-element-button" href="' . esc_url( home_url( '/offerte-aanvragen/' ) ) . '">Vrijblijvende offerte aanvragen</a></div>
 <!-- /wp:button -->
 </div>
 <!-- /wp:buttons -->
@@ -53,7 +53,7 @@ function hds_register_block_patterns(): void {
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
 <div class="wp-block-buttons">
 <!-- wp:button {"className":"is-style-cta"} -->
-<div class="wp-block-button is-style-cta"><a class="wp-block-button__link wp-element-button" href="/offerte-aanvragen/">Vrijblijvende offerte</a></div>
+<div class="wp-block-button is-style-cta"><a class="wp-block-button__link wp-element-button" href="' . esc_url( home_url( '/offerte-aanvragen/' ) ) . '">Vrijblijvende offerte</a></div>
 <!-- /wp:button -->
 </div>
 <!-- /wp:buttons -->
