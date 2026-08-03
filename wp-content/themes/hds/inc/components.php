@@ -210,6 +210,23 @@ function hds_card( string $content, string $class = '', bool $clickable = false 
 }
 
 /**
+ * Render a USP card.
+ *
+ * @param string $title       Card title (pre-translated).
+ * @param string $description Card description (pre-translated).
+ */
+function hds_usp_card( string $title, string $description ): string {
+	ob_start();
+	?>
+	<article class="hds-card hds-usp-card">
+		<h3 class="hds-usp-card__title"><?php echo esc_html( $title ); ?></h3>
+		<p class="hds-usp-card__desc"><?php echo esc_html( $description ); ?></p>
+	</article>
+	<?php
+	return ob_get_clean();
+}
+
+/**
  * Render a grid wrapper.
  *
  * @param string $content Pre-escaped content HTML.

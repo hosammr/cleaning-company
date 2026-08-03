@@ -49,22 +49,12 @@ get_header();
 				<h2 id="about-values"><?php esc_html_e( 'Onze kernwaarden', 'hds' ); ?></h2>
 			</header>
 			<div class="hds-usp-grid">
-				<article class="hds-card hds-usp-card">
-					<h3 class="hds-usp-card__title"><?php esc_html_e( 'Betrouwbaarheid', 'hds' ); ?></h3>
-					<p class="hds-usp-card__desc"><?php esc_html_e( 'Afspraak is afspraak. U kunt op ons rekenen, elke dag weer.', 'hds' ); ?></p>
-				</article>
-				<article class="hds-card hds-usp-card">
-					<h3 class="hds-usp-card__title"><?php esc_html_e( 'Kwaliteit', 'hds' ); ?></h3>
-					<p class="hds-usp-card__desc"><?php esc_html_e( 'Wij leveren consequent hoge kwaliteit met oog voor detail.', 'hds' ); ?></p>
-				</article>
-				<article class="hds-card hds-usp-card">
-					<h3 class="hds-usp-card__title"><?php esc_html_e( 'Flexibiliteit', 'hds' ); ?></h3>
-					<p class="hds-usp-card__desc"><?php esc_html_e( 'Wij stemmen onze werkzaamheden af op uw planning en bedrijfsprocessen.', 'hds' ); ?></p>
-				</article>
-				<article class="hds-card hds-usp-card">
-					<h3 class="hds-usp-card__title"><?php esc_html_e( 'Duurzaamheid', 'hds' ); ?></h3>
-					<p class="hds-usp-card__desc"><?php esc_html_e( 'Milieubewust werken met professionele producten en methoden.', 'hds' ); ?></p>
-				</article>
+				<?php
+				echo hds_usp_card( __( 'Betrouwbaarheid', 'hds' ), __( 'Afspraak is afspraak. U kunt op ons rekenen, elke dag weer.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo hds_usp_card( __( 'Kwaliteit', 'hds' ), __( 'Wij leveren consequent hoge kwaliteit met oog voor detail.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo hds_usp_card( __( 'Flexibiliteit', 'hds' ), __( 'Wij stemmen onze werkzaamheden af op uw planning en bedrijfsprocessen.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo hds_usp_card( __( 'Duurzaamheid', 'hds' ), __( 'Milieubewust werken met professionele producten en methoden.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				?>
 			</div>
 		</div>
 	</section>
@@ -75,22 +65,12 @@ get_header();
 				<h2 id="about-why"><?php esc_html_e( 'Waarom bedrijven kiezen voor HDS', 'hds' ); ?></h2>
 			</header>
 			<div class="hds-usp-grid">
-				<article class="hds-card hds-usp-card">
-					<h3 class="hds-usp-card__title"><?php esc_html_e( '20+ jaar ervaring', 'hds' ); ?></h3>
-					<p class="hds-usp-card__desc"><?php esc_html_e( 'Al meer dan twee decennia een vertrouwde partner in schoonmaak.', 'hds' ); ?></p>
-				</article>
-				<article class="hds-card hds-usp-card">
-					<h3 class="hds-usp-card__title"><?php esc_html_e( 'Regionale partner', 'hds' ); ?></h3>
-					<p class="hds-usp-card__desc"><?php esc_html_e( 'Wij kennen de regio West-Brabant en Zeeland als geen ander.', 'hds' ); ?></p>
-				</article>
-				<article class="hds-card hds-usp-card">
-					<h3 class="hds-usp-card__title"><?php esc_html_e( 'Persoonlijk contact', 'hds' ); ?></h3>
-					<p class="hds-usp-card__desc"><?php esc_html_e( 'Geen callcenter, maar een vaste contactpersoon die u kent.', 'hds' ); ?></p>
-				</article>
-				<article class="hds-card hds-usp-card">
-					<h3 class="hds-usp-card__title"><?php esc_html_e( 'Volledig verzekerd', 'hds' ); ?></h3>
-					<p class="hds-usp-card__desc"><?php esc_html_e( 'U zit nooit met risico\'s. Onze diensten zijn volledig verzekerd.', 'hds' ); ?></p>
-				</article>
+				<?php
+				echo hds_usp_card( __( '20+ jaar ervaring', 'hds' ), __( 'Al meer dan twee decennia een vertrouwde partner in schoonmaak.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo hds_usp_card( __( 'Regionale partner', 'hds' ), __( 'Wij kennen de regio West-Brabant en Zeeland als geen ander.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo hds_usp_card( __( 'Persoonlijk contact', 'hds' ), __( 'Geen callcenter, maar een vaste contactpersoon die u kent.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo hds_usp_card( __( 'Volledig verzekerd', 'hds' ), __( 'U zit nooit met risico\'s. Onze diensten zijn volledig verzekerd.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				?>
 			</div>
 		</div>
 	</section>

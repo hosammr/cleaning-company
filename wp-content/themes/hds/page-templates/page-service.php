@@ -39,22 +39,12 @@ get_header();
 					<h2 id="hds-usp-heading"><?php esc_html_e( 'Waarom kiezen voor HDS', 'hds' ); ?></h2>
 				</header>
 				<div class="hds-usp-grid">
-					<article class="hds-card hds-usp-card">
-						<h3 class="hds-usp-card__title"><?php esc_html_e( 'Betrouwbare service', 'hds' ); ?></h3>
-						<p class="hds-usp-card__desc"><?php esc_html_e( 'Afspraak is afspraak. Wij leveren constante kwaliteit volgens een duidelijke planning.', 'hds' ); ?></p>
-					</article>
-					<article class="hds-card hds-usp-card">
-						<h3 class="hds-usp-card__title"><?php esc_html_e( 'Ervaren medewerkers', 'hds' ); ?></h3>
-						<p class="hds-usp-card__desc"><?php esc_html_e( 'Professionele schoonmakers met ervaring in uiteenlopende sectoren.', 'hds' ); ?></p>
-					</article>
-					<article class="hds-card hds-usp-card">
-						<h3 class="hds-usp-card__title"><?php esc_html_e( 'Flexibele planning', 'hds' ); ?></h3>
-						<p class="hds-usp-card__desc"><?php esc_html_e( 'Werkzaamheden afgestemd op uw openingstijden en bedrijfsprocessen.', 'hds' ); ?></p>
-					</article>
-					<article class="hds-card hds-usp-card">
-						<h3 class="hds-usp-card__title"><?php esc_html_e( 'Duurzame werkwijze', 'hds' ); ?></h3>
-						<p class="hds-usp-card__desc"><?php esc_html_e( 'Wij werken met professionele producten en milieubewuste schoonmaakmethoden.', 'hds' ); ?></p>
-					</article>
+					<?php
+					echo hds_usp_card( __( 'Betrouwbare service', 'hds' ), __( 'Afspraak is afspraak. Wij leveren constante kwaliteit volgens een duidelijke planning.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo hds_usp_card( __( 'Ervaren medewerkers', 'hds' ), __( 'Professionele schoonmakers met ervaring in uiteenlopende sectoren.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo hds_usp_card( __( 'Flexibele planning', 'hds' ), __( 'Werkzaamheden afgestemd op uw openingstijden en bedrijfsprocessen.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo hds_usp_card( __( 'Duurzame werkwijze', 'hds' ), __( 'Wij werken met professionele producten en milieubewuste schoonmaakmethoden.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					?>
 				</div>
 			</div>
 		</section>

@@ -60,9 +60,7 @@ get_header();
 		?>
 		<section class="home-testimonials">
 			<div class="container">
-				<div class="section-header section-header--center">
-					<h2 class="section-header__heading"><?php esc_html_e( 'Wat onze klanten zeggen', 'hds' ); ?></h2>
-				</div>
+				<?php echo hds_section_header( __( 'Wat onze klanten zeggen', 'hds' ), '', 'center' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				<?php
 				echo do_blocks( '<!-- wp:hds/testimonial {"count":3,"showRating":true} /-->' );
 				?>
@@ -89,12 +87,7 @@ get_header();
 		?>
 		<section class="home-latest-posts">
 			<div class="container">
-				<div class="section-header section-header--center">
-					<h2 class="section-header__heading"><?php esc_html_e( 'Laatste nieuws', 'hds' ); ?></h2>
-					<p class="section-header__subtitle">
-						<?php esc_html_e( 'Tips, nieuws en updates van HDS Onderhoudsdiensten.', 'hds' ); ?>
-					</p>
-				</div>
+				<?php echo hds_section_header( __( 'Laatste nieuws', 'hds' ), __( 'Tips, nieuws en updates van HDS Onderhoudsdiensten.', 'hds' ), 'center' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				<div class="hds-grid hds-grid--posts" style="--hds-grid-columns:3">
 					<?php foreach ( $latest_posts as $post_item ) : ?>
 						<article class="hds-post-card">
