@@ -24,24 +24,6 @@ function hds_validate_star_rating( $value ): int {
 }
 
 /**
- * Validate a Dutch postcode (1234 AB or 1234AB).
- */
-function hds_validate_postcode( string $value ): string {
-	$value = strtoupper( trim( $value ) );
-	if ( $value === '' || preg_match( '/^[1-9]\d{3}\s?[A-Z]{2}$/', $value ) ) {
-		return $value;
-	}
-	return '';
-}
-
-/**
- * Validate and format a phone number — keep only digits, +, -, spaces.
- */
-function hds_validate_phone( string $value ): string {
-	return preg_replace( '/[^\d+\-() ]/', '', trim( $value ) );
-}
-
-/**
  * Validate that a value is a valid email address.
  */
 function hds_validate_email( string $value ): string {

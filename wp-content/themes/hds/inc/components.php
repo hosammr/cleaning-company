@@ -13,57 +13,6 @@
  */
 
 /**
- * Render a notification banner.
- *
- * @param string $message Message text.
- * @param string $type    One of: success, error, warning, info.
- * @param bool   $dismissible Whether to show a close button.
- */
-function hds_notification( string $message, string $type = 'info', bool $dismissible = true ): string {
-	$valid_types = [ 'success', 'error', 'warning', 'info' ];
-	if ( ! in_array( $type, $valid_types, true ) ) {
-		$type = 'info';
-	}
-
-	$role  = 'status';
-	$live  = 'polite';
-	if ( 'error' === $type ) {
-		$role = 'alert';
-		$live = 'assertive';
-	}
-
-	$icon_map = [
-		'success' => '&#10003;',
-		'error'   => '&#10007;',
-		'warning' => '&#9888;',
-		'info'    => '&#8505;',
-	];
-
-	$icon = $icon_map[ $type ];
-
-	ob_start();
-	?>
-	<div class="hds-notification hds-notification--<?php echo esc_attr( $type ); ?>" role="<?php echo esc_attr( $role ); ?>" aria-live="<?php echo esc_attr( $live ); ?>">
-		<span class="hds-notification__icon" aria-hidden="true"><?php echo $icon; // phpcs:ignore ?></span>
-		<span class="hds-notification__message"><?php echo esc_html( $message ); ?></span>
-		<?php if ( $dismissible ) : ?>
-			<button type="button" class="hds-notification__dismiss" aria-label="<?php esc_attr_e( 'Sluiten', 'hds' ); ?>">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		<?php endif; ?>
-	</div>
-	<?php
-	return ob_get_clean();
-}
-
-/**
- * Output a notification immediately (echo wrapper).
- */
-function hds_notification_e( string $message, string $type = 'info', bool $dismissible = true ): void {
-	echo hds_notification( $message, $type, $dismissible ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-}
-
-/**
  * Render a reusable CTA section.
  *
  * @param string $heading     CTA heading text.
@@ -177,19 +126,6 @@ function hds_button( string $text, string $url = '#', string $style = 'primary',
 }
 
 /**
- * Render a badge/tag component.
- *
- * @param string $text  Badge label.
- * @param string $style 'default', 'primary', 'success', 'warning', 'error'.
- */
-function hds_badge( string $text, string $style = 'default' ): string {
-	return sprintf(
-		'<span class="hds-badge hds-badge--%s">%s</span>',
-		esc_attr( $style ),
-		esc_html( $text )
-	);
-}
-
 /**
  * Render a card wrapper.
  *
@@ -242,35 +178,6 @@ function hds_grid( string $content, int $columns = 3, string $class = '' ): stri
 	$style = '--hds-grid-columns:' . $columns;
 
 	return sprintf( '<div class="%s" style="%s">%s</div>', esc_attr( $classes ), esc_attr( $style ), $content );
-}
-
-/**
- * Render an icon wrapper.
- *
- * @param string $icon_name Slug of the icon (e.g. 'phone', 'mail', 'location').
- * @param string $size      'sm', 'md', 'lg'.
- * @param string $class     Additional CSS classes.
- */
-function hds_icon( string $icon_name, string $size = 'md', string $class = '' ): string {
-	$classes = 'hds-icon hds-icon--' . $size;
-	if ( $class ) {
-		$classes .= ' ' . $class;
-	}
-
-	return sprintf(
-		'<span class="%s hds-icon--%s" aria-hidden="true"></span>',
-		esc_attr( $classes ),
-		esc_attr( $icon_name )
-	);
-}
-
-/**
- * Render a divider.
- *
- * @param string $style 'solid' (default), 'dashed', 'dotted'.
- */
-function hds_divider( string $style = 'solid' ): string {
-	return sprintf( '<hr class="hds-divider hds-divider--%s">', esc_attr( $style ) );
 }
 
 /**

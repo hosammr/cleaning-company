@@ -48,35 +48,3 @@ function hds_template_body_classes( array $classes ): array {
 	return $classes;
 }
 add_filter( 'body_class', 'hds_template_body_classes' );
-
-/**
- * Determine the current template context.
- */
-function hds_get_template_context(): string {
-	if ( is_front_page() ) {
-		return 'front-page';
-	}
-	if ( is_home() ) {
-		return 'blog';
-	}
-	if ( is_singular( 'post' ) ) {
-		return 'single';
-	}
-	if ( is_singular( 'hds_vacancy' ) ) {
-		return 'vacancy';
-	}
-	if ( is_page() ) {
-		return 'page';
-	}
-	if ( is_archive() ) {
-		return 'archive';
-	}
-	if ( is_search() ) {
-		return 'search';
-	}
-	if ( is_404() ) {
-		return '404';
-	}
-
-	return 'default';
-}
