@@ -2,9 +2,10 @@
 /**
  * Footer template part.
  *
- * 5-column grid: Diensten, Over HDS, Contact, Luchtreiniging, Juridisch.
+ * 5-column grid: Branding, Diensten, Over HDS, Contact, Juridisch.
  * Bottom bar: KVK/BTW, copyright, social links.
  * All content loaded dynamically from Customizer + Nav Menus.
+ * Fallback menus render when no nav menu is assigned to a theme location.
  *
  * @package HDS
  */
@@ -15,13 +16,25 @@
 		<div class="footer-grid">
 
 			<div class="footer-column">
+				<h3 class="footer-heading"><?php bloginfo( 'name' ); ?></h3>
+				<?php if ( has_custom_logo() ) : ?>
+					<div class="site-logo" style="margin-bottom:var(--wp--preset--spacing--3)">
+						<?php the_custom_logo(); ?>
+					</div>
+				<?php endif; ?>
+				<p class="footer-contact__item" style="color:var(--wp--preset--color--light-gray);font-size:var(--wp--preset--font-size--s)">
+					<?php bloginfo( 'description' ); ?>
+				</p>
+			</div>
+
+			<div class="footer-column">
 				<h3 class="footer-heading"><?php esc_html_e( 'Diensten', 'hds' ); ?></h3>
 				<?php
 				wp_nav_menu( [
 					'theme_location' => 'footer-services',
 					'menu_class'     => 'footer-menu',
 					'container'      => false,
-					'fallback_cb'    => false,
+					'fallback_cb'    => 'hds_footer_services_fallback',
 					'depth'          => 1,
 				] );
 				?>
@@ -63,26 +76,13 @@
 			</div>
 
 			<div class="footer-column">
-				<h3 class="footer-heading"><?php esc_html_e( 'Luchtreiniging', 'hds' ); ?></h3>
-				<?php
-				wp_nav_menu( [
-					'theme_location' => 'footer-airfixr',
-					'menu_class'     => 'footer-menu',
-					'container'      => false,
-					'fallback_cb'    => false,
-					'depth'          => 1,
-				] );
-				?>
-			</div>
-
-			<div class="footer-column">
 				<h3 class="footer-heading"><?php esc_html_e( 'Juridisch', 'hds' ); ?></h3>
 				<?php
 				wp_nav_menu( [
 					'theme_location' => 'footer-legal',
 					'menu_class'     => 'footer-menu',
 					'container'      => false,
-					'fallback_cb'    => false,
+					'fallback_cb'    => 'hds_footer_legal_fallback',
 					'depth'          => 1,
 				] );
 				?>

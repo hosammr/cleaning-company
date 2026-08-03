@@ -124,9 +124,64 @@ function hds_truncate( string $text, int $length = 100, string $suffix = '...' )
  */
 function hds_footer_about_fallback( array $args ): void {
 	$links = [
-		home_url( '/over-hds/' )    => __( 'Over HDS', 'hds' ),
-		home_url( '/reviews/' )     => __( 'Referenties', 'hds' ),
-		home_url( '/contact/' )     => __( 'Contact', 'hds' ),
+		home_url( '/over-hds/' )          => __( 'Over HDS', 'hds' ),
+		home_url( '/reviews/' )           => __( 'Referenties', 'hds' ),
+		home_url( '/offerte-aanvragen/' ) => __( 'Offerte aanvragen', 'hds' ),
+		home_url( '/contact/' )           => __( 'Contact', 'hds' ),
+	];
+
+	$menu_class = ! empty( $args['menu_class'] ) ? $args['menu_class'] : 'footer-menu';
+
+	echo '<ul class="' . esc_attr( $menu_class ) . '">';
+	foreach ( $links as $url => $label ) {
+		printf(
+			'<li><a href="%s">%s</a></li>',
+			esc_url( $url ),
+			esc_html( $label )
+		);
+	}
+	echo '</ul>';
+}
+
+/**
+ * Fallback for the footer-services nav menu when no menu is assigned.
+ *
+ * Renders the actual published service pages using the existing
+ * hds_get_service_pages() helper.
+ *
+ * @param array $args wp_nav_menu() arguments.
+ */
+function hds_footer_services_fallback( array $args ): void {
+	$services      = hds_get_service_pages();
+	$visible       = array_filter( $services, fn( $page ) => $page->post_status === 'publish' );
+	$menu_class    = ! empty( $args['menu_class'] ) ? $args['menu_class'] : 'footer-menu';
+
+	echo '<ul class="' . esc_attr( $menu_class ) . '">';
+	foreach ( $visible as $service ) {
+		printf(
+			'<li><a href="%s">%s</a></li>',
+			esc_url( get_permalink( $service ) ),
+			esc_html( get_the_title( $service ) )
+		);
+	}
+	if ( empty( $visible ) ) {
+		echo '<li>' . esc_html__( 'Geen diensten beschikbaar', 'hds' ) . '</li>';
+	}
+	echo '</ul>';
+}
+
+/**
+ * Fallback for the footer-legal nav menu when no menu is assigned.
+ *
+ * Renders standard legal page links.
+ *
+ * @param array $args wp_nav_menu() arguments.
+ */
+function hds_footer_legal_fallback( array $args ): void {
+	$links = [
+		home_url( '/privacyverklaring/' )    => __( 'Privacyverklaring', 'hds' ),
+		home_url( '/algemene-voorwaarden/' ) => __( 'Algemene voorwaarden', 'hds' ),
+		home_url( '/cookiebeleid/' )         => __( 'Cookiebeleid', 'hds' ),
 	];
 
 	$menu_class = ! empty( $args['menu_class'] ) ? $args['menu_class'] : 'footer-menu';
