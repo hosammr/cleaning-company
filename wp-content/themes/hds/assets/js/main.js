@@ -38,7 +38,8 @@
 			} else {
 				primaryMenu.classList.remove( 'is-active' );
 				document.body.classList.remove( 'menu-open' );
-				this.querySelector( '.screen-reader-text' ).textContent = 'Menu openen';
+				this.querySelector( '.screen-reader-text' ).textContent = this.getAttribute( 'data-open-text' )
+					|| 'Menu openen';
 				menuToggle.focus();
 			}
 		} );
@@ -61,7 +62,8 @@
 				document.body.classList.remove( 'menu-open' );
 				if ( menuToggle ) {
 					menuToggle.setAttribute( 'aria-expanded', 'false' );
-					menuToggle.querySelector( '.screen-reader-text' ).textContent = 'Menu openen';
+					menuToggle.querySelector( '.screen-reader-text' ).textContent = menuToggle.getAttribute( 'data-open-text' )
+						|| 'Menu openen';
 					menuToggle.focus();
 				}
 			}

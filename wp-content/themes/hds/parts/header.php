@@ -49,6 +49,8 @@
 					aria-controls="primary-menu"
 					aria-expanded="false"
 					aria-haspopup="true"
+					data-open-text="<?php esc_attr_e( 'Menu openen', 'hds' ); ?>"
+					data-close-text="<?php esc_attr_e( 'Menu sluiten', 'hds' ); ?>"
 				>
 					<span class="menu-toggle__icon" aria-hidden="true">
 						<span class="menu-toggle__bar"></span>
