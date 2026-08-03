@@ -83,6 +83,33 @@ get_header();
 		<?php echo hds_render_cross_sell_section(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</section>
 
+		<?php
+		$related_testimonial_ids = get_posts( [
+			'post_type'      => 'hds_testimonial',
+			'posts_per_page' => 3,
+			'post_status'    => 'publish',
+			'fields'         => 'ids',
+			'meta_key'       => 'hds_related_service', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+			'meta_value'     => get_the_ID(), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+		] );
+		if ( ! empty( $related_testimonial_ids ) ) :
+			?>
+			<section class="home-testimonials" aria-labelledby="service-testimonials-heading">
+				<div class="container">
+					<?php
+					echo hds_section_header(
+						__( 'Wat onze klanten zeggen', 'hds' ),
+						'',
+						'center'
+					); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					echo do_blocks( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						'<!-- wp:hds/testimonial {"count":3,"showRating":true,"selectedItems":' . wp_json_encode( $related_testimonial_ids ) . '} /-->'
+					);
+					?>
+				</div>
+			</section>
+		<?php endif; ?>
+
 		<section class="hds-faq-section" aria-labelledby="hds-faq-heading">
 			<div class="container">
 				<header class="hds-faq-header">
