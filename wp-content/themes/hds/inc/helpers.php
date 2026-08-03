@@ -113,3 +113,31 @@ function hds_truncate( string $text, int $length = 100, string $suffix = '...' )
 	}
 	return $truncated . $suffix;
 }
+
+/**
+ * Fallback for the footer-about nav menu when no menu is assigned.
+ *
+ * Renders default links including Reviews, About, and Contact
+ * using the existing footer-menu class.
+ *
+ * @param array $args wp_nav_menu() arguments.
+ */
+function hds_footer_about_fallback( array $args ): void {
+	$links = [
+		home_url( '/over-hds/' )    => __( 'Over HDS', 'hds' ),
+		home_url( '/reviews/' )     => __( 'Referenties', 'hds' ),
+		home_url( '/contact/' )     => __( 'Contact', 'hds' ),
+	];
+
+	$menu_class = ! empty( $args['menu_class'] ) ? $args['menu_class'] : 'footer-menu';
+
+	echo '<ul class="' . esc_attr( $menu_class ) . '">';
+	foreach ( $links as $url => $label ) {
+		printf(
+			'<li><a href="%s">%s</a></li>',
+			esc_url( $url ),
+			esc_html( $label )
+		);
+	}
+	echo '</ul>';
+}

@@ -34,7 +34,7 @@
 					'theme_location' => 'footer-about',
 					'menu_class'     => 'footer-menu',
 					'container'      => false,
-					'fallback_cb'    => false,
+					'fallback_cb'    => 'hds_footer_about_fallback',
 					'depth'          => 1,
 				] );
 				?>
