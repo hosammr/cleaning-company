@@ -73,7 +73,7 @@ function hds_page_header( string $title, string $subtitle = '', int $bg_image = 
 				<p class="page-header__subtitle"><?php echo esc_html( $subtitle ); ?></p>
 			<?php endif; ?>
 		</div>
-	</header>
+	</section>
 	<?php
 	return ob_get_clean();
 }
@@ -305,59 +305,62 @@ function hds_output_cookie_banner(): void {
 add_action( 'wp_footer', 'hds_output_cookie_banner', 10 );
 
 /**
- * Inject Phosphor SVG icons into USP grid cards on the front page.
+ * Render a single USP card.
  *
- * All cards use the same code path — a single mapping array iterated
- * with str_replace. No per-card branching, no CSS pseudo-elements,
- * no browser-specific mask-image rendering.
- *
- * @param string $content Post content.
- * @return string Content with icons injected.
+ * @param array $item Card data with 'title' and 'description' keys.
+ * @return string HTML for one USP card.
  */
-function hds_inject_usp_icons( string $content ): string {
-	if ( false === strpos( $content, 'usp-grid' ) ) {
-		return $content;
-	}
-
-	$icons = [
-		'Vast opgeleid personeel'           => '<svg class="is-style-card__icon" width="36" height="36" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M84 80c0-24.3 19.7-44 44-44s44 19.7 44 44" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 208c0-48.6 39.4-88 88-88s88 39.4 88 88" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-		'Veiligheid &amp; Certificering'    => '<svg class="is-style-card__icon" width="36" height="36" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M216 112c0 50.2-41.8 92-88 104-46.2-12-88-53.8-88-104V56l88-32 88 32v56Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><polyline points="88 136 112 160 168 104" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-		'Een aanspreekpunt'                 => '<svg class="is-style-card__icon" width="36" height="36" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M128 232a104 104 0 1 1 0-208c57.4 0 104 46.6 104 104 0 47.8-38 88.3-86 100.3L128 232Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><line x1="96" y1="112" x2="160" y2="112" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><line x1="96" y1="144" x2="128" y2="144" stroke="currentColor" stroke-width="12" stroke-linecap="round"/></svg>',
-	];
-
-	foreach ( $icons as $heading => $icon ) {
-		$content = str_replace(
-			'<h3 class="wp-block-heading">' . $heading . '</h3>',
-			$icon . '<h3 class="wp-block-heading">' . $heading . '</h3>',
-			$content
-		);
-	}
-
-	return $content;
+function hds_render_usp_card( array $item ): string {
+	ob_start();
+	?>
+	<div class="usp-card">
+		<div class="usp-card__accent" aria-hidden="true"></div>
+		<h3 class="usp-card__title"><?php echo esc_html( $item['title'] ); ?></h3>
+		<div class="usp-card__divider" aria-hidden="true"></div>
+		<p class="usp-card__description"><?php echo esc_html( $item['description'] ); ?></p>
+	</div>
+	<?php
+	return ob_get_clean();
 }
-add_filter( 'the_content', 'hds_inject_usp_icons', 20 );
 
 /**
- * Inject a supporting subtitle into the USP grid section.
+ * Render the USP section with heading, subtitle, and card grid.
  *
- * Adds a centered paragraph below the "Waarom HDS?" heading
- * using the existing section-header__subtitle typography token.
- *
- * @param string $content Post content.
- * @return string Content with subtitle injected.
+ * @return string Complete USP section HTML.
  */
-function hds_inject_usp_subtitle( string $content ): string {
-	if ( false === strpos( $content, 'usp-grid' ) ) {
-		return $content;
-	}
+function hds_render_usp_section(): string {
+	$usp_items = [
+		[
+			'title'       => __( 'Vast opgeleid personeel', 'hds' ),
+			'description' => __( 'Onze medewerkers zijn in vaste dienst en volledig opgeleid.', 'hds' ),
+		],
+		[
+			'title'       => __( 'Veiligheid & Certificering', 'hds' ),
+			'description' => __( 'OSB-gecertificeerd. Wij werken volgens de hoogste veiligheidsnormen.', 'hds' ),
+		],
+		[
+			'title'       => __( 'Een aanspreekpunt', 'hds' ),
+			'description' => __( 'U heeft altijd één vast aanspreekpunt voor al uw vragen.', 'hds' ),
+		],
+	];
 
-	$subtitle = '<p class="section-header__subtitle has-text-align-center" style="margin-bottom:0">'
-		. esc_html__( 'Daarom kiezen bedrijven in West-Brabant en Zeeland voor HDS als vaste schoonmaakpartner.', 'hds' )
-		. '</p>';
-
-	$needle  = '<h2 class="wp-block-heading has-text-align-center">Waarom HDS?</h2>';
-	$content = str_replace( $needle, $needle . $subtitle, $content );
-
-	return $content;
+	ob_start();
+	?>
+	<section class="usp-grid">
+		<div class="container">
+			<div class="section-header section-header--center">
+				<h2 class="section-header__heading"><?php esc_html_e( 'Waarom HDS?', 'hds' ); ?></h2>
+				<p class="section-header__subtitle">
+					<?php esc_html_e( 'Daarom kiezen bedrijven in West-Brabant en Zeeland voor HDS als vaste schoonmaakpartner.', 'hds' ); ?>
+				</p>
+			</div>
+			<div class="usp-grid__cards">
+				<?php foreach ( $usp_items as $item ) : ?>
+					<?php echo hds_render_usp_card( $item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</section>
+	<?php
+	return ob_get_clean();
 }
-add_filter( 'the_content', 'hds_inject_usp_subtitle', 21 );

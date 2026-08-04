@@ -2015,17 +2015,11 @@ h3 {
 .is-style-card {
 	background: var(--wp--preset--color--white);
 	border-radius: 10px;
-	box-shadow: 0 4px 20px rgb(0 0 0 / 4%);
+	box-shadow: var(--wp--preset--shadow--md);
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	padding: var(--wp--preset--spacing--8) !important;
-	transition: box-shadow 220ms ease, transform 220ms ease;
-}
-
-.is-style-card:hover {
-	box-shadow: 0 6px 24px rgb(0 0 0 / 6%);
-	transform: translateY(-4px);
+	padding: var(--wp--preset--spacing--6);
 }
 
 .is-style-card__icon {
@@ -2033,49 +2027,76 @@ h3 {
 	display: block;
 	flex-shrink: 0;
 	height: 36px;
-	margin: 0 auto var(--wp--preset--spacing--4);
+	margin-bottom: var(--wp--preset--spacing--4);
 	width: 36px;
 }
 
-.is-style-card h3 {
+.is-style-card h3 + p {
+	margin-top: auto;
+}
+
+/* ── USP Card ── */
+.usp-card {
+	background: var(--wp--preset--color--white);
+	border-radius: 16px;
+	box-shadow: 0 4px 20px rgb(0 0 0 / 4%);
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: 32px;
+	transition: box-shadow 220ms ease, transform 220ms ease;
+}
+
+.usp-card:hover {
+	box-shadow: 0 6px 24px rgb(0 0 0 / 6%);
+	transform: translateY(-4px);
+}
+
+.usp-card__accent {
+	background: var(--wp--preset--color--primary);
+	border-radius: 999px;
+	flex-shrink: 0;
+	height: 4px;
+	margin: 20px auto 28px;
+	width: 72px;
+}
+
+.usp-card__title {
+	font-size: var(--wp--preset--font-size--3-xl);
 	font-weight: 700;
+	line-height: 1.25;
+	margin: 0 auto 8px;
+	max-width: 220px;
 	text-align: center;
 }
 
-.is-style-card h3::before {
-	background: var(--wp--preset--color--primary);
-	border-radius: 2px;
-	content: '';
-	display: block;
-	height: 4px;
-	margin: 0 auto var(--wp--preset--spacing--4);
-	width: 76px;
-}
-
-.is-style-card h3::after {
-	background: var(--wp--preset--color--light-gray);
-	content: '';
-	display: block;
+.usp-card__divider {
+	background: rgb(0 0 0 / 10%);
+	flex-shrink: 0;
 	height: 1px;
-	margin: var(--wp--preset--spacing--3) auto 0;
-	width: 70px;
+	margin: 20px auto 24px;
+	width: 72px;
 }
 
-.is-style-card p {
-	line-height: 1.7;
-	margin-top: var(--wp--preset--spacing--3);
+.usp-card__description {
+	color: var(--wp--preset--color--black);
+	line-height: 1.65;
+	margin: 0 auto;
+	max-width: 240px;
 	text-align: center;
 }
 
 /* ── USP Grid ── */
 .usp-grid {
 	background: rgb(26 115 232 / 4%);
-	padding-top: var(--wp--preset--spacing--10) !important;
-	padding-bottom: var(--wp--preset--spacing--10) !important;
+	padding-top: var(--wp--preset--spacing--8);
+	padding-bottom: var(--wp--preset--spacing--8);
 }
 
-.usp-grid .wp-block-columns {
-	gap: var(--wp--preset--spacing--2);
+.usp-grid__cards {
+	display: grid;
+	gap: 4px;
+	grid-template-columns: repeat(3, 1fr);
 	margin-top: var(--wp--preset--spacing--8);
 }
 
@@ -2108,6 +2129,10 @@ h3 {
 		grid-template-columns: repeat(2, 1fr);
 	}
 
+	.usp-grid__cards {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
 	.header-cta {
 		display: none;
 	}
@@ -2125,6 +2150,10 @@ h3 {
 	}
 
 	.hds-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.usp-grid__cards {
 		grid-template-columns: 1fr;
 	}
 

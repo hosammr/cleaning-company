@@ -38,6 +38,9 @@ get_header();
 		<?php
 	endwhile;
 
+	// Section 3: USP Grid — server-rendered reusable component
+	echo hds_render_usp_section(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
 	// Section 2: Service Card Grid — services that exist and are published
 	$home_services = hds_get_visible_service_pages();
 	if ( ! empty( $home_services ) ) {
