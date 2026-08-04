@@ -2015,17 +2015,16 @@ h3 {
 .is-style-card {
 	background: var(--wp--preset--color--white);
 	border-radius: 10px;
-	border-top: 3px solid var(--wp--preset--color--primary);
 	box-shadow: 0 4px 20px rgb(0 0 0 / 4%);
 	display: flex;
 	flex-direction: column;
 	height: 100%;
 	padding: var(--wp--preset--spacing--8) !important;
-	transition: box-shadow 240ms ease, transform 240ms ease;
+	transition: box-shadow 220ms ease, transform 220ms ease;
 }
 
 .is-style-card:hover {
-	box-shadow: 0 8px 28px rgb(0 0 0 / 7%);
+	box-shadow: 0 6px 24px rgb(0 0 0 / 6%);
 	transform: translateY(-4px);
 }
 
@@ -2034,12 +2033,38 @@ h3 {
 	display: block;
 	flex-shrink: 0;
 	height: 36px;
-	margin-bottom: var(--wp--preset--spacing--4);
+	margin: 0 auto var(--wp--preset--spacing--4);
 	width: 36px;
 }
 
-.is-style-card h3 + p {
-	margin-top: auto;
+.is-style-card h3 {
+	font-weight: 700;
+	text-align: center;
+}
+
+.is-style-card h3::before {
+	background: var(--wp--preset--color--primary);
+	border-radius: 2px;
+	content: '';
+	display: block;
+	height: 4px;
+	margin: 0 auto var(--wp--preset--spacing--4);
+	width: 76px;
+}
+
+.is-style-card h3::after {
+	background: var(--wp--preset--color--light-gray);
+	content: '';
+	display: block;
+	height: 1px;
+	margin: var(--wp--preset--spacing--3) auto 0;
+	width: 70px;
+}
+
+.is-style-card p {
+	line-height: 1.7;
+	margin-top: var(--wp--preset--spacing--3);
+	text-align: center;
 }
 
 /* ── USP Grid ── */
@@ -2050,7 +2075,7 @@ h3 {
 }
 
 .usp-grid .wp-block-columns {
-	gap: var(--wp--preset--spacing--3);
+	gap: var(--wp--preset--spacing--2);
 	margin-top: var(--wp--preset--spacing--8);
 }
 
