@@ -841,18 +841,37 @@ h3 {
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
-	transition: box-shadow var(--hds-transition-speed) var(--hds-transition-easing), transform var(--hds-transition-speed) var(--hds-transition-easing);
+	transition: box-shadow var(--hds-transition-speed) var(--hds-transition-easing);
 }
 
 .hds-service-card:hover {
 	box-shadow: var(--wp--preset--shadow--lg);
-	transform: translateY(-2px);
+}
+
+.hds-service-card__image {
+	overflow: hidden;
 }
 
 .hds-service-card__image img {
 	aspect-ratio: 16 / 9;
+	display: block;
 	object-fit: cover;
 	width: 100%;
+}
+
+.hds-service-card__placeholder {
+	align-items: center;
+	aspect-ratio: 16 / 9;
+	background: var(--wp--preset--color--light-gray);
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.hds-service-card__placeholder-icon {
+	color: var(--wp--preset--color--primary);
+	font-size: var(--wp--preset--font-size--4-xl);
+	opacity: 0.25;
 }
 
 .hds-service-card__body {
@@ -866,7 +885,7 @@ h3 {
 	color: var(--wp--preset--color--primary);
 	display: block;
 	font-size: var(--wp--preset--font-size--3-xl);
-	margin-bottom: var(--wp--preset--spacing--3);
+	margin-bottom: var(--wp--preset--spacing--2);
 }
 
 .hds-service-card__title {
@@ -888,18 +907,12 @@ h3 {
 	color: var(--wp--preset--color--gray);
 	flex: 1;
 	font-size: var(--wp--preset--font-size--s);
-	margin-bottom: var(--wp--preset--spacing--4);
+	margin-bottom: var(--wp--preset--spacing--5);
 }
 
-.hds-service-card__link {
-	color: var(--wp--preset--color--primary);
-	font-weight: 600;
-	font-size: var(--wp--preset--font-size--s);
-	text-decoration: none;
-}
-
-.hds-service-card__link:hover {
-	text-decoration: underline;
+.hds-service-card .btn {
+	align-self: flex-start;
+	margin-top: auto;
 }
 
 /* ── Service Card Grid Section ── */

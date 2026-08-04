@@ -104,33 +104,41 @@ function hds_render_service_card_core( \WP_Post $post, bool $show_image = true, 
 
 	ob_start();
 	?>
-	<article class="hds-service-card">
-		<?php if ( $show_image && $image_id ) : ?>
-			<div class="hds-service-card__image">
-				<?php echo wp_get_attachment_image( (int) $image_id, 'hds-card', false, [
-					'alt'     => get_the_title( $post ),
-					'loading' => 'lazy',
-				] ); ?>
-			</div>
-		<?php endif; ?>
-		<div class="hds-service-card__body">
-			<?php if ( $show_icon && $icon ) : ?>
-				<span class="hds-service-card__icon" aria-hidden="true"><?php echo esc_html( $icon ); ?></span>
+		<article class="hds-service-card">
+			<?php if ( $show_image ) : ?>
+				<div class="hds-service-card__image">
+					<?php if ( $image_id ) : ?>
+						<?php echo wp_get_attachment_image( (int) $image_id, 'hds-card', false, [
+							'alt'     => get_the_title( $post ),
+							'loading' => 'lazy',
+						] ); ?>
+					<?php else : ?>
+						<div class="hds-service-card__placeholder" aria-hidden="true">
+							<?php if ( $show_icon && $icon ) : ?>
+								<span class="hds-service-card__placeholder-icon"><?php echo esc_html( $icon ); ?></span>
+							<?php endif; ?>
+						</div>
+					<?php endif; ?>
+				</div>
 			<?php endif; ?>
-			<h3 class="hds-service-card__title">
-				<a href="<?php echo esc_url( get_permalink( $post ) ); ?>">
-					<?php echo esc_html( get_the_title( $post ) ); ?>
+			<div class="hds-service-card__body">
+				<?php if ( $show_icon && $icon ) : ?>
+					<span class="hds-service-card__icon" aria-hidden="true"><?php echo esc_html( $icon ); ?></span>
+				<?php endif; ?>
+				<h3 class="hds-service-card__title">
+					<a href="<?php echo esc_url( get_permalink( $post ) ); ?>">
+						<?php echo esc_html( get_the_title( $post ) ); ?>
+					</a>
+				</h3>
+				<p class="hds-service-card__excerpt"><?php echo esc_html( $excerpt ); ?></p>
+				<a href="<?php echo esc_url( get_permalink( $post ) ); ?>" class="btn btn--primary">
+					<?php esc_html_e( 'Lees meer', 'hds' ); ?>
+					<span class="screen-reader-text">
+						<?php echo esc_html( sprintf( __( 'over %s', 'hds' ), get_the_title( $post ) ) ); ?>
+					</span>
 				</a>
-			</h3>
-			<p class="hds-service-card__excerpt"><?php echo esc_html( $excerpt ); ?></p>
-			<a href="<?php echo esc_url( get_permalink( $post ) ); ?>" class="hds-service-card__link">
-				<?php esc_html_e( 'Lees meer', 'hds' ); ?>
-				<span class="screen-reader-text">
-					<?php echo esc_html( sprintf( __( 'over %s', 'hds' ), get_the_title( $post ) ) ); ?>
-				</span>
-			</a>
-		</div>
-	</article>
+			</div>
+		</article>
 	<?php
 	return ob_get_clean();
 }
