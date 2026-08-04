@@ -63,6 +63,11 @@ function hds_render_quote_form(): string {
 
 	$values = $submitted ? $data : [];
 	?>
+	<div class="hds-quote-trust">
+		<span class="hds-quote-trust__item">&#10003; <?php esc_html_e( 'Vrijblijvend', 'hds' ); ?></span>
+		<span class="hds-quote-trust__item">&#10003; <?php esc_html_e( 'Reactie binnen 1 werkdag', 'hds' ); ?></span>
+		<span class="hds-quote-trust__item">&#10003; <?php esc_html_e( 'Geen verplichtingen', 'hds' ); ?></span>
+	</div>
 	<form method="post" action="#offerte-formulier" class="hds-quote-form" enctype="multipart/form-data" novalidate>
 		<?php wp_nonce_field( 'hds_quote_form', 'hds_quote_nonce' ); ?>
 
@@ -95,9 +100,10 @@ function hds_render_quote_form(): string {
 
 				<div class="hds-quote-form__field">
 					<label for="hds-qf-phone" class="hds-quote-form__label">
-						<?php esc_html_e( 'Telefoonnummer', 'hds' ); ?> <span class="hds-quote-form__required" aria-hidden="true">*</span>
+						<?php esc_html_e( 'Telefoonnummer', 'hds' ); ?>
 					</label>
-					<input type="tel" id="hds-qf-phone" name="hds_qf_phone" class="hds-quote-form__input" value="<?php echo esc_attr( $values['hds_qf_phone'] ?? '' ); ?>" required aria-required="true">
+					<input type="tel" id="hds-qf-phone" name="hds_qf_phone" class="hds-quote-form__input" value="<?php echo esc_attr( $values['hds_qf_phone'] ?? '' ); ?>">
+					<p class="hds-quote-form__hint"><?php esc_html_e( 'Optioneel. Handig voor een snellere afhandeling van uw aanvraag.', 'hds' ); ?></p>
 				</div>
 			</div>
 
@@ -178,7 +184,7 @@ function hds_render_quote_form(): string {
 						<?php esc_html_e( 'Bestand bijvoegen', 'hds' ); ?>
 					</label>
 					<input type="file" id="hds-qf-file" name="hds_qf_file" class="hds-quote-form__file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
-					<p class="hds-quote-form__hint"><?php esc_html_e( 'Plattegrond, foto\'s of situatieschets (optioneel). Max. 5 MB.', 'hds' ); ?></p>
+					<p class="hds-quote-form__hint"><?php esc_html_e( 'Optioneel. Voeg een plattegrond, foto of situatieschets toe voor een nauwkeurigere offerte. Toegestaan: PDF, JPG, PNG, DOC (max. 5 MB).', 'hds' ); ?></p>
 				</div>
 			</div>
 
@@ -207,9 +213,13 @@ function hds_render_quote_form(): string {
 		</fieldset>
 
 		<div class="hds-quote-form__actions">
-			<button type="submit" name="hds_quote_submit" class="btn btn--cta">
+			<button type="submit" name="hds_quote_submit" class="hds-quote-form__submit btn btn--cta">
 				<?php esc_html_e( 'Offerte aanvragen', 'hds' ); ?>
+				<span class="hds-quote-form__submit-arrow" aria-hidden="true">&rarr;</span>
 			</button>
+			<p class="hds-quote-form__submit-note">
+				<?php esc_html_e( 'Vrijblijvend — u zit nergens aan vast.', 'hds' ); ?>
+			</p>
 		</div>
 	</form>
 	<?php
@@ -253,7 +263,6 @@ function hds_quote_validate_submission( array $data, array $files ): array {
 		'hds_qf_bedrijf'   => __( 'Bedrijfsnaam is verplicht.', 'hds' ),
 		'hds_qf_contact'   => __( 'Contactpersoon is verplicht.', 'hds' ),
 		'hds_qf_email'     => __( 'E-mailadres is verplicht.', 'hds' ),
-		'hds_qf_phone'     => __( 'Telefoonnummer is verplicht.', 'hds' ),
 		'hds_qf_postcode'  => __( 'Postcode is verplicht.', 'hds' ),
 		'hds_qf_type'      => __( 'Type bedrijfspand is verplicht.', 'hds' ),
 		'hds_qf_surface'   => __( 'Oppervlakte is verplicht.', 'hds' ),

@@ -1155,6 +1155,51 @@ h3 {
 	}
 }
 
+/* ── Quote Trust Row ── */
+.hds-quote-trust {
+	align-items: center;
+	background: var(--wp--preset--color--light-gray);
+	border-radius: var(--hds-border-radius);
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--3) var(--wp--preset--spacing--6);
+	justify-content: center;
+	margin-bottom: var(--wp--preset--spacing--5);
+	padding: var(--wp--preset--spacing--3) var(--wp--preset--spacing--5);
+}
+
+.hds-quote-trust__item {
+	color: var(--wp--preset--color--dark-gray);
+	font-size: var(--wp--preset--font-size--s);
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+/* ── Quote Submit Button ── */
+.hds-quote-form__submit {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--3);
+	font-size: var(--wp--preset--font-size--l);
+	padding: 1rem 3rem;
+}
+
+.hds-quote-form__submit:hover .hds-quote-form__submit-arrow {
+	transform: translateX(4px);
+}
+
+.hds-quote-form__submit-arrow {
+	display: inline-block;
+	transition: transform var(--hds-transition-fast);
+}
+
+.hds-quote-form__submit-note {
+	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--xs);
+	margin: var(--wp--preset--spacing--2) 0 0;
+	text-align: center;
+}
+
 /* ── Thank You Page ── */
 .thank-you-page {
 	margin-inline: auto;
