@@ -1285,17 +1285,14 @@ h3 {
 .hero-section::before {
 	background: linear-gradient(
 		to bottom,
-		rgba(26, 115, 232, 0.25) 0%,
-		rgba(26, 115, 232, 0.40) 50%,
-		rgba(21, 87, 176, 0.55) 100%
+		rgb(26 115 232 / 25%) 0%,
+		rgb(26 115 232 / 40%) 50%,
+		rgb(21 87 176 / 55%) 100%
 	);
-	bottom: 0;
+	inset: 0;
 	content: '';
-	left: 0;
 	pointer-events: none;
 	position: absolute;
-	right: 0;
-	top: 0;
 	z-index: 0;
 }
 
@@ -1327,7 +1324,7 @@ h3 {
 	margin-left: auto;
 	margin-right: auto;
 	max-width: 580px;
-	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+	text-shadow: 0 1px 4px rgb(0 0 0 / 35%);
 }
 
 .hero-section .wp-block-buttons {
@@ -2017,18 +2014,18 @@ h3 {
 /* ── Block Styles ── */
 .is-style-card {
 	background: var(--wp--preset--color--white);
-	border-radius: var(--hds-border-radius);
-	box-shadow: var(--wp--preset--shadow--md);
+	border-radius: 10px;
+	box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	padding: var(--wp--preset--spacing--8) !important;
+	padding: var(--wp--preset--spacing--10) !important;
 	transition: box-shadow var(--hds-transition-base), transform var(--hds-transition-base);
 }
 
 .is-style-card:hover {
-	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
-	transform: translateY(-3px);
+	box-shadow: 0 6px 20px rgb(0 0 0 / 8%);
+	transform: translateY(-4px);
 }
 
 .is-style-card__icon {
@@ -2044,8 +2041,13 @@ h3 {
 	margin-top: auto;
 }
 
-/* ── USP Grid Spacing ── */
+/* ── USP Grid ── */
+.usp-grid {
+	background: rgb(26 115 232 / 4%);
+}
+
 .usp-grid .wp-block-columns {
+	gap: var(--wp--preset--spacing--5);
 	margin-top: var(--wp--preset--spacing--8);
 }
 
