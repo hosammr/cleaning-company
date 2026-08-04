@@ -17,11 +17,14 @@ get_header();
 	<?php hds_breadcrumbs(); ?>
 
 	<?php
-	// 1. Hero — reuse hds_page_header
-	$hero_title    = get_the_title();
-	$hero_subtitle = get_post_meta( get_the_ID(), 'hds_subtitle', true );
-	$hero_image_id = (int) get_post_meta( get_the_ID(), 'hds_hero_image', true );
-	echo hds_page_header( $hero_title, $hero_subtitle, $hero_image_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	// 1. Hero — reuse parts/hero (consistent with all other inner pages)
+	$hero_title     = get_the_title();
+	$hero_subtitle  = get_post_meta( get_the_ID(), 'hds_subtitle', true );
+	$hero_image_id  = (int) get_post_meta( get_the_ID(), 'hds_hero_image', true );
+	$hero_image_url = $hero_image_id ? wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ) : '';
+	$hero_cta_text  = __( 'Direct aanvragen', 'hds' );
+	$hero_cta_url   = '#offerte-formulier';
+	get_template_part( 'parts/hero' );
 	?>
 
 	<div class="container">
@@ -103,7 +106,7 @@ get_header();
 				'center'
 			); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			?>
-			<div class="quote-intro">
+			<div class="quote-intro" id="offerte-formulier">
 				<?php
 				while ( have_posts() ) :
 					the_post();
@@ -124,13 +127,13 @@ get_header();
 	</div>
 
 	<?php
-	// 6. Final CTA — reuse hds_cta_section
+	// 6. Final CTA — direct phone contact
 	echo hds_cta_section(
-		__( 'Klaar om samen te werken?', 'hds' ),
-		__( 'Heeft u nog vragen? Neem gerust contact met ons op.', 'hds' ),
-		__( 'Contact opnemen', 'hds' ),
-		home_url( '/contact/' )
-	); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		__( 'Liever direct contact?', 'hds' ),
+		__( 'Wij zijn op werkdagen telefonisch bereikbaar van 08:00 tot 17:00.', 'hds' ),
+		hds_get_phone(),
+		'tel:' . hds_esc_tel( hds_get_phone() )
+	);
 	?>
 </main>
 

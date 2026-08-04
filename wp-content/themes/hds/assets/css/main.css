@@ -1007,6 +1007,20 @@ h3 {
 	margin-bottom: var(--wp--preset--spacing--8);
 }
 
+#offerte-formulier {
+	scroll-margin-top: 100px;
+}
+
+.quote-intro form,
+.quote-intro .gform_wrapper,
+.quote-intro .wpcf7-form {
+	background: var(--wp--preset--color--white);
+	border: 1px solid var(--wp--preset--color--light-gray);
+	border-radius: var(--hds-border-radius);
+	box-shadow: var(--wp--preset--shadow--md);
+	padding: var(--wp--preset--spacing--6);
+}
+
 .quote-cta-fallback {
 	background: var(--wp--preset--color--light-gray);
 	border-radius: var(--hds-border-radius);
