@@ -117,36 +117,6 @@ function hds_register_block_pattern_categories(): void {
 add_action( 'init', 'hds_register_block_pattern_categories' );
 
 /**
- * Register custom templates.
- */
-function hds_register_custom_templates(): void {
-	$templates = [
-		'service'          => __( 'Service', 'hds' ),
-		'contact'          => __( 'Contact', 'hds' ),
-		'quote'            => __( 'Offerte Aanvragen', 'hds' ),
-		'category-landing' => __( 'Category Landing', 'hds' ),
-		'about'            => __( 'About', 'hds' ),
-		'legal'            => __( 'Legal', 'hds' ),
-		'faq'              => __( 'FAQ', 'hds' ),
-		'bedankt'          => __( 'Bedankt', 'hds' ),
-		'luchtreiniging'   => __( 'Luchtreiniging Landing', 'hds' ),
-		'reviews'          => __( 'Reviews', 'hds' ),
-	];
-
-	foreach ( $templates as $slug => $label ) {
-		$template_file = 'page-templates/page-' . $slug . '.php';
-		if ( file_exists( HDS_DIR . '/' . $template_file ) ) {
-			register_block_template( 'hds//' . $slug, [
-				'title'       => $label,
-				'description' => sprintf( __( 'Template voor %s pagina.', 'hds' ), $label ),
-				'content'     => file_get_contents( HDS_DIR . '/' . $template_file ),
-			] );
-		}
-	}
-}
-add_action( 'init', 'hds_register_custom_templates' );
-
-/**
  * Include functionality modules.
  */
 require_once HDS_DIR . '/inc/setup.php';

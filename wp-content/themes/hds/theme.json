@@ -203,6 +203,21 @@
 			"name": "faq",
 			"title": "FAQ",
 			"postTypes": ["page"]
+		},
+		{
+			"name": "reviews",
+			"title": "Reviews",
+			"postTypes": ["page"]
+		},
+		{
+			"name": "bedankt",
+			"title": "Bedankt",
+			"postTypes": ["page"]
+		},
+		{
+			"name": "luchtreiniging",
+			"title": "Luchtreiniging Landing",
+			"postTypes": ["page"]
 		}
 	]
 }
