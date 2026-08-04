@@ -17,11 +17,10 @@ get_header();
 	<?php hds_breadcrumbs(); ?>
 
 	<?php
-	// 1. Hero — reuse parts/hero (consistent with all other inner pages)
-	$hero_title     = get_the_title();
-	$hero_subtitle  = get_post_meta( get_the_ID(), 'hds_subtitle', true );
-	$hero_image_id  = (int) get_post_meta( get_the_ID(), 'hds_hero_image', true );
-	$hero_image_url = $hero_image_id ? wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ) : '';
+	// 1. Hero — compact light variant
+	$hero_title     = __( 'Vraag vrijblijvend een offerte aan', 'hds' );
+	$hero_subtitle  = __( 'Ontvang binnen één werkdag een vrijblijvende offerte op maat voor uw bedrijf.', 'hds' );
+	$hero_image_url = '';
 	$hero_cta_text  = __( 'Direct aanvragen', 'hds' );
 	$hero_cta_url   = '#offerte-formulier';
 	get_template_part( 'parts/hero' );
@@ -55,9 +54,21 @@ get_header();
 			</header>
 			<div class="hds-usp-grid">
 				<?php
-				echo hds_usp_card( __( 'Vrijblijvend', 'hds' ), __( 'Een offerte aanvragen is geheel vrijblijvend en verplicht u tot niets.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo hds_usp_card( __( 'Op maat', 'hds' ), __( 'Iedere offerte wordt afgestemd op uw specifieke wensen en bedrijfssituatie.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo hds_usp_card( __( 'Snelle reactie', 'hds' ), __( 'Wij streven ernaar binnen één werkdag te reageren op uw aanvraag.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo hds_usp_card(
+					__( 'Vrijblijvend', 'hds' ),
+					__( 'Een offerte aanvragen is geheel vrijblijvend en verplicht u tot niets.', 'hds' ),
+					'<svg width="32" height="32" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M87.8 69.6c-13.2-14.8-32.4-23.2-54.2-22.3C14.8 48.5 0 64.4 0 83.3v89.4c0 18.9 14.8 34.8 33.6 36.1 21.8 1 41-7.4 54.2-22.3L122 152h12l34.2 34.6c13.2 14.8 32.4 23.2 54.2 22.3 18.9-1.3 33.6-17.2 33.6-36.1V83.3c0-18.9-14.8-34.8-33.6-36.1-21.8-1-41 7.4-54.2 22.3L134 104h-12L87.8 69.6Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+				); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo hds_usp_card(
+					__( 'Op maat', 'hds' ),
+					__( 'Iedere offerte wordt afgestemd op uw specifieke wensen en bedrijfssituatie.', 'hds' ),
+					'<svg width="32" height="32" viewBox="0 0 256 256" fill="none" aria-hidden="true"><rect x="26" y="80" width="60" height="128" rx="8" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><rect x="98" y="40" width="60" height="168" rx="8" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><rect x="170" y="104" width="60" height="104" rx="8" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+				); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo hds_usp_card(
+					__( 'Snelle reactie', 'hds' ),
+					__( 'Wij streven ernaar binnen één werkdag te reageren op uw aanvraag.', 'hds' ),
+					'<svg width="32" height="32" viewBox="0 0 256 256" fill="none" aria-hidden="true"><circle cx="128" cy="128" r="96" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><polyline points="128 72 128 128 168 152" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+				); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				?>
 			</div>
 		</div>

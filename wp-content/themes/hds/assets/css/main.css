@@ -1438,6 +1438,12 @@ h3 {
 	flex-direction: column;
 }
 
+.hds-usp-card__icon {
+	color: var(--wp--preset--color--primary);
+	display: block;
+	margin-bottom: var(--wp--preset--spacing--4);
+}
+
 .hds-usp-card__title {
 	color: var(--wp--preset--color--dark-gray);
 	font-size: var(--wp--preset--font-size--xl);

@@ -150,11 +150,15 @@ function hds_card( string $content, string $class = '', bool $clickable = false 
  *
  * @param string $title       Card title (pre-translated).
  * @param string $description Card description (pre-translated).
+ * @param string $icon        Optional SVG icon markup.
  */
-function hds_usp_card( string $title, string $description ): string {
+function hds_usp_card( string $title, string $description, string $icon = '' ): string {
 	ob_start();
 	?>
 	<article class="hds-card hds-usp-card">
+		<?php if ( $icon ) : ?>
+			<span class="hds-usp-card__icon" aria-hidden="true"><?php echo $icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+		<?php endif; ?>
 		<h3 class="hds-usp-card__title"><?php echo esc_html( $title ); ?></h3>
 		<p class="hds-usp-card__desc"><?php echo esc_html( $description ); ?></p>
 	</article>
