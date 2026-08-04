@@ -336,3 +336,28 @@ function hds_inject_usp_icons( string $content ): string {
 	return $content;
 }
 add_filter( 'the_content', 'hds_inject_usp_icons', 20 );
+
+/**
+ * Inject a supporting subtitle into the USP grid section.
+ *
+ * Adds a centered paragraph below the "Waarom HDS?" heading
+ * using the existing section-header__subtitle typography token.
+ *
+ * @param string $content Post content.
+ * @return string Content with subtitle injected.
+ */
+function hds_inject_usp_subtitle( string $content ): string {
+	if ( false === strpos( $content, 'usp-grid' ) ) {
+		return $content;
+	}
+
+	$subtitle = '<p class="section-header__subtitle has-text-align-center" style="margin-bottom:0">'
+		. esc_html__( 'Daarom kiezen bedrijven in West-Brabant en Zeeland voor HDS als vaste schoonmaakpartner.', 'hds' )
+		. '</p>';
+
+	$needle  = '<h2 class="wp-block-heading has-text-align-center">Waarom HDS?</h2>';
+	$content = str_replace( $needle, $needle . $subtitle, $content );
+
+	return $content;
+}
+add_filter( 'the_content', 'hds_inject_usp_subtitle', 21 );
