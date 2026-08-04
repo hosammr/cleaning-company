@@ -144,3 +144,4 @@ require_once HDS_DIR . '/inc/patterns.php';
 require_once HDS_DIR . '/inc/blocks.php';
 require_once HDS_DIR . '/inc/schema.php';
 require_once HDS_DIR . '/inc/service-functions.php';
+require_once HDS_DIR . '/inc/form-quote.php';

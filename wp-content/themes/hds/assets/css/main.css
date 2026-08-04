@@ -1033,6 +1033,128 @@ h3 {
 	margin: 0;
 }
 
+/* ── Quote Form ── */
+.hds-quote-form {
+	text-align: left;
+}
+
+.hds-quote-form__fieldset {
+	border: none;
+	margin: 0 0 var(--wp--preset--spacing--6);
+	padding: 0;
+}
+
+.hds-quote-form__legend {
+	color: var(--wp--preset--color--dark-gray);
+	font-size: var(--wp--preset--font-size--l);
+	font-weight: 600;
+	margin-bottom: var(--wp--preset--spacing--4);
+	padding: 0;
+	width: 100%;
+}
+
+.hds-quote-form__row {
+	display: grid;
+	gap: var(--wp--preset--spacing--4);
+	grid-template-columns: 1fr 1fr;
+	margin-bottom: var(--wp--preset--spacing--4);
+}
+
+.hds-quote-form__field {
+	margin-bottom: var(--wp--preset--spacing--4);
+}
+
+.hds-quote-form__field--full {
+	grid-column: 1 / -1;
+}
+
+.hds-quote-form__label {
+	color: var(--wp--preset--color--dark-gray);
+	display: block;
+	font-size: var(--wp--preset--font-size--s);
+	font-weight: 600;
+	margin-bottom: var(--wp--preset--spacing--1);
+}
+
+.hds-quote-form__required {
+	color: var(--wp--preset--color--error);
+}
+
+.hds-quote-form__input,
+.hds-quote-form__select,
+.hds-quote-form__textarea {
+	border: 1px solid var(--wp--preset--color--gray);
+	border-radius: 4px;
+	font-family: inherit;
+	font-size: var(--wp--preset--font-size--m);
+	min-height: 44px;
+	padding: var(--wp--preset--spacing--2) var(--wp--preset--spacing--3);
+	width: 100%;
+}
+
+.hds-quote-form__input:focus,
+.hds-quote-form__select:focus,
+.hds-quote-form__textarea:focus {
+	border-color: var(--wp--preset--color--primary);
+	outline: none;
+}
+
+.hds-quote-form__textarea {
+	min-height: 100px;
+	resize: vertical;
+}
+
+.hds-quote-form__file {
+	font-family: inherit;
+	font-size: var(--wp--preset--font-size--s);
+}
+
+.hds-quote-form__hint {
+	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--xs);
+	margin: var(--wp--preset--spacing--1) 0 0;
+}
+
+.hds-quote-form__checklist {
+	display: grid;
+	gap: var(--wp--preset--spacing--2);
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.hds-quote-form__checkbox-label {
+	align-items: center;
+	color: var(--wp--preset--color--dark-gray);
+	cursor: pointer;
+	display: flex;
+	font-size: var(--wp--preset--font-size--s);
+	gap: var(--wp--preset--spacing--2);
+}
+
+.hds-quote-form__checkbox-label--block {
+	font-size: var(--wp--preset--font-size--m);
+}
+
+.hds-quote-form__checkbox-label a {
+	color: var(--wp--preset--color--primary);
+}
+
+.hds-quote-form__checkbox {
+	accent-color: var(--wp--preset--color--primary);
+	flex-shrink: 0;
+	height: 18px;
+	width: 18px;
+}
+
+.hds-quote-form__actions {
+	margin-top: var(--wp--preset--spacing--6);
+}
+
+@media (width <= 600px) {
+	.hds-quote-form__row {
+		grid-template-columns: 1fr;
+	}
+}
+
 /* ── Thank You Page ── */
 .thank-you-page {
 	margin-inline: auto;

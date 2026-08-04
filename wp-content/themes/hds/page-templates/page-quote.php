@@ -110,7 +110,12 @@ get_header();
 				<?php
 				while ( have_posts() ) :
 					the_post();
-					the_content();
+					$raw_content = get_the_content();
+					if ( hds_has_plugin_form( $raw_content ) ) :
+						the_content();
+					else :
+						echo hds_render_quote_form(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					endif;
 				endwhile;
 				?>
 			</div>
