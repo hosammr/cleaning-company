@@ -26,12 +26,35 @@
 
 body {
 	margin: 0;
+	font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 img {
 	display: block;
 	height: auto;
 	max-width: 100%;
+}
+
+/* ── Typography ── */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+h1 {
+	letter-spacing: -0.02em;
+}
+
+h2 {
+	letter-spacing: -0.01em;
+}
+
+h3 {
+	letter-spacing: -0.005em;
 }
 
 /* ── Accessibility ── */
@@ -79,7 +102,7 @@ img {
 
 .site-main {
 	min-height: 60vh;
-	padding-block: var(--wp--preset--spacing--8);
+	padding-block-end: var(--wp--preset--spacing--8);
 }
 
 /* ── Header ── */
@@ -1048,6 +1071,74 @@ img {
 
 .contact-info-item strong {
 	font-size: var(--wp--preset--font-size--s);
+}
+
+/* ── Front Page Hero ── */
+.hero-section {
+	align-items: center;
+	background: linear-gradient(135deg, var(--wp--preset--color--primary) 0%, var(--wp--preset--color--primary-dark) 100%);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-height: 70vh;
+	overflow: hidden;
+	padding: var(--wp--preset--spacing--24) var(--wp--preset--spacing--4) !important;
+	position: relative;
+}
+
+.hero-section::before {
+	background: linear-gradient(
+		to bottom,
+		rgba(0, 0, 0, 0.0) 0%,
+		rgba(0, 0, 0, 0.06) 60%,
+		rgba(0, 0, 0, 0.20) 100%
+	);
+	bottom: 0;
+	content: '';
+	left: 0;
+	pointer-events: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 0;
+}
+
+.hero-section > * {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 680px;
+	position: relative;
+	width: 100%;
+	z-index: 1;
+}
+
+.hero-section h1,
+.hero-section h2,
+.hero-section h3,
+.hero-section h4,
+.hero-section h5,
+.hero-section h6 {
+	color: var(--wp--preset--color--white);
+}
+
+.hero-section h1 {
+	margin-bottom: var(--wp--preset--spacing--4);
+}
+
+.hero-section p {
+	color: var(--wp--preset--color--white);
+	margin-bottom: var(--wp--preset--spacing--5);
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 580px;
+}
+
+.hero-section .wp-block-buttons {
+	margin-top: var(--wp--preset--spacing--4);
+}
+
+.hero-section .wp-block-button__link {
+	padding: 0.875rem 2.5rem;
 }
 
 /* ── Service Hero ── */

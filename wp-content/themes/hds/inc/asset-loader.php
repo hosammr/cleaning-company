@@ -16,9 +16,16 @@ function hds_enqueue_styles(): void {
 	$min     = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 	wp_enqueue_style(
+		'hds-google-fonts',
+		'https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75..100,300..800&family=Plus+Jakarta+Sans:wght@400..800&display=swap',
+		[],
+		null
+	);
+
+	wp_enqueue_style(
 		'hds-main',
 		HDS_URI . '/assets/css/main' . $min . '.css',
-		[],
+		[ 'hds-google-fonts' ],
 		$version
 	);
 
@@ -105,6 +112,8 @@ add_action( 'wp_head', 'hds_preload_assets', 1 );
  * Preconnect to external origins for faster resource loading.
  */
 function hds_preconnect_origins(): void {
+	echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
+	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
 	echo '<link rel="preconnect" href="https://www.google.com">' . "\n";
 	echo '<link rel="preconnect" href="https://www.googletagmanager.com">' . "\n";
 	echo '<link rel="dns-prefetch" href="https://www.googletagmanager.com">' . "\n";
