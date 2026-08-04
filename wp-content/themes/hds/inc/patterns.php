@@ -80,7 +80,7 @@ function hds_register_block_patterns(): void {
 <!-- wp:group {"className":"is-style-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|6","bottom":"var:preset|spacing|6","left":"var:preset|spacing|6","right":"var:preset|spacing|6"}}},"layout":{"type":"constrained"}} -->
 	<div class="wp-block-group is-style-card" style="padding-top:var(--wp--preset--spacing--6);padding-bottom:var(--wp--preset--spacing--6);padding-left:var(--wp--preset--spacing--6);padding-right:var(--wp--preset--spacing--6)">
 <!-- wp:html -->
-<svg class="is-style-card__icon" width="36" height="36" viewBox="0 0 256 256" fill="none" aria-hidden="true"><circle cx="86" cy="80" r="32" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 200c0-35.3 28.7-64 64-64s64 28.7 64 64" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><circle cx="170" cy="80" r="32" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M154 136h32c35.3 0 64 28.7 64 64" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<svg class="is-style-card__icon" width="36" height="36" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M84 80c0-24.3 19.7-44 44-44s44 19.7 44 44" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 208c0-48.6 39.4-88 88-88s88 39.4 88 88" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>
 <!-- /wp:html -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading">Vast opgeleid personeel</h3>

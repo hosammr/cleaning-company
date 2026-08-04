@@ -303,3 +303,36 @@ function hds_output_cookie_banner(): void {
 	echo hds_cookie_banner(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 add_action( 'wp_footer', 'hds_output_cookie_banner', 10 );
+
+/**
+ * Inject Phosphor SVG icons into USP grid cards on the front page.
+ *
+ * All cards use the same code path — a single mapping array iterated
+ * with str_replace. No per-card branching, no CSS pseudo-elements,
+ * no browser-specific mask-image rendering.
+ *
+ * @param string $content Post content.
+ * @return string Content with icons injected.
+ */
+function hds_inject_usp_icons( string $content ): string {
+	if ( false === strpos( $content, 'usp-grid' ) ) {
+		return $content;
+	}
+
+	$icons = [
+		'Vast opgeleid personeel'           => '<svg class="is-style-card__icon" width="36" height="36" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M84 80c0-24.3 19.7-44 44-44s44 19.7 44 44" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 208c0-48.6 39.4-88 88-88s88 39.4 88 88" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+		'Veiligheid &amp; Certificering'    => '<svg class="is-style-card__icon" width="36" height="36" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M216 112c0 50.2-41.8 92-88 104-46.2-12-88-53.8-88-104V56l88-32 88 32v56Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><polyline points="88 136 112 160 168 104" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+		'Een aanspreekpunt'                 => '<svg class="is-style-card__icon" width="36" height="36" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M128 232a104 104 0 1 1 0-208c57.4 0 104 46.6 104 104 0 47.8-38 88.3-86 100.3L128 232Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><line x1="96" y1="112" x2="160" y2="112" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><line x1="96" y1="144" x2="128" y2="144" stroke="currentColor" stroke-width="12" stroke-linecap="round"/></svg>',
+	];
+
+	foreach ( $icons as $heading => $icon ) {
+		$content = str_replace(
+			'<h3 class="wp-block-heading">' . $heading . '</h3>',
+			$icon . '<h3 class="wp-block-heading">' . $heading . '</h3>',
+			$content
+		);
+	}
+
+	return $content;
+}
+add_filter( 'the_content', 'hds_inject_usp_icons', 20 );

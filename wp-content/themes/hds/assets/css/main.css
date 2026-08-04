@@ -2036,42 +2036,6 @@ h3 {
 	margin-top: var(--wp--preset--spacing--8);
 }
 
-/* ── USP Grid Icons ── */
-.usp-grid .is-style-card h3 {
-	padding-left: 48px;
-	position: relative;
-}
-
-.usp-grid .is-style-card h3::before {
-	background-color: var(--wp--preset--color--primary);
-	content: '';
-	display: block;
-	height: 36px;
-	left: 0;
-	mask-repeat: no-repeat;
-	mask-size: contain;
-	position: absolute;
-	top: 0;
-	width: 36px;
-	-webkit-mask-repeat: no-repeat;
-	-webkit-mask-size: contain;
-}
-
-.usp-grid .wp-block-column:nth-child(1) .is-style-card h3::before {
-	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 256 256' fill='none'%3E%3Ccircle cx='128' cy='96' r='48' stroke='%23000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M44 208c0-46.4 37.6-84 84-84s84 37.6 84 84' stroke='%23000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='184 64 200 80 232 48' stroke='%23000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 256 256' fill='none'%3E%3Ccircle cx='128' cy='96' r='48' stroke='%23000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M44 208c0-46.4 37.6-84 84-84s84 37.6 84 84' stroke='%23000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='184 64 200 80 232 48' stroke='%23000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
-
-.usp-grid .wp-block-column:nth-child(2) .is-style-card h3::before {
-	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 256 256' fill='none'%3E%3Cpath d='M216 112c0 50.2-41.8 92-88 104-46.2-12-88-53.8-88-104V56l88-32 88 32v56Z' stroke='%23000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='88 136 112 160 168 104' stroke='%23000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 256 256' fill='none'%3E%3Cpath d='M216 112c0 50.2-41.8 92-88 104-46.2-12-88-53.8-88-104V56l88-32 88 32v56Z' stroke='%23000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='88 136 112 160 168 104' stroke='%23000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
-
-.usp-grid .wp-block-column:nth-child(3) .is-style-card h3::before {
-	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 256 256' fill='none'%3E%3Cpath d='M128 232a104 104 0 1 1 0-208c57.4 0 104 46.6 104 104 0 47.8-38 88.3-86 100.3L128 232Z' stroke='%23000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cline x1='96' y1='112' x2='160' y2='112' stroke='%23000' stroke-width='12' stroke-linecap='round'/%3E%3Cline x1='96' y1='144' x2='128' y2='144' stroke='%23000' stroke-width='12' stroke-linecap='round'/%3E%3C/svg%3E");
-	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 256 256' fill='none'%3E%3Cpath d='M128 232a104 104 0 1 1 0-208c57.4 0 104 46.6 104 104 0 47.8-38 88.3-86 100.3L128 232Z' stroke='%23000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cline x1='96' y1='112' x2='160' y2='112' stroke='%23000' stroke-width='12' stroke-linecap='round'/%3E%3Cline x1='96' y1='144' x2='128' y2='144' stroke='%23000' stroke-width='12' stroke-linecap='round'/%3E%3C/svg%3E");
-}
-
 .is-style-banner {
 	background: var(--wp--preset--color--primary);
 	border-radius: 0;
