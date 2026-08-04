@@ -2018,18 +2018,12 @@ h3 {
 	transform: translateY(-3px);
 }
 
-.is-style-card h3::before {
-	background-color: var(--wp--preset--color--primary);
-	content: '';
+.is-style-card__icon {
+	color: var(--wp--preset--color--primary);
 	display: block;
+	flex-shrink: 0;
 	height: 36px;
 	margin-bottom: var(--wp--preset--spacing--4);
-	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 256 256' fill='none'%3E%3Cpath d='M216 112c0 50.2-41.8 92-88 104-46.2-12-88-53.8-88-104V56l88-32 88 32v56Z' stroke='%23000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='88 136 112 160 168 104' stroke='%23000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-	mask-repeat: no-repeat;
-	mask-size: contain;
-	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 256 256' fill='none'%3E%3Cpath d='M216 112c0 50.2-41.8 92-88 104-46.2-12-88-53.8-88-104V56l88-32 88 32v56Z' stroke='%23000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpolyline points='88 136 112 160 168 104' stroke='%23000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-	-webkit-mask-repeat: no-repeat;
-	-webkit-mask-size: contain;
 	width: 36px;
 }
 

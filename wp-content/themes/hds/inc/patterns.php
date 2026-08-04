@@ -78,7 +78,10 @@ function hds_register_block_patterns(): void {
 <!-- wp:column -->
 <div class="wp-block-column">
 <!-- wp:group {"className":"is-style-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|6","bottom":"var:preset|spacing|6","left":"var:preset|spacing|6","right":"var:preset|spacing|6"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group is-style-card" style="padding-top:var(--wp--preset--spacing--6);padding-bottom:var(--wp--preset--spacing--6);padding-left:var(--wp--preset--spacing--6);padding-right:var(--wp--preset--spacing--6)">
+	<div class="wp-block-group is-style-card" style="padding-top:var(--wp--preset--spacing--6);padding-bottom:var(--wp--preset--spacing--6);padding-left:var(--wp--preset--spacing--6);padding-right:var(--wp--preset--spacing--6)">
+<!-- wp:html -->
+<svg class="is-style-card__icon" width="36" height="36" viewBox="0 0 256 256" fill="none" aria-hidden="true"><circle cx="86" cy="80" r="32" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 200c0-35.3 28.7-64 64-64s64 28.7 64 64" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><circle cx="170" cy="80" r="32" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M154 136h32c35.3 0 64 28.7 64 64" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<!-- /wp:html -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading">Vast opgeleid personeel</h3>
 <!-- /wp:heading -->
@@ -93,6 +96,9 @@ function hds_register_block_patterns(): void {
 <div class="wp-block-column">
 <!-- wp:group {"className":"is-style-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|6","bottom":"var:preset|spacing|6","left":"var:preset|spacing|6","right":"var:preset|spacing|6"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group is-style-card" style="padding-top:var(--wp--preset--spacing--6);padding-bottom:var(--wp--preset--spacing--6);padding-left:var(--wp--preset--spacing--6);padding-right:var(--wp--preset--spacing--6)">
+<!-- wp:html -->
+<svg class="is-style-card__icon" width="36" height="36" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M216 112c0 50.2-41.8 92-88 104-46.2-12-88-53.8-88-104V56l88-32 88 32v56Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><polyline points="88 136 112 160 168 104" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<!-- /wp:html -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading">Veiligheid &amp; Certificering</h3>
 <!-- /wp:heading -->
@@ -107,6 +113,9 @@ function hds_register_block_patterns(): void {
 <div class="wp-block-column">
 <!-- wp:group {"className":"is-style-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|6","bottom":"var:preset|spacing|6","left":"var:preset|spacing|6","right":"var:preset|spacing|6"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group is-style-card" style="padding-top:var(--wp--preset--spacing--6);padding-bottom:var(--wp--preset--spacing--6);padding-left:var(--wp--preset--spacing--6);padding-right:var(--wp--preset--spacing--6)">
+<!-- wp:html -->
+<svg class="is-style-card__icon" width="36" height="36" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M87.8 69.6c-13.2-14.8-32.4-23.2-54.2-22.3C14.8 48.5 0 64.4 0 83.3v89.4c0 18.9 14.8 34.8 33.6 36.1 21.8 1 41-7.4 54.2-22.3L122 152h12l34.2 34.6c13.2 14.8 32.4 23.2 54.2 22.3 18.9-1.3 33.6-17.2 33.6-36.1V83.3c0-18.9-14.8-34.8-33.6-36.1-21.8-1-41 7.4-54.2 22.3L134 104h-12L87.8 69.6Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<!-- /wp:html -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading">Een aanspreekpunt</h3>
 <!-- /wp:heading -->
