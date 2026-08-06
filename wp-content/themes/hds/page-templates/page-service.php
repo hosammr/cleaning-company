@@ -9,18 +9,30 @@ get_header();
 ?>
 
 <main id="main" class="site-main">
-	<?php hds_breadcrumbs(); ?>
-
 	<?php
-	$hero_title     = get_the_title();
-	$hero_subtitle   = get_post_meta( get_the_ID(), 'hds_subtitle', true );
-	$hero_image_id   = (int) get_post_meta( get_the_ID(), 'hds_hero_image', true );
-	$hero_image_url  = $hero_image_id ? wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ) : '';
-	$cta_override    = get_post_meta( get_the_ID(), 'hds_cta_override', true );
-	$hero_cta_text   = $cta_override ?: __( 'Vrijblijvende offerte', 'hds' );
-	$hero_cta_url    = home_url( '/offerte-aanvragen/' );
+	$slug    = get_post_field( 'post_name' );
+	$service = hds_get_service( $slug );
+
+	if ( $service ) {
+		$hero_title    = $service['title'];
+		$hero_subtitle = $service['subtitle'];
+		$hero_image_id = $service['hero_image'];
+		$hero_cta_text = __( 'Vraag vrijblijvend een offerte aan', 'hds' );
+		$hero_cta_url  = home_url( '/offerte-aanvragen/' );
+	} else {
+		$hero_title    = get_the_title();
+		$hero_subtitle = get_post_meta( get_the_ID(), 'hds_subtitle', true );
+		$hero_image_id = (int) get_post_meta( get_the_ID(), 'hds_hero_image', true );
+		$cta_override  = get_post_meta( get_the_ID(), 'hds_cta_override', true );
+		$hero_cta_text = $cta_override ?: __( 'Vrijblijvende offerte', 'hds' );
+		$hero_cta_url  = home_url( '/offerte-aanvragen/' );
+	}
+
+	$hero_image_url = $hero_image_id ? wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ) : '';
 	get_template_part( 'parts/hero' );
 	?>
+
+	<?php hds_breadcrumbs(); ?>
 
 	<div class="container">
 		<div class="service-content">
