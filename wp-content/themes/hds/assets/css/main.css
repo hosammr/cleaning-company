@@ -2273,6 +2273,18 @@ h3 {
 		scroll-behavior: auto !important;
 		transition-duration: 0.01ms !important;
 	}
+
+	.hds-service-card:hover {
+		transform: none;
+	}
+
+	.hds-service-card:hover::before {
+		transform: scaleX(0);
+	}
+
+	.hds-service-card:hover .hds-service-card__image img {
+		transform: none;
+	}
 }
 
 /* ── Contact Map Placeholder ── */
