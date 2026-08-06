@@ -16,7 +16,7 @@ get_header();
 	if ( $service ) {
 		$hero_title    = $service['title'];
 		$hero_subtitle = $service['subtitle'];
-		$hero_image_id = $service['hero_image'];
+		$hero_image_id = $service['hero_image'] ?: get_post_thumbnail_id( get_queried_object_id() );
 		$hero_cta_text = __( 'Vraag vrijblijvend een offerte aan', 'hds' );
 		$hero_cta_url  = home_url( '/offerte-aanvragen/' );
 	} else {
@@ -28,7 +28,18 @@ get_header();
 		$hero_cta_url  = home_url( '/offerte-aanvragen/' );
 	}
 
-	$hero_image_url = $hero_image_id ? wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ) : '';
+	$hero_image_url = '';
+	if ( $hero_image_id ) {
+		$hero_image_url = wp_get_attachment_image_url( $hero_image_id, 'hds-hero' );
+	}
+	if ( ! $hero_image_url ) {
+		$hero_image_url = HDS_URI . '/screenshot.png';
+	}
+	set_query_var( 'hero_title', $hero_title );
+	set_query_var( 'hero_subtitle', $hero_subtitle );
+	set_query_var( 'hero_image_url', $hero_image_url );
+	set_query_var( 'hero_cta_text', $hero_cta_text );
+	set_query_var( 'hero_cta_url', $hero_cta_url );
 	get_template_part( 'parts/hero' );
 	?>
 
