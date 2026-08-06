@@ -842,32 +842,13 @@ h3 {
 	flex-direction: column;
 	overflow: hidden;
 	position: relative;
-	transition: box-shadow var(--hds-transition-speed) var(--hds-transition-easing),
-	            transform var(--hds-transition-speed) var(--hds-transition-easing);
-}
-
-.hds-service-card::before {
-	background: var(--wp--preset--color--primary);
-	border-radius: var(--hds-border-radius) var(--hds-border-radius) 0 0;
-	content: '';
-	height: 3px;
-	left: 0;
-	position: absolute;
-	top: 0;
-	transform: scaleX(0);
-	transform-origin: left;
-	transition: transform var(--hds-transition-speed) var(--hds-transition-easing);
-	width: 100%;
-	z-index: 1;
+	transition: transform .25s ease, box-shadow .25s ease;
+	will-change: transform;
 }
 
 .hds-service-card:hover {
-	box-shadow: var(--wp--preset--shadow--lg);
 	transform: translateY(-8px);
-}
-
-.hds-service-card:hover::before {
-	transform: scaleX(1);
+	box-shadow: 0 16px 40px rgba(0,0,0,.14);
 }
 
 .hds-service-card__image {
@@ -878,7 +859,7 @@ h3 {
 	aspect-ratio: 16 / 9;
 	display: block;
 	object-fit: cover;
-	transition: transform var(--hds-transition-speed) var(--hds-transition-easing);
+	transition: transform .35s ease;
 	width: 100%;
 }
 
@@ -940,6 +921,14 @@ h3 {
 .hds-service-card .btn {
 	align-self: flex-start;
 	margin-top: auto;
+}
+
+.hds-service-card .wp-block-button__link {
+	transition: background-color .25s ease, transform .25s ease;
+}
+
+.hds-service-card:hover .wp-block-button__link {
+	transform: translateX(4px);
 }
 
 /* ── Service Card Grid Section ── */
@@ -2062,54 +2051,6 @@ h3 {
 	margin-top: auto;
 }
 
-/* ── Service card hover (block-pattern / editor cards) ── */
-.service-card-grid-section .is-style-card {
-	overflow: hidden;
-	position: relative;
-	transition: box-shadow var(--hds-transition-speed) var(--hds-transition-easing),
-	            transform var(--hds-transition-speed) var(--hds-transition-easing);
-}
-
-.service-card-grid-section .is-style-card::before {
-	background: var(--wp--preset--color--primary);
-	border-radius: 10px 10px 0 0;
-	content: '';
-	height: 3px;
-	left: 0;
-	position: absolute;
-	top: 0;
-	transform: scaleX(0);
-	transform-origin: left;
-	transition: transform var(--hds-transition-speed) var(--hds-transition-easing);
-	width: 100%;
-	z-index: 1;
-}
-
-.service-card-grid-section .is-style-card:hover {
-	box-shadow: var(--wp--preset--shadow--lg);
-	transform: translateY(-8px);
-}
-
-.service-card-grid-section .is-style-card:hover::before {
-	transform: scaleX(1);
-}
-
-.service-card-grid-section .is-style-card img {
-	transition: transform var(--hds-transition-speed) var(--hds-transition-easing);
-}
-
-.service-card-grid-section .is-style-card:hover img {
-	transform: scale(1.05);
-}
-
-.service-card-grid-section .wp-block-button__link {
-	transition: box-shadow var(--hds-transition-speed) var(--hds-transition-easing);
-}
-
-.service-card-grid-section .wp-block-button__link:hover {
-	box-shadow: inset 0 0 0 999px rgba(0, 0, 0, 0.08);
-}
-
 /* ── USP Card ── */
 .usp-card {
 	background: var(--wp--preset--color--white);
@@ -2326,23 +2267,7 @@ h3 {
 		transform: none;
 	}
 
-	.hds-service-card:hover::before {
-		transform: scaleX(0);
-	}
-
 	.hds-service-card:hover .hds-service-card__image img {
-		transform: none;
-	}
-
-	.service-card-grid-section .is-style-card:hover {
-		transform: none;
-	}
-
-	.service-card-grid-section .is-style-card:hover::before {
-		transform: scaleX(0);
-	}
-
-	.service-card-grid-section .is-style-card:hover img {
 		transform: none;
 	}
 }
