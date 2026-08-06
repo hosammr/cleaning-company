@@ -846,9 +846,28 @@ h3 {
 	will-change: transform;
 }
 
+.hds-service-card::before {
+	background: var(--wp--preset--color--primary);
+	border-radius: var(--hds-border-radius) var(--hds-border-radius) 0 0;
+	content: '';
+	height: 3px;
+	left: 0;
+	position: absolute;
+	top: 0;
+	transform: scaleX(0);
+	transform-origin: left center;
+	transition: transform 250ms ease;
+	width: 100%;
+	z-index: 1;
+}
+
 .hds-service-card:hover {
 	transform: translateY(-8px);
 	box-shadow: 0 16px 40px rgba(0,0,0,.14);
+}
+
+.hds-service-card:hover::before {
+	transform: scaleX(1);
 }
 
 .hds-service-card__image {
