@@ -863,7 +863,6 @@ h3 {
 
 .hds-service-card:hover {
 	box-shadow: var(--wp--preset--shadow--lg);
-	outline: 4px solid red !important;
 	transform: translateY(-8px);
 }
 
