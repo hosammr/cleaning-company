@@ -841,11 +841,33 @@ h3 {
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
-	transition: box-shadow var(--hds-transition-speed) var(--hds-transition-easing);
+	position: relative;
+	transition: box-shadow var(--hds-transition-speed) var(--hds-transition-easing),
+	            transform var(--hds-transition-speed) var(--hds-transition-easing);
+}
+
+.hds-service-card::before {
+	background: var(--wp--preset--color--primary);
+	border-radius: var(--hds-border-radius) var(--hds-border-radius) 0 0;
+	content: '';
+	height: 3px;
+	left: 0;
+	position: absolute;
+	top: 0;
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform var(--hds-transition-speed) var(--hds-transition-easing);
+	width: 100%;
+	z-index: 1;
 }
 
 .hds-service-card:hover {
 	box-shadow: var(--wp--preset--shadow--lg);
+	transform: translateY(-8px);
+}
+
+.hds-service-card:hover::before {
+	transform: scaleX(1);
 }
 
 .hds-service-card__image {
@@ -856,7 +878,12 @@ h3 {
 	aspect-ratio: 16 / 9;
 	display: block;
 	object-fit: cover;
+	transition: transform var(--hds-transition-speed) var(--hds-transition-easing);
 	width: 100%;
+}
+
+.hds-service-card:hover .hds-service-card__image img {
+	transform: scale(1.05);
 }
 
 .hds-service-card__placeholder {
