@@ -1552,7 +1552,7 @@ h3 {
 	height: 56px;
 	justify-content: center;
 	line-height: 1;
-	margin-bottom: var(--wp--preset--spacing--5);
+	margin-bottom: var(--wp--preset--spacing--4);
 	position: relative;
 	transition: box-shadow 250ms ease, transform 250ms ease;
 	width: 56px;
@@ -1564,7 +1564,8 @@ h3 {
 	font-size: var(--wp--preset--font-size--l);
 	font-weight: 700;
 	line-height: 1.3;
-	margin: 0 0 var(--wp--preset--spacing--2);
+	margin: 0 0 var(--wp--preset--spacing--4);
+	max-width: 240px;
 }
 
 .hds-process-step__desc {
@@ -1575,17 +1576,17 @@ h3 {
 	max-width: 240px;
 }
 
-/* Timeline connector — desktop: horizontal */
+/* Timeline connector — desktop: continuous line through all circles */
 @media (min-width: 1024px) {
-	.hds-process-step:not(:last-child)::after {
+	.hds-process-steps::before {
 		background: var(--wp--preset--color--primary);
 		content: '';
 		height: 2px;
-		left: calc(50% + 36px);
+		left: 12.5%;
 		opacity: 0.25;
 		position: absolute;
 		top: 28px;
-		width: calc(100% - 72px);
+		width: 75%;
 		z-index: 0;
 	}
 }
@@ -1593,7 +1594,7 @@ h3 {
 /* Hover — desktop only */
 @media (hover: hover) and (pointer: fine) {
 	.hds-process-step:hover {
-		transform: translateY(-6px);
+		transform: translateY(-4px);
 	}
 
 	.hds-process-step:hover .hds-process-step__number {
