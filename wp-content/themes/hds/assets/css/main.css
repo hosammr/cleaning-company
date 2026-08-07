@@ -625,8 +625,8 @@ h3 {
 
 .service-intro__grid {
 	display: grid;
-	gap: var(--wp--preset--spacing--8);
-	grid-template-columns: 1fr 1fr;
+	gap: 68px;
+	grid-template-columns: 3fr 2fr;
 	text-align: left;
 }
 
@@ -668,12 +668,6 @@ h3 {
 	content: '\2713';
 	flex-shrink: 0;
 	font-weight: 700;
-}
-
-@media (width <= 1023px) {
-	.service-intro__grid {
-		grid-template-columns: 3fr 2fr;
-	}
 }
 
 @media (width <= 767px) {
