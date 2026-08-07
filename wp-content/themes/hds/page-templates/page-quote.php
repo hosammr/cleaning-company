@@ -77,35 +77,17 @@ get_header();
 	<?php
 	// 4. Our process — reuse from page-service.php
 	?>
-	<section class="hds-process-section" aria-labelledby="quote-process-heading">
-		<div class="container">
-			<header class="hds-process-header">
-				<h2 id="quote-process-heading"><?php esc_html_e( 'Onze werkwijze', 'hds' ); ?></h2>
-			</header>
-			<ol class="hds-process-steps">
-				<li class="hds-process-step">
-					<span class="hds-process-step__number" aria-hidden="true">1</span>
-					<h3 class="hds-process-step__title"><?php esc_html_e( 'Aanvraag', 'hds' ); ?></h3>
-					<p class="hds-process-step__desc"><?php esc_html_e( 'Neem contact met ons op en vertel ons uw wensen.', 'hds' ); ?></p>
-				</li>
-				<li class="hds-process-step">
-					<span class="hds-process-step__number" aria-hidden="true">2</span>
-					<h3 class="hds-process-step__title"><?php esc_html_e( 'Vrijblijvende offerte', 'hds' ); ?></h3>
-					<p class="hds-process-step__desc"><?php esc_html_e( 'Wij analyseren uw situatie en sturen een duidelijke offerte.', 'hds' ); ?></p>
-				</li>
-				<li class="hds-process-step">
-					<span class="hds-process-step__number" aria-hidden="true">3</span>
-					<h3 class="hds-process-step__title"><?php esc_html_e( 'Planning', 'hds' ); ?></h3>
-					<p class="hds-process-step__desc"><?php esc_html_e( 'Samen plannen we de werkzaamheden op een geschikt moment.', 'hds' ); ?></p>
-				</li>
-				<li class="hds-process-step">
-					<span class="hds-process-step__number" aria-hidden="true">4</span>
-					<h3 class="hds-process-step__title"><?php esc_html_e( 'Uitvoering', 'hds' ); ?></h3>
-					<p class="hds-process-step__desc"><?php esc_html_e( 'Ons team voert de werkzaamheden zorgvuldig en volgens afspraak uit.', 'hds' ); ?></p>
-				</li>
-			</ol>
-		</div>
-	</section>
+	<?php
+	echo hds_render_process_timeline(
+		__( 'Onze werkwijze', 'hds' ),
+		[
+			[ 'title' => __( 'Aanvraag', 'hds' ), 'description' => __( 'Neem contact met ons op en vertel ons uw wensen.', 'hds' ) ],
+			[ 'title' => __( 'Vrijblijvende offerte', 'hds' ), 'description' => __( 'Wij analyseren uw situatie en sturen een duidelijke offerte.', 'hds' ) ],
+			[ 'title' => __( 'Planning', 'hds' ), 'description' => __( 'Samen plannen we de werkzaamheden op een geschikt moment.', 'hds' ) ],
+			[ 'title' => __( 'Uitvoering', 'hds' ), 'description' => __( 'Ons team voert de werkzaamheden zorgvuldig en volgens afspraak uit.', 'hds' ) ],
+		]
+	); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	?>
 
 	<div class="container">
 		<div class="quote-page">

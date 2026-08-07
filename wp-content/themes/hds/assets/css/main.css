@@ -1503,13 +1503,14 @@ h3 {
 	margin: 0;
 }
 
-/* ── Process Section ── */
+/* ── Process Timeline ── */
 .hds-process-section {
-	padding-block: var(--wp--preset--spacing--12);
+	padding-top: var(--wp--preset--spacing--10);
+	padding-bottom: var(--wp--preset--spacing--8);
 }
 
 .hds-process-header {
-	margin-bottom: var(--wp--preset--spacing--8);
+	margin-bottom: var(--wp--preset--spacing--10);
 	text-align: center;
 }
 
@@ -1521,61 +1522,141 @@ h3 {
 
 .hds-process-steps {
 	display: grid;
-	gap: var(--wp--preset--spacing--8);
-	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: var(--wp--preset--spacing--6);
+	grid-template-columns: repeat(4, 1fr);
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	position: relative;
 }
 
 .hds-process-step {
+	align-items: center;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	position: relative;
 	text-align: center;
+	transition: transform 250ms ease;
 }
 
 .hds-process-step__number {
 	align-items: center;
 	background: var(--wp--preset--color--primary);
 	border-radius: 50%;
+	box-shadow: 0 4px 12px rgb(26 115 232 / 20%);
 	color: var(--wp--preset--color--white);
 	display: flex;
 	flex-shrink: 0;
 	font-size: var(--wp--preset--font-size--xl);
 	font-weight: 700;
-	height: 48px;
+	height: 56px;
 	justify-content: center;
 	line-height: 1;
-	margin-bottom: var(--wp--preset--spacing--4);
-	width: 48px;
+	margin-bottom: var(--wp--preset--spacing--5);
+	position: relative;
+	transition: box-shadow 250ms ease, transform 250ms ease;
+	width: 56px;
+	z-index: 1;
 }
 
 .hds-process-step__title {
 	color: var(--wp--preset--color--dark-gray);
-	font-size: var(--wp--preset--font-size--xl);
+	font-size: var(--wp--preset--font-size--l);
+	font-weight: 700;
 	line-height: 1.3;
 	margin: 0 0 var(--wp--preset--spacing--2);
 }
 
 .hds-process-step__desc {
 	color: var(--wp--preset--color--gray);
-	font-size: var(--wp--preset--font-size--m);
+	font-size: 15px;
 	line-height: 1.6;
 	margin: 0;
+	max-width: 240px;
 }
 
-@media (min-width: 72em) {
+/* Timeline connector — desktop: horizontal */
+@media (min-width: 1024px) {
 	.hds-process-step:not(:last-child)::after {
 		background: var(--wp--preset--color--primary);
 		content: '';
 		height: 2px;
-		left: calc(50% + 32px);
-		opacity: 0.2;
+		left: calc(50% + 36px);
+		opacity: 0.25;
 		position: absolute;
-		top: 24px;
-		width: calc(100% - 64px);
+		top: 28px;
+		width: calc(100% - 72px);
+		z-index: 0;
+	}
+}
+
+/* Hover — desktop only */
+@media (hover: hover) and (pointer: fine) {
+	.hds-process-step:hover {
+		transform: translateY(-6px);
+	}
+
+	.hds-process-step:hover .hds-process-step__number {
+		box-shadow: 0 6px 20px rgb(26 115 232 / 30%);
+		transform: scale(1.05);
+	}
+}
+
+/* Entrance animation */
+.hds-process-step {
+	animation: process-fade-in 600ms ease both;
+}
+
+.hds-process-step:nth-child(1) { animation-delay: 100ms; }
+.hds-process-step:nth-child(2) { animation-delay: 250ms; }
+.hds-process-step:nth-child(3) { animation-delay: 400ms; }
+.hds-process-step:nth-child(4) { animation-delay: 550ms; }
+
+@keyframes process-fade-in {
+	from {
+		opacity: 0;
+		transform: translateY(24px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@supports (animation-timeline: view()) {
+	.hds-process-step {
+		animation-name: process-fade-in;
+		animation-fill-mode: both;
+		animation-timeline: view();
+		animation-range: entry 0% entry 30%;
+		animation-delay: 0ms;
+	}
+}
+
+/* Tablet: 2 × 2 grid */
+@media (width <= 1023px) {
+	.hds-process-steps {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* Mobile: vertical timeline */
+@media (width <= 767px) {
+	.hds-process-steps {
+		grid-template-columns: 1fr;
+	}
+
+	.hds-process-step:not(:last-child)::after {
+		background: var(--wp--preset--color--primary);
+		content: '';
+		height: calc(100% - 56px);
+		left: 50%;
+		opacity: 0.25;
+		position: absolute;
+		top: 56px;
+		transform: translateX(-50%);
+		width: 2px;
+		z-index: 0;
 	}
 }
 
@@ -2284,6 +2365,14 @@ h3 {
 	}
 
 	.usp-card:hover {
+		transform: none;
+	}
+
+	.hds-process-step:hover {
+		transform: none;
+	}
+
+	.hds-process-step:hover .hds-process-step__number {
 		transform: none;
 	}
 

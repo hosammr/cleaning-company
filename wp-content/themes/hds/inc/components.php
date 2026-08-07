@@ -390,3 +390,41 @@ function hds_render_usp_section(): string {
 		__( 'Daarom kiezen bedrijven in West-Brabant en Zeeland voor HDS als vaste schoonmaakpartner.', 'hds' )
 	);
 }
+
+/**
+ * Render a process timeline section.
+ *
+ * Shared component used by service pages and the quote page.
+ * Renders a heading followed by an ordered list of process steps
+ * with numbered circles connected by a timeline.
+ *
+ * @param string $heading Section heading.
+ * @param array  $steps   Array of steps, each with 'title' and 'description'.
+ * @return string Complete process timeline section HTML.
+ */
+function hds_render_process_timeline( string $heading, array $steps ): string {
+	if ( empty( $steps ) ) {
+		return '';
+	}
+
+	ob_start();
+	?>
+	<section class="hds-process-section" aria-labelledby="hds-process-heading">
+		<div class="container">
+			<header class="hds-process-header">
+				<h2 id="hds-process-heading"><?php echo esc_html( $heading ); ?></h2>
+			</header>
+			<ol class="hds-process-steps">
+				<?php foreach ( $steps as $index => $step ) : ?>
+					<li class="hds-process-step">
+						<span class="hds-process-step__number" aria-hidden="true"><?php echo (int) ( $index + 1 ); ?></span>
+						<h3 class="hds-process-step__title"><?php echo esc_html( $step['title'] ); ?></h3>
+						<p class="hds-process-step__desc"><?php echo esc_html( $step['description'] ); ?></p>
+					</li>
+				<?php endforeach; ?>
+			</ol>
+		</div>
+	</section>
+	<?php
+	return ob_get_clean();
+}
