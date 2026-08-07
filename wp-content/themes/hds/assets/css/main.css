@@ -594,6 +594,69 @@ h3 {
 	font-weight: 600;
 }
 
+/* ── Service Introduction ── */
+.service-intro {
+	padding-block: var(--wp--preset--spacing--10);
+}
+
+.service-intro__grid {
+	display: grid;
+	gap: var(--wp--preset--spacing--10);
+	grid-template-columns: 1fr 1fr;
+}
+
+.service-intro__content {
+	max-width: 600px;
+}
+
+.service-intro__title {
+	font-size: var(--wp--preset--font-size--3-xl);
+	line-height: 1.3;
+	margin: 0 0 var(--wp--preset--spacing--5);
+}
+
+.service-intro__text {
+	color: var(--wp--preset--color--dark-gray);
+	font-size: var(--wp--preset--font-size--m);
+	line-height: 1.7;
+	margin: 0 0 var(--wp--preset--spacing--4);
+}
+
+.service-intro__text:last-child {
+	margin-bottom: 0;
+}
+
+.service-intro__benefit-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--4);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.service-intro__benefit-item {
+	align-items: baseline;
+	color: var(--wp--preset--color--dark-gray);
+	display: flex;
+	font-size: var(--wp--preset--font-size--m);
+	gap: var(--wp--preset--spacing--3);
+	line-height: 1.5;
+}
+
+.service-intro__benefit-item::before {
+	color: var(--wp--preset--color--primary);
+	content: '\2713';
+	flex-shrink: 0;
+	font-weight: 700;
+}
+
+@media (width <= 767px) {
+	.service-intro__grid {
+		grid-template-columns: 1fr;
+	}
+}
+
 /* ── CTA Banner ── */
 .cta-banner {
 	background: var(--wp--preset--color--primary);

@@ -16,6 +16,8 @@
  *   title           — H1 and meta title
  *   subtitle        — hero subtitle paragraph
  *   hero_image      — media attachment ID (0 = none)
+ *   eyebrow         — optional hero eyebrow label
+ *   intro           — array { title, paragraphs[], benefits[] }
  *   checklist       — array of { text: string } for the "What's included" section
  *   industries      — string[] of industry slugs (see hds_get_industry_data)
  *   faq             — array of { q: string, a: string }
@@ -30,6 +32,15 @@ function hds_get_services(): array {
 			'title'           => __( 'Kantoor schoonmaak', 'hds' ),
 			'subtitle'        => __( 'Professionele kantoorreiniging op maat voor een schone, gezonde en representatieve werkomgeving.', 'hds' ),
 			'hero_image'      => 0,
+			'eyebrow'         => __( 'Kantoorreiniging', 'hds' ),
+			'intro'           => [
+				'title'       => __( 'Kantoor schoonmaak op maat', 'hds' ),
+				'paragraphs'  => [
+					__( 'Een schoon kantoor draagt bij aan de productiviteit, gezondheid en uitstraling van uw organisatie. Met onze professionele kantoorreiniging creëren wij een frisse werkomgeving waarin medewerkers prettig werken en klanten een positieve indruk krijgen.', 'hds' ),
+					__( 'Wij stemmen de schoonmaak volledig af op uw wensen, werktijden en de aard van uw bedrijf. Van dagelijkse reiniging tot periodiek onderhoud — u bepaalt de frequentie en wij leveren de kwaliteit.', 'hds' ),
+				],
+				'benefits'    => hds_get_default_intro_benefits(),
+			],
 			'checklist'       => [
 				[ 'text' => __( 'Dagelijkse schoonmaak van alle kantoorruimtes, vergaderzalen en werkplekken', 'hds' ) ],
 				[ 'text' => __( 'Sanitaire voorzieningen reinigen, desinfecteren en aanvullen van verbruiksartikelen', 'hds' ) ],
@@ -69,6 +80,22 @@ function hds_get_services(): array {
 			'title'           => __( 'Glasbewassing', 'hds' ),
 			'subtitle'        => __( 'Professionele glasbewassing voor bedrijfspanden, kantoren en commercieel vastgoed. Strak resultaat, veilig uitgevoerd.', 'hds' ),
 			'hero_image'      => 0,
+			'eyebrow'         => __( 'Glasbewassing', 'hds' ),
+			'intro'           => [
+				'title'       => __( 'Professionele glasbewassing voor bedrijven', 'hds' ),
+				'paragraphs'  => [
+					__( 'Schone ramen en glazen puien bepalen de eerste indruk van uw pand. Met onze professionele glasbewassing zorgen wij voor streeploos schone ramen, binnen en buiten, tot elke hoogte.', 'hds' ),
+					__( 'Wij werken met moderne osmosewater-technologie en gecertificeerde hoogwerkers. Of het nu gaat om periodieke glasbewassing of een eenmalige reiniging — wij leveren altijd een strak en veilig resultaat.', 'hds' ),
+				],
+				'benefits'    => [
+					__( 'Binnen- en buitenglasbewassing', 'hds' ),
+					__( 'Flexibele planning', 'hds' ),
+					__( 'Gecertificeerde hoogwerkers', 'hds' ),
+					__( 'Osmosewater-technologie', 'hds' ),
+					__( 'Veilig gecertificeerd personeel', 'hds' ),
+					__( 'Vrijblijvende offerte', 'hds' ),
+				],
+			],
 			'checklist'       => [
 				[ 'text' => __( 'Binnen- en buitenglasbewassing van ramen, puien en glazen gevels tot elke hoogte', 'hds' ) ],
 				[ 'text' => __( 'Reinigen van zonwering, lamellen en screens met behoud van materiaalkwaliteit', 'hds' ) ],
@@ -169,6 +196,22 @@ function hds_get_services(): array {
 			'seo_title'       => '',
 			'seo_description' => '',
 		],
+	];
+}
+
+/**
+ * Default intro benefits used when a service does not define its own.
+ *
+ * @return string[]
+ */
+function hds_get_default_intro_benefits(): array {
+	return [
+		__( 'Dagelijkse of periodieke schoonmaak', 'hds' ),
+		__( 'Flexibele werktijden', 'hds' ),
+		__( 'Vaste schoonmaakteams', 'hds' ),
+		__( 'Milieuvriendelijke producten', 'hds' ),
+		__( 'Kwaliteitscontrole', 'hds' ),
+		__( 'Vrijblijvende offerte', 'hds' ),
 	];
 }
 

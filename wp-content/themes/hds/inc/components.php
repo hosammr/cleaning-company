@@ -429,8 +429,42 @@ function hds_render_process_timeline( string $heading, array $steps ): string {
 						<h3 class="hds-process-step__title"><?php echo esc_html( $step['title'] ); ?></h3>
 						<p class="hds-process-step__desc"><?php echo esc_html( $step['description'] ); ?></p>
 					</li>
-				<?php endforeach; ?>
-			</ol>
+					</section>
+	<?php
+	return ob_get_clean();
+}
+
+/**
+ * Render the Service Introduction section.
+ *
+ * Two-column layout: heading + paragraphs on the left, benefit checklist on the right.
+ * Reads content from the service's `intro` data in services.php.
+ *
+ * @param array $intro Intro data with 'title', 'paragraphs', and 'benefits' keys.
+ * @return string Service introduction section HTML.
+ */
+function hds_render_service_intro( array $intro ): string {
+	ob_start();
+	?>
+	<section class="service-intro">
+		<div class="container">
+			<div class="service-intro__grid">
+				<div class="service-intro__content">
+					<h2 class="service-intro__title"><?php echo esc_html( $intro['title'] ); ?></h2>
+					<?php foreach ( $intro['paragraphs'] as $paragraph ) : ?>
+						<p class="service-intro__text"><?php echo esc_html( $paragraph ); ?></p>
+					<?php endforeach; ?>
+				</div>
+				<?php if ( ! empty( $intro['benefits'] ) ) : ?>
+					<div class="service-intro__benefits">
+						<ul class="service-intro__benefit-list">
+							<?php foreach ( $intro['benefits'] as $benefit ) : ?>
+								<li class="service-intro__benefit-item"><?php echo esc_html( $benefit ); ?></li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				<?php endif; ?>
+			</div>
 		</div>
 	</section>
 	<?php
