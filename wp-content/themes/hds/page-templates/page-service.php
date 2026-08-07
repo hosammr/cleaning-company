@@ -49,12 +49,8 @@ get_header();
 	<?php hds_breadcrumbs(); ?>
 
 	<?php
-	$service_intro = $service['intro'] ?? [
-		'title'       => get_the_title(),
-		'paragraphs'  => [],
-		'benefits'    => hds_get_default_intro_benefits(),
-	];
-	if ( ! empty( $service_intro['paragraphs'] ) ) {
+	$service_intro = $service['intro'] ?? null;
+	if ( $service_intro && ! empty( $service_intro['paragraphs'] ) ) {
 		echo hds_render_service_intro( $service_intro ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 	?>

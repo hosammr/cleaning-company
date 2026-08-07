@@ -440,10 +440,11 @@ function hds_render_process_timeline( string $heading, array $steps ): string {
 /**
  * Render the Service Introduction section.
  *
- * Two-column layout: heading + paragraphs on the left, benefit checklist on the right.
+ * Centered eyebrow + heading + intro sentence above a two-column layout.
+ * Left: paragraphs, Right: benefit checklist.
  * Reads content from the service's `intro` data in services.php.
  *
- * @param array $intro Intro data with 'title', 'paragraphs', and 'benefits' keys.
+ * @param array $intro Intro data with 'eyebrow', 'title', 'intro_text', 'paragraphs', and 'benefits' keys.
  * @return string Service introduction section HTML.
  */
 function hds_render_service_intro( array $intro ): string {
@@ -451,9 +452,15 @@ function hds_render_service_intro( array $intro ): string {
 	?>
 	<section class="service-intro">
 		<div class="container">
+			<?php if ( ! empty( $intro['eyebrow'] ) ) : ?>
+				<p class="service-intro__eyebrow"><?php echo esc_html( $intro['eyebrow'] ); ?></p>
+			<?php endif; ?>
+			<h2 class="service-intro__title"><?php echo esc_html( $intro['title'] ); ?></h2>
+			<?php if ( ! empty( $intro['intro_text'] ) ) : ?>
+				<p class="service-intro__intro-text"><?php echo esc_html( $intro['intro_text'] ); ?></p>
+			<?php endif; ?>
 			<div class="service-intro__grid">
 				<div class="service-intro__content">
-					<h2 class="service-intro__title"><?php echo esc_html( $intro['title'] ); ?></h2>
 					<?php foreach ( $intro['paragraphs'] as $paragraph ) : ?>
 						<p class="service-intro__text"><?php echo esc_html( $paragraph ); ?></p>
 					<?php endforeach; ?>

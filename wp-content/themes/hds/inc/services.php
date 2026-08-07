@@ -34,7 +34,9 @@ function hds_get_services(): array {
 			'hero_image'      => 0,
 			'eyebrow'         => __( 'Kantoorreiniging', 'hds' ),
 			'intro'           => [
+				'eyebrow'     => __( 'Onze dienst', 'hds' ),
 				'title'       => __( 'Kantoor schoonmaak op maat', 'hds' ),
+				'intro_text'  => __( 'Ontdek hoe professionele kantoor schoonmaak bijdraagt aan een representatieve, gezonde en productieve werkomgeving.', 'hds' ),
 				'paragraphs'  => [
 					__( 'Een schoon kantoor draagt bij aan de productiviteit, gezondheid en uitstraling van uw organisatie. Met onze professionele kantoorreiniging creëren wij een frisse werkomgeving waarin medewerkers prettig werken en klanten een positieve indruk krijgen.', 'hds' ),
 					__( 'Wij stemmen de schoonmaak volledig af op uw wensen, werktijden en de aard van uw bedrijf. Van dagelijkse reiniging tot periodiek onderhoud — u bepaalt de frequentie en wij leveren de kwaliteit.', 'hds' ),
@@ -82,7 +84,9 @@ function hds_get_services(): array {
 			'hero_image'      => 0,
 			'eyebrow'         => __( 'Glasbewassing', 'hds' ),
 			'intro'           => [
+				'eyebrow'     => __( 'Onze dienst', 'hds' ),
 				'title'       => __( 'Professionele glasbewassing voor bedrijven', 'hds' ),
+				'intro_text'  => __( 'Ontdek hoe professionele glasbewassing bijdraagt aan een representatieve uitstraling van uw bedrijfspand.', 'hds' ),
 				'paragraphs'  => [
 					__( 'Schone ramen en glazen puien bepalen de eerste indruk van uw pand. Met onze professionele glasbewassing zorgen wij voor streeploos schone ramen, binnen en buiten, tot elke hoogte.', 'hds' ),
 					__( 'Wij werken met moderne osmosewater-technologie en gecertificeerde hoogwerkers. Of het nu gaat om periodieke glasbewassing of een eenmalige reiniging — wij leveren altijd een strak en veilig resultaat.', 'hds' ),
