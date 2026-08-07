@@ -625,14 +625,12 @@ h3 {
 
 .service-intro__grid {
 	display: grid;
-	gap: 68px;
-	grid-template-columns: 3fr 2fr;
+	gap: 80px;
+	grid-template-columns: 5fr 2fr;
 	text-align: left;
 }
 
-.service-intro__content {
-	max-width: 640px;
-}
+.service-intro__content {}
 
 .service-intro__text {
 	color: var(--wp--preset--color--dark-gray);
