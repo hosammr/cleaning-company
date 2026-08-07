@@ -166,7 +166,7 @@ get_header();
 	echo hds_cta_section(
 		__( 'Vrijblijvende offerte aanvragen', 'hds' ),
 		__( 'Wij denken graag met u mee over de beste oplossing.', 'hds' ),
-		__( 'Offerte aanvragen', 'hds' ),
+		__( 'Vraag vrijblijvend een offerte aan', 'hds' ),
 		home_url( '/offerte-aanvragen/' )
 	);
 	?>

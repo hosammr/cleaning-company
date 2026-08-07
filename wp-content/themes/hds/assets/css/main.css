@@ -598,7 +598,7 @@ h3 {
 .cta-banner {
 	background: var(--wp--preset--color--primary);
 	color: var(--wp--preset--color--white);
-	padding-block: var(--wp--preset--spacing--12);
+	padding-block: var(--wp--preset--spacing--10);
 	text-align: center;
 }
 
@@ -617,11 +617,6 @@ h3 {
 	color: inherit;
 	font-size: var(--wp--preset--font-size--l);
 	margin-bottom: var(--wp--preset--spacing--6);
-}
-
-.cta-banner .btn--cta {
-	background: var(--wp--preset--color--white);
-	color: var(--wp--preset--color--primary);
 }
 
 /* ── Contact Info Component ── */
