@@ -56,21 +56,18 @@ get_header();
 		</div>
 	</div>
 
-		<section class="hds-usp-section" aria-labelledby="hds-usp-heading">
-			<div class="container">
-				<header class="hds-usp-header">
-					<h2 id="hds-usp-heading"><?php esc_html_e( 'Waarom kiezen voor HDS', 'hds' ); ?></h2>
-				</header>
-				<div class="hds-usp-grid">
-					<?php
-					echo hds_usp_card( __( 'Betrouwbare service', 'hds' ), __( 'Afspraak is afspraak. Wij leveren constante kwaliteit volgens een duidelijke planning.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo hds_usp_card( __( 'Ervaren medewerkers', 'hds' ), __( 'Professionele schoonmakers met ervaring in uiteenlopende sectoren.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo hds_usp_card( __( 'Flexibele planning', 'hds' ), __( 'Werkzaamheden afgestemd op uw openingstijden en bedrijfsprocessen.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo hds_usp_card( __( 'Duurzame werkwijze', 'hds' ), __( 'Wij werken met professionele producten en milieubewuste schoonmaakmethoden.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					?>
-				</div>
-			</div>
-		</section>
+		<?php
+		echo hds_render_usp_grid(
+			[
+				[ 'title' => __( 'Betrouwbare service', 'hds' ), 'description' => __( 'Afspraak is afspraak. Wij leveren constante kwaliteit volgens een duidelijke planning.', 'hds' ) ],
+				[ 'title' => __( 'Ervaren medewerkers', 'hds' ), 'description' => __( 'Professionele schoonmakers met ervaring in uiteenlopende sectoren.', 'hds' ) ],
+				[ 'title' => __( 'Flexibele planning', 'hds' ), 'description' => __( 'Werkzaamheden afgestemd op uw openingstijden en bedrijfsprocessen.', 'hds' ) ],
+				[ 'title' => __( 'Duurzame werkwijze', 'hds' ), 'description' => __( 'Wij werken met professionele producten en milieubewuste schoonmaakmethoden.', 'hds' ) ],
+			],
+			__( 'Waarom kiezen voor HDS', 'hds' ),
+			''
+		); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		?>
 
 		<section class="hds-process-section" aria-labelledby="hds-process-heading">
 			<div class="container">

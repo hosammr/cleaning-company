@@ -324,7 +324,47 @@ function hds_render_usp_card( array $item ): string {
 }
 
 /**
- * Render the USP section with heading, subtitle, and card grid.
+ * Render a USP card grid with heading, subtitle, and card items.
+ *
+ * Shared component used by homepage, service pages, and any page
+ * that needs USP cards. Cards are rendered via hds_render_usp_card().
+ *
+ * @param array  $items   Array of cards, each with 'title' and 'description'.
+ * @param string $heading Section heading (H2).
+ * @param string $subtitle Optional subtitle paragraph.
+ * @return string Complete USP grid section HTML.
+ */
+function hds_render_usp_grid( array $items, string $heading, string $subtitle = '' ): string {
+	if ( empty( $items ) ) {
+		return '';
+	}
+
+	$column_count = count( $items );
+	$grid_class   = 'usp-grid__cards';
+
+	ob_start();
+	?>
+	<section class="usp-grid">
+		<div class="container">
+			<div class="section-header section-header--center">
+				<h2 class="section-header__heading"><?php echo esc_html( $heading ); ?></h2>
+				<?php if ( $subtitle ) : ?>
+					<p class="section-header__subtitle"><?php echo esc_html( $subtitle ); ?></p>
+				<?php endif; ?>
+			</div>
+			<div class="<?php echo esc_attr( $grid_class ); ?>" style="--usp-columns:<?php echo (int) $column_count; ?>">
+				<?php foreach ( $items as $item ) : ?>
+					<?php echo hds_render_usp_card( $item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</section>
+	<?php
+	return ob_get_clean();
+}
+
+/**
+ * Render the homepage USP section.
  *
  * @return string Complete USP section HTML.
  */
@@ -344,23 +384,9 @@ function hds_render_usp_section(): string {
 		],
 	];
 
-	ob_start();
-	?>
-	<section class="usp-grid">
-		<div class="container">
-			<div class="section-header section-header--center">
-				<h2 class="section-header__heading"><?php esc_html_e( 'Waarom HDS?', 'hds' ); ?></h2>
-				<p class="section-header__subtitle">
-					<?php esc_html_e( 'Daarom kiezen bedrijven in West-Brabant en Zeeland voor HDS als vaste schoonmaakpartner.', 'hds' ); ?>
-				</p>
-			</div>
-			<div class="usp-grid__cards">
-				<?php foreach ( $usp_items as $item ) : ?>
-					<?php echo hds_render_usp_card( $item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-				<?php endforeach; ?>
-			</div>
-		</div>
-	</section>
-	<?php
-	return ob_get_clean();
+	return hds_render_usp_grid(
+		$usp_items,
+		__( 'Waarom HDS?', 'hds' ),
+		__( 'Daarom kiezen bedrijven in West-Brabant en Zeeland voor HDS als vaste schoonmaakpartner.', 'hds' )
+	);
 }
