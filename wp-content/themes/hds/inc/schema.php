@@ -22,6 +22,7 @@ function hds_output_schema(): void {
 
 	if ( is_page_template( 'page-templates/page-service.php' ) ) {
 		$schemas[] = hds_get_service_schema( get_the_ID() );
+		$schemas[] = hds_get_service_faq_schema();
 	}
 
 	if ( is_page( 'veelgestelde-vragen' ) || is_page_template( 'page-templates/page-faq.php' ) ) {
@@ -130,6 +131,54 @@ function hds_get_service_schema( int $post_id ): array {
 			'name'  => hds_get_postal_city() ?: __( 'West-Brabant en Zeeland', 'hds' ),
 		],
 		'serviceType' => get_the_title( $post ),
+	];
+}
+
+/**
+ * Build FAQPage schema for service template pages.
+ *
+ * Matches the hardcoded FAQ items in page-templates/page-service.php.
+ */
+function hds_get_service_faq_schema(): array {
+	$faq_items = [
+		[
+			'question' => __( 'Hoe vaak adviseren jullie schoonmaak?', 'hds' ),
+			'answer'   => __( 'Dit is afhankelijk van uw bedrijf, bezoekersaantallen en wensen. Wij adviseren u graag.', 'hds' ),
+		],
+		[
+			'question' => __( 'Werken jullie buiten kantooruren?', 'hds' ),
+			'answer'   => __( 'Ja. Wij kunnen werkzaamheden uitvoeren buiten uw openingstijden.', 'hds' ),
+		],
+		[
+			'question' => __( 'Gebruiken jullie milieuvriendelijke producten?', 'hds' ),
+			'answer'   => __( 'Ja. Waar mogelijk gebruiken wij professionele en milieubewuste schoonmaakmiddelen.', 'hds' ),
+		],
+		[
+			'question' => __( 'Kan ik een vrijblijvende offerte aanvragen?', 'hds' ),
+			'answer'   => __( 'Ja. Wij maken graag een offerte op maat zonder verplichtingen.', 'hds' ),
+		],
+		[
+			'question' => __( 'Zijn jullie diensten beschikbaar voor zowel kleine als grote bedrijven?', 'hds' ),
+			'answer'   => __( 'Ja. Wij werken voor organisaties van iedere omvang.', 'hds' ),
+		],
+	];
+
+	$questions = [];
+	foreach ( $faq_items as $item ) {
+		$questions[] = [
+			'@type'          => 'Question',
+			'name'           => $item['question'],
+			'acceptedAnswer' => [
+				'@type' => 'Answer',
+				'text'  => $item['answer'],
+			],
+		];
+	}
+
+	return [
+		'@context'   => 'https://schema.org',
+		'@type'      => 'FAQPage',
+		'mainEntity' => $questions,
 	];
 }
 

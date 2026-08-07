@@ -15,13 +15,14 @@
 /**
  * Render a reusable CTA section.
  *
- * @param string $heading     CTA heading text.
- * @param string $description CTA description (optional).
- * @param string $button_text Button label.
- * @param string $button_url  Button link URL.
- * @param string $style       'primary' (default) or 'secondary'.
+ * @param string   $heading       CTA heading text.
+ * @param string   $description   CTA description (optional).
+ * @param string   $button_text   Button label.
+ * @param string   $button_url    Button link URL.
+ * @param string   $style         'primary' (default) or 'secondary'.
+ * @param string[] $trust_bullets Optional list of trust bullet texts below the button.
  */
-function hds_cta_section( string $heading, string $description = '', string $button_text = '', string $button_url = '', string $style = 'primary' ): string {
+function hds_cta_section( string $heading, string $description = '', string $button_text = '', string $button_url = '', string $style = 'primary', array $trust_bullets = [] ): string {
 	if ( ! $button_text ) {
 		$button_text = __( 'Offerte aanvragen', 'hds' );
 	}
@@ -42,6 +43,13 @@ function hds_cta_section( string $heading, string $description = '', string $but
 			<a href="<?php echo esc_url( $button_url ); ?>" class="btn btn-cta">
 				<?php echo esc_html( $button_text ); ?>
 			</a>
+			<?php if ( $trust_bullets ) : ?>
+				<ul class="cta-banner__trust">
+					<?php foreach ( $trust_bullets as $bullet ) : ?>
+						<li><?php echo esc_html( $bullet ); ?></li>
+					<?php endforeach; ?>
+				</ul>
+			<?php endif; ?>
 		</div>
 	</section>
 	<?php

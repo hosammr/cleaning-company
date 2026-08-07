@@ -556,7 +556,7 @@ h3 {
 /* ── Breadcrumbs ── */
 .breadcrumbs {
 	margin-bottom: var(--wp--preset--spacing--6);
-	padding-block: var(--wp--preset--spacing--4);
+	padding-block: var(--wp--preset--spacing--3);
 }
 
 .breadcrumbs ol {
@@ -617,6 +617,22 @@ h3 {
 	color: inherit;
 	font-size: var(--wp--preset--font-size--l);
 	margin-bottom: var(--wp--preset--spacing--6);
+}
+
+.cta-banner__trust {
+	color: rgb(255 255 255 / 85%);
+	display: flex;
+	flex-wrap: wrap;
+	font-size: var(--wp--preset--font-size--s);
+	gap: var(--wp--preset--spacing--4);
+	justify-content: center;
+	list-style: none;
+	margin: var(--wp--preset--spacing--5) 0 0;
+	padding: 0;
+}
+
+.cta-banner__trust li::before {
+	content: '\2713\00a0';
 }
 
 /* ── Contact Info Component ── */
@@ -1395,6 +1411,22 @@ h3 {
 	max-width: 780px;
 }
 
+.service-hero__eyebrow {
+	font-size: var(--wp--preset--font-size--s);
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	margin: 0 0 var(--wp--preset--spacing--3);
+	text-transform: uppercase;
+}
+
+.service-hero[style*="background-image"] .service-hero__eyebrow {
+	color: rgb(255 255 255 / 80%);
+}
+
+.service-hero:not([style*="background-image"]) .service-hero__eyebrow {
+	color: var(--wp--preset--color--primary);
+}
+
 .service-hero[style*="background-image"] .container {
 	color: var(--wp--preset--color--white);
 }
@@ -1662,18 +1694,27 @@ h3 {
 }
 
 .hds-faq-header {
-	margin-bottom: var(--wp--preset--spacing--8);
+	margin-bottom: var(--wp--preset--spacing--6);
 	text-align: center;
 }
 
 .hds-faq-header h2 {
 	font-size: var(--wp--preset--font-size--3-xl);
 	line-height: 1.3;
-	margin: 0;
+	margin: 0 0 var(--wp--preset--spacing--3);
+}
+
+.hds-faq-header__intro {
+	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--m);
+	line-height: 1.6;
+	margin: 0 auto;
+	max-width: 600px;
 }
 
 .hds-faq-list {
 	margin-inline: auto;
+	margin-top: var(--wp--preset--spacing--4);
 	max-width: 780px;
 }
 

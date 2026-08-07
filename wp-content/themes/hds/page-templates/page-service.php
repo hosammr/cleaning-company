@@ -19,6 +19,7 @@ get_header();
 		$hero_image_id = $service['hero_image'] ?: get_post_thumbnail_id( get_queried_object_id() );
 		$hero_cta_text = __( 'Vraag vrijblijvend een offerte aan', 'hds' );
 		$hero_cta_url  = home_url( '/offerte-aanvragen/' );
+		$hero_eyebrow  = $service['eyebrow'] ?? __( 'Onze diensten', 'hds' );
 	} else {
 		$hero_title    = get_the_title();
 		$hero_subtitle = get_post_meta( get_the_ID(), 'hds_subtitle', true );
@@ -26,6 +27,7 @@ get_header();
 		$cta_override  = get_post_meta( get_the_ID(), 'hds_cta_override', true );
 		$hero_cta_text = $cta_override ?: __( 'Vrijblijvende offerte', 'hds' );
 		$hero_cta_url  = home_url( '/offerte-aanvragen/' );
+		$hero_eyebrow  = get_post_meta( get_the_ID(), 'hds_eyebrow', true ) ?: __( 'Onze diensten', 'hds' );
 	}
 
 	$hero_image_url = '';
@@ -36,6 +38,7 @@ get_header();
 		$hero_image_url = HDS_URI . '/screenshot.png';
 	}
 	set_query_var( 'hero_title', $hero_title );
+	set_query_var( 'hero_eyebrow', $hero_eyebrow );
 	set_query_var( 'hero_subtitle', $hero_subtitle );
 	set_query_var( 'hero_image_url', $hero_image_url );
 	set_query_var( 'hero_cta_text', $hero_cta_text );
@@ -116,6 +119,7 @@ get_header();
 			<div class="container">
 				<header class="hds-faq-header">
 					<h2 id="hds-faq-heading"><?php esc_html_e( 'Veelgestelde vragen', 'hds' ); ?></h2>
+					<p class="hds-faq-header__intro"><?php esc_html_e( 'Hier vindt u antwoorden op de meest gestelde vragen over onze schoonmaakdiensten.', 'hds' ); ?></p>
 				</header>
 				<div class="hds-faq-list">
 					<details class="hds-faq-item">
@@ -167,7 +171,13 @@ get_header();
 		__( 'Vrijblijvende offerte aanvragen', 'hds' ),
 		__( 'Wij denken graag met u mee over de beste oplossing.', 'hds' ),
 		__( 'Vraag vrijblijvend een offerte aan', 'hds' ),
-		home_url( '/offerte-aanvragen/' )
+		home_url( '/offerte-aanvragen/' ),
+		'primary',
+		[
+			__( 'Reactie binnen 24 uur', 'hds' ),
+			__( 'Vrijblijvende offerte', 'hds' ),
+			__( 'Geen verplichtingen', 'hds' ),
+		]
 	);
 	?>
 </main>
