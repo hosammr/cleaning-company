@@ -405,14 +405,14 @@ h3 {
 	color: var(--wp--preset--color--white);
 }
 
-.btn--cta {
+.btn-cta {
 	background: var(--wp--preset--color--accent);
 	color: var(--wp--preset--color--white);
 	font-size: var(--wp--preset--font-size--l);
 	padding: 0.875rem 2rem;
 }
 
-.btn--cta:hover {
+.btn-cta:hover {
 	background: var(--wp--preset--color--primary-dark);
 }
 
