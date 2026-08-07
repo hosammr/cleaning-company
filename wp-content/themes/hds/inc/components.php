@@ -429,7 +429,10 @@ function hds_render_process_timeline( string $heading, array $steps ): string {
 						<h3 class="hds-process-step__title"><?php echo esc_html( $step['title'] ); ?></h3>
 						<p class="hds-process-step__desc"><?php echo esc_html( $step['description'] ); ?></p>
 					</li>
-					</section>
+				<?php endforeach; ?>
+			</ol>
+		</div>
+	</section>
 	<?php
 	return ob_get_clean();
 }
