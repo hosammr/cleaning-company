@@ -99,7 +99,11 @@ function hds_get_cross_sell_services(): array {
  */
 function hds_render_service_card_core( \WP_Post $post, bool $show_image = true, bool $show_icon = true ): string {
 	$icon     = get_post_meta( $post->ID, 'hds_service_icon', true );
-	$image_id = get_post_meta( $post->ID, 'hds_hero_image', true );
+	$image_id = get_post_thumbnail_id( $post );
+
+	if ( ! $image_id ) {
+		$image_id = get_post_meta( $post->ID, 'hds_hero_image', true );
+	}
 	$excerpt  = has_excerpt( $post )
 		? get_the_excerpt( $post )
 		: wp_trim_words( wp_strip_all_tags( $post->post_content ), 20, '&hellip;' );
