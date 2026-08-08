@@ -159,7 +159,28 @@ function hds_get_services(): array {
 			],
 			'checklist'       => [],
 			'industries'      => [],
-			'faq'             => [],
+			'faq'             => [
+				[
+					'q' => __( 'Welke soorten gevels en materialen kunnen jullie reinigen?', 'hds' ),
+					'a' => __( 'Wij reinigen alle typen gevels en materialen — van baksteen, beton en natuursteen tot metaal, kunststof en hout. Iedere gevel vraagt om een eigen aanpak en wij stemmen de reinigingstechniek daar volledig op af.', 'hds' ),
+				],
+				[
+					'q' => __( 'Welke reinigingstechniek gebruiken jullie?', 'hds' ),
+					'a' => __( 'Dit is afhankelijk van het geveltype en de aard van de vervuiling. Wij werken met gespecialiseerde technieken per geveltype, van chemische reiniging tot stoom- en hogedrukreiniging.', 'hds' ),
+				],
+				[
+					'q' => __( 'Hoe bepalen jullie de juiste reinigingsmethode voor mijn gevel?', 'hds' ),
+					'a' => __( 'Wij inspecteren vooraf het geveltype, de mate van vervuiling en eventuele beschadigingen. Op basis daarvan kiezen wij de meest geschikte en veilige reinigingsmethode, zodat het materiaal niet wordt aangetast.', 'hds' ),
+				],
+				[
+					'q' => __( 'Hoe werken jullie veilig bij gevels op hoogte?', 'hds' ),
+					'a' => __( 'Veiligheid staat bij ons voorop. Wij beschikken over gecertificeerde hoogwerkers en ons personeel is volledig opgeleid en gecertificeerd. Van laagbouw tot hoogbouw voeren wij iedere opdracht veilig en efficiënt uit.', 'hds' ),
+				],
+				[
+					'q' => __( 'Hoe vaak is gevelreiniging nodig?', 'hds' ),
+					'a' => __( 'Dit is afhankelijk van de ligging van uw pand, omgevingsfactoren zoals verkeer of industrie, en de gewenste uitstraling. Tijdens de kennismaking adviseren wij u over de optimale frequentie voor uw situatie.', 'hds' ),
+				],
+			],
 			'seo_title'       => '',
 			'seo_description' => '',
 		],
