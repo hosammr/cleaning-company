@@ -122,56 +122,36 @@ get_header();
 			</section>
 		<?php endif; ?>
 
-		<section class="hds-faq-section" aria-labelledby="hds-faq-heading">
-			<div class="container">
-				<header class="hds-faq-header">
-					<h2 id="hds-faq-heading"><?php esc_html_e( 'Veelgestelde vragen', 'hds' ); ?></h2>
-					<p class="hds-faq-header__intro"><?php esc_html_e( 'Hier vindt u antwoorden op de meest gestelde vragen over onze schoonmaakdiensten.', 'hds' ); ?></p>
-				</header>
-				<div class="hds-faq-list">
-					<details class="hds-faq-item">
-						<summary class="hds-faq-item__question">
-							<?php esc_html_e( 'Hoe vaak adviseren jullie schoonmaak?', 'hds' ); ?>
-						</summary>
-						<div class="hds-faq-item__answer">
-							<p><?php esc_html_e( 'Dit is afhankelijk van uw bedrijf, bezoekersaantallen en wensen. Wij adviseren u graag.', 'hds' ); ?></p>
-						</div>
-					</details>
-					<details class="hds-faq-item">
-						<summary class="hds-faq-item__question">
-							<?php esc_html_e( 'Werken jullie buiten kantooruren?', 'hds' ); ?>
-						</summary>
-						<div class="hds-faq-item__answer">
-							<p><?php esc_html_e( 'Ja. Wij kunnen werkzaamheden uitvoeren buiten uw openingstijden.', 'hds' ); ?></p>
-						</div>
-					</details>
-					<details class="hds-faq-item">
-						<summary class="hds-faq-item__question">
-							<?php esc_html_e( 'Gebruiken jullie milieuvriendelijke producten?', 'hds' ); ?>
-						</summary>
-						<div class="hds-faq-item__answer">
-							<p><?php esc_html_e( 'Ja. Waar mogelijk gebruiken wij professionele en milieubewuste schoonmaakmiddelen.', 'hds' ); ?></p>
-						</div>
-					</details>
-					<details class="hds-faq-item">
-						<summary class="hds-faq-item__question">
-							<?php esc_html_e( 'Kan ik een vrijblijvende offerte aanvragen?', 'hds' ); ?>
-						</summary>
-						<div class="hds-faq-item__answer">
-							<p><?php esc_html_e( 'Ja. Wij maken graag een offerte op maat zonder verplichtingen.', 'hds' ); ?></p>
-						</div>
-					</details>
-					<details class="hds-faq-item">
-						<summary class="hds-faq-item__question">
-							<?php esc_html_e( 'Zijn jullie diensten beschikbaar voor zowel kleine als grote bedrijven?', 'hds' ); ?>
-						</summary>
-						<div class="hds-faq-item__answer">
-							<p><?php esc_html_e( 'Ja. Wij werken voor organisaties van iedere omvang.', 'hds' ); ?></p>
-						</div>
-					</details>
+			<?php
+			$service_faq = $service['faq'] ?? [];
+			$faq_items   = ! empty( $service_faq ) ? $service_faq : [
+				[ 'q' => __( 'Hoe vaak adviseren jullie schoonmaak?', 'hds' ), 'a' => __( 'Dit is afhankelijk van uw bedrijf, bezoekersaantallen en wensen. Wij adviseren u graag.', 'hds' ) ],
+				[ 'q' => __( 'Werken jullie buiten kantooruren?', 'hds' ), 'a' => __( 'Ja. Wij kunnen werkzaamheden uitvoeren buiten uw openingstijden.', 'hds' ) ],
+				[ 'q' => __( 'Gebruiken jullie milieuvriendelijke producten?', 'hds' ), 'a' => __( 'Ja. Waar mogelijk gebruiken wij professionele en milieubewuste schoonmaakmiddelen.', 'hds' ) ],
+				[ 'q' => __( 'Kan ik een vrijblijvende offerte aanvragen?', 'hds' ), 'a' => __( 'Ja. Wij maken graag een offerte op maat zonder verplichtingen.', 'hds' ) ],
+				[ 'q' => __( 'Zijn jullie diensten beschikbaar voor zowel kleine als grote bedrijven?', 'hds' ), 'a' => __( 'Ja. Wij werken voor organisaties van iedere omvang.', 'hds' ) ],
+			];
+			?>
+			<section class="hds-faq-section" aria-labelledby="hds-faq-heading">
+				<div class="container">
+					<header class="hds-faq-header">
+						<h2 id="hds-faq-heading"><?php esc_html_e( 'Veelgestelde vragen', 'hds' ); ?></h2>
+						<p class="hds-faq-header__intro"><?php esc_html_e( 'Hier vindt u antwoorden op de meest gestelde vragen over onze schoonmaakdiensten.', 'hds' ); ?></p>
+					</header>
+					<div class="hds-faq-list">
+						<?php foreach ( $faq_items as $faq_item ) : ?>
+							<details class="hds-faq-item">
+								<summary class="hds-faq-item__question">
+									<?php echo esc_html( $faq_item['q'] ); ?>
+								</summary>
+								<div class="hds-faq-item__answer">
+									<p><?php echo esc_html( $faq_item['a'] ); ?></p>
+								</div>
+							</details>
+						<?php endforeach; ?>
+					</div>
 				</div>
-			</div>
-		</section>
+			</section>
 
 	<?php
 	echo hds_cta_section(
