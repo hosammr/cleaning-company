@@ -136,9 +136,27 @@ function hds_get_services(): array {
 		],
 
 		'gevelreiniging' => [
-			'title'    => __( 'Gevelreiniging', 'hds' ),
-			'subtitle' => __( 'Professionele gevelreiniging voor alle typen gevels en materialen.', 'hds' ),
+			'title'           => __( 'Gevelreiniging', 'hds' ),
+			'subtitle'        => __( 'Professionele gevelreiniging voor alle typen gevels en materialen.', 'hds' ),
 			'hero_image'      => 0,
+			'eyebrow'         => __( 'Gevelreiniging', 'hds' ),
+			'intro'           => [
+				'eyebrow'     => __( 'Onze dienst', 'hds' ),
+				'title'       => __( 'Professionele gevelreiniging voor bedrijfspanden', 'hds' ),
+				'intro_text'  => __( 'Ontdek hoe professionele gevelreiniging bijdraagt aan een verzorgde uitstraling en het behoud van uw vastgoed.', 'hds' ),
+				'paragraphs'  => [
+					__( 'Een schone gevel bepaalt het visitekaartje van uw bedrijfspand. Met onze professionele gevelreiniging verwijderen wij vervuiling, aanslag, graffiti en weersinvloeden van iedere gevel — ongeacht het materiaal.', 'hds' ),
+					__( 'Wij werken met gespecialiseerde reinigingstechnieken per geveltype, van chemische reiniging tot stoom- en hogedrukreiniging. Ons gecertificeerde team voert iedere opdracht veilig en efficiënt uit, van laagbouw tot hoogbouw.', 'hds' ),
+				],
+				'benefits'    => [
+					__( 'Reiniging van alle geveltypes', 'hds' ),
+					__( 'Flexibele planning', 'hds' ),
+					__( 'Gecertificeerde hoogwerkers', 'hds' ),
+					__( 'Milieuvriendelijke reinigingsmethoden', 'hds' ),
+					__( 'Veilig gecertificeerd personeel', 'hds' ),
+					__( 'Vrijblijvende offerte', 'hds' ),
+				],
+			],
 			'checklist'       => [],
 			'industries'      => [],
 			'faq'             => [],
