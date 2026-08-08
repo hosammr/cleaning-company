@@ -36,7 +36,7 @@ function hds_get_service_url_map(): array {
 function hds_get_cross_sell_map(): array {
 	return [
 		'glasbewassing'            => [ 'gevelreiniging', 'reguliere-schoonmaak', 'oplevering-schoonmaak' ],
-		'gevelreiniging'           => [ 'glasbewassing', 'industriele-schoonmaak' ],
+		'gevelreiniging'           => [ 'glasbewassing', 'vloeronderhoud', 'oplevering-schoonmaak' ],
 		'reguliere-schoonmaak'     => [ 'vloeronderhoud', 'glasbewassing', 'vve-service' ],
 		'vloeronderhoud'           => [ 'reguliere-schoonmaak', 'oplevering-schoonmaak' ],
 		'vve-service'              => [ 'reguliere-schoonmaak', 'glasbewassing' ],
