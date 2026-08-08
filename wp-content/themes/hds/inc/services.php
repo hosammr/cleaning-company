@@ -197,12 +197,51 @@ function hds_get_services(): array {
 		],
 
 		'vloeronderhoud' => [
-			'title'    => __( 'Vloeronderhoud', 'hds' ),
-			'subtitle' => __( 'Vakkundig vloeronderhoud voor een duurzame en representatieve uitstraling.', 'hds' ),
+			'title'           => __( 'Vloeronderhoud', 'hds' ),
+			'subtitle'        => __( 'Vakkundig vloeronderhoud voor een duurzame en representatieve uitstraling.', 'hds' ),
 			'hero_image'      => 0,
+			'eyebrow'         => __( 'Vloeronderhoud', 'hds' ),
+			'intro'           => [
+				'eyebrow'     => __( 'Onze dienst', 'hds' ),
+				'title'       => __( 'Professioneel vloeronderhoud voor bedrijven', 'hds' ),
+				'intro_text'  => __( 'Ontdek hoe professioneel vloeronderhoud bijdraagt aan een duurzame en representatieve uitstraling van uw bedrijfspand.', 'hds' ),
+				'paragraphs'  => [
+					__( 'Een goed onderhouden vloer verlengt de levensduur, voorkomt slijtage en draagt bij aan een verzorgde uitstraling. Met ons professionele vloeronderhoud houden wij iedere vloer in topconditie — van dagelijks stofzuigen en dweilen tot periodieke dieptereiniging.', 'hds' ),
+					__( 'Wij werken met gespecialiseerde reinigingsmethoden per vloertype, van tapijt en PVC tot natuursteen en parket. Ons ervaren team stemt het onderhoud volledig af op het materiaal, de gebruiksintensiteit en uw wensen.', 'hds' ),
+				],
+				'benefits'    => [
+					__( 'Onderhoud van alle vloertypes', 'hds' ),
+					__( 'Dagelijks en periodiek onderhoud', 'hds' ),
+					__( 'Verlengde levensduur van uw vloer', 'hds' ),
+					__( 'Gespecialiseerde reinigingsmethoden', 'hds' ),
+					__( 'Flexibele planning', 'hds' ),
+					__( 'Vrijblijvende offerte', 'hds' ),
+				],
+			],
 			'checklist'       => [],
 			'industries'      => [],
-			'faq'             => [],
+			'faq'             => [
+				[
+					'q' => __( 'Welke soorten vloeren kunnen jullie onderhouden?', 'hds' ),
+					'a' => __( 'Wij onderhouden alle vloertypes — van tapijt, PVC, linoleum en laminaat tot natuursteen, parket en beton. Ieder vloertype vraagt om een eigen aanpak en wij stemmen de reinigingsmethode daar volledig op af.', 'hds' ),
+				],
+				[
+					'q' => __( 'Welke onderhoudsmethoden gebruiken jullie?', 'hds' ),
+					'a' => __( 'Dit is afhankelijk van het vloertype en de gebruiksintensiteit. Onze werkzaamheden variëren van dagelijks stofzuigen en dweilen tot periodieke dieptereiniging met gespecialiseerde machines en reinigingsmiddelen per materiaalsoort.', 'hds' ),
+				],
+				[
+					'q' => __( 'Hoe vaak is vloeronderhoud nodig?', 'hds' ),
+					'a' => __( 'De frequentie hangt af van het vloertype, de loopintensiteit en de gewenste uitstraling. Wij adviseren een combinatie van dagelijks of wekelijks onderhoud met periodieke dieptereiniging. Tijdens de kennismaking stellen wij een plan op maat voor.', 'hds' ),
+				],
+				[
+					'q' => __( 'Hoe beschermen jullie vloeren tijdens het gebruik?', 'hds' ),
+					'a' => __( 'Naast reiniging bieden wij beschermende behandelingen aan zoals impregneren, coaten en het aanbrengen van een beschermlaag. Deze behandelingen verlengen de levensduur van uw vloer aanzienlijk en maken dagelijks onderhoud eenvoudiger.', 'hds' ),
+				],
+				[
+					'q' => __( 'Is vloeronderhoud geschikt voor een bedrijfsomgeving?', 'hds' ),
+					'a' => __( 'Ja, wij zijn gespecialiseerd in vloeronderhoud voor bedrijfspanden. Onze werkzaamheden worden afgestemd op de openingstijden van uw organisatie, zodat u geen hinder ondervindt van het onderhoud.', 'hds' ),
+				],
+			],
 			'seo_title'       => '',
 			'seo_description' => '',
 		],
