@@ -626,7 +626,7 @@ h3 {
 .service-intro__grid {
 	display: grid;
 	gap: 80px;
-	grid-template-columns: 5fr 2fr;
+	grid-template-columns: 9fr 5fr;
 	text-align: left;
 }
 
