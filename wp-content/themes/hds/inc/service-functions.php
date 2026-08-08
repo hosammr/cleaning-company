@@ -21,13 +21,14 @@ function hds_get_service_url_map(): array {
 		'reguliere-schoonmaak'     => __( 'Reguliere Schoonmaak', 'hds' ),
 		'vloeronderhoud'           => __( 'Vloeronderhoud', 'hds' ),
 		'vve-service'              => __( 'VVE Service', 'hds' ),
-		'oplevering-schoonmaak'    => __( 'Oplevering Schoonmaak', 'hds' ),
-		'industriele-schoonmaak'   => __( 'Industriële Schoonmaak', 'hds' ),
-	];
-}
+			'oplevering-schoonmaak'    => __( 'Oplevering Schoonmaak', 'hds' ),
+			'industriele-schoonmaak'   => __( 'Industriële Schoonmaak', 'hds' ),
+			'kantoor-schoonmaak'       => __( 'Kantoor schoonmaak', 'hds' ),
+		];
+	}
 
-/**
- * Cross-sell service mapping.
+	/**
+	 * Cross-sell service mapping.
  *
  * Defines which related services to show on each service page.
  * MPS-001 Section E specifies cross-links per service.
@@ -39,10 +40,11 @@ function hds_get_cross_sell_map(): array {
 		'reguliere-schoonmaak'     => [ 'vloeronderhoud', 'glasbewassing', 'vve-service' ],
 		'vloeronderhoud'           => [ 'reguliere-schoonmaak', 'oplevering-schoonmaak' ],
 		'vve-service'              => [ 'reguliere-schoonmaak', 'glasbewassing' ],
-		'oplevering-schoonmaak'    => [ 'reguliere-schoonmaak', 'glasbewassing', 'vloeronderhoud' ],
-		'industriele-schoonmaak'   => [ 'reguliere-schoonmaak', 'gevelreiniging' ],
-	];
-}
+			'oplevering-schoonmaak'    => [ 'reguliere-schoonmaak', 'glasbewassing', 'vloeronderhoud' ],
+			'industriele-schoonmaak'   => [ 'reguliere-schoonmaak', 'gevelreiniging' ],
+			'kantoor-schoonmaak'       => [ 'glasbewassing', 'gevelreiniging', 'vloeronderhoud' ],
+		];
+	}
 
 /**
  * Get cross-sell service post objects for the current service page.
@@ -239,13 +241,14 @@ function hds_get_service_page_groups(): array {
 		'gevelreiniging',
 	];
 
-	$schoonmaak = [
-		'reguliere-schoonmaak',
-		'vloeronderhoud',
-		'vve-service',
-		'oplevering-schoonmaak',
-		'industriele-schoonmaak',
-	];
+		$schoonmaak = [
+			'reguliere-schoonmaak',
+			'vloeronderhoud',
+			'vve-service',
+			'oplevering-schoonmaak',
+			'industriele-schoonmaak',
+			'kantoor-schoonmaak',
+		];
 
 	$groups = [
 		'glas-en-gevel'        => [],
