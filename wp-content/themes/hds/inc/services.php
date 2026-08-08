@@ -269,12 +269,51 @@ function hds_get_services(): array {
 		],
 
 		'industriele-schoonmaak' => [
-			'title'    => __( 'Industriële schoonmaak', 'hds' ),
-			'subtitle' => __( 'Gespecialiseerde industriële reiniging voor productieomgevingen.', 'hds' ),
+			'title'           => __( 'Industriële schoonmaak', 'hds' ),
+			'subtitle'        => __( 'Gespecialiseerde industriële reiniging voor productieomgevingen.', 'hds' ),
 			'hero_image'      => 0,
+			'eyebrow'         => __( 'Industriële reiniging', 'hds' ),
+			'intro'           => [
+				'eyebrow'     => __( 'Onze dienst', 'hds' ),
+				'title'       => __( 'Professionele industriële reiniging voor productieomgevingen', 'hds' ),
+				'intro_text'  => __( 'Ontdek hoe gespecialiseerde industriële reiniging bijdraagt aan een veilige, schone en efficiënte productieomgeving.', 'hds' ),
+				'paragraphs'  => [
+					__( 'In een industriële omgeving is reiniging meer dan alleen schoonmaken — het draagt bij aan veiligheid, productkwaliteit en de levensduur van machines en installaties. Met onze industriële reiniging pakken wij ieder type vervuiling aan, van stof en olie tot productieresten.', 'hds' ),
+					__( 'Wij stemmen de reinigingsmethode volledig af op uw productieomgeving, de aard van de vervuiling en de geldende veiligheidsvoorschriften. Ons ervaren team werkt efficiënt en veilig, met minimale verstoring van uw bedrijfsprocessen.', 'hds' ),
+				],
+				'benefits'    => [
+					__( 'Reiniging van productieruimtes en installaties', 'hds' ),
+					__( 'Flexibele planning', 'hds' ),
+					__( 'Veilig werken volgens voorschriften', 'hds' ),
+					__( 'Gespecialiseerde reinigingsmethoden', 'hds' ),
+					__( 'Minimale verstoring van productie', 'hds' ),
+					__( 'Vrijblijvende offerte', 'hds' ),
+				],
+			],
 			'checklist'       => [],
 			'industries'      => [],
-			'faq'             => [],
+			'faq'             => [
+				[
+					'q' => __( 'Welke industriële ruimtes en installaties kunnen jullie reinigen?', 'hds' ),
+					'a' => __( 'Wij reinigen productieruimtes, magazijnen, werkplaatsen, machinekamers en technische installaties. Iedere ruimte en installatie vraagt om een eigen aanpak en wij stemmen de reinigingsmethode daar volledig op af.', 'hds' ),
+				],
+				[
+					'q' => __( 'Hoe pakken jullie industriële vervuiling aan?', 'hds' ),
+					'a' => __( 'Dit is afhankelijk van de aard van de vervuiling — van stof en olie tot vet en productieresten. Wij werken met gespecialiseerde reinigingsmethoden die zijn afgestemd op het type vervuiling en de te reinigen ondergrond.', 'hds' ),
+				],
+				[
+					'q' => __( 'Hoe vaak is industriële reiniging nodig?', 'hds' ),
+					'a' => __( 'De frequentie hangt af van het type productieomgeving, de aard en mate van vervuiling en de geldende voorschriften. Wij adviseren een planning op maat — van dagelijkse reiniging tot periodiek onderhoud. Tijdens de kennismaking stellen wij een schema voor.', 'hds' ),
+				],
+				[
+					'q' => __( 'Hoe zorgen jullie voor veiligheid tijdens de werkzaamheden?', 'hds' ),
+					'a' => __( 'Veiligheid staat bij ons voorop. Ons personeel is volledig opgeleid en werkt volgens de geldende veiligheidsvoorschriften van uw bedrijf. Wij stemmen de werkwijze vooraf af op de risico\'s van uw productieomgeving.', 'hds' ),
+				],
+				[
+					'q' => __( 'Kunnen de werkzaamheden worden uitgevoerd zonder de productie te verstoren?', 'hds' ),
+					'a' => __( 'Ja, wij plannen de werkzaamheden in overleg met u, bij voorkeur buiten productietijden — zoals in de avond, nacht of het weekend. Zo ondervindt uw productieproces minimale hinder van onze werkzaamheden.', 'hds' ),
+				],
+			],
 			'seo_title'       => '',
 			'seo_description' => '',
 		],
