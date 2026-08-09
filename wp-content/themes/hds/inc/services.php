@@ -258,14 +258,60 @@ function hds_get_services(): array {
 		],
 
 		'oplevering-schoonmaak' => [
-			'title'    => __( 'Oplevering schoonmaak', 'hds' ),
-			'subtitle' => __( 'Grondige opleverschoonmaak voor een vlekkeloze eindoplevering.', 'hds' ),
+			'title'           => __( 'Oplevering schoonmaak', 'hds' ),
+			'subtitle'        => __( 'Grondige opleverschoonmaak voor een vlekkeloze eindoplevering.', 'hds' ),
 			'hero_image'      => 0,
-			'checklist'       => [],
-			'industries'      => [],
-			'faq'             => [],
-			'seo_title'       => '',
-			'seo_description' => '',
+			'eyebrow'         => __( 'Opleverschoonmaak', 'hds' ),
+			'intro'           => [
+				'eyebrow'     => __( 'Onze dienst', 'hds' ),
+				'title'       => __( 'Professionele opleverschoonmaak voor een vlekkeloze oplevering', 'hds' ),
+				'intro_text'  => __( 'Ontdek hoe onze grondige opleverschoonmaak zorgt voor een vlekkeloze eindoplevering van uw project.', 'hds' ),
+				'paragraphs'  => [
+					__( 'Na een bouwproject, verbouwing of renovatie blijft er vaak veel stof, vuil en bouwresidu achter. Onze opleverschoonmaak verwijdert al deze resten grondig, zodat uw pand er piekfijn uitziet bij de eindoplevering. Van plafond tot plint — wij laten geen enkel detail ongemoeid.', 'hds' ),
+					__( 'Wij stemmen de opleverschoonmaak volledig af op uw projectplanning en de aard van het pand. Of het nu gaat om een kantoorpand, winkelruimte, zorginstelling of school — ons ervaren team zorgt voor een strak en schoon resultaat, precies op het juiste moment vóór de sleuteloverdracht.', 'hds' ),
+				],
+				'benefits'    => [
+					__( 'Reiniging na bouw, verbouwing en renovatie', 'hds' ),
+					__( 'Flexibele planning', 'hds' ),
+					__( 'Volledige opleveringsreiniging', 'hds' ),
+					__( 'Aandacht voor ieder detail', 'hds' ),
+					__( 'Afgestemd op uw opleverschema', 'hds' ),
+					__( 'Vrijblijvende offerte', 'hds' ),
+				],
+			],
+			'checklist'       => [
+				[ 'text' => __( 'Verwijderen van bouwstof, cementresten, kit- en verfspatten van alle oppervlakken', 'hds' ) ],
+				[ 'text' => __( 'Reinigen en stofvrij maken van vloeren, plinten, kozijnen, deuren en vensterbanken', 'hds' ) ],
+				[ 'text' => __( 'Glasbewassing van alle ramen, zowel binnen- als buitenzijde', 'hds' ) ],
+				[ 'text' => __( 'Reinigen van keukenblokken, sanitair, tegels en voegen in natte ruimtes', 'hds' ) ],
+				[ 'text' => __( 'Schoonmaken van radiatoren, ventilatieroosters, stopcontacten en lichtschakelaars', 'hds' ) ],
+				[ 'text' => __( 'Nazorg en eventuele correctierondes voor een perfecte eindoplevering', 'hds' ) ],
+			],
+			'industries'      => [ 'kantoren', 'zorginstellingen', 'scholen', 'retail', 'overheid', 'bedrijfsverzamelgebouwen' ],
+			'faq'             => [
+				[
+					'q' => __( 'Wanneer wordt een opleverschoonmaak uitgevoerd?', 'hds' ),
+					'a' => __( 'Een opleverschoonmaak wordt uitgevoerd na afronding van bouw-, verbouwings- of renovatiewerkzaamheden, vlak voor de sleuteloverdracht. Dit kan ook na een verhuizing of bij de eindoplevering van een nieuw pand. Wij plannen de schoonmaak zo in dat het pand perfect schoon is op het moment van overdracht aan de eigenaar of huurder.', 'hds' ),
+				],
+				[
+					'q' => __( 'Welke soorten panden kunnen jullie opleverschoon maken?', 'hds' ),
+					'a' => __( 'Wij verzorgen opleverschoonmaak voor alle typen bedrijfspanden, waaronder kantoren, winkelruimtes, zorginstellingen, scholen, overheidsgebouwen en bedrijfsverzamelgebouwen. Ook nieuwbouw- en renovatieprojecten van iedere omvang behoren tot onze expertise.', 'hds' ),
+				],
+				[
+					'q' => __( 'Wat houdt de opleverschoonmaak precies in?', 'hds' ),
+					'a' => __( 'Onze opleverschoonmaak omvat het verwijderen van bouwstof, cementresten, kit- en verfspatten, het reinigen van vloeren en oppervlakken, glasbewassing binnen en buiten, schoonmaken van sanitair en keukenblokken, en het stofvrij maken van radiatoren, ventilatieroosters en elektrapunten. Wij leveren een volledig schoon en gebruiksklaar pand op.', 'hds' ),
+				],
+				[
+					'q' => __( 'Hoe plannen jullie de opleverschoonmaak voor de sleuteloverdracht?', 'hds' ),
+					'a' => __( 'Wij stemmen de planning volledig af op uw project en de datum van sleuteloverdracht. Idealiter plannen wij de schoonmaak één tot twee dagen vóór de eindinspectie, zodat eventuele correcties nog kunnen worden uitgevoerd. Onze flexibele planning zorgt ervoor dat u nooit voor verrassingen komt te staan.', 'hds' ),
+				],
+				[
+					'q' => __( 'Hoe verloopt de afstemming met de aannemer of projectleider?', 'hds' ),
+					'a' => __( 'Wij plannen de werkzaamheden in nauw overleg met de aannemer, projectleider of opdrachtgever. Wij houden rekening met de bouwplanning, de datum van oplevering en eventuele laatste werkzaamheden op de bouwplaats. Indien gewenst kunnen wij ook buiten reguliere werktijden schoonmaken om de planning niet te verstoren.', 'hds' ),
+				],
+			],
+			'seo_title'       => __( 'Oplevering schoonmaak | Professionele opleverschoonmaak na bouw en renovatie | HDS', 'hds' ),
+			'seo_description' => __( 'Professionele opleverschoonmaak door HDS. Grondige reiniging na bouw, verbouwing en renovatie voor een vlekkeloze eindoplevering. Vrijblijvende offerte aanvragen.', 'hds' ),
 		],
 
 		'industriele-schoonmaak' => [
