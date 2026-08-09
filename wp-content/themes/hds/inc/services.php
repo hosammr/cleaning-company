@@ -372,10 +372,10 @@ function hds_get_services(): array {
 			'intro'           => [
 				'eyebrow'     => __( 'Onze dienst', 'hds' ),
 				'title'       => __( 'Professionele specialistische reiniging voor bedrijven', 'hds' ),
-				'intro_text'  => __( 'Ontdek hoe onze gespecialiseerde reinigingsoplossingen bijdragen aan een schone, veilige en representatieve bedrijfsomgeving.', 'hds' ),
+				'intro_text'  => __( 'Ontdek hoe onze specialistische reiniging bijdraagt aan een schone, veilige en representatieve bedrijfsomgeving.', 'hds' ),
 				'paragraphs'  => [
-					__( 'Niet ieder pand en niet iedere vervuiling is hetzelfde. Voor situaties waarin standaard schoonmaak niet volstaat, bieden wij specialistische reinigingsoplossingen op maat. Van hardnekkige vervuiling tot gevoelige oppervlakken — ons ervaren team beschikt over de juiste kennis, technieken en middelen.', 'hds' ),
-					__( 'Wij analyseren vooraf de situatie en stellen een reinigingsplan op dat volledig is afgestemd op het type vervuiling, het oppervlak en uw bedrijfsvoering. Of het nu gaat om dieptereiniging, desinfectie of het verwijderen van specifieke verontreinigingen — wij leveren een veilig en grondig resultaat.', 'hds' ),
+					__( 'Sommige ruimtes en oppervlakken vragen om meer dan reguliere schoonmaak. Onze specialistische reiniging is gericht op situaties waarin specifieke kennis, technieken of apparatuur nodig zijn. We stemmen de werkzaamheden af op de omgeving, het materiaal en de aard van de vervuiling.', 'hds' ),
+					__( 'Wij brengen vooraf in kaart welke reinigingsmethode het beste past bij uw situatie. Zo werken we gericht en zorgvuldig, met aandacht voor veiligheid, bereikbaarheid en het gewenste resultaat.', 'hds' ),
 				],
 				'benefits'    => [
 					__( 'Reiniging van hardnekkige en bijzondere vervuiling', 'hds' ),
