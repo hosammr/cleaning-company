@@ -186,14 +186,60 @@ function hds_get_services(): array {
 		],
 
 		'reguliere-schoonmaak' => [
-			'title'    => __( 'Reguliere schoonmaak', 'hds' ),
-			'subtitle' => __( 'Betrouwbare reguliere schoonmaak op maat voor uw bedrijf.', 'hds' ),
+			'title'           => __( 'Reguliere schoonmaak', 'hds' ),
+			'subtitle'        => __( 'Betrouwbare reguliere schoonmaak op maat voor uw bedrijf.', 'hds' ),
 			'hero_image'      => 0,
-			'checklist'       => [],
-			'industries'      => [],
-			'faq'             => [],
-			'seo_title'       => '',
-			'seo_description' => '',
+			'eyebrow'         => __( 'Reguliere schoonmaak', 'hds' ),
+			'intro'           => [
+				'eyebrow'     => __( 'Onze dienst', 'hds' ),
+				'title'       => __( 'Professionele reguliere schoonmaak voor bedrijven', 'hds' ),
+				'intro_text'  => __( 'Een schone werkomgeving draagt bij aan een prettige, verzorgde en representatieve bedrijfsomgeving.', 'hds' ),
+				'paragraphs'  => [
+					__( 'Met reguliere schoonmaak zorgen wij ervoor dat kantoren en bedrijfsruimtes dagelijks of periodiek schoon en verzorgd blijven. We stemmen de werkzaamheden af op uw locatie, gebruik en gewenste schoonmaakfrequentie.', 'hds' ),
+					__( 'Van algemene schoonmaak tot het reinigen van veelgebruikte ruimtes en oppervlakken: wij werken volgens een duidelijke planning en zorgen voor een constante kwaliteit die past bij uw organisatie.', 'hds' ),
+				],
+				'benefits'    => [
+					__( 'Dagelijkse of periodieke schoonmaak', 'hds' ),
+					__( 'Vaste schoonmaakafspraken', 'hds' ),
+					__( 'Flexibele planning', 'hds' ),
+					__( 'Geschikt voor verschillende bedrijfsruimtes', 'hds' ),
+					__( 'Professionele schoonmaakmedewerkers', 'hds' ),
+					__( 'Vrijblijvende offerte', 'hds' ),
+				],
+			],
+			'checklist'       => [
+				[ 'text' => __( 'Algemene schoonmaak van kantoortuinen, vergaderruimtes en gemeenschappelijke ruimtes', 'hds' ) ],
+				[ 'text' => __( 'Reinigen en desinfecteren van sanitaire voorzieningen en het aanvullen van verbruiksartikelen', 'hds' ) ],
+				[ 'text' => __( 'Stofzuigen en dweilen van alle vloeren, inclusief stofvrij maken van plinten en hoeken', 'hds' ) ],
+				[ 'text' => __( 'Afnemen van werkplekken, bureaus, tafels en overige meubeloppervlakken', 'hds' ) ],
+				[ 'text' => __( 'Leegmaken van prullenbakken en gescheiden afvalverwerking volgens richtlijnen', 'hds' ) ],
+				[ 'text' => __( 'Reinigen van pantry\'s, keukenblokken en koffiecorners inclusief apparatuur', 'hds' ) ],
+			],
+			'industries'      => [ 'kantoren', 'zorginstellingen', 'scholen', 'retail', 'overheid', 'bedrijfsverzamelgebouwen' ],
+			'faq'             => [
+				[
+					'q' => __( 'Hoe vaak kan reguliere schoonmaak plaatsvinden?', 'hds' ),
+					'a' => __( 'De frequentie bepalen wij volledig in overleg met u. Dit kan variëren van dagelijks tot wekelijks of tweewekelijks, afhankelijk van de grootte van uw pand, het aantal medewerkers en de aard van uw bedrijfsvoering. Tijdens de kennismaking adviseren wij u over de optimale planning.', 'hds' ),
+				],
+				[
+					'q' => __( 'Wat valt er onder reguliere schoonmaak?', 'hds' ),
+					'a' => __( 'Onze reguliere schoonmaak omvat de dagelijkse of periodieke reiniging van alle bedrijfsruimtes: stofzuigen en dweilen van vloeren, reinigen van werkplekken en oppervlakken, schoonmaken van sanitair, legen van prullenbakken, reinigen van pantry\'s en keukenblokken, en het verzorgen van gemeenschappelijke ruimtes. De exacte werkzaamheden stemmen wij af op uw wensen.', 'hds' ),
+				],
+				[
+					'q' => __( 'Kunnen de schoonmaakwerkzaamheden buiten kantooruren plaatsvinden?', 'hds' ),
+					'a' => __( 'Ja, wij kunnen alle werkzaamheden uitvoeren buiten uw openingstijden — vroeg in de ochtend, \'s avonds of in het weekend. Zo ondervinden u en uw medewerkers geen hinder van de schoonmaakwerkzaamheden tijdens de dagelijkse bedrijfsvoering.', 'hds' ),
+				],
+				[
+					'q' => __( 'Kan het schoonmaakschema worden aangepast als de behoefte verandert?', 'hds' ),
+					'a' => __( 'Zeker. Wij begrijpen dat de behoefte aan schoonmaak kan veranderen — bijvoorbeeld door groei van uw organisatie, een verhuizing of seizoensinvloeden. Het schoonmaakschema passen wij in overleg eenvoudig aan. U zit nergens aan vast en wij denken graag met u mee.', 'hds' ),
+				],
+				[
+					'q' => __( 'Is reguliere schoonmaak geschikt voor zowel kleine als grote bedrijven?', 'hds' ),
+					'a' => __( 'Ja, onze reguliere schoonmaak is geschikt voor bedrijven van iedere omvang — van kleine kantoren met enkele medewerkers tot grote bedrijfspanden met honderden werkplekken. Wij schalen onze inzet en planning volledig op uw organisatie, zodat u altijd de juiste hoeveelheid schoonmaak ontvangt.', 'hds' ),
+				],
+			],
+			'seo_title'       => __( 'Reguliere schoonmaak | Professionele bedrijfsschoonmaak op maat | HDS', 'hds' ),
+			'seo_description' => __( 'Professionele reguliere schoonmaak door HDS. Dagelijkse of periodieke schoonmaak voor kantoren en bedrijfsruimtes, afgestemd op uw organisatie. Vrijblijvende offerte aanvragen.', 'hds' ),
 		],
 
 		'vloeronderhoud' => [
