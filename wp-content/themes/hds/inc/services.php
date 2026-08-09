@@ -293,14 +293,60 @@ function hds_get_services(): array {
 		],
 
 		'vve-service' => [
-			'title'    => __( 'VvE service', 'hds' ),
-			'subtitle' => __( 'Complete schoonmaakdiensten voor Verenigingen van Eigenaren.', 'hds' ),
+			'title'           => __( 'VvE service', 'hds' ),
+			'subtitle'        => __( 'Complete schoonmaakdiensten voor Verenigingen van Eigenaren.', 'hds' ),
 			'hero_image'      => 0,
-			'checklist'       => [],
-			'industries'      => [],
-			'faq'             => [],
-			'seo_title'       => '',
-			'seo_description' => '',
+			'eyebrow'         => __( 'Onze dienst', 'hds' ),
+			'intro'           => [
+				'eyebrow'     => __( 'Onze dienst', 'hds' ),
+				'title'       => __( 'Professionele schoonmaak voor VvE\'s', 'hds' ),
+				'intro_text'  => __( 'Een schone en verzorgde woonomgeving draagt bij aan het comfort en de uitstraling van een appartementencomplex.', 'hds' ),
+				'paragraphs'  => [
+					__( 'Met onze VvE-service verzorgen wij de schoonmaak van gemeenschappelijke ruimtes binnen appartementencomplexen en woongebouwen. Denk aan entrees, trappenhuizen, gangen en andere gedeelde ruimtes die dagelijks door bewoners worden gebruikt.', 'hds' ),
+					__( 'Wij stemmen de werkzaamheden af op het gebouw, de wensen van de VvE en de afgesproken frequentie. Zo blijft het complex verzorgd en weten bewoners en bestuur waar zij aan toe zijn.', 'hds' ),
+				],
+				'benefits'    => [
+					__( 'Schoonmaak van gemeenschappelijke ruimtes', 'hds' ),
+					__( 'Vaste of periodieke schoonmaakafspraken', 'hds' ),
+					__( 'Flexibele planning', 'hds' ),
+					__( 'Geschikt voor appartementencomplexen en woongebouwen', 'hds' ),
+					__( 'Duidelijke afspraken met de VvE', 'hds' ),
+					__( 'Vrijblijvende offerte', 'hds' ),
+				],
+			],
+			'checklist'       => [
+				[ 'text' => __( 'Schoonmaak van entrees, centrale hallen en algemene toegangsruimtes', 'hds' ) ],
+				[ 'text' => __( 'Reinigen van trappenhuizen, gangen, galerijen en portieken op alle verdiepingen', 'hds' ) ],
+				[ 'text' => __( 'Stofzuigen en dweilen van vloeren in alle gemeenschappelijke ruimtes', 'hds' ) ],
+				[ 'text' => __( 'Reinigen van trapleuningen, deurklinken, liftknoppen en andere veelgebruikte contactpunten', 'hds' ) ],
+				[ 'text' => __( 'Schoonmaken van ramen en glaspartijen in gemeenschappelijke ruimtes', 'hds' ) ],
+				[ 'text' => __( 'Periodieke aanvullende schoonmaak zoals het reinigen van bergingen, fietsenstallingen en technische ruimtes', 'hds' ) ],
+			],
+			'industries'      => [ 'bedrijfsverzamelgebouwen' ],
+			'faq'             => [
+				[
+					'q' => __( 'Welke ruimtes worden binnen een VvE-complex schoongemaakt?', 'hds' ),
+					'a' => __( 'Wij reinigen alle gemeenschappelijke ruimtes binnen het complex: entrees, centrale hallen, trappenhuizen, gangen, galerijen, portieken en liften. Optioneel kunnen ook bergingen, fietsenstallingen, technische ruimtes en gemeenschappelijke ramen en glaspartijen worden meegenomen in het schoonmaakplan.', 'hds' ),
+				],
+				[
+					'q' => __( 'Hoe vaak vindt de schoonmaak van een VvE-complex plaats?', 'hds' ),
+					'a' => __( 'De frequentie stemmen wij af op het complex en de wensen van de VvE. Dit kan variëren van dagelijks tot wekelijks of tweewekelijks, afhankelijk van de grootte van het gebouw, het aantal bewoners en het gebruik van de gemeenschappelijke ruimtes. Wij adviseren graag over de optimale planning.', 'hds' ),
+				],
+				[
+					'q' => __( 'Kan de schoonmaakfrequentie worden aangepast als de behoefte verandert?', 'hds' ),
+					'a' => __( 'Ja, de schoonmaakfrequentie passen wij in overleg met het VvE-bestuur eenvoudig aan. Bijvoorbeeld na een verbouwing, bij wisselende seizoenen of wanneer bewoners aangeven dat er meer of juist minder schoonmaak nodig is. U zit nergens aan vast.', 'hds' ),
+				],
+				[
+					'q' => __( 'Hoe stemmen jullie de werkzaamheden af met het VvE-bestuur?', 'hds' ),
+					'a' => __( 'Wij maken vooraf duidelijke afspraken over de uit te voeren werkzaamheden, de frequentie en de planning. Het VvE-bestuur heeft één vast aanspreekpunt bij HDS. Wij rapporteren periodiek over de uitgevoerde werkzaamheden en zijn altijd bereikbaar voor vragen of bijsturing.', 'hds' ),
+				],
+				[
+					'q' => __( 'Kan ik een vrijblijvende offerte aanvragen voor onze VvE?', 'hds' ),
+					'a' => __( 'Ja, wij maken graag een vrijblijvende offerte op maat voor uw VvE. Tijdens een kennismaking bekijken wij het complex, bespreken we de wensen en stellen we een passend schoonmaakplan op. Ook een proefperiode behoort tot de mogelijkheden.', 'hds' ),
+				],
+			],
+			'seo_title'       => __( 'VvE schoonmaak | Professionele schoonmaak voor VvE\'s en appartementencomplexen | HDS', 'hds' ),
+			'seo_description' => __( 'Professionele VvE-schoonmaak door HDS. Schoonmaak van gemeenschappelijke ruimtes in appartementencomplexen en woongebouwen, afgestemd op uw VvE. Vrijblijvende offerte.', 'hds' ),
 		],
 
 		'oplevering-schoonmaak' => [
