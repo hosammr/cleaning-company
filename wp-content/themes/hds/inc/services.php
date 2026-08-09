@@ -363,6 +363,63 @@ function hds_get_services(): array {
 			'seo_title'       => '',
 			'seo_description' => '',
 		],
+
+		'specialistische-reiniging' => [
+			'title'           => __( 'Specialistische reiniging', 'hds' ),
+			'subtitle'        => __( 'Gespecialiseerde reinigingsoplossingen voor elke uitdaging.', 'hds' ),
+			'hero_image'      => 0,
+			'eyebrow'         => __( 'Specialistische reiniging', 'hds' ),
+			'intro'           => [
+				'eyebrow'     => __( 'Onze dienst', 'hds' ),
+				'title'       => __( 'Professionele specialistische reiniging voor bedrijven', 'hds' ),
+				'intro_text'  => __( 'Ontdek hoe onze gespecialiseerde reinigingsoplossingen bijdragen aan een schone, veilige en representatieve bedrijfsomgeving.', 'hds' ),
+				'paragraphs'  => [
+					__( 'Niet ieder pand en niet iedere vervuiling is hetzelfde. Voor situaties waarin standaard schoonmaak niet volstaat, bieden wij specialistische reinigingsoplossingen op maat. Van hardnekkige vervuiling tot gevoelige oppervlakken — ons ervaren team beschikt over de juiste kennis, technieken en middelen.', 'hds' ),
+					__( 'Wij analyseren vooraf de situatie en stellen een reinigingsplan op dat volledig is afgestemd op het type vervuiling, het oppervlak en uw bedrijfsvoering. Of het nu gaat om dieptereiniging, desinfectie of het verwijderen van specifieke verontreinigingen — wij leveren een veilig en grondig resultaat.', 'hds' ),
+				],
+				'benefits'    => [
+					__( 'Reiniging van hardnekkige en bijzondere vervuiling', 'hds' ),
+					__( 'Flexibele planning', 'hds' ),
+					__( 'Gespecialiseerde reinigingstechnieken', 'hds' ),
+					__( 'Aangepast reinigingsplan per situatie', 'hds' ),
+					__( 'Veilig en vakkundig uitgevoerd', 'hds' ),
+					__( 'Vrijblijvende offerte', 'hds' ),
+				],
+			],
+			'checklist'       => [
+				[ 'text' => __( 'Verwijderen van hardnekkige vervuiling, aanslag, vet en olie van oppervlakken en machines', 'hds' ) ],
+				[ 'text' => __( 'Dieptereiniging en desinfectie van sanitaire ruimtes, keukens en productieomgevingen', 'hds' ) ],
+				[ 'text' => __( 'Reinigen van gevels, daken, goten en andere moeilijk bereikbare buitenoppervlakken', 'hds' ) ],
+				[ 'text' => __( 'Speciale vloerreiniging: het strippen, schuren en opnieuw afwerken van alle vloertypes', 'hds' ) ],
+				[ 'text' => __( 'Verwijderen van graffiti, lijmresten, stickers en andere aangebrachte vervuiling', 'hds' ) ],
+				[ 'text' => __( 'Reiniging van ventilatiesystemen, luchtkanalen, filters en roosters', 'hds' ) ],
+			],
+			'industries'      => [ 'kantoren', 'zorginstellingen', 'scholen', 'retail', 'overheid', 'bedrijfsverzamelgebouwen' ],
+			'faq'             => [
+				[
+					'q' => __( 'Wat is het verschil tussen reguliere schoonmaak en specialistische reiniging?', 'hds' ),
+					'a' => __( 'Reguliere schoonmaak richt zich op het dagelijks of periodiek schoon en fris houden van een pand. Specialistische reiniging komt in beeld bij hardnekkige vervuiling, bijzondere oppervlakken of specifieke situaties waar standaard reinigingsmethoden tekortschieten. Denk aan dieptereiniging, desinfectie, gevelreiniging of het verwijderen van graffiti en vetafzetting.', 'hds' ),
+				],
+				[
+					'q' => __( 'Welke soorten specialistische reiniging bieden jullie aan?', 'hds' ),
+					'a' => __( 'Wij bieden een breed scala aan specialistische reinigingsdiensten, waaronder dieptereiniging en desinfectie van ruimtes, gevel- en dakreiniging, speciale vloerreiniging zoals strippen en coaten, verwijderen van graffiti en aangebrachte vervuiling, reiniging van ventilatiesystemen en luchtkanalen, en het reinigen van moeilijk bereikbare oppervlakken. Iedere opdracht begint met een analyse van de situatie.', 'hds' ),
+				],
+				[
+					'q' => __( 'Hoe bepalen jullie de juiste reinigingsmethode?', 'hds' ),
+					'a' => __( 'Wij starten altijd met een inspectie van het oppervlak, het type vervuiling en de omgevingsfactoren. Op basis daarvan kiezen wij de meest geschikte reinigingstechniek — van chemische reiniging en hogedrukreiniging tot stoomreiniging of droge methoden. Het uitgangspunt is altijd: het beste resultaat zonder schade aan het materiaal.', 'hds' ),
+				],
+				[
+					'q' => __( 'Kunnen de werkzaamheden worden uitgevoerd zonder de dagelijkse bedrijfsvoering te verstoren?', 'hds' ),
+					'a' => __( 'Ja, wij plannen specialistische reiniging bij voorkeur buiten openingstijden — in de avond, nacht of het weekend. Zo ondervindt u geen hinder van de werkzaamheden. In overleg stemmen wij de planning volledig af op uw bedrijfsproces, zodat de continuïteit van uw organisatie gewaarborgd blijft.', 'hds' ),
+				],
+				[
+					'q' => __( 'Is specialistische reiniging eenmalig of periodiek nodig?', 'hds' ),
+					'a' => __( 'Dit is volledig afhankelijk van de situatie. Sommige specialistische reiniging is eenmalig — bijvoorbeeld na een incident, verbouwing of bij een verhuizing. Andere situaties vragen om periodieke herhaling, zoals het reinigen van ventilatiekanalen of het periodiek strippen en coaten van vloeren. Wij adviseren u graag over de optimale frequentie.', 'hds' ),
+				],
+			],
+			'seo_title'       => __( 'Specialistische reiniging | Gespecialiseerde schoonmaak op maat | HDS', 'hds' ),
+			'seo_description' => __( 'Specialistische reiniging door HDS. Gespecialiseerde schoonmaakoplossingen voor hardnekkige vervuiling, dieptereiniging en bijzondere oppervlakken. Vrijblijvende offerte aanvragen.', 'hds' ),
+		],
 	];
 }
 

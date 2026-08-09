@@ -23,7 +23,8 @@ function hds_get_service_url_map(): array {
 		'vve-service'              => __( 'VVE Service', 'hds' ),
 			'oplevering-schoonmaak'    => __( 'Oplevering Schoonmaak', 'hds' ),
 			'industriele-schoonmaak'   => __( 'Industriële Schoonmaak', 'hds' ),
-			'kantoor-schoonmaak'       => __( 'Kantoor schoonmaak', 'hds' ),
+			'kantoor-schoonmaak'           => __( 'Kantoor schoonmaak', 'hds' ),
+			'specialistische-reiniging'   => __( 'Specialistische reiniging', 'hds' ),
 		];
 	}
 
@@ -36,13 +37,14 @@ function hds_get_service_url_map(): array {
 function hds_get_cross_sell_map(): array {
 	return [
 		'glasbewassing'            => [ 'gevelreiniging', 'reguliere-schoonmaak', 'oplevering-schoonmaak' ],
-		'gevelreiniging'           => [ 'glasbewassing', 'vloeronderhoud', 'oplevering-schoonmaak' ],
+		'gevelreiniging'           => [ 'glasbewassing', 'vloeronderhoud', 'specialistische-reiniging' ],
 		'reguliere-schoonmaak'     => [ 'vloeronderhoud', 'glasbewassing', 'vve-service' ],
 		'vloeronderhoud'           => [ 'reguliere-schoonmaak', 'oplevering-schoonmaak', 'kantoor-schoonmaak' ],
 		'vve-service'              => [ 'reguliere-schoonmaak', 'glasbewassing' ],
-			'oplevering-schoonmaak'    => [ 'reguliere-schoonmaak', 'glasbewassing', 'vloeronderhoud' ],
-			'industriele-schoonmaak'   => [ 'reguliere-schoonmaak', 'gevelreiniging', 'vloeronderhoud' ],
+			'oplevering-schoonmaak'    => [ 'reguliere-schoonmaak', 'glasbewassing', 'specialistische-reiniging' ],
+			'industriele-schoonmaak'   => [ 'reguliere-schoonmaak', 'gevelreiniging', 'specialistische-reiniging' ],
 			'kantoor-schoonmaak'       => [ 'glasbewassing', 'gevelreiniging', 'vloeronderhoud' ],
+			'specialistische-reiniging' => [ 'industriele-schoonmaak', 'gevelreiniging', 'oplevering-schoonmaak' ],
 		];
 	}
 
@@ -252,6 +254,7 @@ function hds_get_service_page_groups(): array {
 			'oplevering-schoonmaak',
 			'industriele-schoonmaak',
 			'kantoor-schoonmaak',
+			'specialistische-reiniging',
 		];
 
 	$groups = [

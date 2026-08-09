@@ -444,6 +444,7 @@ function hds_quote_services(): array {
 		'vve-service'            => __( 'VvE service', 'hds' ),
 		'oplevering-schoonmaak'  => __( 'Oplevering schoonmaak', 'hds' ),
 		'industriele-schoonmaak' => __( 'Industriële schoonmaak', 'hds' ),
+		'specialistische-reiniging' => __( 'Specialistische reiniging', 'hds' ),
 	];
 }
 
