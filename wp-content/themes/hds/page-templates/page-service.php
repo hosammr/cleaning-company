@@ -16,7 +16,10 @@ get_header();
 	if ( $service ) {
 		$hero_title    = $service['title'];
 		$hero_subtitle = $service['subtitle'];
-		$hero_image_id = $service['hero_image'] ?: get_post_thumbnail_id( get_queried_object_id() );
+		$hero_image_id =
+			$service['hero_image']
+			?: (int) get_post_meta( get_queried_object_id(), 'hds_hero_image', true )
+			?: get_post_thumbnail_id( get_queried_object_id() );
 		$hero_cta_text = __( 'Vraag vrijblijvend een offerte aan', 'hds' );
 		$hero_cta_url  = home_url( '/offerte-aanvragen/' );
 		$hero_eyebrow  = $service['eyebrow'] ?? __( 'Onze diensten', 'hds' );
