@@ -2069,6 +2069,7 @@ h3 {
 }
 
 .page-slug-kwaliteit-en-veiligheid .hds-usp-section[aria-labelledby="about-why"] .hds-usp-card__title {
+	font-size: var(--wp--preset--font-size--l);
 	font-weight: 700;
 }
 
