@@ -63,17 +63,6 @@ function hds_get_about_sections( string $slug ): array {
 				],
 			],
 			[
-				'key'          => 'values',
-				'heading'      => __( 'Onze kernwaarden', 'hds' ),
-				'content_type' => 'cards',
-				'items'        => [
-					[ 'title' => __( 'Betrouwbaarheid', 'hds' ), 'description' => __( 'Afspraak is afspraak. U kunt op ons rekenen, elke dag weer.', 'hds' ) ],
-					[ 'title' => __( 'Kwaliteit', 'hds' ), 'description' => __( 'Wij leveren consequent hoge kwaliteit met oog voor detail.', 'hds' ) ],
-					[ 'title' => __( 'Flexibiliteit', 'hds' ), 'description' => __( 'Wij stemmen onze werkzaamheden af op uw planning en bedrijfsprocessen.', 'hds' ) ],
-					[ 'title' => __( 'Duurzaamheid', 'hds' ), 'description' => __( 'Milieubewust werken met professionele producten en methoden.', 'hds' ) ],
-				],
-			],
-			[
 				'key'          => 'why',
 				'heading'      => __( 'Waarom kwaliteit en veiligheid belangrijk zijn', 'hds' ),
 				'content_type' => 'cards',
@@ -81,7 +70,7 @@ function hds_get_about_sections( string $slug ): array {
 					[ 'title' => __( 'OSB-gecertificeerd', 'hds' ), 'description' => __( 'Wij zijn gecertificeerd door de Ondernemersorganisatie Schoonmaak- en Bedrijfsdiensten.', 'hds' ) ],
 					[ 'title' => __( 'Opgeleid personeel', 'hds' ), 'description' => __( 'Onze medewerkers zijn getraind in de juiste schoonmaaktechnieken en veiligheidsprotocollen.', 'hds' ) ],
 					[ 'title' => __( 'Professionele middelen', 'hds' ), 'description' => __( 'Wij gebruiken uitsluitend professionele schoonmaakmiddelen en gekeurde apparatuur.', 'hds' ) ],
-					[ 'title' => __( 'Volledig verzekerd', 'hds' ), 'description' => __( 'U zit nooit met risico\'s. Onze diensten zijn volledig verzekerd.', 'hds' ) ],
+					[ 'title' => __( 'VOG-gecertificeerd personeel', 'hds' ), 'description' => __( 'Al onze schoonmaakmedewerkers zijn in vaste dienst, volledig opgeleid en beschikken over een VOG-verklaring (Verklaring Omtrent Gedrag). Uw veiligheid en vertrouwen staan voorop.', 'hds' ) ],
 				],
 			],
 		],
