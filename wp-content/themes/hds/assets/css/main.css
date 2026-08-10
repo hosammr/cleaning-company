@@ -1992,17 +1992,17 @@ h3 {
 }
 
 /* ── About: Onze kernwaarden ── */
-#about-values .hds-usp-grid {
+.hds-usp-section[aria-labelledby="about-values"] .hds-usp-grid {
 	grid-template-columns: repeat(4, 1fr);
 }
 
-#about-values .hds-usp-card {
+.hds-usp-section[aria-labelledby="about-values"] .hds-usp-card {
 	padding: var(--wp--preset--spacing--6);
 	position: relative;
 	text-align: center;
 }
 
-#about-values .hds-usp-card::before {
+.hds-usp-section[aria-labelledby="about-values"] .hds-usp-card::before {
 	background: var(--wp--preset--color--primary);
 	border-radius: 999px;
 	content: '';
@@ -2012,23 +2012,23 @@ h3 {
 	width: 56px;
 }
 
-#about-values .hds-usp-card__title {
+.hds-usp-section[aria-labelledby="about-values"] .hds-usp-card__title {
 	font-weight: 700;
 }
 
-#about-values .hds-usp-card__desc {
+.hds-usp-section[aria-labelledby="about-values"] .hds-usp-card__desc {
 	margin: 0 auto;
 	max-width: 240px;
 }
 
 @media (width <= 1023px) {
-	#about-values .hds-usp-grid {
+	.hds-usp-section[aria-labelledby="about-values"] .hds-usp-grid {
 		grid-template-columns: repeat(2, 1fr);
 	}
 }
 
 @media (width <= 767px) {
-	#about-values .hds-usp-grid {
+	.hds-usp-section[aria-labelledby="about-values"] .hds-usp-grid {
 		grid-template-columns: 1fr;
 	}
 }
