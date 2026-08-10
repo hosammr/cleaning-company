@@ -1,0 +1,23 @@
+[
+  {
+    "ariaLabelledby": "about-mission",
+    "h2Id": "about-mission",
+    "h2Text": "Onze missie",
+    "gridExists": false,
+    "cardCount": 0
+  },
+  {
+    "ariaLabelledby": "about-values",
+    "h2Id": "about-values",
+    "h2Text": "Onze kernwaarden",
+    "gridExists": true,
+    "cardCount": 4
+  },
+  {
+    "ariaLabelledby": "about-why",
+    "h2Id": "about-why",
+    "h2Text": "Waarom bedrijven kiezen voor HDS",
+    "gridExists": true,
+    "cardCount": 4
+  }
+]

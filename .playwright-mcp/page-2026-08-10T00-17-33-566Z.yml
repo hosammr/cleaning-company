@@ -1,0 +1,163 @@
+- generic [active] [ref=e1]:
+  - link "Direct naar inhoud" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - generic [ref=e5]:
+      - paragraph [ref=e7]:
+        - link "HDS-schoonmaakdiensten — Home" [ref=e8] [cursor=pointer]:
+          - /url: http://hds-schoonmaakdiensten.local/
+          - text: HDS-schoonmaakdiensten
+      - navigation "Hoofdmenu"
+      - generic [ref=e9]:
+        - link "Bel ons op 0164-652846" [ref=e10] [cursor=pointer]:
+          - /url: tel:0164652846
+          - generic [ref=e11]: 0164-652846
+        - link "Offerte" [ref=e12] [cursor=pointer]:
+          - /url: http://hds-schoonmaakdiensten.local/offerte-aanvragen/
+  - main [ref=e13]:
+    - navigation "Kruimelpad" [ref=e14]:
+      - list [ref=e15]:
+        - listitem [ref=e16]:
+          - link "Home" [ref=e17] [cursor=pointer]:
+            - /url: http://hds-schoonmaakdiensten.local/
+          - text: /
+        - listitem [ref=e18]: Over HDS
+    - generic [ref=e20]:
+      - heading "Over HDS" [level=1] [ref=e21]
+      - link "Vrijblijvende offerte" [ref=e22] [cursor=pointer]:
+        - /url: http://hds-schoonmaakdiensten.local/offerte-aanvragen/
+    - generic [ref=e24]:
+      - paragraph
+      - heading [level=2] [ref=e25]:
+        - strong [ref=e26]: Over HDS
+      - paragraph [ref=e27]: HDS-schoonmaakdiensten is een schoonmaakbedrijf voor bedrijven in West-Brabant en Zeeland. Wij helpen organisaties met een schone, verzorgde en representatieve werkomgeving die past bij hun dagelijkse praktijk.
+      - paragraph [ref=e28]: Van reguliere schoonmaak en glasbewassing tot specialistische reiniging en opleveringsschoonmaak. We stemmen onze werkzaamheden af op uw locatie, uw planning en het gebruik van de ruimte.
+      - paragraph [ref=e29]: We werken met duidelijke afspraken en vaste communicatielijnen. Zo weet u wat u van ons kunt verwachten en kunnen onze medewerkers hun werkzaamheden zorgvuldig uitvoeren.
+      - paragraph [ref=e30]: In deze branche draait alles om deskundigheid, ervaring en vertrouwen, om deze reden werken wij met vaste vakkundig opgeleide medewerkers die enthousiast hun vak verstaan. Onze mensen beheersen alle reinigingstechnieken en mogen dan ook met recht de reinigingsspecialisten van de regio genoemd worden.
+      - paragraph [ref=e31]: "HDS is in staat voor iedere klant een optimaal stappenplan te realiseren. Bij het opstarten van een nieuwe opdracht zorgen wij dat de bedrijfsleiding de eerste periode zelf op het project aanwezig is. Zij kennen de fijne kneepjes van het vak en verwerken hun \x9don the job inzicht van uw bedrijf in een op maat gesneden werkplanning voor onze medewerkers, die te herkennen zijn aan de HDS bedrijfskleding."
+    - region [ref=e32]:
+      - generic [ref=e33]:
+        - heading "Onze missie" [level=2] [ref=e35]
+        - paragraph [ref=e36]: Wij geloven dat een schone werkomgeving de basis is voor productiviteit, gezondheid en een goede eerste indruk. Daarom levert HDS al meer dan 20 jaar hoogwaardige schoonmaakdiensten aan bedrijven in West-Brabant en Zeeland.
+    - region [ref=e37]:
+      - generic [ref=e38]:
+        - heading "Onze kernwaarden" [level=2] [ref=e40]
+        - generic [ref=e41]:
+          - article [ref=e42]:
+            - heading "Betrouwbaarheid" [level=3] [ref=e43]
+            - paragraph [ref=e44]: Afspraak is afspraak. U kunt op ons rekenen, elke dag weer.
+          - article [ref=e45]:
+            - heading "Kwaliteit" [level=3] [ref=e46]
+            - paragraph [ref=e47]: Wij leveren consequent hoge kwaliteit met oog voor detail.
+          - article [ref=e48]:
+            - heading "Flexibiliteit" [level=3] [ref=e49]
+            - paragraph [ref=e50]: Wij stemmen onze werkzaamheden af op uw planning en bedrijfsprocessen.
+          - article [ref=e51]:
+            - heading "Duurzaamheid" [level=3] [ref=e52]
+            - paragraph [ref=e53]: Milieubewust werken met professionele producten en methoden.
+    - region [ref=e54]:
+      - generic [ref=e55]:
+        - heading "Waarom bedrijven kiezen voor HDS" [level=2] [ref=e57]
+        - generic [ref=e58]:
+          - article [ref=e59]:
+            - heading "20+ jaar ervaring" [level=3] [ref=e60]
+            - paragraph [ref=e61]: Al meer dan twee decennia een vertrouwde partner in schoonmaak.
+          - article [ref=e62]:
+            - heading "Regionale partner" [level=3] [ref=e63]
+            - paragraph [ref=e64]: Wij kennen de regio West-Brabant en Zeeland als geen ander.
+          - article [ref=e65]:
+            - heading "Persoonlijk contact" [level=3] [ref=e66]
+            - paragraph [ref=e67]: Geen callcenter, maar een vaste contactpersoon die u kent.
+          - article [ref=e68]:
+            - heading "Volledig verzekerd" [level=3] [ref=e69]
+            - paragraph [ref=e70]: U zit nooit met risico's. Onze diensten zijn volledig verzekerd.
+    - generic [ref=e72]:
+      - heading "Klaar voor een schonere werkomgeving?" [level=2] [ref=e73]
+      - paragraph [ref=e74]: Neem vrijblijvend contact op voor een kennismaking.
+      - link "Offerte aanvragen" [ref=e75] [cursor=pointer]:
+        - /url: http://hds-schoonmaakdiensten.local/offerte-aanvragen/
+  - contentinfo [ref=e76]:
+    - generic [ref=e77]:
+      - generic [ref=e78]:
+        - generic [ref=e79]:
+          - heading "HDS-schoonmaakdiensten" [level=3] [ref=e80]
+          - paragraph
+        - generic [ref=e81]:
+          - heading "Diensten" [level=3] [ref=e82]
+          - list [ref=e83]:
+            - listitem [ref=e84]:
+              - link "Kantoorreiniging" [ref=e85] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/kantoor-schoonmaak/
+            - listitem [ref=e86]:
+              - link "Glasbewassing" [ref=e87] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/glasbewassing/
+            - listitem [ref=e88]:
+              - link "Gevelreiniging" [ref=e89] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/gevelreiniging/
+            - listitem [ref=e90]:
+              - link "Vloeronderhoud" [ref=e91] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/vloeronderhoud/
+            - listitem [ref=e92]:
+              - link "Industriële reiniging" [ref=e93] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/industriele-schoonmaak/
+            - listitem [ref=e94]:
+              - link "Oplevering Schoonmaak" [ref=e95] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/oplevering-schoonmaak/
+            - listitem [ref=e96]:
+              - link "Specialistische reiniging" [ref=e97] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/specialistische-reiniging/
+            - listitem [ref=e98]:
+              - link "Reguliere Schoonmaak" [ref=e99] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/reguliere-schoonmaak/
+            - listitem [ref=e100]:
+              - link "VVE Service" [ref=e101] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/vve-service/
+        - generic [ref=e102]:
+          - heading "Over HDS" [level=3] [ref=e103]
+          - list [ref=e104]:
+            - listitem [ref=e105]:
+              - link "Over HDS" [ref=e106] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/over-hds/
+            - listitem [ref=e107]:
+              - link "Referenties" [ref=e108] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/reviews/
+            - listitem [ref=e109]:
+              - link "Offerte aanvragen" [ref=e110] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/offerte-aanvragen/
+            - listitem [ref=e111]:
+              - link "Contact" [ref=e112] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/contact/
+        - generic [ref=e113]:
+          - heading "Contact" [level=3] [ref=e114]
+          - generic [ref=e115]:
+            - paragraph [ref=e116]:
+              - link "0164-652846" [ref=e117] [cursor=pointer]:
+                - /url: tel:0164652846
+            - paragraph [ref=e118]:
+              - link "info@helderduidelijkschoon.nl" [ref=e119] [cursor=pointer]:
+                - /url: mailto:info@helderduidelijkschoon.nl
+        - generic [ref=e120]:
+          - heading "Juridisch" [level=3] [ref=e121]
+          - list [ref=e122]:
+            - listitem [ref=e123]:
+              - link "Privacyverklaring" [ref=e124] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/privacyverklaring/
+            - listitem [ref=e125]:
+              - link "Algemene voorwaarden" [ref=e126] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/algemene-voorwaarden/
+            - listitem [ref=e127]:
+              - link "Cookiebeleid" [ref=e128] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/cookiebeleid/
+      - paragraph [ref=e131]: © 2026 HDS-schoonmaakdiensten. Alle rechten voorbehouden.
+  - dialog [ref=e132]:
+    - generic [ref=e133]:
+      - generic [ref=e134]:
+        - heading "Deze website gebruikt cookies" [level=2] [ref=e135]
+        - paragraph [ref=e136]: Wij gebruiken cookies om de website goed te laten werken en te analyseren. Door op "Accepteren" te klikken stemt u in met het gebruik van alle cookies.
+      - generic [ref=e137]:
+        - button "Accepteren" [ref=e138] [cursor=pointer]
+        - button "Alleen functioneel" [ref=e139] [cursor=pointer]
+        - link "Privacyverklaring" [ref=e140] [cursor=pointer]:
+          - /url: http://hds-schoonmaakdiensten.local/privacyverklaring/
+  - button "Terug naar boven":
+    - generic: ↑
