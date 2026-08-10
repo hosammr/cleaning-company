@@ -2236,6 +2236,10 @@ h3 {
 }
 
 .client-logo-grid {
+	display: grid;
+	gap: var(--wp--preset--spacing--6);
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	align-items: center;
 	text-align: center;
 }
 
