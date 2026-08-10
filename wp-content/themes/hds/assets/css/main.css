@@ -2059,14 +2059,21 @@ h3 {
 }
 
 /* ── About: Kwaliteit & Veiligheid — Waarom kwaliteit en veiligheid belangrijk zijn ── */
+.page-slug-kwaliteit-en-veiligheid .hds-usp-section[aria-labelledby="about-why"] {
+	background: var(--wp--preset--color--light-gray);
+}
+
 .page-slug-kwaliteit-en-veiligheid .hds-usp-section[aria-labelledby="about-why"] .hds-usp-card {
 	border: 1px solid var(--wp--preset--color--light-gray);
-	box-shadow: none;
 	padding: var(--wp--preset--spacing--7);
 }
 
 .page-slug-kwaliteit-en-veiligheid .hds-usp-section[aria-labelledby="about-why"] .hds-usp-card__title {
 	font-weight: 700;
+}
+
+.page-slug-kwaliteit-en-veiligheid .hds-usp-section[aria-labelledby="about-why"] .hds-usp-card__desc {
+	font-size: var(--wp--preset--font-size--s);
 }
 
 /* ── About Page ── */
