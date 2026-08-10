@@ -2033,6 +2033,31 @@ h3 {
 	}
 }
 
+/* ── About: Waarom bedrijven kiezen voor HDS ── */
+.hds-usp-section[aria-labelledby="about-why"] .hds-usp-grid {
+	grid-template-columns: repeat(4, 1fr);
+}
+
+.hds-usp-section[aria-labelledby="about-why"] .hds-usp-card {
+	text-align: left;
+}
+
+.hds-usp-section[aria-labelledby="about-why"] .hds-usp-card__title {
+	font-weight: 600;
+}
+
+@media (width <= 1023px) {
+	.hds-usp-section[aria-labelledby="about-why"] .hds-usp-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (width <= 767px) {
+	.hds-usp-section[aria-labelledby="about-why"] .hds-usp-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
 /* ── About Page ── */
 .about-content {
 	margin-bottom: var(--wp--preset--spacing--8);
