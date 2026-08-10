@@ -125,7 +125,7 @@ function hds_truncate( string $text, int $length = 100, string $suffix = '...' )
 function hds_footer_about_fallback( array $args ): void {
 	$links = [
 		home_url( '/over-hds/' )          => __( 'Over HDS', 'hds' ),
-		home_url( '/reviews/' )           => __( 'Referenties', 'hds' ),
+		home_url( '/referenties/' )      => __( 'Referenties', 'hds' ),
 		home_url( '/offerte-aanvragen/' ) => __( 'Offerte aanvragen', 'hds' ),
 		home_url( '/contact/' )           => __( 'Contact', 'hds' ),
 	];

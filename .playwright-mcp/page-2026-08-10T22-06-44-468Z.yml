@@ -1,0 +1,101 @@
+- generic [active] [ref=e1]:
+  - link "Direct naar inhoud" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - generic [ref=e5]:
+      - paragraph [ref=e7]:
+        - link "HDS-schoonmaakdiensten — Home" [ref=e8] [cursor=pointer]:
+          - /url: http://hds-schoonmaakdiensten.local/
+          - text: HDS-schoonmaakdiensten
+      - navigation "Hoofdmenu"
+      - generic [ref=e9]:
+        - link "Bel ons op 0164-652846" [ref=e10] [cursor=pointer]:
+          - /url: tel:0164652846
+          - generic [ref=e11]: 0164-652846
+        - link "Offerte" [ref=e12] [cursor=pointer]:
+          - /url: http://hds-schoonmaakdiensten.local/offerte-aanvragen/
+  - main [ref=e13]:
+    - navigation "Kruimelpad" [ref=e14]:
+      - list [ref=e15]:
+        - listitem [ref=e16]:
+          - link "Home" [ref=e17] [cursor=pointer]:
+            - /url: http://hds-schoonmaakdiensten.local/
+          - text: /
+        - listitem [ref=e18]: Referenties
+    - article [ref=e20]:
+      - heading "Referenties" [level=1] [ref=e22]
+  - contentinfo [ref=e23]:
+    - generic [ref=e24]:
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - heading "HDS-schoonmaakdiensten" [level=3] [ref=e27]
+          - paragraph
+        - generic [ref=e28]:
+          - heading "Diensten" [level=3] [ref=e29]
+          - list [ref=e30]:
+            - listitem [ref=e31]:
+              - link "Kantoorreiniging" [ref=e32] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/kantoor-schoonmaak/
+            - listitem [ref=e33]:
+              - link "Glasbewassing" [ref=e34] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/glasbewassing/
+            - listitem [ref=e35]:
+              - link "Gevelreiniging" [ref=e36] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/gevelreiniging/
+            - listitem [ref=e37]:
+              - link "Vloeronderhoud" [ref=e38] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/vloeronderhoud/
+            - listitem [ref=e39]:
+              - link "Industriële reiniging" [ref=e40] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/industriele-schoonmaak/
+            - listitem [ref=e41]:
+              - link "Oplevering Schoonmaak" [ref=e42] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/oplevering-schoonmaak/
+            - listitem [ref=e43]:
+              - link "Specialistische reiniging" [ref=e44] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/specialistische-reiniging/
+            - listitem [ref=e45]:
+              - link "Reguliere Schoonmaak" [ref=e46] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/reguliere-schoonmaak/
+            - listitem [ref=e47]:
+              - link "VVE Service" [ref=e48] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/vve-service/
+        - generic [ref=e49]:
+          - heading "Over HDS" [level=3] [ref=e50]
+          - list [ref=e51]:
+            - listitem [ref=e52]:
+              - link "Over HDS" [ref=e53] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/over-hds/
+            - listitem [ref=e54]:
+              - link "Referenties" [ref=e55] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/reviews/
+            - listitem [ref=e56]:
+              - link "Offerte aanvragen" [ref=e57] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/offerte-aanvragen/
+            - listitem [ref=e58]:
+              - link "Contact" [ref=e59] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/contact/
+        - generic [ref=e60]:
+          - heading "Contact" [level=3] [ref=e61]
+          - generic [ref=e62]:
+            - paragraph [ref=e63]:
+              - link "0164-652846" [ref=e64] [cursor=pointer]:
+                - /url: tel:0164652846
+            - paragraph [ref=e65]:
+              - link "info@helderduidelijkschoon.nl" [ref=e66] [cursor=pointer]:
+                - /url: mailto:info@helderduidelijkschoon.nl
+        - generic [ref=e67]:
+          - heading "Juridisch" [level=3] [ref=e68]
+          - list [ref=e69]:
+            - listitem [ref=e70]:
+              - link "Privacyverklaring" [ref=e71] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/privacyverklaring/
+            - listitem [ref=e72]:
+              - link "Algemene voorwaarden" [ref=e73] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/algemene-voorwaarden/
+            - listitem [ref=e74]:
+              - link "Cookiebeleid" [ref=e75] [cursor=pointer]:
+                - /url: http://hds-schoonmaakdiensten.local/cookiebeleid/
+      - paragraph [ref=e78]: © 2026 HDS-schoonmaakdiensten. Alle rechten voorbehouden.
+  - button "Terug naar boven":
+    - generic: ↑
