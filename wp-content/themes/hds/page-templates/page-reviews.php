@@ -101,25 +101,6 @@ get_header();
 	<?php endif; ?>
 
 	<?php
-	// 5. Why clients trust HDS — reuse hds_usp_card
-	?>
-	<section class="hds-usp-section" aria-labelledby="reviews-trust-heading">
-		<div class="container">
-			<header class="hds-usp-header">
-				<h2 id="reviews-trust-heading"><?php esc_html_e( 'Waarom klanten voor HDS kiezen', 'hds' ); ?></h2>
-			</header>
-			<div class="hds-usp-grid">
-				<?php
-				echo hds_usp_card( __( 'Betrouwbaarheid', 'hds' ), __( 'Afspraak is afspraak. U kunt op ons rekenen, elke dag weer.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo hds_usp_card( __( 'Kwaliteit', 'hds' ), __( 'Wij leveren consequent hoge kwaliteit met oog voor detail.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo hds_usp_card( __( 'Flexibiliteit', 'hds' ), __( 'Wij stemmen onze werkzaamheden af op uw planning en bedrijfsprocessen.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo hds_usp_card( __( 'Persoonlijk contact', 'hds' ), __( 'Geen callcenter, maar een vaste contactpersoon die u kent.', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				?>
-			</div>
-		</div>
-	</section>
-
-	<?php
 	// 6. Final CTA — reuse hds_cta_section
 	echo hds_cta_section(
 		__( 'Klaar om ook klant te worden?', 'hds' ),
