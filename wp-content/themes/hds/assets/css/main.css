@@ -2243,6 +2243,15 @@ h3 {
 	text-align: center;
 }
 
+/* ── Client Logo Visual Balance (first 3) ── */
+.client-logo-grid > :nth-child(1) img,
+.client-logo-grid > :nth-child(2) img,
+.client-logo-grid > :nth-child(3) img {
+	max-height: 5rem;
+	object-fit: contain;
+	width: auto;
+}
+
 /* ── 404 Page ── */
 .error-404 {
 	margin-inline: auto;
