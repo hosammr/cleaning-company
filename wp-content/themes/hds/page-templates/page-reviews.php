@@ -29,15 +29,6 @@ get_header();
 	<div class="container">
 		<div class="quote-page">
 			<?php
-			// 2. Introduction
-			echo hds_section_header(
-				__( 'Wat onze klanten zeggen', 'hds' ),
-				__( 'Wij zijn trots op de samenwerking met onze klanten. Lees hier wat zij over HDS Onderhoudsdiensten zeggen.', 'hds' ),
-				'center'
-			); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			?>
-
-			<?php
 			while ( have_posts() ) :
 				the_post();
 				if ( ! empty( get_the_content() ) ) :
