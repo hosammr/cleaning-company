@@ -218,6 +218,11 @@
 			"name": "luchtreiniging",
 			"title": "Luchtreiniging Landing",
 			"postTypes": ["page"]
+		},
+		{
+			"name": "vacatures",
+			"title": "Vacatures",
+			"postTypes": ["page"]
 		}
 	]
 }
