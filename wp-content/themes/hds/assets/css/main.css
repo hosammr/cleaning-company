@@ -1563,6 +1563,10 @@ h3 {
 	}
 }
 
+.page-template-page-vacatures .service-hero {
+	background-position: center 20%;
+}
+
 /* ── USP Section ── */
 .hds-usp-section {
 	padding-block: var(--wp--preset--spacing--12);

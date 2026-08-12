@@ -15,14 +15,14 @@ get_header();
 	<?php hds_breadcrumbs(); ?>
 
 	<?php
-	// 1. Hero — reuse parts/hero
-	$hero_title     = get_the_title();
-	$hero_eyebrow   = get_post_meta( get_the_ID(), 'hds_eyebrow', true );
-	$hero_subtitle  = get_post_meta( get_the_ID(), 'hds_subtitle', true );
-	$hero_image_id  = (int) get_post_meta( get_the_ID(), 'hds_hero_image', true );
-	$hero_image_url = $hero_image_id ? wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ) : '';
-	$hero_cta_text  = __( 'Vrijblijvende offerte', 'hds' );
-	$hero_cta_url   = home_url( '/offerte-aanvragen/' );
+		// 1. Hero — reuse parts/hero
+		$hero_title     = get_the_title();
+		$hero_eyebrow   = get_post_meta( get_the_ID(), 'hds_eyebrow', true );
+		$hero_subtitle  = get_post_meta( get_the_ID(), 'hds_subtitle', true );
+		$hero_image_id  = (int) get_post_meta( get_the_ID(), 'hds_hero_image', true );
+		$hero_image_url = $hero_image_id ? wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ) : '';
+		$hero_cta_text  = __( 'Bekijk vacatures', 'hds' );
+		$hero_cta_url   = '#vacancy-heading';
 
 	set_query_var( 'hero_title', $hero_title );
 	set_query_var( 'hero_eyebrow', $hero_eyebrow );
@@ -34,21 +34,30 @@ get_header();
 	get_template_part( 'parts/hero' );
 	?>
 
-	<?php
-	// 2. Editable intro — renders WordPress page editor content
-	while ( have_posts() ) :
-		the_post();
-		if ( ! empty( get_the_content() ) ) :
-			?>
-			<div class="container">
-				<div class="entry-content">
-					<?php the_content(); ?>
+		<?php
+		// 2. Editable intro — renders WordPress page editor content, or default fallback
+		while ( have_posts() ) :
+			the_post();
+			if ( ! empty( get_the_content() ) ) :
+				?>
+				<div class="container">
+					<div class="entry-content">
+						<?php the_content(); ?>
+					</div>
 				</div>
-			</div>
-			<?php
-		endif;
-	endwhile;
-	?>
+				<?php
+			else :
+				?>
+				<section class="vacancy-intro" aria-labelledby="vacancy-intro-heading">
+					<div class="container">
+						<h2 id="vacancy-intro-heading"><?php esc_html_e( 'Werken bij HDS', 'hds' ); ?></h2>
+						<p><?php esc_html_e( 'Werken bij HDS betekent werken in een team waarin kwaliteit, betrouwbaarheid en samenwerking centraal staan.', 'hds' ); ?></p>
+					</div>
+				</section>
+				<?php
+			endif;
+		endwhile;
+		?>
 
 	<?php
 	// 3. Job listing — hds/job-listing block queries hds_vacancy CPT
