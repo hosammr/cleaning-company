@@ -1567,6 +1567,20 @@ h3 {
 	background-position: center 20%;
 }
 
+.page-template-page-vacatures .vacancy-intro {
+	text-align: center;
+	padding-block: var(--wp--preset--spacing--8);
+}
+
+.page-template-page-vacatures .vacancy-intro h2 {
+	margin-bottom: var(--wp--preset--spacing--4);
+}
+
+.page-template-page-vacatures .vacancy-intro p {
+	margin-inline: auto;
+	max-width: 640px;
+}
+
 /* ── USP Section ── */
 .hds-usp-section {
 	padding-block: var(--wp--preset--spacing--12);

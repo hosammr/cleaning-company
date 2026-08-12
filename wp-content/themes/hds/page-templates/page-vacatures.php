@@ -22,7 +22,7 @@ get_header();
 		$hero_image_id  = (int) get_post_meta( get_the_ID(), 'hds_hero_image', true );
 		$hero_image_url = $hero_image_id ? wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ) : '';
 		$hero_cta_text  = __( 'Bekijk vacatures', 'hds' );
-		$hero_cta_url   = '#vacancy-heading';
+		$hero_cta_url   = '#openstaande-vacatures';
 
 	set_query_var( 'hero_title', $hero_title );
 	set_query_var( 'hero_eyebrow', $hero_eyebrow );
@@ -41,7 +41,7 @@ get_header();
 			if ( ! empty( get_the_content() ) ) :
 				?>
 				<div class="container">
-					<div class="entry-content">
+					<div class="vacancy-intro">
 						<?php the_content(); ?>
 					</div>
 				</div>
@@ -62,7 +62,7 @@ get_header();
 	<?php
 	// 3. Job listing — hds/job-listing block queries hds_vacancy CPT
 	?>
-	<section class="hds-vacancy-section" aria-labelledby="vacancy-heading">
+	<section class="hds-vacancy-section" id="openstaande-vacatures" aria-label="<?php esc_attr_e( 'Openstaande vacatures', 'hds' ); ?>">
 		<div class="container">
 			<?php
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
