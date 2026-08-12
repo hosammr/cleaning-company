@@ -20,11 +20,16 @@ services:
       - ./wp-config-env.php:/var/www/html/wp-config.php:ro
       - wordpress-core:/var/www/html
     environment:
+      WP_ENV: ${WP_ENV:-local}
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_NAME: ${DB_NAME:-hds_local}
       WORDPRESS_DB_USER: ${DB_USER:-hds}
       WORDPRESS_DB_PASSWORD: ${DB_PASSWORD:-hds_local_pass}
       WORDPRESS_TABLE_PREFIX: ${DB_PREFIX:-hds_}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
       WORDPRESS_CONFIG_EXTRA: |
         define('WP_REDIS_HOST', 'redis');
         define('WP_REDIS_PORT', 6379);
