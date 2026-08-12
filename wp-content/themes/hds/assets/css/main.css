@@ -2016,16 +2016,27 @@ h3 {
 	color: var(--wp--preset--color--primary-dark);
 }
 
-.hds-vacancy-card__toggle-less {
-	display: none;
-}
-
 .hds-vacancy-card__details[open] .hds-vacancy-card__toggle-more {
 	display: none;
 }
 
-.hds-vacancy-card__details[open] .hds-vacancy-card__toggle-less {
-	display: inline;
+.hds-vacancy-card__toggle-less {
+	background: none;
+	border: none;
+	color: var(--wp--preset--color--primary);
+	cursor: pointer;
+	display: block;
+	font-family: inherit;
+	font-size: var(--wp--preset--font-size--s);
+	font-weight: 600;
+	margin-top: var(--wp--preset--spacing--4);
+	padding: 0;
+	text-align: left;
+}
+
+.hds-vacancy-card__toggle-less:hover,
+.hds-vacancy-card__toggle-less:focus-visible {
+	color: var(--wp--preset--color--primary-dark);
 }
 
 .hds-vacancy-card__details .hds-vacancy-card__content {

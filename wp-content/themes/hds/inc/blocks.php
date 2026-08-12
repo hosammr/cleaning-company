@@ -268,11 +268,11 @@ function hds_render_job_listing( array $attributes, string $content, \WP_Block $
 				<details class="hds-vacancy-card__details">
 					<summary class="hds-vacancy-card__toggle">
 						<span class="hds-vacancy-card__toggle-more"><?php esc_html_e( 'Lees meer', 'hds' ); ?></span>
-						<span class="hds-vacancy-card__toggle-less"><?php esc_html_e( 'Lees minder', 'hds' ); ?></span>
 					</summary>
 					<div class="hds-vacancy-card__content">
 						<?php echo apply_filters( 'the_content', $content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					</div>
+					<button type="button" class="hds-vacancy-card__toggle-less" onclick="this.closest('details').removeAttribute('open')"><?php esc_html_e( 'Lees minder', 'hds' ); ?></button>
 				</details>
 
 				<?php
