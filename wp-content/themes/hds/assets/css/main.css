@@ -1939,19 +1939,29 @@ h3 {
 .hds-vacancy-card {
 	background: var(--wp--preset--color--white);
 	border: 1px solid var(--wp--preset--color--light-gray);
+	border-left: 4px solid var(--wp--preset--color--primary);
 	border-radius: var(--hds-border-radius);
+	display: flex;
+	flex-direction: column;
 	padding: var(--wp--preset--spacing--6);
+	transition: border-color var(--hds-transition-fast);
+}
+
+.hds-vacancy-card:hover {
+	border-color: var(--wp--preset--color--primary);
 }
 
 .hds-vacancy-card__title {
-	font-size: var(--wp--preset--font-size--l);
-	margin-bottom: var(--wp--preset--spacing--4);
+	font-size: var(--wp--preset--font-size--xl);
+	line-height: 1.3;
+	margin-bottom: var(--wp--preset--spacing--3);
 }
 
 .hds-vacancy-card__meta {
 	display: flex;
+	flex-wrap: wrap;
 	gap: var(--wp--preset--spacing--6);
-	margin-bottom: var(--wp--preset--spacing--4);
+	margin-bottom: var(--wp--preset--spacing--5);
 }
 
 .hds-vacancy-card__meta-item {
@@ -1960,19 +1970,34 @@ h3 {
 
 .hds-vacancy-card__meta-item dt {
 	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--xs);
 	font-weight: 600;
+	margin-bottom: var(--wp--preset--spacing--1);
+	text-transform: uppercase;
 }
 
 .hds-vacancy-card__meta-item dd {
+	font-weight: 600;
 	margin: 0;
 }
 
 .hds-vacancy-card__content {
-	margin-bottom: var(--wp--preset--spacing--4);
+	color: var(--wp--preset--color--dark-gray);
+	font-size: var(--wp--preset--font-size--m);
+	line-height: 1.7;
+	margin-bottom: var(--wp--preset--spacing--6);
 }
 
 .hds-vacancy-card__apply {
+	align-self: flex-start;
+	background: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--white);
 	margin-top: auto;
+	padding: 0.75rem 2rem;
+}
+
+.hds-vacancy-card__apply:hover {
+	background: var(--wp--preset--color--primary-dark);
 }
 
 /* ── Block Empty State ── */
