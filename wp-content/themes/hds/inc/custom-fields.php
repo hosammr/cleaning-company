@@ -164,4 +164,48 @@ function hds_register_vacancy_fields(): void {
 		] );
 	}
 }
+
+add_filter( 'rest_hds_vacancy_item_schema', 'hds_add_vacancy_meta_to_rest_schema' );
+
+/**
+ * Add vacancy meta fields to the REST API schema for hds_vacancy.
+ *
+ * Ensures the six hds_* custom fields are accepted during
+ * block-editor saves via the REST API.
+ *
+ * @param array $schema REST item schema.
+ * @return array Modified schema with meta property.
+ */
+function hds_add_vacancy_meta_to_rest_schema( array $schema ): array {
+	$schema['properties']['meta'] = array(
+		'type'       => 'object',
+		'properties' => array(
+			'hds_hours_per_week'    => array(
+				'type'    => 'string',
+				'default' => '',
+			),
+			'hds_location'          => array(
+				'type'    => 'string',
+				'default' => '',
+			),
+			'hds_start_date'        => array(
+				'type'    => 'string',
+				'default' => '',
+			),
+			'hds_application_email' => array(
+				'type'    => 'string',
+				'default' => '',
+			),
+			'hds_deadline'          => array(
+				'type'    => 'string',
+				'default' => '',
+			),
+			'hds_is_active'         => array(
+				'type'    => 'boolean',
+				'default' => false,
+			),
+		),
+	);
+	return $schema;
+}
 add_action( 'init', 'hds_register_vacancy_fields' );
