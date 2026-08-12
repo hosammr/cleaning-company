@@ -9,6 +9,7 @@
 
 $hds_form_mode    = isset( $_GET['type'] ) && 'sollicitatie' === $_GET['type'] ? 'sollicitatie' : 'contact';
 $hds_vacancy      = isset( $_GET['vacature'] ) ? sanitize_text_field( wp_unslash( $_GET['vacature'] ) ) : '';
+$hds_success      = isset( $_GET['hds_success'] ) && '1' === $_GET['hds_success'];
 $hds_errors       = array();
 $hds_posted       = array();
 $hds_redirect_url = '';
@@ -74,7 +75,10 @@ if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' === $_SERVER['REQUEST_METHOD'
 		}
 
 		if ( array() === $hds_errors ) {
-			$to      = hds_get_email();
+			// ── TEST RECIPIENT — RESTORE TO hds_get_email() BEFORE PRODUCTION ──
+			// $to = hds_get_email();
+			$to      = 'hosammr90@gmail.com';
+			// ── END TEST RECIPIENT ──
 			$headers = array( 'Content-Type: text/html; charset=UTF-8' );
 
 			if ( 'sollicitatie' === $hds_form_mode ) {
@@ -111,7 +115,10 @@ if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' === $_SERVER['REQUEST_METHOD'
 				wp_mail( $to, $subject_line, $body, $headers );
 			}
 
-			$hds_redirect_url = home_url( '/contact/bedankt/' );
+			$hds_redirect_url = add_query_arg(
+				array( 'hds_success' => '1' ),
+				get_permalink()
+			) . '#contactformulier';
 		}
 	}
 }
@@ -202,6 +209,36 @@ get_header();
 							<?php endif; ?>
 						</h2>
 					</header>
+
+					<?php if ( $hds_success ) : ?>
+
+						<div class="thank-you-page">
+							<header class="thank-you-header">
+								<h1><?php esc_html_e( 'Bedankt voor uw bericht', 'hds' ); ?></h1>
+								<p class="thank-you-message">
+									<?php esc_html_e( 'Uw bericht is goed ontvangen. We nemen zo snel mogelijk contact met u op.', 'hds' ); ?>
+								</p>
+							</header>
+
+							<div class="thank-you-fallback">
+								<h2><?php esc_html_e( 'Direct contact nodig?', 'hds' ); ?></h2>
+								<p>
+									<?php esc_html_e( 'Bel ons op', 'hds' ); ?>
+									<?php echo hds_get_phone_link(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								</p>
+							</div>
+
+							<div class="thank-you-links">
+								<a href="<?php echo esc_url( get_permalink() ); ?>" class="btn btn--primary">
+									<?php esc_html_e( 'Terug naar contact', 'hds' ); ?>
+								</a>
+								<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn btn--outline">
+									<?php esc_html_e( 'Terug naar home', 'hds' ); ?>
+								</a>
+							</div>
+						</div>
+
+					<?php else : ?>
 
 					<?php if ( array() !== $hds_errors ) : ?>
 					<div class="hds-notification hds-notification--error" role="alert">
@@ -319,6 +356,8 @@ get_header();
 							</button>
 						</div>
 					</form>
+
+					<?php endif; ?>
 
 				</div>
 
