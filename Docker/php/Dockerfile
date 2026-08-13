@@ -12,6 +12,8 @@ RUN apk add --no-cache \
     libxslt-dev \
     imagemagick-dev \
     imagemagick-libs \
+    autoconf \
+    build-base \
     nginx \
     supervisor \
     curl \
