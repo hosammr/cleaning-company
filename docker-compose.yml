@@ -47,7 +47,7 @@ services:
       - hds-network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.hds.rule=Host(`hds.local`)"
+      - "traefik.http.routers.hds.rule=Host(`hds-schoonmaakdiensten.local`)"
       - "traefik.http.routers.hds.entrypoints=web"
       - "traefik.http.services.hds.loadbalancer.server.port=80"
 
