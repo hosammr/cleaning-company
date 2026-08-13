@@ -45,11 +45,6 @@ services:
         define('WP_MAX_MEMORY_LIMIT', '512M');
     networks:
       - hds-network
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.hds.rule=Host(`hds-schoonmaakdiensten.local`)"
-      - "traefik.http.routers.hds.entrypoints=web"
-      - "traefik.http.services.hds.loadbalancer.server.port=80"
 
   # Nginx reverse proxy
   nginx:
@@ -66,6 +61,11 @@ services:
       - "${NGINX_PORT:-8080}:80"
     networks:
       - hds-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hds.rule=Host(`hds-schoonmaakdiensten.local`)"
+      - "traefik.http.routers.hds.entrypoints=web"
+      - "traefik.http.services.hds.loadbalancer.server.port=80"
 
   # MySQL 8.0
   mysql:
