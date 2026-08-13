@@ -21,6 +21,11 @@ services:
       - wordpress-core:/var/www/html
     environment:
       WP_ENV: ${WP_ENV:-local}
+      DB_HOST: mysql
+      DB_NAME: ${DB_NAME:-hds_local}
+      DB_USER: ${DB_USER:-hds}
+      DB_PASSWORD: ${DB_PASSWORD:-hds_local_pass}
+      DB_PREFIX: ${DB_PREFIX:-hds_}
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_NAME: ${DB_NAME:-hds_local}
       WORDPRESS_DB_USER: ${DB_USER:-hds}
