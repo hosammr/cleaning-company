@@ -134,7 +134,7 @@ services:
 
   # Traefik reverse proxy (for clean *.local domains)
   traefik:
-    image: traefik:3.2
+    image: traefik:3.6.1
     container_name: hds-traefik
     restart: unless-stopped
     command:
