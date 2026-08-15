@@ -6,6 +6,7 @@
  *   - Keyboard navigation: Escape closes overlay, arrow keys in dropdowns
  *   - Focus trap inside mobile overlay
  *   - CSS-only dropdown toggle via class on parent (desktop)
+ *   - Header search panel toggle with ARIA state management
  *   - Back-to-top button (IntersectionObserver)
  *   - Cookie banner dismissal
  *   - Notification dismissal
@@ -113,6 +114,68 @@
 			} );
 		}
 	} );
+
+	/* ── Header Search Toggle ── */
+	const searchToggle  = document.getElementById( 'hds-header-search-toggle' );
+	const searchPanel   = document.getElementById( 'hds-header-search-panel' );
+	const searchClose   = document.getElementById( 'hds-header-search-close' );
+	const searchInput   = searchPanel ? searchPanel.querySelector( '.hds-search-form__input' ) : null;
+
+	function openHeaderSearch() {
+		if ( ! searchToggle || ! searchPanel ) {
+			return;
+		}
+		searchPanel.hidden = false;
+		searchToggle.setAttribute( 'aria-expanded', 'true' );
+		if ( searchInput ) {
+			setTimeout( function () { searchInput.focus(); }, 50 );
+		}
+	}
+
+	function closeHeaderSearch( returnFocus ) {
+		if ( ! searchToggle || ! searchPanel ) {
+			return;
+		}
+		searchPanel.hidden = true;
+		searchToggle.setAttribute( 'aria-expanded', 'false' );
+		if ( returnFocus ) {
+			searchToggle.focus();
+		}
+	}
+
+	if ( searchToggle && searchPanel ) {
+		searchToggle.addEventListener( 'click', function () {
+			if ( 'true' === this.getAttribute( 'aria-expanded' ) ) {
+				closeHeaderSearch( false );
+			} else {
+				openHeaderSearch();
+			}
+		} );
+
+		if ( searchClose ) {
+			searchClose.addEventListener( 'click', function () {
+				closeHeaderSearch( true );
+			} );
+		}
+
+		searchPanel.addEventListener( 'keydown', function ( event ) {
+			if ( event.key === 'Escape' ) {
+				closeHeaderSearch( true );
+			}
+		} );
+
+		document.addEventListener( 'click', function ( event ) {
+			if (
+				'false' === searchToggle.getAttribute( 'aria-expanded' ) ||
+				searchPanel.hidden
+			) {
+				return;
+			}
+			if ( ! event.target.closest( '#hds-header-search-panel' ) && ! event.target.closest( '#hds-header-search-toggle' ) ) {
+				closeHeaderSearch( false );
+			}
+		} );
+	}
 
 	/* ── Back-to-Top Button ── */
 	const backToTop = document.getElementById( 'hds-back-to-top' );

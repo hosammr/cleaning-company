@@ -82,8 +82,48 @@
 				<a href="<?php echo esc_url( home_url( '/offerte-aanvragen/' ) ); ?>" class="btn btn--cta header-cta">
 					<?php esc_html_e( 'Offerte', 'hds' ); ?>
 				</a>
+
+				<button
+					type="button"
+					class="header-search-toggle"
+					id="hds-header-search-toggle"
+					aria-expanded="false"
+					aria-controls="hds-header-search-panel"
+					aria-label="<?php esc_attr_e( 'Zoeken', 'hds' ); ?>"
+				>
+					<svg class="header-search-toggle__icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+				</button>
 			</div>
 
 		</div>
+
+		<div class="header-search-panel" id="hds-header-search-panel" hidden>
+			<div class="container">
+				<form role="search" method="get" class="hds-search-form hds-search-form--header" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+					<label class="hds-search-form__label" for="hds-header-search-input">
+						<span class="screen-reader-text"><?php esc_html_e( 'Zoeken naar:', 'hds' ); ?></span>
+					</label>
+					<div class="hds-search-form__wrapper">
+						<input
+							type="search"
+							id="hds-header-search-input"
+							class="hds-search-form__input"
+							name="s"
+							value="<?php echo get_search_query(); ?>"
+							placeholder="<?php esc_attr_e( 'Zoeken...', 'hds' ); ?>"
+							required
+							aria-label="<?php esc_attr_e( 'Zoeken op de website', 'hds' ); ?>"
+						>
+						<button type="submit" class="hds-search-form__submit" aria-label="<?php esc_attr_e( 'Zoek', 'hds' ); ?>">
+							<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+						</button>
+					</div>
+					<button type="button" class="header-search-panel__close" id="hds-header-search-close" aria-label="<?php esc_attr_e( 'Zoeken sluiten', 'hds' ); ?>" aria-controls="hds-header-search-panel">
+						<?php esc_html_e( 'Sluiten', 'hds' ); ?>
+					</button>
+				</form>
+			</div>
+		</div>
+
 	</div>
 </header>
