@@ -75,10 +75,7 @@ if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' === $_SERVER['REQUEST_METHOD'
 		}
 
 		if ( array() === $hds_errors ) {
-			// ── TEST RECIPIENT — RESTORE TO hds_get_email() BEFORE PRODUCTION ──
-			// $to = hds_get_email();
-			$to      = 'hosammr90@gmail.com';
-			// ── END TEST RECIPIENT ──
+			$to = hds_get_email();
 			$headers = array( 'Content-Type: text/html; charset=UTF-8' );
 
 			if ( 'sollicitatie' === $hds_form_mode ) {
@@ -169,6 +166,7 @@ get_header();
 					<h3 class="hds-usp-card__title"><?php esc_html_e( 'E-mail', 'hds' ); ?></h3>
 					<p class="hds-usp-card__desc"><?php echo hds_get_email_link(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 				</article>
+				<?php if ( hds_get_address() || hds_get_postal_city() ) : ?>
 				<article class="hds-card hds-usp-card">
 					<h3 class="hds-usp-card__title"><?php esc_html_e( 'Adres', 'hds' ); ?></h3>
 					<p class="hds-usp-card__desc">
@@ -178,6 +176,7 @@ get_header();
 						<?php echo esc_html( hds_get_postal_city() ); ?>
 					</p>
 				</article>
+				<?php endif; ?>
 				<article class="hds-card hds-usp-card">
 					<h3 class="hds-usp-card__title"><?php esc_html_e( 'Openingstijden', 'hds' ); ?></h3>
 					<p class="hds-usp-card__desc">
