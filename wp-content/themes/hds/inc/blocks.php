@@ -276,9 +276,15 @@ function hds_render_job_listing( array $attributes, string $content, \WP_Block $
 				</details>
 
 				<?php
-				$email = get_post_meta( get_the_ID(), 'hds_application_email', true ) ?: hds_get_email();
+				$apply_url = add_query_arg(
+					[
+						'type'     => 'sollicitatie',
+						'vacature' => get_the_title(),
+					],
+					home_url( '/contact/' )
+				);
 				?>
-				<a href="mailto:<?php echo esc_attr( $email ); ?>?subject=<?php echo esc_attr( sprintf( __( 'Sollicitatie: %s', 'hds' ), get_the_title() ) ); ?>" class="btn hds-vacancy-card__apply">
+				<a href="<?php echo esc_url( $apply_url ); ?>" class="btn hds-vacancy-card__apply">
 					<?php esc_html_e( 'Solliciteer nu', 'hds' ); ?>
 				</a>
 			</article>
