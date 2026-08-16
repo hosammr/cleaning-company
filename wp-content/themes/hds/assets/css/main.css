@@ -112,7 +112,21 @@ h3 {
 	padding-block: var(--wp--preset--spacing--4);
 	position: sticky;
 	top: 0;
+	transition: padding-top var(--hds-transition-speed) var(--hds-easing-standard),
+	            padding-bottom var(--hds-transition-speed) var(--hds-easing-standard),
+	            box-shadow var(--hds-transition-speed) var(--hds-easing-standard),
+	            top var(--hds-transition-speed) var(--hds-easing-standard);
 	z-index: 1000;
+}
+
+body.admin-bar .site-header {
+	top: 32px;
+}
+
+@media (max-width: 782px) {
+	body.admin-bar .site-header {
+		top: 46px;
+	}
 }
 
 .site-header-inner {
@@ -127,9 +141,17 @@ h3 {
 }
 
 .site-logo img {
-	height: auto;
+	height: 60px;
 	max-height: 60px;
+	object-fit: contain;
+	transition: height var(--hds-transition-speed) var(--hds-easing-standard),
+	            max-height var(--hds-transition-speed) var(--hds-easing-standard);
 	width: auto;
+}
+
+.custom-logo-link {
+	display: inline-flex;
+	line-height: 0;
 }
 
 .site-title a {
@@ -137,6 +159,7 @@ h3 {
 	font-size: var(--wp--preset--font-size--xl);
 	font-weight: 700;
 	text-decoration: none;
+	transition: font-size var(--hds-transition-speed) var(--hds-easing-standard);
 }
 
 .site-header-actions {
@@ -285,6 +308,7 @@ h3 {
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	transition: gap var(--hds-transition-speed) var(--hds-easing-standard);
 }
 
 .primary-menu a {
@@ -359,6 +383,31 @@ h3 {
 	margin: 5px 0;
 	transition: transform var(--hds-transition-speed) var(--hds-transition-easing), opacity var(--hds-transition-speed) var(--hds-transition-easing);
 	width: 24px;
+}
+
+/* ── Header: compact state (desktop only ≥1024px to align with mobile-menu top:60px) ── */
+@media (min-width: 1024px) {
+	.site-header.is-scrolled {
+		box-shadow: var(--wp--preset--shadow--sm);
+		padding-block: var(--wp--preset--spacing--2);
+	}
+
+	.site-header.is-scrolled .site-logo img {
+		height: 44px;
+		max-height: 44px;
+	}
+
+	.site-header.is-scrolled .site-title a {
+		font-size: var(--wp--preset--font-size--l);
+	}
+
+	.site-header.is-scrolled .primary-menu {
+		gap: var(--wp--preset--spacing--4);
+	}
+
+	.site-header.is-scrolled .primary-menu a {
+		line-height: 1.4;
+	}
 }
 
 /* ── Footer ── */

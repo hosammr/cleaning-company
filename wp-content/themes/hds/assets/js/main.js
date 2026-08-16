@@ -7,6 +7,7 @@
  *   - Focus trap inside mobile overlay
  *   - CSS-only dropdown toggle via class on parent (desktop)
  *   - Header search panel toggle with ARIA state management
+ *   - Sticky header compact state on scroll
  *   - Back-to-top button (IntersectionObserver)
  *   - Cookie banner dismissal
  *   - Notification dismissal
@@ -175,6 +176,32 @@
 				closeHeaderSearch( false );
 			}
 		} );
+	}
+
+	/* ── Sticky Header Compact State ── */
+	const siteHeader = document.querySelector( '.site-header' );
+
+	if ( siteHeader ) {
+		let ticking = false;
+		const SCROLL_THRESHOLD = 24;
+
+		function updateHeaderState() {
+			if ( window.scrollY > SCROLL_THRESHOLD ) {
+				siteHeader.classList.add( 'is-scrolled' );
+			} else {
+				siteHeader.classList.remove( 'is-scrolled' );
+			}
+			ticking = false;
+		}
+
+		updateHeaderState();
+
+		window.addEventListener( 'scroll', function () {
+			if ( ! ticking ) {
+				window.requestAnimationFrame( updateHeaderState );
+				ticking = true;
+			}
+		}, { passive: true } );
 	}
 
 	/* ── Back-to-Top Button ── */
