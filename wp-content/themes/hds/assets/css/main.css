@@ -351,9 +351,7 @@ body.admin-bar .site-header {
 	z-index: 100;
 }
 
-.primary-menu .sub-menu.is-open,
-.primary-menu .menu-item-has-children:hover > .sub-menu,
-.primary-menu .menu-item-has-children:focus-within > .sub-menu {
+.primary-menu .sub-menu.is-open {
 	display: block;
 }
 
