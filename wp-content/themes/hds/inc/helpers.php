@@ -117,17 +117,18 @@ function hds_truncate( string $text, int $length = 100, string $suffix = '...' )
 /**
  * Fallback for the footer-about nav menu when no menu is assigned.
  *
- * Renders default links including Reviews, About, and Contact
- * using the existing footer-menu class.
+ * Renders the Over HDS links: Over HDS, Kwaliteit & Veiligheid,
+ * Referenties, Downloads, Offerte aanvragen.
  *
  * @param array $args wp_nav_menu() arguments.
  */
 function hds_footer_about_fallback( array $args ): void {
 	$links = [
-		home_url( '/over-hds/' )          => __( 'Over HDS', 'hds' ),
-		home_url( '/referenties/' )      => __( 'Referenties', 'hds' ),
-		home_url( '/offerte-aanvragen/' ) => __( 'Offerte aanvragen', 'hds' ),
-		home_url( '/contact/' )           => __( 'Contact', 'hds' ),
+		home_url( '/over-hds/' )                => __( 'Over HDS', 'hds' ),
+		home_url( '/kwaliteit-en-veiligheid/' ) => __( 'Kwaliteit & Veiligheid', 'hds' ),
+		home_url( '/referenties/' )             => __( 'Referenties', 'hds' ),
+		home_url( '/downloads/' )               => __( 'Downloads', 'hds' ),
+		home_url( '/offerte-aanvragen/' )       => __( 'Offerte aanvragen', 'hds' ),
 	];
 
 	$menu_class = ! empty( $args['menu_class'] ) ? $args['menu_class'] : 'footer-menu';
