@@ -192,6 +192,10 @@ body.admin-bar .site-header {
 	white-space: nowrap;
 }
 
+.primary-menu .menu-item-cta {
+	display: none;
+}
+
 .header-search-toggle {
 	align-items: center;
 	background: none;
@@ -2863,6 +2867,28 @@ body.admin-bar .site-header {
 		border-bottom: 1px solid var(--wp--preset--color--light-gray);
 		display: block;
 		padding: var(--wp--preset--spacing--3) 0;
+	}
+
+	.primary-menu .menu-item-cta {
+		display: block;
+		margin-top: var(--wp--preset--spacing--5);
+	}
+
+	.primary-menu .menu-item-cta a {
+		background: var(--wp--preset--color--primary);
+		border-bottom: none;
+		border-radius: var(--hds-border-radius);
+		color: var(--wp--preset--color--white);
+		font-weight: 600;
+		min-height: 44px;
+		padding: var(--wp--preset--spacing--3) var(--wp--preset--spacing--4);
+		text-align: center;
+		transition: background var(--hds-transition-speed) var(--hds-transition-easing);
+	}
+
+	.primary-menu .menu-item-cta a:hover,
+	.primary-menu .menu-item-cta a:focus-visible {
+		background: var(--wp--preset--color--primary-dark);
 	}
 
 	.primary-menu .sub-menu {

@@ -60,17 +60,23 @@
 					<span class="screen-reader-text"><?php esc_html_e( 'Menu openen', 'hds' ); ?></span>
 				</button>
 
-				<?php
-				wp_nav_menu( [
-					'theme_location'  => 'primary',
-					'menu_id'         => 'primary-menu',
-					'menu_class'      => 'primary-menu',
-					'container'       => false,
-					'fallback_cb'     => false,
-					'depth'           => 3,
-					'walker'          => new HDS_Walker_Nav_Menu(),
-				] );
-				?>
+			<?php
+			$cta_item = sprintf(
+				'<li class="menu-item menu-item-cta"><a href="%1$s">%2$s</a></li>',
+				esc_url( home_url( '/offerte-aanvragen/' ) ),
+				esc_html__( 'Offerte aanvragen', 'hds' )
+			);
+			wp_nav_menu( [
+				'theme_location'  => 'primary',
+				'menu_id'         => 'primary-menu',
+				'menu_class'      => 'primary-menu',
+				'container'       => false,
+				'fallback_cb'     => false,
+				'depth'           => 3,
+				'walker'          => new HDS_Walker_Nav_Menu(),
+				'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s' . $cta_item . '</ul>',
+			] );
+			?>
 			</nav>
 
 			<div class="site-header-actions">
