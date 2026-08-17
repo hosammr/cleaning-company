@@ -118,7 +118,7 @@
 		}
 	} );
 
-	/* ── Desktop dropdown: click toggle for touch/hover fallback ── */
+	/* ── Dropdown: click/tap toggle for touch/hover fallback (all widths) ── */
 	if ( siteNavigation ) {
 		const dropdownParents = siteNavigation.querySelectorAll( '.menu-item-has-children > a' );
 
@@ -127,7 +127,7 @@
 				const parent = this.parentNode;
 				const hasDropdown = parent.classList.contains( 'menu-item-has-children' );
 
-				if ( hasDropdown && window.innerWidth > 1023 ) {
+				if ( hasDropdown ) {
 					e.preventDefault();
 
 					if ( parent.classList.contains( 'is-open' ) ) {
