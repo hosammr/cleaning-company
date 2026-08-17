@@ -1624,6 +1624,7 @@ body.admin-bar .site-header {
 
 .hero-section h1 {
 	margin-bottom: var(--wp--preset--spacing--4);
+	overflow-wrap: break-word;
 }
 
 .hero-section p {
@@ -1632,6 +1633,7 @@ body.admin-bar .site-header {
 	margin-left: auto;
 	margin-right: auto;
 	max-width: 580px;
+	overflow-wrap: break-word;
 	text-shadow: 0 1px 4px rgb(0 0 0 / 35%);
 }
 
@@ -1641,6 +1643,58 @@ body.admin-bar .site-header {
 
 .hero-section .wp-block-button__link {
 	padding: 0.875rem 2.5rem;
+}
+
+/* ── Hero responsive ── */
+@media (width <= 1023px) {
+	.hero-section {
+		min-height: 60vh;
+		padding: var(--wp--preset--spacing--16) var(--wp--preset--spacing--6) !important;
+	}
+
+	.hero-section h1 {
+		font-size: clamp(1.75rem, 4vw, 2.75rem);
+		line-height: 1.2;
+		margin-bottom: var(--wp--preset--spacing--4);
+		max-width: 600px;
+		padding-inline: var(--wp--preset--spacing--4);
+	}
+
+	.hero-section p {
+		font-size: 1.0625rem;
+		line-height: 1.6;
+		max-width: 520px;
+	}
+}
+
+@media (width <= 767px) {
+	.hero-section {
+		background-position: center 30%;
+		min-height: 50vh;
+		padding: var(--wp--preset--spacing--12) var(--wp--preset--spacing--5) !important;
+	}
+
+	.hero-section h1 {
+		font-size: clamp(1.5rem, 6vw, 2rem);
+		line-height: 1.2;
+		padding-inline: var(--wp--preset--spacing--2);
+	}
+
+	.hero-section p {
+		font-size: 1rem;
+		line-height: 1.6;
+		margin-bottom: var(--wp--preset--spacing--4);
+		max-width: 90%;
+	}
+
+	.hero-section .wp-block-buttons {
+		margin-top: var(--wp--preset--spacing--5);
+	}
+
+	.hero-section .wp-block-button__link {
+		max-width: 100%;
+		padding: 0.75rem 1.5rem;
+	}
 }
 
 /* ── Service Hero ── */
