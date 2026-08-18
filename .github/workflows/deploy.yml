@@ -21,10 +21,11 @@ env:
   NODE_VERSION: '20'
 
 jobs:
-  # ── Lint & Static Analysis ──
+    # ── Lint & Static Analysis ──
   lint:
     name: Lint & Static Analysis
     runs-on: ubuntu-24.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -45,34 +46,29 @@ jobs:
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
+          restore-keys: |
+            ${{ runner.os }}-composer-
 
       - name: Install Composer dependencies
         run: composer install --no-interaction --no-progress
-        continue-on-error: true
 
       - name: Run PHPCS
-        run: composer phpcs || true
-        continue-on-error: true
+        run: composer phpcs
 
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: npm
 
       - name: Install Node dependencies
         run: npm ci
-        continue-on-error: true
 
       - name: Run ESLint
-        run: npm run lint:js || true
-        continue-on-error: true
+        run: npm run lint:js
 
       - name: Run Stylelint
-        run: npm run lint:css || true
-        continue-on-error: true
-
+        run: npm run lint:css
   # ── Deploy ──
   deploy:
     name: Deploy

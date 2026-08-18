@@ -816,7 +816,7 @@ body.admin-bar .site-header {
 	text-align: left;
 }
 
-.service-intro__content {}
+
 
 .service-intro__text {
 	color: var(--wp--preset--color--dark-gray);
@@ -1140,7 +1140,7 @@ body.admin-bar .site-header {
 
 .hds-service-card:hover {
 	transform: translateY(-8px);
-	box-shadow: 0 16px 40px rgba(0,0,0,.14);
+	box-shadow: 0 16px 40px rgb(0 0 0 / 14%);
 }
 
 .hds-service-card:hover::before {
@@ -1897,6 +1897,7 @@ body.admin-bar .site-header {
 
 .hds-process-step {
 	align-items: center;
+	animation: process-fade-in 600ms ease both;
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -1969,9 +1970,7 @@ body.admin-bar .site-header {
 }
 
 /* Entrance animation */
-.hds-process-step {
-	animation: process-fade-in 600ms ease both;
-}
+
 
 .hds-process-step:nth-child(1) { animation-delay: 100ms; }
 .hds-process-step:nth-child(2) { animation-delay: 250ms; }
