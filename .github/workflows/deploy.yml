@@ -29,6 +29,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -52,8 +54,25 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-interaction --no-progress
 
-      - name: Run PHPCS
-        run: composer phpcs
+      - name: Run PHPCS on changed PHP files
+        run: |
+          BEFORE="${{ github.event.before }}"
+          if [[ -z "$BEFORE" || "$BEFORE" == "0000000000000000000000000000000000000000" ]]; then
+            RANGE="HEAD~1..HEAD"
+          else
+            RANGE="${BEFORE}..${{ github.sha }}"
+          fi
+
+          mapfile -t CHANGED_PHP < <(git diff --name-only --diff-filter=d "$RANGE" -- '*.php')
+
+          if [[ ${#CHANGED_PHP[@]} -eq 0 ]]; then
+            echo "No PHP files changed, skipping PHPCS"
+            exit 0
+          fi
+
+          echo "Running PHPCS on changed PHP files:"
+          printf '  %s\n' "${CHANGED_PHP[@]}"
+          vendor/bin/phpcs --standard=phpcs.xml "${CHANGED_PHP[@]}"
 
       - name: Setup Node.js
         uses: actions/setup-node@v5
