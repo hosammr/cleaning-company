@@ -77,7 +77,9 @@ jobs:
   deploy:
     name: Deploy
     needs: lint
-    if: success() || failure()
+    # Deployment is disabled until hosting and SSH credentials are configured.
+    # Enable by setting DEPLOY_ENABLED to 'true'.
+    if: vars.DEPLOY_ENABLED == 'true' && success()
     runs-on: ubuntu-24.04
     environment:
       name: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
@@ -149,7 +151,9 @@ jobs:
   backup:
     name: Pre-deploy Backup
     needs: lint
-    if: github.ref_name == 'main' && github.event_name == 'push'
+    # Backup is disabled until production hosting and SSH access are configured.
+    # Enable by setting DEPLOY_ENABLED to 'true'.
+    if: vars.DEPLOY_ENABLED == 'true' && github.ref_name == 'main' && github.event_name == 'push' && success()
     runs-on: ubuntu-24.04
     steps:
       - name: Trigger backup via SSH
