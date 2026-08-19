@@ -6,6 +6,7 @@
 
 :root {
 	--hds-spacing: var(--wp--preset--spacing--4);
+	--hds-header-height: calc(60px + var(--wp--preset--spacing--4) * 2);
 	--hds-border-radius: 8px;
 	--hds-transition-speed: 300ms;
 	--hds-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
@@ -2841,21 +2842,29 @@ body.admin-bar .site-header {
 	.primary-menu {
 		background: var(--wp--preset--color--white);
 		border-top: 1px solid var(--wp--preset--color--light-gray);
+		box-shadow: var(--wp--preset--shadow--md);
 		display: none;
 		flex-direction: column;
 		gap: 0;
-		left: 0;
-		max-height: calc(100vh - 60px);
+		left: var(--wp--preset--spacing--4);
+		max-height: calc(100vh - var(--hds-header-height) - var(--wp--preset--spacing--3));
+		max-height: calc(100dvh - var(--hds-header-height) - var(--wp--preset--spacing--3));
 		overflow-y: auto;
-		padding: var(--wp--preset--spacing--4);
+		padding: var(--wp--preset--spacing--3) var(--wp--preset--spacing--4);
 		position: fixed;
-		right: 0;
-		top: 60px;
+		right: var(--wp--preset--spacing--4);
+		top: calc(var(--hds-header-height) + var(--wp--preset--spacing--3));
 		z-index: 999;
 	}
 
+	body.admin-bar .primary-menu {
+		top: calc(46px + var(--hds-header-height) + var(--wp--preset--spacing--3));
+		max-height: calc(100vh - 46px - var(--hds-header-height) - var(--wp--preset--spacing--3));
+		max-height: calc(100dvh - 46px - var(--hds-header-height) - var(--wp--preset--spacing--3));
+	}
+
 	.primary-menu.is-active {
-		display: flex;
+		display: block;
 	}
 
 	body.menu-open {
@@ -2865,12 +2874,12 @@ body.admin-bar .site-header {
 	.primary-menu a {
 		border-bottom: 1px solid var(--wp--preset--color--light-gray);
 		display: block;
-		padding: var(--wp--preset--spacing--3) 0;
+		padding: var(--wp--preset--spacing--2) 0;
 	}
 
 	.primary-menu .menu-item-cta {
 		display: block;
-		margin-top: var(--wp--preset--spacing--5);
+		margin-top: var(--wp--preset--spacing--3);
 	}
 
 	.primary-menu .menu-item-cta a {
@@ -2879,10 +2888,13 @@ body.admin-bar .site-header {
 		border-radius: var(--hds-border-radius);
 		color: var(--wp--preset--color--white);
 		font-weight: 600;
-		min-height: 44px;
-		padding: var(--wp--preset--spacing--3) var(--wp--preset--spacing--4);
+		margin-inline: auto;
+		max-width: 390px;
+		min-height: 50px;
+		padding: var(--wp--preset--spacing--2) var(--wp--preset--spacing--3);
 		text-align: center;
 		transition: background var(--hds-transition-speed) var(--hds-transition-easing);
+		width: calc(100% - 40px);
 	}
 
 	.primary-menu .menu-item-cta a:hover,
