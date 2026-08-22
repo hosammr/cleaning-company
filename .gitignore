@@ -69,6 +69,9 @@ desktop.ini
 *.tar.gz
 *.zip
 
+# === Tooling artifacts ===
+.playwright-mcp/
+
 # === System ===
 /.codegraph/
 /.omo/
