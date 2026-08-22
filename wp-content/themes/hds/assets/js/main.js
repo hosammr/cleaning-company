@@ -32,6 +32,7 @@
 			this.setAttribute( 'aria-expanded', expanded ? 'false' : 'true' );
 
 			if ( ! expanded ) {
+				lockBodyScroll();
 				primaryMenu.classList.add( 'is-active' );
 				document.body.classList.add( 'menu-open' );
 				this.querySelector( '.screen-reader-text' ).textContent = this.getAttribute( 'data-close-text' )
@@ -40,6 +41,7 @@
 			} else {
 				primaryMenu.classList.remove( 'is-active' );
 				document.body.classList.remove( 'menu-open' );
+				unlockBodyScroll();
 				this.querySelector( '.screen-reader-text' ).textContent = this.getAttribute( 'data-open-text' )
 					|| 'Menu openen';
 				menuToggle.focus();
@@ -55,6 +57,26 @@
 			}, 100 );
 		}
 	}
+
+	let scrollLockY = 0;
+
+	function lockBodyScroll() {
+		scrollLockY = window.scrollY;
+		document.body.style.top = `-${scrollLockY}px`;
+	}
+
+	function unlockBodyScroll() {
+		document.body.style.top = '';
+		window.scrollTo( 0, scrollLockY );
+		scrollLockY = 0;
+	}
+
+	window.addEventListener( 'resize', function () {
+		if ( window.innerWidth > 767 && document.body.classList.contains( 'menu-open' ) ) {
+			unlockBodyScroll();
+			document.body.classList.remove( 'menu-open' );
+		}
+	} );
 
 	function openDropdown( item ) {
 		item.classList.add( 'is-open' );
@@ -99,6 +121,7 @@
 			if ( primaryMenu && primaryMenu.classList.contains( 'is-active' ) ) {
 				primaryMenu.classList.remove( 'is-active' );
 				document.body.classList.remove( 'menu-open' );
+				unlockBodyScroll();
 				if ( menuToggle ) {
 					menuToggle.setAttribute( 'aria-expanded', 'false' );
 					menuToggle.querySelector( '.screen-reader-text' ).textContent = menuToggle.getAttribute( 'data-open-text' )
