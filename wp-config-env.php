@@ -43,11 +43,21 @@ define( 'LOGGED_IN_SALT',   getenv( 'LOGGED_IN_SALT' )   ?: 'default-logged-in-s
 define( 'NONCE_SALT',       getenv( 'NONCE_SALT' )       ?: 'default-nonce-salt' );
 
 // ── WordPress URLs ──
-if ( getenv( 'WP_HOME' ) ) {
-	define( 'WP_HOME', getenv( 'WP_HOME' ) );
-}
-if ( getenv( 'WP_SITEURL' ) ) {
-	define( 'WP_SITEURL', getenv( 'WP_SITEURL' ) );
+//
+// Local development: canonical local hostname (stable desktop workflow).
+// Mobile image URLs remain host-relative in post_content, so uploaded media
+// resolves against this host. Production/staging keep using the WP_HOME/
+// WP_SITEURL environment values (or DB options).
+if ( 'local' === $env ) {
+	define( 'WP_HOME', 'http://hds-schoonmaakdiensten.local' );
+	define( 'WP_SITEURL', 'http://hds-schoonmaakdiensten.local' );
+} else {
+	if ( getenv( 'WP_HOME' ) ) {
+		define( 'WP_HOME', getenv( 'WP_HOME' ) );
+	}
+	if ( getenv( 'WP_SITEURL' ) ) {
+		define( 'WP_SITEURL', getenv( 'WP_SITEURL' ) );
+	}
 }
 
 // ── Debug settings per environment ──
