@@ -2814,29 +2814,8 @@ body.admin-bar .site-header {
 	}
 }
 
-@media (width <= 767px) {
-	.footer-grid {
-		grid-template-columns: 1fr;
-	}
-
-	.footer-bottom {
-		flex-direction: column;
-		gap: var(--wp--preset--spacing--3);
-		text-align: center;
-	}
-
-	.hds-grid {
-		grid-template-columns: 1fr;
-	}
-
-	.usp-grid__cards {
-		grid-template-columns: 1fr;
-	}
-
-	.header-phone__number {
-		display: none;
-	}
-
+/* ── Tablet/mobile navigation overlay (shared ≤1023px) ── */
+@media (width <= 1023px) {
 	.menu-toggle {
 		display: block;
 	}
@@ -2916,6 +2895,38 @@ body.admin-bar .site-header {
 
 	.main-navigation {
 		margin-inline: 0;
+	}
+}
+
+/* Keep the overlay hidden when the open state is cleared at 768–1023px
+   (e.g., viewport resize while the menu is open). */
+@media (width > 767px) and (width <= 1023px) {
+	body:not(.menu-open) .primary-menu.is-active {
+		display: none;
+	}
+}
+
+@media (width <= 767px) {
+	.footer-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.footer-bottom {
+		flex-direction: column;
+		gap: var(--wp--preset--spacing--3);
+		text-align: center;
+	}
+
+	.hds-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.usp-grid__cards {
+		grid-template-columns: 1fr;
+	}
+
+	.header-phone__number {
+		display: none;
 	}
 
 	.header-search-toggle {
