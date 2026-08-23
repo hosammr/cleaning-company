@@ -213,7 +213,7 @@ function hds_render_quote_form(): string {
 		</fieldset>
 
 		<div class="hds-quote-form__actions">
-			<button type="submit" name="hds_quote_submit" class="hds-quote-form__submit btn btn--cta">
+			<button type="submit" name="hds_quote_submit" class="hds-quote-form__submit btn btn-cta">
 				<?php esc_html_e( 'Offerte aanvragen', 'hds' ); ?>
 				<span class="hds-quote-form__submit-arrow" aria-hidden="true">&rarr;</span>
 			</button>

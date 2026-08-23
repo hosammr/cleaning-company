@@ -85,7 +85,7 @@
 					<span class="header-phone__number"><?php echo esc_html( hds_get_phone() ); ?></span>
 				</a>
 
-				<a href="<?php echo esc_url( home_url( '/offerte-aanvragen/' ) ); ?>" class="btn btn--cta header-cta">
+				<a href="<?php echo esc_url( home_url( '/offerte-aanvragen/' ) ); ?>" class="btn btn-cta header-cta">
 					<?php esc_html_e( 'Offerte', 'hds' ); ?>
 				</a>
 

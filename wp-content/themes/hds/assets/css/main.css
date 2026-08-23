@@ -594,13 +594,14 @@ body.admin-bar .site-header {
 
 .btn-cta {
 	background: var(--wp--preset--color--accent);
-	color: var(--wp--preset--color--white);
+	color: var(--wp--preset--color--dark-gray);
 	font-size: var(--wp--preset--font-size--l);
 	padding: 0.875rem 2rem;
 }
 
 .btn-cta:hover {
 	background: var(--wp--preset--color--primary-dark);
+	color: var(--wp--preset--color--white);
 }
 
 .btn--outline {
@@ -1778,7 +1779,7 @@ body.admin-bar .site-header {
 .service-hero .btn-cta {
 	background: var(--wp--preset--color--accent);
 	border-radius: 4px;
-	color: var(--wp--preset--color--white);
+	color: var(--wp--preset--color--dark-gray);
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -1796,6 +1797,7 @@ body.admin-bar .site-header {
 .service-hero .btn-cta:hover,
 .service-hero .btn-cta:focus-visible {
 	background: var(--wp--preset--color--primary-dark);
+	color: var(--wp--preset--color--white);
 }
 
 @media (min-width: 782px) {
