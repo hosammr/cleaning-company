@@ -390,7 +390,7 @@ body.admin-bar .site-header {
 }
 
 /* ── Header: compact state (desktop only ≥1024px to align with mobile-menu top:60px) ── */
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
 	.site-header.is-scrolled {
 		background: #EAF4FC;
 		box-shadow: var(--wp--preset--shadow--sm);
@@ -1652,7 +1652,7 @@ body.admin-bar .site-header {
 }
 
 /* ── Hero responsive ── */
-@media (width <= 1023px) {
+@media (width < 1024px) {
 	.hero-section {
 		min-height: 60vh;
 		padding: var(--wp--preset--spacing--16) var(--wp--preset--spacing--6) !important;
@@ -1946,7 +1946,7 @@ body.admin-bar .site-header {
 }
 
 /* Timeline connector — desktop: continuous line through all circles */
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
 	.hds-process-steps::before {
 		background: var(--wp--preset--color--primary);
 		content: '';
@@ -2002,7 +2002,7 @@ body.admin-bar .site-header {
 }
 
 /* Tablet: 2 × 2 grid */
-@media (width <= 1023px) {
+@media (width < 1024px) {
 	.hds-process-steps {
 		grid-template-columns: repeat(2, 1fr);
 	}
@@ -2365,7 +2365,7 @@ body.admin-bar .site-header {
 	max-width: 240px;
 }
 
-@media (width <= 1023px) {
+@media (width < 1024px) {
 	.hds-usp-section[aria-labelledby="about-values"] .hds-usp-grid {
 		grid-template-columns: repeat(2, 1fr);
 	}
@@ -2390,7 +2390,7 @@ body.admin-bar .site-header {
 	font-weight: 600;
 }
 
-@media (width <= 1023px) {
+@media (width < 1024px) {
 	.hds-usp-section[aria-labelledby="about-why"] .hds-usp-grid {
 		grid-template-columns: repeat(2, 1fr);
 	}
@@ -2792,7 +2792,7 @@ body.admin-bar .site-header {
 }
 
 /* ── Responsive ── */
-@media (width <= 1023px) {
+@media (width < 1024px) {
 	.footer-grid {
 		grid-template-columns: repeat(2, 1fr);
 	}
@@ -2815,7 +2815,7 @@ body.admin-bar .site-header {
 }
 
 /* ── Tablet/mobile navigation overlay (shared ≤1023px) ── */
-@media (width <= 1023px) {
+@media (width < 1024px) {
 	.menu-toggle {
 		display: block;
 	}
@@ -2900,7 +2900,7 @@ body.admin-bar .site-header {
 
 /* Keep the overlay hidden when the open state is cleared at 768–1023px
    (e.g., viewport resize while the menu is open). */
-@media (width > 767px) and (width <= 1023px) {
+@media (width > 767px) and (width < 1024px) {
 	body:not(.menu-open) .primary-menu.is-active {
 		display: none;
 	}
