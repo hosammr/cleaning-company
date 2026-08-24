@@ -58,6 +58,49 @@
 		}
 	}
 
+	/* ── Focus trap: keep Tab inside the open mobile navigation ── */
+	function getMenuFocusables() {
+		if ( ! primaryMenu ) {
+			return [];
+		}
+		const selector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+		const candidates = primaryMenu.querySelectorAll( selector );
+		return Array.prototype.filter.call( candidates, function ( el ) {
+			return el.getClientRects().length > 0 && ! el.closest( '[aria-hidden="true"]' );
+		} );
+	}
+
+	document.addEventListener( 'keydown', function ( event ) {
+		if ( event.key !== 'Tab' ) {
+			return;
+		}
+		if ( window.innerWidth > 1023 || ! document.body.classList.contains( 'menu-open' ) || ! primaryMenu ) {
+			return;
+		}
+
+		const focusables = getMenuFocusables();
+		if ( ! focusables.length ) {
+			return;
+		}
+
+		const activeIndex = focusables.indexOf( document.activeElement );
+
+		if ( activeIndex === -1 ) {
+			event.preventDefault();
+			const target = event.shiftKey ? focusables[ focusables.length - 1 ] : focusables[ 0 ];
+			target.focus();
+			return;
+		}
+
+		if ( event.shiftKey && activeIndex === 0 ) {
+			event.preventDefault();
+			focusables[ focusables.length - 1 ].focus();
+		} else if ( ! event.shiftKey && activeIndex === focusables.length - 1 ) {
+			event.preventDefault();
+			focusables[ 0 ].focus();
+		}
+	} );
+
 	let scrollLockY = 0;
 
 	function lockBodyScroll() {
