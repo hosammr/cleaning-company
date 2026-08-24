@@ -72,9 +72,33 @@
 	}
 
 	window.addEventListener( 'resize', function () {
-		if ( window.innerWidth > 767 && document.body.classList.contains( 'menu-open' ) ) {
+		if ( window.innerWidth <= 1023 ) {
+			return;
+		}
+
+		const menuOpen = document.body.classList.contains( 'menu-open' );
+		const menuActive = primaryMenu && primaryMenu.classList.contains( 'is-active' );
+		const ariaExpanded = menuToggle && menuToggle.getAttribute( 'aria-expanded' ) === 'true';
+
+		if ( ! menuOpen && ! menuActive && ! ariaExpanded ) {
+			return;
+		}
+
+		if ( menuOpen ) {
 			unlockBodyScroll();
 			document.body.classList.remove( 'menu-open' );
+		}
+
+		if ( menuActive ) {
+			primaryMenu.classList.remove( 'is-active' );
+		}
+
+		if ( menuToggle ) {
+			menuToggle.setAttribute( 'aria-expanded', 'false' );
+			const srText = menuToggle.querySelector( '.screen-reader-text' );
+			if ( srText ) {
+				srText.textContent = menuToggle.getAttribute( 'data-open-text' ) || 'Menu openen';
+			}
 		}
 	} );
 
