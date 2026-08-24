@@ -413,6 +413,17 @@ body.admin-bar .site-header {
 	.site-header.is-scrolled .primary-menu a {
 		line-height: 1.4;
 	}
+
+	.site-header.is-scrolled .primary-menu a:hover,
+	.site-header.is-scrolled .primary-menu a:focus,
+	.site-header.is-scrolled .primary-menu .current-menu-item > a,
+	.site-header.is-scrolled .primary-menu .current_page_item > a,
+	.site-header.is-scrolled .header-phone:hover,
+	.site-header.is-scrolled .header-phone:focus,
+	.site-header.is-scrolled .header-search-toggle:hover,
+	.site-header.is-scrolled .header-search-toggle:focus-visible {
+		color: var(--wp--preset--color--primary-dark);
+	}
 }
 
 /* ── Footer ── */
