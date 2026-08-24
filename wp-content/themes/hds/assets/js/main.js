@@ -3,7 +3,7 @@
  *
  * Responsibilities:
  *   - Mobile menu toggle with ARIA state management
- *   - Keyboard navigation: Escape closes overlay, arrow keys in dropdowns
+ *   - Keyboard navigation: Escape closes menu and dropdowns
  *   - Focus trap inside mobile overlay
  *   - CSS-only dropdown toggle via class on parent (desktop)
  *   - Header search panel toggle with ARIA state management
