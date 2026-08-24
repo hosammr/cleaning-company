@@ -14,6 +14,13 @@
 class HDS_Walker_Nav_Menu extends \Walker_Nav_Menu {
 
 	/**
+	 * Parent item titles per depth, used to label sub-menus.
+	 *
+	 * @var array<int,string>
+	 */
+	private array $submenu_labels = [];
+
+	/**
 	 * Start level — wrap sub-menus with ARIA.
 	 */
 	public function start_lvl( &$output, $depth = 0, $args = null ): void {
@@ -21,7 +28,10 @@ class HDS_Walker_Nav_Menu extends \Walker_Nav_Menu {
 		$classes = [ 'sub-menu' ];
 		$class_names = implode( ' ', $classes );
 
-		$output .= "\n{$indent}<ul class=\"" . esc_attr( $class_names ) . "\" aria-label=\"submenu\">\n";
+		$parent_title = $this->submenu_labels[ $depth ] ?? '';
+		$aria_label   = $parent_title ? trim( $parent_title ) . ' ' . __( 'submenu', 'hds' ) : __( 'submenu', 'hds' );
+
+		$output .= "\n{$indent}<ul class=\"" . esc_attr( $class_names ) . "\" aria-label=\"" . esc_attr( $aria_label ) . "\">\n";
 	}
 
 	/**
@@ -73,6 +83,10 @@ class HDS_Walker_Nav_Menu extends \Walker_Nav_Menu {
 
 		$title = apply_filters( 'the_title', $data_object->title, $data_object->ID );
 		$title = apply_filters( 'nav_menu_item_title', $title, $data_object, $args, $depth );
+
+		if ( $args->walker->has_children ) {
+			$this->submenu_labels[ $depth ] = $title;
+		}
 
 		$item_output  = $args->before;
 		$item_output .= '<a' . $attributes . '>';
