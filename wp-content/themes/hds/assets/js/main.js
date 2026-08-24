@@ -124,6 +124,10 @@
 		if ( toggle ) {
 			toggle.setAttribute( 'aria-expanded', 'false' );
 		}
+		const hoverIndex = hoverOpenedItems.indexOf( item );
+		if ( hoverIndex !== -1 ) {
+			hoverOpenedItems.splice( hoverIndex, 1 );
+		}
 	}
 
 	function closeSiblingDropdowns( currentParent ) {
@@ -166,6 +170,17 @@
 	} );
 
 	/* ── Dropdown: click/tap toggle for touch/hover fallback (all widths) ── */
+	let pointerInteraction = false;
+	const hoverOpenedItems = [];
+
+	document.addEventListener( 'pointerdown', function () {
+		pointerInteraction = true;
+	} );
+
+	document.addEventListener( 'keydown', function () {
+		pointerInteraction = false;
+	} );
+
 	if ( siteNavigation ) {
 		const dropdownParents = siteNavigation.querySelectorAll( '.menu-item-has-children > a' );
 
@@ -176,6 +191,27 @@
 
 				if ( hasDropdown ) {
 					e.preventDefault();
+
+					if ( window.innerWidth > 1023 && e.detail === 0 ) {
+						return;
+					}
+
+					if ( window.innerWidth > 1023 && pointerInteraction ) {
+						const openedByHover = hoverOpenedItems.indexOf( parent ) !== -1;
+
+						if ( openedByHover || ! parent.classList.contains( 'is-open' ) ) {
+							closeSiblingDropdowns( parent );
+							openDropdown( parent );
+						} else {
+							closeDropdown( parent );
+						}
+
+						const hoverIndex = hoverOpenedItems.indexOf( parent );
+						if ( hoverIndex !== -1 ) {
+							hoverOpenedItems.splice( hoverIndex, 1 );
+						}
+						return;
+					}
 
 					if ( parent.classList.contains( 'is-open' ) ) {
 						closeDropdown( parent );
@@ -191,6 +227,9 @@
 		topLevelParents.forEach( function ( item ) {
 			item.addEventListener( 'mouseenter', function () {
 				if ( window.innerWidth > 1023 ) {
+					if ( ! item.classList.contains( 'is-open' ) && hoverOpenedItems.indexOf( item ) === -1 ) {
+						hoverOpenedItems.push( item );
+					}
 					closeSiblingDropdowns( item );
 					openDropdown( item );
 				}
@@ -204,6 +243,9 @@
 
 		siteNavigation.addEventListener( 'focusin', function ( e ) {
 			if ( window.innerWidth <= 1023 ) {
+				return;
+			}
+			if ( pointerInteraction ) {
 				return;
 			}
 			const targetItem = e.target.closest( '.primary-menu > .menu-item-has-children' );
