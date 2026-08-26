@@ -434,16 +434,43 @@
 	}
 
 	/* ── Cookie Banner ── */
+	function hdsUpdateConsent( grants ) {
+		window.dataLayer = window.dataLayer || [];
+		if ( typeof window.gtag === 'function' ) {
+			window.gtag( 'consent', 'update', grants );
+		} else {
+			window.dataLayer.push( [ 'consent', 'update', grants ] );
+		}
+	}
+
 	const cookieBanner = document.getElementById( 'hds-cookie-banner' );
 	if ( cookieBanner ) {
 		cookieBanner.querySelector( '.hds-cookie-banner__accept' ).addEventListener( 'click', function () {
 			document.cookie = `hds_cookie_consent=accepted;path=/;max-age=${60 * 60 * 24 * 365}`;
+			hdsUpdateConsent( {
+				ad_storage: 'granted',
+				ad_user_data: 'granted',
+				ad_personalization: 'granted',
+				analytics_storage: 'granted',
+				functionality_storage: 'granted',
+				personalization_storage: 'granted',
+				security_storage: 'granted'
+			} );
 			cookieBanner.hidden = true;
 			cookieBanner.setAttribute( 'aria-hidden', 'true' );
 		} );
 
 		cookieBanner.querySelector( '.hds-cookie-banner__decline' ).addEventListener( 'click', function () {
 			document.cookie = `hds_cookie_consent=declined;path=/;max-age=${60 * 60 * 24 * 365}`;
+			hdsUpdateConsent( {
+				ad_storage: 'denied',
+				ad_user_data: 'denied',
+				ad_personalization: 'denied',
+				analytics_storage: 'denied',
+				functionality_storage: 'granted',
+				personalization_storage: 'denied',
+				security_storage: 'granted'
+			} );
 			cookieBanner.hidden = true;
 			cookieBanner.setAttribute( 'aria-hidden', 'true' );
 		} );

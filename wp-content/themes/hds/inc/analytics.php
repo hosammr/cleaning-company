@@ -13,6 +13,52 @@
  */
 
 /**
+ * Check whether the visitor has granted analytics consent.
+ *
+ * Reads the hds_cookie_consent cookie set by the cookie banner.
+ * Returns false when no cookie exists yet or when the visitor
+ * chose "Alleen functioneel".
+ */
+function hds_analytics_consent_granted(): bool {
+	return isset( $_COOKIE['hds_cookie_consent'] )
+		&& 'accepted' === sanitize_text_field( wp_unslash( $_COOKIE['hds_cookie_consent'] ) );
+}
+
+/**
+ * Output Google Consent Mode v2 default state in <head>.
+ *
+ * Must run BEFORE the GTM container or gtag.js snippets so analytics
+ * cannot process anything before consent is established. When the
+ * hds_cookie_consent cookie already holds "accepted" (returning
+ * visitor), the default state starts granted; otherwise everything
+ * non-essential starts denied and is only upgraded by the banner's
+ * "Accepteren" handler (consent update in main.js).
+ */
+function hds_output_consent_defaults(): void {
+	if ( ! HDS_Config::gtm_id() && ! HDS_Config::ga4_id() ) {
+		return;
+	}
+
+	$state = hds_analytics_consent_granted() ? 'granted' : 'denied';
+	?>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('consent', 'default', {
+			'ad_storage': '<?php echo $state; ?>',
+			'ad_user_data': '<?php echo $state; ?>',
+			'ad_personalization': '<?php echo $state; ?>',
+			'analytics_storage': '<?php echo $state; ?>',
+			'functionality_storage': 'granted',
+			'personalization_storage': '<?php echo $state; ?>',
+			'security_storage': 'granted'
+		});
+	</script>
+	<?php
+}
+add_action( 'wp_head', 'hds_output_consent_defaults', 0 );
+
+/**
  * Output GTM container snippet in <head>.
  */
 function hds_output_gtm_head(): void {
@@ -38,6 +84,11 @@ add_action( 'wp_head', 'hds_output_gtm_head', 1 );
 function hds_output_gtm_body(): void {
 	$gtm_id = HDS_Config::gtm_id();
 	if ( ! $gtm_id ) {
+		return;
+	}
+	// The noscript fallback cannot evaluate consent client-side, so only
+	// render it for visitors who already accepted analytics cookies.
+	if ( ! hds_analytics_consent_granted() ) {
 		return;
 	}
 	printf(
@@ -75,6 +126,12 @@ function hds_track_event( string $event_name, array $event_data = [] ): void {
 		return;
 	}
 
+	// Never push analytics events without granted consent. Consent Mode
+	// guards the container itself; this guards server-rendered events.
+	if ( ! hds_analytics_consent_granted() ) {
+		return;
+	}
+
 	$data = array_merge( [ 'event' => $event_name ], $event_data );
 
 	echo '<script>dataLayer = window.dataLayer || []; dataLayer.push(' . wp_json_encode( $data, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT ) . ');</script>' . "\n";
@@ -90,7 +147,7 @@ add_action( 'wp_footer', function () {
  * Track phone clicks via data attribute hook.
  */
 function hds_phone_click_tracking( string $output, string $phone ): string {
-	if ( ! HDS_Config::gtm_id() ) {
+	if ( ! HDS_Config::gtm_id() || ! hds_analytics_consent_granted() ) {
 		return $output;
 	}
 	return str_replace( '<a ', '<a data-event="phone_click" data-phone="' . esc_attr( $phone ) . '" ', $output );
@@ -101,7 +158,7 @@ add_filter( 'hds_phone_link', 'hds_phone_click_tracking', 10, 2 );
  * Track email clicks via data attribute hook.
  */
 function hds_email_click_tracking( string $output, string $email ): string {
-	if ( ! HDS_Config::gtm_id() ) {
+	if ( ! HDS_Config::gtm_id() || ! hds_analytics_consent_granted() ) {
 		return $output;
 	}
 	return str_replace( '<a ', '<a data-event="email_click" data-email="' . esc_attr( $email ) . '" ', $output );
@@ -112,7 +169,7 @@ add_filter( 'hds_email_link', 'hds_email_click_tracking', 10, 2 );
  * Track file downloads (applied to PDF links).
  */
 function hds_download_tracking( string $content ): string {
-	if ( ! HDS_Config::gtm_id() ) {
+	if ( ! HDS_Config::gtm_id() || ! hds_analytics_consent_granted() ) {
 		return $content;
 	}
 
