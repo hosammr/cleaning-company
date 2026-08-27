@@ -23,6 +23,13 @@ get_header();
 	$hero_image_url = '';
 	$hero_cta_text  = __( 'Direct aanvragen', 'hds' );
 	$hero_cta_url   = '#offerte-formulier';
+
+	set_query_var( 'hero_title', $hero_title );
+	set_query_var( 'hero_subtitle', $hero_subtitle );
+	set_query_var( 'hero_image_url', $hero_image_url );
+	set_query_var( 'hero_cta_text', $hero_cta_text );
+	set_query_var( 'hero_cta_url', $hero_cta_url );
+
 	get_template_part( 'parts/hero' );
 	?>
 
