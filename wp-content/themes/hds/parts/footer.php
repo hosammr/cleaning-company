@@ -29,6 +29,7 @@
 
 			<div class="footer-column">
 				<h3 class="footer-heading"><?php esc_html_e( 'Diensten', 'hds' ); ?></h3>
+				<nav class="footer-nav" aria-label="<?php esc_attr_e( 'Diensten', 'hds' ); ?>">
 				<?php
 				wp_nav_menu( [
 					'theme_location' => 'footer-services',
@@ -38,10 +39,12 @@
 					'depth'          => 1,
 				] );
 				?>
+				</nav>
 			</div>
 
 			<div class="footer-column">
 				<h3 class="footer-heading"><?php esc_html_e( 'Over HDS', 'hds' ); ?></h3>
+				<nav class="footer-nav" aria-label="<?php esc_attr_e( 'Over HDS', 'hds' ); ?>">
 				<?php
 				wp_nav_menu( [
 					'theme_location' => 'footer-about',
@@ -51,6 +54,7 @@
 					'depth'          => 1,
 				] );
 				?>
+				</nav>
 			</div>
 
 			<div class="footer-column">
@@ -81,6 +85,7 @@
 
 			<div class="footer-column">
 				<h3 class="footer-heading"><?php esc_html_e( 'Juridisch', 'hds' ); ?></h3>
+				<nav class="footer-nav" aria-label="<?php esc_attr_e( 'Juridisch', 'hds' ); ?>">
 				<?php
 				wp_nav_menu( [
 					'theme_location' => 'footer-legal',
@@ -90,6 +95,7 @@
 					'depth'          => 1,
 				] );
 				?>
+				</nav>
 			</div>
 
 		</div>
