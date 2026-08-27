@@ -193,6 +193,7 @@ function hds_get_faqpage_schema( int $post_id ): array {
 
 	$blocks = parse_blocks( $post->post_content );
 	$questions = [];
+	$seen      = [];
 
 	foreach ( $blocks as $block ) {
 		if ( $block['blockName'] === 'yoast/faq-block' && ! empty( $block['innerBlocks'] ) ) {
@@ -210,6 +211,11 @@ function hds_get_faqpage_schema( int $post_id ): array {
 					}
 
 					if ( $question_html && $answer_html ) {
+						$key = mb_strtolower( trim( wp_strip_all_tags( $question_html ) ) );
+						if ( isset( $seen[ $key ] ) ) {
+							continue;
+						}
+						$seen[ $key ] = true;
 						$questions[] = [
 							'@type'          => 'Question',
 							'name'           => $question_html,
@@ -221,6 +227,41 @@ function hds_get_faqpage_schema( int $post_id ): array {
 					}
 				}
 			}
+		}
+	}
+
+	// Parse native core/details blocks: summary = question, inner content = answer.
+	foreach ( $blocks as $block ) {
+		if ( $block['blockName'] !== 'core/details' || empty( $block['innerBlocks'] ) ) {
+			continue;
+		}
+
+		$question_html = trim( wp_strip_all_tags( $block['attrs']['summary'] ?? '' ) );
+		if ( '' === $question_html ) {
+			if ( preg_match( '~<summary[^>]*>(.*?)</summary>~is', render_block( $block ), $matches ) ) {
+				$question_html = trim( wp_strip_all_tags( $matches[1] ) );
+			}
+		}
+
+		$answer_html = '';
+		foreach ( $block['innerBlocks'] as $inner ) {
+			$answer_html .= render_block( $inner );
+		}
+
+		if ( $question_html && trim( wp_strip_all_tags( $answer_html ) ) ) {
+			$key = mb_strtolower( $question_html );
+			if ( isset( $seen[ $key ] ) ) {
+				continue;
+			}
+			$seen[ $key ] = true;
+			$questions[] = [
+				'@type'          => 'Question',
+				'name'           => $question_html,
+				'acceptedAnswer' => [
+					'@type' => 'Answer',
+					'text'  => $answer_html,
+				],
+			];
 		}
 	}
 

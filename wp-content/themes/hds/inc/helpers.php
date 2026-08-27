@@ -127,6 +127,7 @@ function hds_footer_about_fallback( array $args ): void {
 		home_url( '/over-hds/' )                => __( 'Over HDS', 'hds' ),
 		home_url( '/kwaliteit-en-veiligheid/' ) => __( 'Kwaliteit & Veiligheid', 'hds' ),
 		home_url( '/referenties/' )             => __( 'Referenties', 'hds' ),
+		home_url( '/veelgestelde-vragen/' )     => __( 'Veelgestelde Vragen', 'hds' ),
 		home_url( '/downloads/' )               => __( 'Downloads', 'hds' ),
 		home_url( '/offerte-aanvragen/' )       => __( 'Offerte aanvragen', 'hds' ),
 	];
