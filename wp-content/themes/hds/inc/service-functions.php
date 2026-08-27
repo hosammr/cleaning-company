@@ -110,6 +110,13 @@ function hds_render_service_card_core( \WP_Post $post, bool $show_image = true, 
 		? get_the_excerpt( $post )
 		: wp_trim_words( wp_strip_all_tags( $post->post_content ), 20, '&hellip;' );
 
+	if ( '' === $excerpt ) {
+		$service = hds_get_service( $post->post_name );
+		if ( $service && ! empty( $service['subtitle'] ) ) {
+			$excerpt = $service['subtitle'];
+		}
+	}
+
 	ob_start();
 	?>
 		<article class="hds-service-card">
