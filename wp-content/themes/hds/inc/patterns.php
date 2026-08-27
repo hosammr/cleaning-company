@@ -193,12 +193,7 @@ function hds_register_block_patterns(): void {
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading">Contactgegevens</h3>
 <!-- /wp:heading -->
-<!-- wp:paragraph -->
-<p><strong>Telefoon:</strong> <a href="tel:0164-652846">0164-652846</a></p>
-<!-- /wp:paragraph -->
-<!-- wp:paragraph -->
-<p><strong>E-mail:</strong> <a href="mailto:info@helderduidelijkschoon.nl">info@helderduidelijkschoon.nl</a></p>
-<!-- /wp:paragraph -->
+<!-- wp:hds/contact-info /-->
 </div>
 <!-- /wp:group -->',
 		]

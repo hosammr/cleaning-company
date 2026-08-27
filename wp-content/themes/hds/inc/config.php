@@ -44,8 +44,6 @@ class HDS_Config {
 				'noindex_author'       => true,
 			],
 			'contact' => [
-				'phone_default'     => '0164-652846',
-				'email_default'     => 'info@helderduidelijkschoon.nl',
 				'company_name'      => 'HDS Onderhoudsdiensten',
 				'country'           => 'NL',
 				'service_area'      => 'West-Brabant en Zeeland',
