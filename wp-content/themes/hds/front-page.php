@@ -95,7 +95,7 @@ get_header();
 		?>
 		<section class="home-latest-posts">
 			<div class="container">
-				<?php echo hds_section_header( __( 'Laatste nieuws', 'hds' ), __( 'Tips, nieuws en updates van HDS Onderhoudsdiensten.', 'hds' ), 'center' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				<?php echo hds_section_header( __( 'Laatste nieuws', 'hds' ), __( 'Tips, nieuws en updates van Hamdoun Schoonmaak.', 'hds' ), 'center' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				<div class="hds-grid hds-grid--posts" style="--hds-grid-columns:3">
 					<?php foreach ( $latest_posts as $post_item ) : ?>
 						<article class="hds-post-card">

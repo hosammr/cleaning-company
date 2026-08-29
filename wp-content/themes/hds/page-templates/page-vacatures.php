@@ -50,8 +50,8 @@ get_header();
 				?>
 				<section class="vacancy-intro" aria-labelledby="vacancy-intro-heading">
 					<div class="container">
-						<h2 id="vacancy-intro-heading"><?php esc_html_e( 'Werken bij HDS', 'hds' ); ?></h2>
-						<p><?php esc_html_e( 'Werken bij HDS betekent werken in een team waarin kwaliteit, betrouwbaarheid en samenwerking centraal staan.', 'hds' ); ?></p>
+						<h2 id="vacancy-intro-heading"><?php esc_html_e( 'Werken bij Hamdoun Schoonmaak', 'hds' ); ?></h2>
+						<p><?php esc_html_e( 'Werken bij Hamdoun Schoonmaak betekent werken in een team waarin kwaliteit, betrouwbaarheid en samenwerking centraal staan.', 'hds' ); ?></p>
 					</div>
 				</section>
 				<?php

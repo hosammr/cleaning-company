@@ -1578,8 +1578,16 @@ body.admin-bar .site-header {
 	text-align: center;
 }
 
+.category-landing-hero h1 {
+	overflow-wrap: break-word;
+}
+
 .category-landing-content {
 	margin-bottom: var(--wp--preset--spacing--8);
+}
+
+.category-landing-content h2 {
+	overflow-wrap: break-word;
 }
 
 /* ── Contact Info Address ── */

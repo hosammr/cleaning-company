@@ -126,7 +126,8 @@ function hds_get_global_options_schema(): array {
 		'fields'      => [
 			'hds_address'       => [ 'type' => 'text',     'label' => __( 'Adres (straat + huisnummer)', 'hds' ) ],
 			'hds_postal_city'   => [ 'type' => 'text',     'label' => __( 'Postcode en plaats', 'hds' ) ],
-			'hds_phone'         => [ 'type' => 'text',     'label' => __( 'Telefoonnummer', 'hds' ), 'default' => '0164-652846' ],
+			'hds_phone'         => [ 'type' => 'text',     'label' => __( 'Telefoonnummer', 'hds' ), 'default' => '0622272811' ],
+			'hds_phone_secondary' => [ 'type' => 'text',   'label' => __( 'Telefoonnummer (vast)', 'hds' ), 'default' => '0502340009' ],
 			'hds_email'         => [ 'type' => 'text',     'label' => __( 'E-mailadres', 'hds' ), 'default' => 'info@helderduidelijkschoon.nl' ],
 			'hds_kvk'           => [ 'type' => 'text',     'label' => __( 'KVK-nummer', 'hds' ) ],
 			'hds_btw'           => [ 'type' => 'text',     'label' => __( 'BTW-nummer', 'hds' ) ],

@@ -10,7 +10,15 @@
  */
 function hds_get_phone(): string {
 	$phone = get_theme_mod( 'hds_phone', '' );
-	return $phone ?: '0164-652846';
+	return $phone ?: '0622272811';
+}
+
+/**
+ * Get company fixed-line phone number (secondary contact number).
+ */
+function hds_get_phone_secondary(): string {
+	$phone = get_theme_mod( 'hds_phone_secondary', '' );
+	return $phone ?: '0502340009';
 }
 
 /**
@@ -124,7 +132,7 @@ function hds_truncate( string $text, int $length = 100, string $suffix = '...' )
  */
 function hds_footer_about_fallback( array $args ): void {
 	$links = [
-		home_url( '/over-hds/' )                => __( 'Over HDS', 'hds' ),
+		home_url( '/over-hds/' )                => __( 'Over Hamdoun Schoonmaak', 'hds' ),
 		home_url( '/kwaliteit-en-veiligheid/' ) => __( 'Kwaliteit & Veiligheid', 'hds' ),
 		home_url( '/referenties/' )             => __( 'Referenties', 'hds' ),
 		home_url( '/veelgestelde-vragen/' )     => __( 'Veelgestelde Vragen', 'hds' ),

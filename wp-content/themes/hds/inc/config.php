@@ -44,9 +44,9 @@ class HDS_Config {
 				'noindex_author'       => true,
 			],
 			'contact' => [
-				'company_name'      => 'HDS Onderhoudsdiensten',
+				'company_name'      => 'Hamdoun Schoonmaak',
 				'country'           => 'NL',
-				'service_area'      => 'West-Brabant en Zeeland',
+				'service_area'      => 'Provincie Groningen',
 			],
 			'woocommerce' => [
 				'enabled'            => defined( 'WC_PLUGIN_FILE' ) || class_exists( 'WooCommerce' ),

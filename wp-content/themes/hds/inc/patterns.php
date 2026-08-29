@@ -48,7 +48,7 @@ function hds_register_block_patterns(): void {
 <h1 class="wp-block-heading has-text-align-center" id="hero-heading">Helder en Duidelijk voor het Schoonste resultaat!</h1>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">Uw betrouwbare partner voor professionele schoonmaak- en onderhoudsdiensten in West-Brabant en Zeeland.</p>
+<p class="has-text-align-center">Uw betrouwbare partner voor professionele schoonmaak- en onderhoudsdiensten in de provincie Groningen.</p>
 <!-- /wp:paragraph -->
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
 <div class="wp-block-buttons">
@@ -71,7 +71,7 @@ function hds_register_block_patterns(): void {
 			'content'     => '<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|16","bottom":"var:preset|spacing|16"}}},"className":"usp-grid","layout":{"type":"constrained"}} -->
 <div class="wp-block-group usp-grid" style="padding-top:var(--wp--preset--spacing--16);padding-bottom:var(--wp--preset--spacing--16)">
 <!-- wp:heading {"textAlign":"center"} -->
-<h2 class="wp-block-heading has-text-align-center">Waarom HDS?</h2>
+<h2 class="wp-block-heading has-text-align-center">Waarom Hamdoun Schoonmaak?</h2>
 <!-- /wp:heading -->
 <!-- wp:columns -->
 <div class="wp-block-columns">
@@ -311,7 +311,7 @@ function hds_register_block_patterns(): void {
 <h2 class="wp-block-heading">Wat onze klanten zeggen</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>Wij zijn trots op de samenwerking met onze klanten. Hieronder leest u wat zij over HDS Onderhoudsdiensten zeggen.</p>
+<p>Wij zijn trots op de samenwerking met onze klanten. Hieronder leest u wat zij over Hamdoun Schoonmaak zeggen.</p>
 <!-- /wp:paragraph -->
 <!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|8","bottom":"var:preset|spacing|8"}}},"className":"client-logo-grid","layout":{"type":"constrained"}} -->
 <div class="wp-block-group client-logo-grid" style="padding-top:var(--wp--preset--spacing--8);padding-bottom:var(--wp--preset--spacing--8)">
@@ -370,10 +370,10 @@ function hds_register_block_patterns(): void {
 			'content'     => '<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|8","bottom":"var:preset|spacing|8"}}},"className":"vacancy-intro","layout":{"type":"constrained"}} -->
 <div class="wp-block-group vacancy-intro" style="padding-top:var(--wp--preset--spacing--8);padding-bottom:var(--wp--preset--spacing--8)">
 <!-- wp:heading -->
-<h2 class="wp-block-heading">Werken bij HDS</h2>
+<h2 class="wp-block-heading">Werken bij Hamdoun Schoonmaak</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>HDS Onderhoudsdiensten is een groeiend schoonmaakbedrijf in West-Brabant. Wij zoeken gemotiveerde collega\'s die kwaliteit, veiligheid en klantgerichtheid belangrijk vinden. Bekijk hieronder onze openstaande vacatures.</p>
+<p>Hamdoun Schoonmaak is een groeiend schoonmaakbedrijf in de provincie Groningen. Wij zoeken gemotiveerde collega\'s die kwaliteit, veiligheid en klantgerichtheid belangrijk vinden. Bekijk hieronder onze openstaande vacatures.</p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->',

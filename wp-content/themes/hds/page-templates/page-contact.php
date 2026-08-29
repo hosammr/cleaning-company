@@ -167,7 +167,8 @@ get_header();
 			<div class="hds-usp-grid">
 				<article class="hds-card hds-usp-card">
 					<h3 class="hds-usp-card__title"><?php esc_html_e( 'Telefoon', 'hds' ); ?></h3>
-					<p class="hds-usp-card__desc"><?php echo hds_get_phone_link(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+					<p class="hds-usp-card__desc"><?php echo hds_get_phone_link(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><br>
+						<?php esc_html_e( 'Vast', 'hds' ); ?>: <?php echo hds_get_phone_link( hds_get_phone_secondary() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 				</article>
 				<article class="hds-card hds-usp-card">
 					<h3 class="hds-usp-card__title"><?php esc_html_e( 'E-mail', 'hds' ); ?></h3>
@@ -422,7 +423,7 @@ get_header();
 				<h2 id="contact-service-area-heading"><?php esc_html_e( 'Werkgebied', 'hds' ); ?></h2>
 			</header>
 			<p class="contact-service-area-text">
-				<?php esc_html_e( 'HDS is actief in heel West-Brabant en Zeeland. Van Bergen op Zoom tot Roosendaal, van Goes tot Middelburg — ons team staat voor u klaar. Ook voor spoedklussen of grote projecten buiten deze regio kunt u contact met ons opnemen.', 'hds' ); ?>
+				<?php esc_html_e( 'Wij zijn werkzaam in de hele provincie Groningen. Ons team staat voor u klaar. Ook voor spoedklussen of grote projecten kunt u contact met ons opnemen.', 'hds' ); ?>
 			</p>
 		</div>
 	</section>

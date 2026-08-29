@@ -74,8 +74,8 @@ function hds_get_services(): array {
 					'a' => __( 'Zeker. Wij starten graag met een proefperiode waarin u onze kwaliteit zelf ervaart. Daarna evalueren we samen en sturen we bij waar nodig. U zit nergens aan vast.', 'hds' ),
 				],
 			],
-			'seo_title'       => __( 'Kantoor schoonmaak | Professionele kantoorschoonmaak op maat | HDS', 'hds' ),
-			'seo_description' => __( 'Professionele kantoorreiniging door HDS. Vaste schoonmaakmedewerkers, flexibele planning buiten kantoortijden en een schone werkomgeving. Vraag een vrijblijvende offerte aan.', 'hds' ),
+			'seo_title'       => __( 'Kantoor schoonmaak | Professionele kantoorschoonmaak op maat | Hamdoun Schoonmaak', 'hds' ),
+			'seo_description' => __( 'Professionele kantoorreiniging door Hamdoun Schoonmaak. Vaste schoonmaakmedewerkers, flexibele planning buiten kantoortijden en een schone werkomgeving. Vraag een vrijblijvende offerte aan.', 'hds' ),
 		],
 
 		'glasbewassing' => [
@@ -124,34 +124,33 @@ function hds_get_services(): array {
 				],
 				[
 					'q' => __( 'Zijn jullie verzekerd bij schade tijdens werkzaamheden?', 'hds' ),
-					'a' => __( 'Ja, HDS is volledig verzekerd. Onze bedrijfsaansprakelijkheidsverzekering dekt eventuele schade die tijdens de werkzaamheden ontstaat. U loopt als opdrachtgever geen enkel risico.', 'hds' ),
+					'a' => __( 'Ja, Hamdoun Schoonmaak is volledig verzekerd. Onze bedrijfsaansprakelijkheidsverzekering dekt eventuele schade die tijdens de werkzaamheden ontstaat. U loopt als opdrachtgever geen enkel risico.', 'hds' ),
 				],
 				[
 					'q' => __( 'Kunnen jullie ook incidenteel glasbewassing uitvoeren?', 'hds' ),
 					'a' => __( 'Absoluut. Naast periodiek onderhoud bieden wij ook eenmalige glasbewassing aan — bijvoorbeeld na een verbouwing, oplevering of voor een speciale gelegenheid. Neem contact op voor de mogelijkheden.', 'hds' ),
 				],
 			],
-			'seo_title'       => __( 'Glasbewassing | Professionele glazenwasser voor bedrijven | HDS', 'hds' ),
-			'seo_description' => __( 'Professionele glasbewassing voor bedrijfspanden door HDS. Binnen- en buitenglas, hoogbouw, osmosewater reiniging en periodiek onderhoud. Vrijblijvende offerte.', 'hds' ),
+			'seo_title'       => __( 'Glasbewassing | Professionele glazenwasser voor bedrijven | Hamdoun Schoonmaak', 'hds' ),
+			'seo_description' => __( 'Professionele glasbewassing voor bedrijfspanden door Hamdoun Schoonmaak. Binnen- en buitenglas, hoogbouw, osmosewater reiniging en periodiek onderhoud. Vrijblijvende offerte.', 'hds' ),
 		],
 
 		'gevelreiniging' => [
 			'title'           => __( 'Gevelreiniging', 'hds' ),
-			'subtitle'        => __( 'Professionele gevelreiniging voor alle typen gevels en materialen.', 'hds' ),
+			'subtitle'        => __( 'Gevelreiniging voor particuliere woningen en laagbouw met goed bereikbare gevels.', 'hds' ),
 			'hero_image'      => 0,
 			'eyebrow'         => __( 'Gevelreiniging', 'hds' ),
 			'intro'           => [
 				'eyebrow'     => __( 'Onze dienst', 'hds' ),
-				'title'       => __( 'Professionele gevelreiniging voor bedrijfspanden', 'hds' ),
-				'intro_text'  => __( 'Ontdek hoe professionele gevelreiniging bijdraagt aan een verzorgde uitstraling en het behoud van uw vastgoed.', 'hds' ),
+				'title'       => __( 'Gevelreiniging voor woningen en laagbouw', 'hds' ),
+				'intro_text'  => __( 'Een schone gevel draagt bij aan een verzorgde uitstraling van uw woning of laagbouwpand.', 'hds' ),
 				'paragraphs'  => [
-					__( 'Een schone gevel bepaalt het visitekaartje van uw bedrijfspand. Met onze professionele gevelreiniging verwijderen wij vervuiling, aanslag, graffiti en weersinvloeden van iedere gevel — ongeacht het materiaal.', 'hds' ),
-					__( 'Wij werken met gespecialiseerde reinigingstechnieken per geveltype, van chemische reiniging tot stoom- en hogedrukreiniging. Ons gecertificeerde team voert iedere opdracht veilig en efficiënt uit, van laagbouw tot hoogbouw.', 'hds' ),
+					__( 'Een schone gevel bepaalt het visitekaartje van uw woning. Met onze gevelreiniging verwijderen wij vervuiling, aanslag, graffiti en weersinvloeden van de gevel van uw woning of laagbouwpand — ongeacht het materiaal.', 'hds' ),
+					__( 'Wij werken met reinigingstechnieken die passen bij het geveltype, zoals chemische reiniging of stoom- en hogedrukreiniging. Wij richten ons op woningen en laagbouw met goed bereikbare gevels. Gevels op grote hoogte of gevels van grote bedrijfspanden nemen wij niet in behandeling.', 'hds' ),
 				],
 				'benefits'    => [
-					__( 'Reiniging van alle geveltypes', 'hds' ),
+					__( 'Reiniging van woningen en laagbouw', 'hds' ),
 					__( 'Flexibele planning', 'hds' ),
-					__( 'Gecertificeerde hoogwerkers', 'hds' ),
 					__( 'Milieuvriendelijke reinigingsmethoden', 'hds' ),
 					__( 'Veilig gecertificeerd personeel', 'hds' ),
 					__( 'Vrijblijvende offerte', 'hds' ),
@@ -161,24 +160,24 @@ function hds_get_services(): array {
 			'industries'      => [],
 			'faq'             => [
 				[
-					'q' => __( 'Welke soorten gevels en materialen kunnen jullie reinigen?', 'hds' ),
-					'a' => __( 'Wij reinigen alle typen gevels en materialen — van baksteen, beton en natuursteen tot metaal, kunststof en hout. Iedere gevel vraagt om een eigen aanpak en wij stemmen de reinigingstechniek daar volledig op af.', 'hds' ),
+					'q' => __( 'Welke gevels en materialen kunnen jullie reinigen?', 'hds' ),
+					'a' => __( 'Wij reinigen gevels van woningen en laagbouwpanden, van baksteen, beton en natuursteen tot metaal, kunststof en hout. Iedere gevel vraagt om een eigen aanpak en wij stemmen de reinigingstechniek daar volledig op af.', 'hds' ),
 				],
 				[
 					'q' => __( 'Welke reinigingstechniek gebruiken jullie?', 'hds' ),
-					'a' => __( 'Dit is afhankelijk van het geveltype en de aard van de vervuiling. Wij werken met gespecialiseerde technieken per geveltype, van chemische reiniging tot stoom- en hogedrukreiniging.', 'hds' ),
+					'a' => __( 'Dit is afhankelijk van het geveltype en de aard van de vervuiling. Wij werken met technieken die passen bij het geveltype, van chemische reiniging tot stoom- en hogedrukreiniging.', 'hds' ),
 				],
 				[
 					'q' => __( 'Hoe bepalen jullie de juiste reinigingsmethode voor mijn gevel?', 'hds' ),
 					'a' => __( 'Wij inspecteren vooraf het geveltype, de mate van vervuiling en eventuele beschadigingen. Op basis daarvan kiezen wij de meest geschikte en veilige reinigingsmethode, zodat het materiaal niet wordt aangetast.', 'hds' ),
 				],
 				[
-					'q' => __( 'Hoe werken jullie veilig bij gevels op hoogte?', 'hds' ),
-					'a' => __( 'Veiligheid staat bij ons voorop. Wij beschikken over gecertificeerde hoogwerkers en ons personeel is volledig opgeleid en gecertificeerd. Van laagbouw tot hoogbouw voeren wij iedere opdracht veilig en efficiënt uit.', 'hds' ),
+					'q' => __( 'Reinigen jullie ook gevels op grote hoogte of gevels van grote bedrijfspanden?', 'hds' ),
+					'a' => __( 'Nee. Wij richten ons op gevelreiniging van woningen en laagbouw met goed bereikbare gevels. Gevels op grote hoogte of gevels van grote bedrijfspanden nemen wij niet in behandeling.', 'hds' ),
 				],
 				[
 					'q' => __( 'Hoe vaak is gevelreiniging nodig?', 'hds' ),
-					'a' => __( 'Dit is afhankelijk van de ligging van uw pand, omgevingsfactoren zoals verkeer of industrie, en de gewenste uitstraling. Tijdens de kennismaking adviseren wij u over de optimale frequentie voor uw situatie.', 'hds' ),
+					'a' => __( 'Dit is afhankelijk van de ligging van uw woning of pand, omgevingsfactoren zoals verkeer of industrie, en de gewenste uitstraling. Tijdens de kennismaking adviseren wij u over de optimale frequentie voor uw situatie.', 'hds' ),
 				],
 			],
 			'seo_title'       => '',
@@ -238,8 +237,8 @@ function hds_get_services(): array {
 					'a' => __( 'Ja, onze reguliere schoonmaak is geschikt voor bedrijven van iedere omvang — van kleine kantoren met enkele medewerkers tot grote bedrijfspanden met honderden werkplekken. Wij schalen onze inzet en planning volledig op uw organisatie, zodat u altijd de juiste hoeveelheid schoonmaak ontvangt.', 'hds' ),
 				],
 			],
-			'seo_title'       => __( 'Reguliere schoonmaak | Professionele bedrijfsschoonmaak op maat | HDS', 'hds' ),
-			'seo_description' => __( 'Professionele reguliere schoonmaak door HDS. Dagelijkse of periodieke schoonmaak voor kantoren en bedrijfsruimtes, afgestemd op uw organisatie. Vrijblijvende offerte aanvragen.', 'hds' ),
+			'seo_title'       => __( 'Reguliere schoonmaak | Professionele bedrijfsschoonmaak op maat | Hamdoun Schoonmaak', 'hds' ),
+			'seo_description' => __( 'Professionele reguliere schoonmaak door Hamdoun Schoonmaak. Dagelijkse of periodieke schoonmaak voor kantoren en bedrijfsruimtes, afgestemd op uw organisatie. Vrijblijvende offerte aanvragen.', 'hds' ),
 		],
 
 		'vloeronderhoud' => [
@@ -338,15 +337,15 @@ function hds_get_services(): array {
 				],
 				[
 					'q' => __( 'Hoe stemmen jullie de werkzaamheden af met het VvE-bestuur?', 'hds' ),
-					'a' => __( 'Wij maken vooraf duidelijke afspraken over de uit te voeren werkzaamheden, de frequentie en de planning. Het VvE-bestuur heeft één vast aanspreekpunt bij HDS. Wij rapporteren periodiek over de uitgevoerde werkzaamheden en zijn altijd bereikbaar voor vragen of bijsturing.', 'hds' ),
+					'a' => __( 'Wij maken vooraf duidelijke afspraken over de uit te voeren werkzaamheden, de frequentie en de planning. Het VvE-bestuur heeft één vast aanspreekpunt bij Hamdoun Schoonmaak. Wij rapporteren periodiek over de uitgevoerde werkzaamheden en zijn altijd bereikbaar voor vragen of bijsturing.', 'hds' ),
 				],
 				[
 					'q' => __( 'Kan ik een vrijblijvende offerte aanvragen voor onze VvE?', 'hds' ),
 					'a' => __( 'Ja, wij maken graag een vrijblijvende offerte op maat voor uw VvE. Tijdens een kennismaking bekijken wij het complex, bespreken we de wensen en stellen we een passend schoonmaakplan op. Ook een proefperiode behoort tot de mogelijkheden.', 'hds' ),
 				],
 			],
-			'seo_title'       => __( 'VvE schoonmaak | Professionele schoonmaak voor VvE\'s en appartementencomplexen | HDS', 'hds' ),
-			'seo_description' => __( 'Professionele VvE-schoonmaak door HDS. Schoonmaak van gemeenschappelijke ruimtes in appartementencomplexen en woongebouwen, afgestemd op uw VvE. Vrijblijvende offerte.', 'hds' ),
+			'seo_title'       => __( 'VvE schoonmaak | Professionele schoonmaak voor VvE\'s en appartementencomplexen | Hamdoun Schoonmaak', 'hds' ),
+			'seo_description' => __( 'Professionele VvE-schoonmaak door Hamdoun Schoonmaak. Schoonmaak van gemeenschappelijke ruimtes in appartementencomplexen en woongebouwen, afgestemd op uw VvE. Vrijblijvende offerte.', 'hds' ),
 		],
 
 		'oplevering-schoonmaak' => [
@@ -402,8 +401,8 @@ function hds_get_services(): array {
 					'a' => __( 'Wij plannen de werkzaamheden in nauw overleg met de aannemer, projectleider of opdrachtgever. Wij houden rekening met de bouwplanning, de datum van oplevering en eventuele laatste werkzaamheden op de bouwplaats. Indien gewenst kunnen wij ook buiten reguliere werktijden schoonmaken om de planning niet te verstoren.', 'hds' ),
 				],
 			],
-			'seo_title'       => __( 'Oplevering schoonmaak | Professionele opleverschoonmaak na bouw en renovatie | HDS', 'hds' ),
-			'seo_description' => __( 'Professionele opleverschoonmaak door HDS. Grondige reiniging na bouw, verbouwing en renovatie voor een vlekkeloze eindoplevering. Vrijblijvende offerte aanvragen.', 'hds' ),
+			'seo_title'       => __( 'Oplevering schoonmaak | Professionele opleverschoonmaak na bouw en renovatie | Hamdoun Schoonmaak', 'hds' ),
+			'seo_description' => __( 'Professionele opleverschoonmaak door Hamdoun Schoonmaak. Grondige reiniging na bouw, verbouwing en renovatie voor een vlekkeloze eindoplevering. Vrijblijvende offerte aanvragen.', 'hds' ),
 		],
 
 		'industriele-schoonmaak' => [
@@ -456,61 +455,56 @@ function hds_get_services(): array {
 			'seo_description' => '',
 		],
 
-		'specialistische-reiniging' => [
-			'title'           => __( 'Specialistische reiniging', 'hds' ),
-			'subtitle'        => __( 'Gespecialiseerde reinigingsoplossingen voor elke uitdaging.', 'hds' ),
+		// PLACEHOLDER CONTENT (F9-D): client copy for this service is pending.
+		// Only generic wording is used — no company-specific facts are claimed.
+		'scholen-en-kinderopvang-reiniging' => [
+			'title'           => __( 'Scholen en Kinderopvang reiniging', 'hds' ),
+			'subtitle'        => __( 'Schoonmaak voor scholen en kinderopvanglocaties, afgestemd op het gebruik van de ruimtes.', 'hds' ),
 			'hero_image'      => 0,
-			'eyebrow'         => __( 'Specialistische reiniging', 'hds' ),
+			'eyebrow'         => __( 'Scholen en kinderopvang', 'hds' ),
 			'intro'           => [
 				'eyebrow'     => __( 'Onze dienst', 'hds' ),
-				'title'       => __( 'Professionele specialistische reiniging voor bedrijven', 'hds' ),
-				'intro_text'  => __( 'Ontdek hoe onze specialistische reiniging bijdraagt aan een schone, veilige en representatieve bedrijfsomgeving.', 'hds' ),
+				'title'       => __( 'Schoonmaak voor scholen en kinderopvang', 'hds' ),
+				'intro_text'  => __( 'Een schone en hygiënische omgeving draagt bij aan een prettige en gezonde leer- en speelomgeving.', 'hds' ),
 				'paragraphs'  => [
-					__( 'Sommige ruimtes en oppervlakken vragen om meer dan reguliere schoonmaak. Onze specialistische reiniging is gericht op situaties waarin specifieke kennis, technieken of apparatuur nodig zijn. We stemmen de werkzaamheden af op de omgeving, het materiaal en de aard van de vervuiling.', 'hds' ),
-					__( 'Wij brengen vooraf in kaart welke reinigingsmethode het beste past bij uw situatie. Zo werken we gericht en zorgvuldig, met aandacht voor veiligheid, bereikbaarheid en het gewenste resultaat.', 'hds' ),
+					__( 'In scholen en kinderopvanglocaties worden ruimtes intensief gebruikt. Wij stemmen de schoonmaak af op het gebouw, het gebruik van de ruimtes en de wensen van de locatie.', 'hds' ),
+					__( 'De werkzaamheden en de frequentie bepalen wij volledig in overleg met u. Zo ontvangen kinderen, medewerkers en bezoekers elke dag een schone en verzorgde omgeving.', 'hds' ),
 				],
-				'benefits'    => [
-					__( 'Reiniging van hardnekkige en bijzondere vervuiling', 'hds' ),
-					__( 'Flexibele planning', 'hds' ),
-					__( 'Gespecialiseerde reinigingstechnieken', 'hds' ),
-					__( 'Aangepast reinigingsplan per situatie', 'hds' ),
-					__( 'Veilig en vakkundig uitgevoerd', 'hds' ),
-					__( 'Vrijblijvende offerte', 'hds' ),
-				],
+				'benefits'    => hds_get_default_intro_benefits(),
 			],
 			'checklist'       => [
-				[ 'text' => __( 'Verwijderen van hardnekkige vervuiling, aanslag, vet en olie van oppervlakken en machines', 'hds' ) ],
-				[ 'text' => __( 'Dieptereiniging en desinfectie van sanitaire ruimtes, keukens en productieomgevingen', 'hds' ) ],
-				[ 'text' => __( 'Reinigen van gevels, daken, goten en andere moeilijk bereikbare buitenoppervlakken', 'hds' ) ],
-				[ 'text' => __( 'Speciale vloerreiniging: het strippen, schuren en opnieuw afwerken van alle vloertypes', 'hds' ) ],
-				[ 'text' => __( 'Verwijderen van graffiti, lijmresten, stickers en andere aangebrachte vervuiling', 'hds' ) ],
-				[ 'text' => __( 'Reiniging van ventilatiesystemen, luchtkanalen, filters en roosters', 'hds' ) ],
+				[ 'text' => __( 'Dagelijkse of periodieke schoonmaak van klaslokalen, groepsruimtes en gemeenschappelijke ruimtes', 'hds' ) ],
+				[ 'text' => __( 'Reinigen en desinfecteren van sanitaire voorzieningen en het aanvullen van verbruiksartikelen', 'hds' ) ],
+				[ 'text' => __( 'Stofzuigen en dweilen van vloeren in alle ruimtes', 'hds' ) ],
+				[ 'text' => __( 'Afnemen van tafels, bureaus en overige oppervlakken', 'hds' ) ],
+				[ 'text' => __( 'Leegmaken van prullenbakken en gescheiden afvalverwerking', 'hds' ) ],
+				[ 'text' => __( 'Reinigen van pantry\'s en personeelsruimtes', 'hds' ) ],
 			],
-			'industries'      => [ 'kantoren', 'zorginstellingen', 'scholen', 'retail', 'overheid', 'bedrijfsverzamelgebouwen' ],
+			'industries'      => [],
 			'faq'             => [
 				[
-					'q' => __( 'Wat is het verschil tussen reguliere schoonmaak en specialistische reiniging?', 'hds' ),
-					'a' => __( 'Reguliere schoonmaak richt zich op het dagelijks of periodiek schoon en fris houden van een pand. Specialistische reiniging komt in beeld bij hardnekkige vervuiling, bijzondere oppervlakken of specifieke situaties waar standaard reinigingsmethoden tekortschieten. Denk aan dieptereiniging, desinfectie, gevelreiniging of het verwijderen van graffiti en vetafzetting.', 'hds' ),
+					'q' => __( 'Voor welke locaties is deze schoonmaak geschikt?', 'hds' ),
+					'a' => __( 'Voor scholen en kinderopvanglocaties. Wij stemmen de werkzaamheden af op het gebouw en het gebruik van de ruimtes.', 'hds' ),
 				],
 				[
-					'q' => __( 'Welke soorten specialistische reiniging bieden jullie aan?', 'hds' ),
-					'a' => __( 'Wij bieden een breed scala aan specialistische reinigingsdiensten, waaronder dieptereiniging en desinfectie van ruimtes, gevel- en dakreiniging, speciale vloerreiniging zoals strippen en coaten, verwijderen van graffiti en aangebrachte vervuiling, reiniging van ventilatiesystemen en luchtkanalen, en het reinigen van moeilijk bereikbare oppervlakken. Iedere opdracht begint met een analyse van de situatie.', 'hds' ),
+					'q' => __( 'Hoe vaak wordt er schoongemaakt?', 'hds' ),
+					'a' => __( 'De frequentie bepalen wij volledig in overleg met u, afgestemd op de locatie en het gebruik. Wij adviseren u graag over een passende planning.', 'hds' ),
 				],
 				[
-					'q' => __( 'Hoe bepalen jullie de juiste reinigingsmethode?', 'hds' ),
-					'a' => __( 'Wij starten altijd met een inspectie van het oppervlak, het type vervuiling en de omgevingsfactoren. Op basis daarvan kiezen wij de meest geschikte reinigingstechniek — van chemische reiniging en hogedrukreiniging tot stoomreiniging of droge methoden. Het uitgangspunt is altijd: het beste resultaat zonder schade aan het materiaal.', 'hds' ),
+					'q' => __( 'Kunnen de werkzaamheden buiten openingstijden plaatsvinden?', 'hds' ),
+					'a' => __( 'Ja. Wij kunnen alle werkzaamheden uitvoeren buiten de openingstijden van de locatie, zodat kinderen en medewerkers geen hinder ondervinden.', 'hds' ),
 				],
 				[
-					'q' => __( 'Kunnen de werkzaamheden worden uitgevoerd zonder de dagelijkse bedrijfsvoering te verstoren?', 'hds' ),
-					'a' => __( 'Ja, wij plannen specialistische reiniging bij voorkeur buiten openingstijden — in de avond, nacht of het weekend. Zo ondervindt u geen hinder van de werkzaamheden. In overleg stemmen wij de planning volledig af op uw bedrijfsproces, zodat de continuïteit van uw organisatie gewaarborgd blijft.', 'hds' ),
+					'q' => __( 'Zijn jullie medewerkers gescreend?', 'hds' ),
+					'a' => __( 'Ja, al onze schoonmaakmedewerkers zijn in vaste dienst, volledig opgeleid en beschikken over een VOG-verklaring (Verklaring Omtrent Gedrag).', 'hds' ),
 				],
 				[
-					'q' => __( 'Is specialistische reiniging eenmalig of periodiek nodig?', 'hds' ),
-					'a' => __( 'Dit is volledig afhankelijk van de situatie. Sommige specialistische reiniging is eenmalig — bijvoorbeeld na een incident, verbouwing of bij een verhuizing. Andere situaties vragen om periodieke herhaling, zoals het reinigen van ventilatiekanalen of het periodiek strippen en coaten van vloeren. Wij adviseren u graag over de optimale frequentie.', 'hds' ),
+					'q' => __( 'Kan ik een vrijblijvende offerte aanvragen?', 'hds' ),
+					'a' => __( 'Ja. Wij maken graag een vrijblijvende offerte op maat. Tijdens de kennismaking bespreken wij uw wensen en stellen wij een passend voorstel op.', 'hds' ),
 				],
 			],
-			'seo_title'       => __( 'Specialistische reiniging | Gespecialiseerde schoonmaak op maat | HDS', 'hds' ),
-			'seo_description' => __( 'Specialistische reiniging door HDS. Gespecialiseerde schoonmaakoplossingen voor hardnekkige vervuiling, dieptereiniging en bijzondere oppervlakken. Vrijblijvende offerte aanvragen.', 'hds' ),
+			'seo_title'       => __( 'Scholen en kinderopvang reiniging | Schoonmaak op maat | Hamdoun Schoonmaak', 'hds' ), // PLACEHOLDER (F9-D)
+			'seo_description' => __( 'Schoonmaak voor scholen en kinderopvanglocaties. Werkzaamheden en frequentie in overleg, afgestemd op het gebruik van de ruimtes. Vrijblijvende offerte.', 'hds' ), // PLACEHOLDER (F9-D)
 		],
 	];
 }

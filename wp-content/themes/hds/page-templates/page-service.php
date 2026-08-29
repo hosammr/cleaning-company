@@ -77,7 +77,7 @@ get_header();
 				[ 'title' => __( 'Flexibele planning', 'hds' ), 'description' => __( 'Werkzaamheden afgestemd op uw openingstijden en bedrijfsprocessen.', 'hds' ) ],
 				[ 'title' => __( 'Duurzame werkwijze', 'hds' ), 'description' => __( 'Wij werken met professionele producten en milieubewuste schoonmaakmethoden.', 'hds' ) ],
 			],
-			__( 'Waarom kiezen voor HDS', 'hds' ),
+			__( 'Waarom kiezen voor Hamdoun Schoonmaak', 'hds' ),
 			''
 		); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		?>

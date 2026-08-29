@@ -43,8 +43,8 @@
 			</div>
 
 			<div class="footer-column">
-				<h3 class="footer-heading"><?php esc_html_e( 'Over HDS', 'hds' ); ?></h3>
-				<nav class="footer-nav" aria-label="<?php esc_attr_e( 'Over HDS', 'hds' ); ?>">
+<h3 class="footer-heading"><?php esc_html_e( 'Over Hamdoun Schoonmaak', 'hds' ); ?></h3>
+			<nav class="footer-nav" aria-label="<?php esc_attr_e( 'Over Hamdoun Schoonmaak', 'hds' ); ?>">
 				<?php
 				wp_nav_menu( [
 					'theme_location' => 'footer-about',
@@ -63,6 +63,12 @@
 					<p class="footer-contact__item">
 						<a href="tel:<?php echo esc_attr( hds_esc_tel( hds_get_phone() ) ); ?>" class="footer-contact__link">
 							<?php echo esc_html( hds_get_phone() ); ?>
+						</a>
+					</p>
+					<p class="footer-contact__item">
+						<?php esc_html_e( 'Vast', 'hds' ); ?>:
+						<a href="tel:<?php echo esc_attr( hds_esc_tel( hds_get_phone_secondary() ) ); ?>" class="footer-contact__link">
+							<?php echo esc_html( hds_get_phone_secondary() ); ?>
 						</a>
 					</p>
 					<p class="footer-contact__item">

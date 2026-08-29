@@ -128,7 +128,7 @@ function hds_get_service_schema( int $post_id ): array {
 		'url'         => get_permalink( $post ),
 		'areaServed'  => [
 			'@type' => 'City',
-			'name'  => hds_get_postal_city() ?: __( 'West-Brabant en Zeeland', 'hds' ),
+			'name'  => hds_get_postal_city() ?: __( 'Provincie Groningen', 'hds' ),
 		],
 		'serviceType' => get_the_title( $post ),
 	];

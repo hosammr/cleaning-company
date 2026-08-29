@@ -394,8 +394,8 @@ function hds_render_usp_section(): string {
 
 	return hds_render_usp_grid(
 		$usp_items,
-		__( 'Waarom HDS?', 'hds' ),
-		__( 'Daarom kiezen bedrijven in West-Brabant en Zeeland voor HDS als vaste schoonmaakpartner.', 'hds' )
+		__( 'Waarom Hamdoun Schoonmaak?', 'hds' ),
+				__( 'Daarom kiezen bedrijven in de provincie Groningen voor Hamdoun Schoonmaak als vaste schoonmaakpartner.', 'hds' )
 	);
 }
 

@@ -19,6 +19,7 @@ function hds_customizer_register( $wp_customize ): void {
 		'hds_address'       => __( 'Adres (straat + huisnummer)', 'hds' ),
 		'hds_postal_city'   => __( 'Postcode en plaats', 'hds' ),
 		'hds_phone'         => __( 'Telefoonnummer', 'hds' ),
+		'hds_phone_secondary' => __( 'Telefoonnummer (vast)', 'hds' ),
 		'hds_email'         => __( 'E-mailadres', 'hds' ),
 		'hds_kvk'           => __( 'KVK-nummer', 'hds' ),
 		'hds_btw'           => __( 'BTW-nummer', 'hds' ),
