@@ -242,9 +242,11 @@ function hds_render_cross_sell_section(): string {
 /**
  * Get service pages grouped by category for landing pages.
  *
- * Returns two groups matching the MPS-001 sitemap:
+ * Returns one group matching the active MPS-001 sitemap:
  *   'glas-en-gevel' => [glasbewassing, gevelreiniging]
- *   'schoonmaakdiensten' => [reguliere-schoonmaak, vloeronderhoud, vve-service, oplevering-schoonmaak, industriele-schoonmaak]
+ *
+ * The 'schoonmaakdiensten' category landing page was removed (F9-F);
+ * its individual services are reached directly via the "Diensten" menu.
  *
  * @return array<string, WP_Post[]> Grouped service pages.
  */
@@ -254,32 +256,14 @@ function hds_get_service_page_groups(): array {
 		'gevelreiniging',
 	];
 
-		$schoonmaak = [
-			'reguliere-schoonmaak',
-			'vloeronderhoud',
-			'vve-service',
-			'oplevering-schoonmaak',
-			'industriele-schoonmaak',
-			'kantoor-schoonmaak',
-			'scholen-en-kinderopvang-reiniging',
-		];
-
 	$groups = [
-		'glas-en-gevel'        => [],
-		'schoonmaakdiensten'   => [],
+		'glas-en-gevel' => [],
 	];
 
 	foreach ( $glazen_gevel as $slug ) {
 		$page = get_page_by_path( $slug );
 		if ( $page && $page->post_status === 'publish' ) {
 			$groups['glas-en-gevel'][] = $page;
-		}
-	}
-
-	foreach ( $schoonmaak as $slug ) {
-		$page = get_page_by_path( $slug );
-		if ( $page && $page->post_status === 'publish' ) {
-			$groups['schoonmaakdiensten'][] = $page;
 		}
 	}
 

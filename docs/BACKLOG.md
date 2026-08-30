@@ -2,7 +2,7 @@
 
 ## Unresolved Project Decisions
 
-### DEC-001 — P10 Schoonmaakdiensten card grid: 5 vs 7 services (UNRESOLVED)
+### DEC-001 — P10 Schoonmaakdiensten card grid: 5 vs 7 services (RESOLVED/OBSOLETE — F9-F)
 
 **Origin:** F9-B category landing page implementation (P09/P10).
 
@@ -30,6 +30,8 @@ The current implementation (`inc/service-functions.php` → `hds_get_service_pag
 
 **Status:** OPEN — no owner assigned.
 
+**RESOLVED/OBSOLETE at F9-F (client approved):** the P10 `/schoonmaakdiensten/` category landing page was removed because it duplicated the individual services already available under "Diensten". With the page gone, the 5-vs-7 card composition question no longer applies and no further action is needed. The historical record above is kept for traceability; the frozen specification documents (FS-001 §4.3, PB E-CORE-08, SEO-001 §6.3, PCR-001) are intentionally not modified.
+
 ---
 
 ## Client Change Records
@@ -44,6 +46,8 @@ The current implementation (`inc/service-functions.php` → `hds_get_service_pag
 
 **Redirect note (unimplemented):** the retired `/specialistische-reiniging/` URL currently returns 404. Recommended future redirect target, if one is configured: `/schoonmaakdiensten/` (aggregate landing). No redirect mechanism exists in the theme; Rank Math absent.
 
+**Update F9-F:** the previously recommended redirect target `/schoonmaakdiensten/` has itself been removed (see DEC-004). There is still no redirect mechanism in the theme and no plugin was introduced. Retired URLs (including the former `/schoonmaakdiensten/`) intentionally return 404 until a redirect mechanism is explicitly requested.
+
 ### DEC-003 — Client identity update (F9-E, client requested)
 
 | Item | Old | New | Status |
@@ -57,3 +61,22 @@ The current implementation (`inc/service-functions.php` → `hds_get_service_pag
 | Facebook URL fallback | facebook.com/helderduidelijkschoon/ | **PENDING** client confirmation | Intentionally unchanged |
 
 **Remaining client dependencies:** official domain, e-mail address(es), Facebook URL, KVK/BTW/address values (not yet supplied).
+
+### DEC-004 — Remove Schoonmaakdiensten category landing page (F9-F, client approved)
+
+| Item | Detail | Status |
+|---|---|---|
+| Removed page | P10 `/schoonmaakdiensten/` (post ID 258) — duplicated the individual services already available under "Diensten" | Page trashed (reversible); URL returns 404 |
+| Removed menu item | "Schoonmaakdiensten" item from the "Diensten" dropdown | Menu item removed |
+| Removed code | 404.php suggestion link, page-bedankt.php "Bekijk onze diensten" link target, `schoonmaakdiensten` entry in `inc/seo.php` category SEO map, `schoonmaakdiensten` group in `hds_get_service_page_groups()` | Implemented |
+
+**Preserved:**
+
+- All individual service pages remain active.
+- "Diensten" remains the main navigation entry point.
+- P09 `/glas-en-gevel/` remains active.
+- Scholen en Kinderopvang remains active.
+- Specialistische reiniging remains retired.
+- Gevelreiniging remains restricted to particuliere woningen and low-rise/easily accessible façades.
+
+**Redirect behavior:** no redirect mechanism exists in the theme and no plugin was introduced. `/schoonmaakdiensten/` intentionally returns 404, consistent with the retired `/specialistische-reiniging/` URL.

@@ -23,10 +23,6 @@ function hds_get_category_landing_seo( string $slug ): array {
 			'title'       => __( 'Glas & Gevel Reiniging — Hamdoun Schoonmaak', 'hds' ),
 			'description' => __( 'Glas en gevel reiniging in de provincie Groningen. Glasbewassing voor bedrijfspanden en gevelreiniging voor woningen en laagbouw. Vrijblijvende offerte.', 'hds' ),
 		],
-		'schoonmaakdiensten' => [
-			'title'       => __( 'Schoonmaakdiensten — Hamdoun Schoonmaak', 'hds' ),
-			'description' => __( 'Alle schoonmaakdiensten voor bedrijven: reguliere schoonmaak, vloeronderhoud, VVE, oplevering en industriele reiniging. Vrijblijvende offerte.', 'hds' ),
-		],
 	];
 
 	return $data[ $slug ] ?? [];
