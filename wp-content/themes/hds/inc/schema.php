@@ -99,11 +99,6 @@ function hds_get_localbusiness_schema(): array {
 		];
 	}
 
-	$hours = get_theme_mod( 'hds_opening_hours' );
-	if ( $hours ) {
-		$schema['openingHours'] = array_filter( array_map( 'trim', explode( "\n", $hours ) ) );
-	}
-
 	return $schema;
 }
 

@@ -83,7 +83,7 @@ get_header();
 		__( 'Geen passende vacature gevonden?', 'hds' ),
 		__( 'Stuur een open sollicitatie en wie weet maken wij samen een match.', 'hds' ),
 		__( 'Open solliciteren', 'hds' ),
-		home_url( '/contact/' )
+		add_query_arg( [ 'type' => 'sollicitatie' ], home_url( '/contact/' ) )
 	);
 	?>
 </main>

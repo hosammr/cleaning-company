@@ -27,7 +27,7 @@ function hds_get_about_sections( string $slug ): array {
 				'heading'      => __( 'Onze missie', 'hds' ),
 				'content_type' => 'paragraphs',
 				'items'        => [
-					__( 'Wij geloven dat een schone werkomgeving de basis is voor productiviteit, gezondheid en een goede eerste indruk. Daarom levert Hamdoun Schoonmaak al meer dan 20 jaar hoogwaardige schoonmaakdiensten aan bedrijven in de provincie Groningen.', 'hds' ),
+					__( 'Wij geloven dat een schone werkomgeving de basis is voor productiviteit, gezondheid en een goede eerste indruk. Hamdoun Schoonmaak is ongeveer twee jaar actief en levert hoogwaardige schoonmaakdiensten aan bedrijven in de provincie Groningen.', 'hds' ),
 				],
 			],
 			[
@@ -46,7 +46,7 @@ function hds_get_about_sections( string $slug ): array {
 				'heading'      => __( 'Waarom bedrijven kiezen voor Hamdoun Schoonmaak', 'hds' ),
 				'content_type' => 'cards',
 				'items'        => [
-					[ 'title' => __( '20+ jaar ervaring', 'hds' ), 'description' => __( 'Al meer dan twee decennia een vertrouwde partner in schoonmaak.', 'hds' ) ],
+					[ 'title' => __( 'Jong en groeiend bedrijf', 'hds' ), 'description' => __( 'Hamdoun Schoonmaak is ongeveer twee jaar actief en blijft zich ontwikkelen en uitbreiden.', 'hds' ) ],
 					[ 'title' => __( 'Regionale partner', 'hds' ), 'description' => __( 'Wij kennen de provincie Groningen als geen ander.', 'hds' ) ],
 					[ 'title' => __( 'Persoonlijk contact', 'hds' ), 'description' => __( 'Geen callcenter, maar een vaste contactpersoon die u kent.', 'hds' ) ],
 					[ 'title' => __( 'Volledig verzekerd', 'hds' ), 'description' => __( 'U zit nooit met risico\'s. Onze diensten zijn volledig verzekerd.', 'hds' ) ],

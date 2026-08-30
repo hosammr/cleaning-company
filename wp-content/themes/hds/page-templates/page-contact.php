@@ -186,14 +186,18 @@ get_header();
 				</article>
 				<?php endif; ?>
 				<article class="hds-card hds-usp-card">
-					<h3 class="hds-usp-card__title"><?php esc_html_e( 'Openingstijden', 'hds' ); ?></h3>
+					<h3 class="hds-usp-card__title"><?php esc_html_e( 'Telefonische bereikbaarheid', 'hds' ); ?></h3>
 					<p class="hds-usp-card__desc">
 						<?php
 						$hours = get_theme_mod( 'hds_opening_hours' );
 						if ( $hours ) :
 							echo nl2br( esc_html( $hours ) );
 						else :
-							esc_html_e( 'Maandag t/m vrijdag van 08:00 tot 17:00', 'hds' );
+							esc_html_e( 'Maandag t/m vrijdag: 08:00–17:00', 'hds' );
+							echo '<br>';
+							esc_html_e( 'Zaterdag: 12:00–17:00', 'hds' );
+							echo '<br>';
+							esc_html_e( 'Zondag: gesloten', 'hds' );
 						endif;
 						?>
 					</p>
