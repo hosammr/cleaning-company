@@ -3,7 +3,7 @@
  * Template Name: Offerte Aanvragen
  *
  * Quote request page with Gravity Forms integration.
- * Layout: Hero → Intro → USP → Process → Form → CTA.
+ * Layout: Hero → Process → USP → Trust strip → Form → CTA.
  * Form rendered via the_content() (Gravity Forms shortcode).
  * MPS-001 G1.2: 13 fields including multi-checkbox, file upload, postcode validation.
  *
@@ -34,32 +34,52 @@ get_header();
 	get_template_part( 'parts/hero' );
 	?>
 
-	<div class="container">
-		<div class="quote-page">
-			<?php
-			// 2. Introduction
-			echo hds_section_header(
-				__( 'Zo werkt het', 'hds' ),
-				__( 'Vraag eenvoudig een vrijblijvende offerte aan. Wij nemen binnen één werkdag contact met u op.', 'hds' ),
-				'center'
-			); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			?>
-			<div class="quote-intro">
-				<p>
-					<?php esc_html_e( 'Vul het onderstaande formulier in en ontvang een offerte op maat. Heeft u een specifieke vraag of wilt u liever direct contact? Bel of mail ons dan gerust.', 'hds' ); ?>
-				</p>
+	<?php
+	// 2. Zo werkt het — compact three-step process.
+	?>
+	<section class="quote-process-section" aria-labelledby="quote-process-heading">
+		<div class="container">
+			<div class="section-header section-header--center">
+				<h2 class="section-header__heading" id="quote-process-heading"><?php esc_html_e( 'Zo werkt het', 'hds' ); ?></h2>
+				<p class="section-header__subtitle"><?php esc_html_e( 'Vraag eenvoudig een vrijblijvende offerte aan. Wij nemen binnen één werkdag contact met u op.', 'hds' ); ?></p>
 			</div>
+			<ol class="quote-process">
+				<li class="quote-process__step">
+					<span class="quote-process__number" aria-hidden="true">1</span>
+					<span class="quote-process__icon" aria-hidden="true">
+						<svg width="28" height="28" viewBox="0 0 256 256" fill="none"><path d="M216 48v160a16 16 0 0 1-16 16H72a16 16 0 0 1-16-16V48a16 16 0 0 1 16-16h128a16 16 0 0 1 16 16Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M96 104h64M96 136h64M96 168h32" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</span>
+					<h3 class="quote-process__title"><?php esc_html_e( 'Offerte aanvragen', 'hds' ); ?></h3>
+					<p class="quote-process__desc"><?php esc_html_e( 'Vul het formulier in met uw gegevens en wensen.', 'hds' ); ?></p>
+				</li>
+				<li class="quote-process__step">
+					<span class="quote-process__number" aria-hidden="true">2</span>
+					<span class="quote-process__icon" aria-hidden="true">
+						<svg width="28" height="28" viewBox="0 0 256 256" fill="none"><path d="M224 152v32a16 16 0 0 1-17.6 16C123.8 197.3 58.7 132.2 56 49.6A16 16 0 0 1 72 32h32a16 16 0 0 1 16 13.6c1.4 11.6 4.2 22.8 8.4 33.4a16 16 0 0 1-3.6 16.9l-11.2 11.2a112.6 112.6 0 0 0 54.1 54.1l11.2-11.2a16 16 0 0 1 16.9-3.6c10.6 4.2 21.8 7 33.4 8.4A16 16 0 0 1 224 152Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</span>
+					<h3 class="quote-process__title"><?php esc_html_e( 'Contact', 'hds' ); ?></h3>
+					<p class="quote-process__desc"><?php esc_html_e( 'Wij nemen binnen één werkdag contact met u op.', 'hds' ); ?></p>
+				</li>
+				<li class="quote-process__step">
+					<span class="quote-process__number" aria-hidden="true">3</span>
+					<span class="quote-process__icon" aria-hidden="true">
+						<svg width="28" height="28" viewBox="0 0 256 256" fill="none"><path d="M216 48v160a16 16 0 0 1-16 16H72a16 16 0 0 1-16-16V48a16 16 0 0 1 16-16h128a16 16 0 0 1 16 16Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M104 140l22 22 40-48" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</span>
+					<h3 class="quote-process__title"><?php esc_html_e( 'Offerte op maat', 'hds' ); ?></h3>
+					<p class="quote-process__desc"><?php esc_html_e( 'Wij stemmen de offerte af op uw situatie en wensen.', 'hds' ); ?></p>
+				</li>
+			</ol>
 		</div>
-	</div>
+	</section>
 
 	<?php
-	// 3. Why request a quotation? — reuse hds_usp_card
+	// 3. Why request a quotation? — reuse hds_usp_card.
 	?>
 	<section class="hds-usp-section" aria-labelledby="quote-usp-heading">
 		<div class="container">
-			<header class="hds-usp-header">
-				<h2 id="quote-usp-heading"><?php esc_html_e( 'Waarom een offerte aanvragen?', 'hds' ); ?></h2>
-			</header>
+			<div class="section-header section-header--center">
+				<h2 class="section-header__heading" id="quote-usp-heading"><?php esc_html_e( 'Waarom een offerte aanvragen?', 'hds' ); ?></h2>
+			</div>
 			<div class="hds-usp-grid">
 				<?php
 				echo hds_usp_card(
@@ -83,24 +103,33 @@ get_header();
 	</section>
 
 	<?php
-	// 4. Our process — reuse from page-service.php
+	// 4. Trust strip — compact reassurance row.
 	?>
-	<?php
-	echo hds_render_process_timeline(
-		__( 'Onze werkwijze', 'hds' ),
-		[
-			[ 'title' => __( 'Aanvraag', 'hds' ), 'description' => __( 'Neem contact met ons op en vertel ons uw wensen.', 'hds' ) ],
-			[ 'title' => __( 'Vrijblijvende offerte', 'hds' ), 'description' => __( 'Wij analyseren uw situatie en sturen een duidelijke offerte.', 'hds' ) ],
-			[ 'title' => __( 'Planning', 'hds' ), 'description' => __( 'Samen plannen we de werkzaamheden op een geschikt moment.', 'hds' ) ],
-			[ 'title' => __( 'Uitvoering', 'hds' ), 'description' => __( 'Ons team voert de werkzaamheden zorgvuldig en volgens afspraak uit.', 'hds' ) ],
-		]
-	); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	?>
+	<section class="quote-trust-strip" aria-label="<?php esc_attr_e( 'Waarom u gerust een offerte kunt aanvragen', 'hds' ); ?>">
+		<div class="container">
+			<ul class="quote-trust-strip__list">
+				<li class="quote-trust-strip__item">
+					<span class="quote-trust-strip__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 256 256" fill="none"><path d="M216 72l-104 104-72-72" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+					<span class="quote-trust-strip__label"><?php esc_html_e( 'Vrijblijvend', 'hds' ); ?></span>
+				</li>
+				<li class="quote-trust-strip__item">
+					<span class="quote-trust-strip__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 256 256" fill="none"><path d="M216 72l-104 104-72-72" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+					<span class="quote-trust-strip__label"><?php esc_html_e( 'Reactie binnen één werkdag', 'hds' ); ?></span>
+				</li>
+				<li class="quote-trust-strip__item">
+					<span class="quote-trust-strip__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 256 256" fill="none"><path d="M216 72l-104 104-72-72" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+					<span class="quote-trust-strip__label"><?php esc_html_e( 'Geen verplichtingen', 'hds' ); ?></span>
+				</li>
+			</ul>
+		</div>
+	</section>
 
+	<?php
+	// 5. Form section — Gravity Forms via the_content().
+	?>
 	<div class="container">
 		<div class="quote-page">
 			<?php
-			// 5. Form section — Gravity Forms via the_content()
 			echo hds_section_header(
 				__( 'Offerte aanvragen', 'hds' ),
 				__( 'Vul onderstaand formulier in en wij nemen contact met u op.', 'hds' ),
@@ -120,27 +149,33 @@ get_header();
 				endwhile;
 				?>
 			</div>
-
-			<div class="quote-cta-fallback">
-				<p>
-					<?php esc_html_e( 'Wilt u liever direct contact? Bel ons op', 'hds' ); ?>
-					<?php echo hds_get_phone_link(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-					<?php esc_html_e( 'of stuur een e-mail naar', 'hds' ); ?>
-					<?php echo hds_get_email_link(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-				</p>
-			</div>
 		</div>
 	</div>
 
 	<?php
-	// 6. Final CTA — direct phone contact
-	echo hds_cta_section(
-		__( 'Liever direct contact?', 'hds' ),
-		__( 'Wij zijn op werkdagen telefonisch bereikbaar van 08:00 tot 17:00.', 'hds' ),
-		hds_get_phone(),
-		'tel:' . hds_esc_tel( hds_get_phone() )
-	);
+	// 6. Final CTA — direct phone contact.
 	?>
+	<section class="quote-contact-cta" aria-labelledby="quote-contact-cta-heading">
+		<div class="container">
+			<div class="quote-contact-cta__grid">
+				<div class="quote-contact-cta__content">
+					<h2 class="quote-contact-cta__heading" id="quote-contact-cta-heading"><?php esc_html_e( 'Liever direct contact?', 'hds' ); ?></h2>
+					<p class="quote-contact-cta__description"><?php esc_html_e( 'Wij zijn op werkdagen telefonisch bereikbaar van 08:00 tot 17:00.', 'hds' ); ?></p>
+				</div>
+				<div class="quote-contact-cta__actions">
+					<span class="quote-contact-cta__icon" aria-hidden="true">
+						<svg width="28" height="28" viewBox="0 0 256 256" fill="none"><path d="M224 152v32a16 16 0 0 1-17.6 16C123.8 197.3 58.7 132.2 56 49.6A16 16 0 0 1 72 32h32a16 16 0 0 1 16 13.6c1.4 11.6 4.2 22.8 8.4 33.4a16 16 0 0 1-3.6 16.9l-11.2 11.2a112.6 112.6 0 0 0 54.1 54.1l11.2-11.2a16 16 0 0 1 16.9-3.6c10.6 4.2 21.8 7 33.4 8.4A16 16 0 0 1 224 152Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</span>
+					<a class="quote-contact-cta__phone" href="tel:<?php echo esc_attr( hds_esc_tel( hds_get_phone() ) ); ?>"><?php echo esc_html( hds_get_phone() ); ?></a>
+					<a class="btn btn-cta" href="tel:<?php echo esc_attr( hds_esc_tel( hds_get_phone() ) ); ?>"><?php esc_html_e( 'Bel ons direct', 'hds' ); ?></a>
+					<p class="quote-contact-cta__email">
+						<?php esc_html_e( 'Of stuur een e-mail naar', 'hds' ); ?>
+						<?php echo hds_get_email_link(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
 </main>
 
 <?php

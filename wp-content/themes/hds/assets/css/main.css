@@ -1349,26 +1349,326 @@ body.admin-bar .site-header {
 	scroll-margin-top: 100px;
 }
 
-.quote-intro form,
-.quote-intro .gform_wrapper,
-.quote-intro .wpcf7-form {
+/* ── Quote Page — Section Accents ── */
+.page-template-page-quote .section-header__heading::after {
+	background: var(--wp--preset--color--secondary);
+	border-radius: 999px;
+	content: '';
+	display: block;
+	height: 4px;
+	margin: var(--wp--preset--spacing--3) auto 0;
+	width: 44px;
+}
+
+/* ── Quote Page — Green Brand CTA Buttons ── */
+.page-template-page-quote .btn-cta {
+	background: var(--wp--preset--color--secondary);
+	color: var(--wp--preset--color--black);
+}
+
+.page-template-page-quote .btn-cta:hover,
+.page-template-page-quote .btn-cta:focus-visible {
+	background: #319a4d;
+	background: color-mix(in srgb, var(--wp--preset--color--secondary) 90%, var(--wp--preset--color--black));
+	color: var(--wp--preset--color--black);
+}
+
+.page-template-page-quote .service-hero .btn-cta {
+	background: var(--wp--preset--color--secondary);
+	color: var(--wp--preset--color--black);
+}
+
+.page-template-page-quote .service-hero .btn-cta:hover,
+.page-template-page-quote .service-hero .btn-cta:focus-visible {
+	background: #319a4d;
+	background: color-mix(in srgb, var(--wp--preset--color--secondary) 90%, var(--wp--preset--color--black));
+	color: var(--wp--preset--color--black);
+}
+
+/* ── Quote Process ── */
+.quote-process-section {
+	padding-block: var(--wp--preset--spacing--12) var(--wp--preset--spacing--10);
+}
+
+.quote-process {
+	display: grid;
+	gap: var(--wp--preset--spacing--6);
+	grid-template-columns: repeat(3, 1fr);
+	list-style: none;
+	margin: var(--wp--preset--spacing--8) 0 0;
+	padding: 0;
+	position: relative;
+}
+
+.quote-process::before {
+	background: var(--wp--preset--color--secondary);
+	content: '';
+	height: 2px;
+	left: 16.66%;
+	opacity: 0.25;
+	position: absolute;
+	top: 0;
+	width: 66.66%;
+	z-index: 2;
+}
+
+.quote-process__step {
+	align-items: center;
 	background: var(--wp--preset--color--white);
 	border: 1px solid var(--wp--preset--color--light-gray);
 	border-radius: var(--hds-border-radius);
-	box-shadow: var(--wp--preset--shadow--md);
-	padding: var(--wp--preset--spacing--6);
-}
-
-.quote-cta-fallback {
-	background: var(--wp--preset--color--light-gray);
-	border-radius: var(--hds-border-radius);
-	margin-top: var(--wp--preset--spacing--8);
-	padding: var(--wp--preset--spacing--6);
+	box-shadow: var(--wp--preset--shadow--sm);
+	display: flex;
+	flex-direction: column;
+	padding: calc(22px + var(--wp--preset--spacing--8)) var(--wp--preset--spacing--6) var(--wp--preset--spacing--8);
+	position: relative;
 	text-align: center;
+	transition: transform var(--hds-transition-speed) var(--hds-transition-easing),
+		box-shadow var(--hds-transition-speed) var(--hds-transition-easing);
 }
 
-.quote-cta-fallback p {
+.quote-process__number {
+	align-items: center;
+	background: var(--wp--preset--color--secondary);
+	border: 3px solid var(--wp--preset--color--white);
+	border-radius: 50%;
+	box-shadow: var(--wp--preset--shadow--sm);
+	color: var(--wp--preset--color--black);
+	display: flex;
+	font-size: var(--wp--preset--font-size--l);
+	font-weight: 700;
+	height: 44px;
+	justify-content: center;
+	left: 50%;
+	line-height: 1;
+	position: absolute;
+	top: -22px;
+	transform: translateX(-50%);
+	width: 44px;
+	z-index: 3;
+}
+
+.quote-process__icon {
+	align-items: center;
+	background: rgb(52 168 83 / 10%);
+	border-radius: var(--hds-border-radius);
+	color: var(--wp--preset--color--secondary);
+	display: flex;
+	height: 56px;
+	justify-content: center;
+	margin-bottom: var(--wp--preset--spacing--4);
+	transition: color var(--hds-transition-speed) var(--hds-transition-easing);
+	width: 56px;
+}
+
+.quote-process__title {
+	color: var(--wp--preset--color--dark-gray);
+	font-size: var(--wp--preset--font-size--xl);
+	line-height: 1.3;
+	margin: 0 0 var(--wp--preset--spacing--2);
+}
+
+.quote-process__desc {
+	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--m);
+	line-height: 1.6;
 	margin: 0;
+	max-width: 32ch;
+}
+
+/* ── Quote USP Cards ── */
+.page-template-page-quote .hds-usp-card {
+	border: 1px solid var(--wp--preset--color--light-gray);
+	box-shadow: var(--wp--preset--shadow--sm);
+	transition: transform var(--hds-transition-speed) var(--hds-transition-easing),
+		box-shadow var(--hds-transition-speed) var(--hds-transition-easing);
+}
+
+.page-template-page-quote .hds-usp-card__icon {
+	align-items: center;
+	background: rgb(26 115 232 / 8%);
+	border-radius: var(--hds-border-radius);
+	color: var(--wp--preset--color--primary);
+	display: flex;
+	height: 56px;
+	justify-content: center;
+	transition: color var(--hds-transition-speed) var(--hds-transition-easing);
+	width: 56px;
+}
+
+/* ── Quote Trust Strip ── */
+.quote-trust-strip {
+	padding-block: var(--wp--preset--spacing--6);
+}
+
+.quote-trust-strip__list {
+	align-items: center;
+	background: rgb(26 115 232 / 6%);
+	border: 1px solid rgb(26 115 232 / 12%);
+	border-radius: var(--hds-border-radius);
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--4) var(--wp--preset--spacing--8);
+	justify-content: center;
+	list-style: none;
+	margin: 0;
+	padding: var(--wp--preset--spacing--5) var(--wp--preset--spacing--6);
+}
+
+.quote-trust-strip__item {
+	align-items: center;
+	display: flex;
+	gap: var(--wp--preset--spacing--2);
+}
+
+.quote-trust-strip__icon {
+	color: var(--wp--preset--color--success);
+	display: flex;
+}
+
+.quote-trust-strip__label {
+	color: var(--wp--preset--color--dark-gray);
+	font-size: var(--wp--preset--font-size--m);
+	font-weight: 600;
+}
+
+/* ── Quote Form Presentation ── */
+.page-template-page-quote .quote-intro form,
+.page-template-page-quote .quote-intro .gform_wrapper,
+.page-template-page-quote .quote-intro .wpcf7-form {
+	background: var(--wp--preset--color--white);
+	border: 1px solid var(--wp--preset--color--light-gray);
+	border-radius: var(--hds-border-radius);
+	box-shadow: var(--wp--preset--shadow--lg);
+	padding: var(--wp--preset--spacing--6);
+}
+
+.page-template-page-quote .hds-quote-form__fieldset + .hds-quote-form__fieldset {
+	border-top: 1px solid var(--wp--preset--color--light-gray);
+	padding-top: var(--wp--preset--spacing--6);
+}
+
+/* ── Quote Direct Contact CTA ── */
+.quote-contact-cta {
+	background: var(--wp--preset--color--primary-dark);
+	color: var(--wp--preset--color--white);
+	padding-block: var(--wp--preset--spacing--12);
+}
+
+.quote-contact-cta__grid {
+	align-items: center;
+	display: grid;
+	gap: var(--wp--preset--spacing--8);
+	grid-template-columns: 1fr auto;
+}
+
+.quote-contact-cta__heading {
+	color: inherit;
+	font-size: var(--wp--preset--font-size--3-xl);
+	margin: 0 0 var(--wp--preset--spacing--2);
+}
+
+.quote-contact-cta__description {
+	color: rgb(255 255 255 / 85%);
+	font-size: var(--wp--preset--font-size--l);
+	margin: 0;
+}
+
+.quote-contact-cta__actions {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--4);
+	justify-content: center;
+}
+
+.quote-contact-cta__icon {
+	align-items: center;
+	background: rgb(255 255 255 / 10%);
+	border-radius: 50%;
+	color: var(--wp--preset--color--white);
+	display: flex;
+	height: 56px;
+	justify-content: center;
+	width: 56px;
+}
+
+.quote-contact-cta__phone {
+	color: var(--wp--preset--color--white);
+	font-size: var(--wp--preset--font-size--2-xl);
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.quote-contact-cta__phone:hover {
+	text-decoration: underline;
+}
+
+.quote-contact-cta__email {
+	color: rgb(255 255 255 / 80%);
+	font-size: var(--wp--preset--font-size--s);
+	margin: 0;
+	width: 100%;
+}
+
+.quote-contact-cta__email a {
+	color: var(--wp--preset--color--white);
+}
+
+/* ── Quote Page — Micro-interactions ── */
+@media (hover: hover) and (pointer: fine) {
+	.page-template-page-quote .quote-process__step:hover,
+	.page-template-page-quote .hds-usp-card:hover {
+		box-shadow: var(--wp--preset--shadow--md);
+		transform: translateY(-3px);
+	}
+
+	.page-template-page-quote .quote-process__step:hover .quote-process__icon {
+		color: color-mix(in srgb, var(--wp--preset--color--secondary) 85%, var(--wp--preset--color--black));
+	}
+
+	.page-template-page-quote .hds-usp-card:hover .hds-usp-card__icon {
+		color: var(--wp--preset--color--primary-dark);
+	}
+}
+
+/* ── Quote Page — Mobile ── */
+@media (width < 782px) {
+	.page-template-page-quote .quote-process {
+		grid-template-columns: 1fr;
+	}
+
+	.page-template-page-quote .quote-process::before {
+		display: none;
+	}
+
+	.page-template-page-quote .quote-process__number {
+		margin-bottom: var(--wp--preset--spacing--4);
+		position: static;
+		transform: none;
+	}
+
+	.page-template-page-quote .quote-process__step {
+		padding: var(--wp--preset--spacing--6);
+	}
+
+	.page-template-page-quote .quote-contact-cta__grid {
+		grid-template-columns: 1fr;
+		text-align: center;
+	}
+}
+
+/* ── Quote Page — Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+	.page-template-page-quote .quote-process__step,
+	.page-template-page-quote .hds-usp-card {
+		transition: none;
+	}
+
+	.page-template-page-quote .quote-process__step:hover,
+	.page-template-page-quote .hds-usp-card:hover {
+		transform: none;
+	}
 }
 
 /* ── Quote Form ── */
@@ -1491,26 +1791,6 @@ body.admin-bar .site-header {
 	.hds-quote-form__row {
 		grid-template-columns: 1fr;
 	}
-}
-
-/* ── Quote Trust Row ── */
-.hds-quote-trust {
-	align-items: center;
-	background: var(--wp--preset--color--light-gray);
-	border-radius: var(--hds-border-radius);
-	display: flex;
-	flex-wrap: wrap;
-	gap: var(--wp--preset--spacing--3) var(--wp--preset--spacing--6);
-	justify-content: center;
-	margin-bottom: var(--wp--preset--spacing--5);
-	padding: var(--wp--preset--spacing--3) var(--wp--preset--spacing--5);
-}
-
-.hds-quote-trust__item {
-	color: var(--wp--preset--color--dark-gray);
-	font-size: var(--wp--preset--font-size--s);
-	font-weight: 600;
-	white-space: nowrap;
 }
 
 /* ── Quote Submit Button ── */

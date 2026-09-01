@@ -63,11 +63,6 @@ function hds_render_quote_form(): string {
 
 	$values = $submitted ? $data : [];
 	?>
-	<div class="hds-quote-trust">
-		<span class="hds-quote-trust__item">&#10003; <?php esc_html_e( 'Vrijblijvend', 'hds' ); ?></span>
-		<span class="hds-quote-trust__item">&#10003; <?php esc_html_e( 'Reactie binnen 1 werkdag', 'hds' ); ?></span>
-		<span class="hds-quote-trust__item">&#10003; <?php esc_html_e( 'Geen verplichtingen', 'hds' ); ?></span>
-	</div>
 	<form method="post" action="#offerte-formulier" class="hds-quote-form" enctype="multipart/form-data" novalidate>
 		<?php wp_nonce_field( 'hds_quote_form', 'hds_quote_nonce' ); ?>
 
