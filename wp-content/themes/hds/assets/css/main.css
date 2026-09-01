@@ -1829,6 +1829,17 @@ body.admin-bar .site-header {
 	background-position: center 20%;
 }
 
+.page-template-page-quote .service-hero {
+	min-height: 300px;
+	padding-block: clamp(3rem, 8vw, 4rem);
+}
+
+@media (min-width: 782px) {
+	.page-template-page-quote .service-hero {
+		min-height: 360px;
+	}
+}
+
 .page-template-page-vacatures .vacancy-intro {
 	text-align: center;
 	padding-block: var(--wp--preset--spacing--8);

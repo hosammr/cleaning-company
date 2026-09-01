@@ -17,10 +17,11 @@ get_header();
 	<?php hds_breadcrumbs(); ?>
 
 	<?php
-	// 1. Hero — compact light variant
+	// 1. Hero — compact variant with the assigned hds_hero_image as background.
 	$hero_title     = __( 'Vraag vrijblijvend een offerte aan', 'hds' );
 	$hero_subtitle  = __( 'Ontvang binnen één werkdag een vrijblijvende offerte op maat voor uw bedrijf.', 'hds' );
-	$hero_image_url = '';
+	$hero_image_id  = (int) get_post_meta( get_queried_object_id(), 'hds_hero_image', true );
+	$hero_image_url = $hero_image_id ? wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ) : '';
 	$hero_cta_text  = __( 'Direct aanvragen', 'hds' );
 	$hero_cta_url   = '#offerte-formulier';
 
