@@ -37,15 +37,17 @@ function hds_mail_configure_transport( $phpmailer ): void {
 		return;
 	}
 
-	// ── Staging / Production: SMTP relay from environment variables ──
-	$smtp_host = getenv( 'SMTP_HOST' );
+	// ── Staging / Production: SMTP relay from constants or environment variables ──
+	// Constants (defined in server-side wp-config.php) take precedence over
+	// environment variables so production credentials never live in the repo.
+	$smtp_host = defined( 'SMTP_HOST' ) ? SMTP_HOST : getenv( 'SMTP_HOST' );
 	if ( ! $smtp_host ) {
 		return;
 	}
 
-	$smtp_user = getenv( 'SMTP_USER' );
-	$smtp_pass = getenv( 'SMTP_PASS' );
-	$smtp_port = getenv( 'SMTP_PORT' );
+	$smtp_user = defined( 'SMTP_USER' ) ? SMTP_USER : getenv( 'SMTP_USER' );
+	$smtp_pass = defined( 'SMTP_PASS' ) ? SMTP_PASS : getenv( 'SMTP_PASS' );
+	$smtp_port = defined( 'SMTP_PORT' ) ? SMTP_PORT : getenv( 'SMTP_PORT' );
 	$smtp_port = $smtp_port ? (int) $smtp_port : 587;
 
 	$phpmailer->isSMTP();

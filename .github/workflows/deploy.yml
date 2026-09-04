@@ -139,6 +139,7 @@ jobs:
             !.env.example
             /docker-compose.yml
             /docker-compose.*.yml
+            /wp-config.php
             /composer.json
             /composer.lock
             /package.json

@@ -16,9 +16,8 @@ wp-config-production.php
 
 # === Environment ===
 .env
-.env.local
-.env.staging
-.env.production
+.env.*
+!.env.example
 
 # === Dependencies ===
 /node_modules/
