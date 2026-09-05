@@ -26,7 +26,7 @@ function hds_get_phone_secondary(): string {
  */
 function hds_get_email(): string {
 	$email = get_theme_mod( 'hds_email', '' );
-	return $email ?: 'info@helderduidelijkschoon.nl';
+	return $email ?: 'info@hamdounschoonmaak.nl';
 }
 
 /**

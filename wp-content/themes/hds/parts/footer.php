@@ -3,7 +3,7 @@
  * Footer template part.
  *
  * 5-column grid: Branding, Diensten, Over HDS, Contact, Juridisch.
- * Bottom bar: KVK/BTW, copyright, social links.
+ * Bottom bar: copyright and social links.
  * All content loaded dynamically from Customizer + Nav Menus.
  * Fallback menus render when no nav menu is assigned to a theme location.
  *
@@ -60,7 +60,7 @@
 			<div class="footer-column">
 				<h3 class="footer-heading"><?php esc_html_e( 'Contact', 'hds' ); ?></h3>
 				<div class="footer-contact">
-					<p class="footer-contact__item">
+					<p class="footer-contact__item footer-contact__item--primary">
 						<a href="tel:<?php echo esc_attr( hds_esc_tel( hds_get_phone() ) ); ?>" class="footer-contact__link">
 							<?php echo esc_html( hds_get_phone() ); ?>
 						</a>
@@ -76,10 +76,15 @@
 							<?php echo esc_html( hds_get_email() ); ?>
 						</a>
 					</p>
-					<a href="<?php echo esc_url( get_theme_mod( 'hds_facebook_url', 'https://www.facebook.com/helderduidelijkschoon/' ) ); ?>" class="footer-contact__social" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Volg ons op Facebook', 'hds' ); ?>">
+					<?php
+					$footer_facebook = get_theme_mod( 'hds_facebook_url' );
+					if ( $footer_facebook ) :
+						?>
+					<a href="<?php echo esc_url( $footer_facebook ); ?>" class="footer-contact__social" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Volg ons op Facebook', 'hds' ); ?>">
 						<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
 						<span><?php esc_html_e( 'Facebook', 'hds' ); ?></span>
 					</a>
+					<?php endif; ?>
 					<?php if ( hds_get_address() && hds_get_postal_city() ) : ?>
 						<address class="footer-contact__address">
 							<?php echo esc_html( hds_get_address() ); ?><br>
@@ -107,18 +112,6 @@
 		</div>
 
 		<div class="footer-bottom">
-			<div class="footer-legal">
-				<?php
-				$kvk = get_theme_mod( 'hds_kvk' );
-				$btw = get_theme_mod( 'hds_btw' );
-				if ( $kvk ) : ?>
-					<span class="footer-legal__item"><?php echo esc_html__( 'KVK:', 'hds' ) . ' ' . esc_html( $kvk ); ?></span>
-				<?php endif; ?>
-				<?php if ( $btw ) : ?>
-					<span class="footer-legal__item"><?php echo esc_html__( 'BTW:', 'hds' ) . ' ' . esc_html( $btw ); ?></span>
-				<?php endif; ?>
-			</div>
-
 			<div class="footer-copyright">
 				<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?>. <?php esc_html_e( 'Alle rechten voorbehouden.', 'hds' ); ?></p>
 			</div>

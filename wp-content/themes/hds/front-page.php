@@ -2,19 +2,15 @@
 /**
  * Front page template.
  *
- * Home page with 8 content sections per MPS-001 Section D2:
- *   1. Hero Banner (tagline + USP + CTA)
- *   2. Service Card Grid (7 services, conditional)
- *   3. USP Grid (via the_content block pattern)
- *   4. Client Logo Carousel (conditional — hide if empty)
- *   5. Testimonial Block (conditional — hide if empty)
- *   6. CTA Banner (all pages)
- *   7. Service Area (via the_content)
+ * Home page section order:
+ *   1. Hero (via the_content — Block Editor)
+ *   2. Trust strip (server-rendered)
+ *   3. Service card grid (server-rendered, conditional)
+ *   4. Why Hamdoun Schoonmaak (server-rendered)
+ *   5. Quality / trust section (server-rendered)
+ *   6. Testimonials (conditional — hidden without real data)
+ *   7. Offerte CTA banner
  *   8. Latest Blog Posts (conditional)
- *
- * Sections 2, 4, 5, and 8 are server-rendered because they depend
- * on dynamic data (published services, CPT entries, blog posts).
- * Sections 1, 3, 6, and 7 are rendered via the_content() (Block Editor).
  *
  * ADR D-015: Conditional sections are hidden when they have no data.
  *
@@ -38,19 +34,42 @@ get_header();
 		<?php
 	endwhile;
 
-	// Section 3: USP Grid — server-rendered reusable component
-	echo hds_render_usp_section(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	// Trust strip directly below the hero.
+	echo hds_render_trust_strip(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
-	// Section 2: Service Card Grid — services that exist and are published
+	// Services grid — services that exist and are published.
 	$home_services = hds_get_visible_service_pages();
 	if ( ! empty( $home_services ) ) {
+		$services_landing = get_page_by_path( 'schoonmaakdiensten' );
+		$header_action    = array();
+		if ( $services_landing && 'publish' === $services_landing->post_status ) {
+			$header_action = array(
+				'text' => __( 'Alle diensten bekijken', 'hds' ),
+				'url'  => get_permalink( $services_landing ),
+			);
+		}
+
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Section HTML is composed from escaped fragments.
 		echo hds_render_service_card_grid(
 			$home_services,
-			__( 'Onze diensten', 'hds' ),
+			__( 'Professionele oplossingen voor elke ruimte', 'hds' ),
 			__( 'Professionele schoonmaak- en onderhoudsdiensten voor uw bedrijf.', 'hds' ),
-			3
+			4,
+			__( 'Onze diensten', 'hds' ),
+			$header_action,
+			'left',
+			'onze-diensten'
 		);
 	}
+
+	// Why Hamdoun Schoonmaak — two-column section.
+	echo hds_render_why_section(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
+	// Quality / trust section.
+	echo hds_render_quality_section(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
+	// Service image slider.
+	echo hds_render_service_gallery(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 	// Section 4: Client Logo Carousel (conditional — renders only if testimonials CPT has entries)
 	$has_testimonials = get_posts( [
@@ -78,11 +97,23 @@ get_header();
 	}
 
 	// Section 6: CTA Banner
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Section HTML is composed from escaped fragments.
 	echo hds_cta_section(
 		__( 'Wilt u een vrijblijvende offerte?', 'hds' ),
 		__( 'Wij denken graag met u mee over de beste oplossing voor uw situatie.', 'hds' ),
 		__( 'Offerte aanvragen', 'hds' ),
-		home_url( '/offerte-aanvragen/' )
+		home_url( '/offerte-aanvragen/' ),
+		'light',
+		array(
+			__( 'Geen verplichtingen', 'hds' ),
+			__( 'Reactie binnen één werkdag', 'hds' ),
+			__( 'Offerte op maat', 'hds' ),
+		),
+		__( 'Vrijblijvende offerte', 'hds' ),
+		array(
+			'text' => __( 'Contact met ons opnemen', 'hds' ),
+			'url'  => home_url( '/contact/' ),
+		)
 	);
 
 	// Section 8: Latest Blog Posts (conditional)

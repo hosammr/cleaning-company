@@ -44,16 +44,19 @@ function hds_register_block_patterns(): void {
 			'categories'  => [ 'hds-patterns' ],
 			'content'     => '<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20","left":"var:preset|spacing|4","right":"var:preset|spacing|4"}}},"className":"hero-section","layout":{"type":"constrained"}} -->
 <div class="wp-block-group hero-section" style="padding-top:var(--wp--preset--spacing--20);padding-right:var(--wp--preset--spacing--4);padding-bottom:var(--wp--preset--spacing--20);padding-left:var(--wp--preset--spacing--4)">
-<!-- wp:heading {"anchor":"hero-heading","level":1,"textAlign":"center"} -->
-<h1 class="wp-block-heading has-text-align-center" id="hero-heading">Helder en Duidelijk voor het Schoonste resultaat!</h1>
+<!-- wp:heading {"anchor":"hero-heading","level":1} -->
+<h1 class="wp-block-heading" id="hero-heading">Een schone omgeving maakt het verschil</h1>
 <!-- /wp:heading -->
-<!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">Uw betrouwbare partner voor professionele schoonmaak- en onderhoudsdiensten in de provincie Groningen.</p>
+<!-- wp:paragraph -->
+<p>Professionele schoonmaak- en onderhoudsdiensten voor bedrijven en organisaties in de provincie Groningen.</p>
 <!-- /wp:paragraph -->
 <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
 <div class="wp-block-buttons">
 <!-- wp:button {"className":"is-style-cta"} -->
-<div class="wp-block-button is-style-cta"><a class="wp-block-button__link wp-element-button" href="' . esc_url( home_url( '/offerte-aanvragen/' ) ) . '">Vrijblijvende offerte</a></div>
+<div class="wp-block-button is-style-cta"><a class="wp-block-button__link wp-element-button" href="' . esc_url( home_url( '/offerte-aanvragen/' ) ) . '">Offerte aanvragen</a></div>
+<!-- /wp:button -->
+<!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#onze-diensten">Onze diensten</a></div>
 <!-- /wp:button -->
 </div>
 <!-- /wp:buttons -->
@@ -100,10 +103,10 @@ function hds_register_block_patterns(): void {
 <svg class="is-style-card__icon" width="36" height="36" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M216 112c0 50.2-41.8 92-88 104-46.2-12-88-53.8-88-104V56l88-32 88 32v56Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><polyline points="88 136 112 160 168 104" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>
 <!-- /wp:html -->
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">Veiligheid &amp; Certificering</h3>
+<h3 class="wp-block-heading">Veiligheid voorop</h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>OSB-gecertificeerd. Wij werken volgens de hoogste veiligheidsnormen.</p>
+<p>Wij werken volgens de hoogste veiligheidsnormen, met opgeleide medewerkers.</p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->

@@ -438,7 +438,6 @@ function hds_quote_services(): array {
 		'vloeronderhoud'         => __( 'Vloeronderhoud', 'hds' ),
 		'vve-service'            => __( 'VvE service', 'hds' ),
 		'oplevering-schoonmaak'  => __( 'Oplevering schoonmaak', 'hds' ),
-		'industriele-schoonmaak' => __( 'Industriële schoonmaak', 'hds' ),
 		'scholen-en-kinderopvang-reiniging' => __( 'Scholen en kinderopvang reiniging', 'hds' ),
 	];
 }

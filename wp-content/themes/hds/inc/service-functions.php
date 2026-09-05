@@ -22,7 +22,6 @@ function hds_get_service_url_map(): array {
 		'vloeronderhoud'           => __( 'Vloeronderhoud', 'hds' ),
 		'vve-service'              => __( 'VVE Service', 'hds' ),
 			'oplevering-schoonmaak'    => __( 'Oplevering Schoonmaak', 'hds' ),
-			'industriele-schoonmaak'   => __( 'Industriële Schoonmaak', 'hds' ),
 			'kantoor-schoonmaak'           => __( 'Kantoor schoonmaak', 'hds' ),
 			'scholen-en-kinderopvang-reiniging'   => __( 'Scholen en Kinderopvang reiniging', 'hds' ),
 		];
@@ -42,7 +41,6 @@ function hds_get_cross_sell_map(): array {
 		'vloeronderhoud'           => [ 'reguliere-schoonmaak', 'oplevering-schoonmaak', 'kantoor-schoonmaak' ],
 		'vve-service'              => [ 'reguliere-schoonmaak', 'glasbewassing', 'vloeronderhoud' ],
 			'oplevering-schoonmaak'    => [ 'reguliere-schoonmaak', 'glasbewassing', 'vloeronderhoud' ],
-			'industriele-schoonmaak'   => [ 'reguliere-schoonmaak', 'gevelreiniging', 'vloeronderhoud' ],
 			'kantoor-schoonmaak'       => [ 'glasbewassing', 'gevelreiniging', 'vloeronderhoud' ],
 			'scholen-en-kinderopvang-reiniging' => [ 'kantoor-schoonmaak', 'reguliere-schoonmaak', 'vloeronderhoud' ],
 		];
@@ -171,29 +169,48 @@ function hds_render_service_card_html( \WP_Post $post ): string {
 /**
  * Render a service card grid.
  *
- * @param array  $posts       Array of WP_Post service page objects.
+ * @param array  $posts        Array of WP_Post service page objects.
  * @param string $title        Optional section title.
  * @param string $subtitle     Optional section subtitle.
  * @param int    $max_columns  Maximum columns (3 default).
+ * @param string $eyebrow      Optional eyebrow label above the title.
+ * @param array  $header_action Optional header link with 'text' and 'url' keys.
+ * @param string $header_align 'center' (default) or 'left'.
+ * @param string $section_id   Optional HTML id attribute for the section.
  * @return string HTML for the service card grid section.
  */
-function hds_render_service_card_grid( array $posts, string $title = '', string $subtitle = '', int $max_columns = 3 ): string {
+function hds_render_service_card_grid( array $posts, string $title = '', string $subtitle = '', int $max_columns = 3, string $eyebrow = '', array $header_action = array(), string $header_align = 'center', string $section_id = '' ): string {
 	if ( empty( $posts ) ) {
 		return '';
 	}
 
-	$columns    = min( count( $posts ), $max_columns );
-	$grid_style = '--hds-grid-columns:' . $columns;
+	$columns     = min( count( $posts ), $max_columns );
+	$grid_style  = '--hds-grid-columns:' . $columns;
+	$align_class = 'center' === $header_align ? ' section-header--center' : '';
+	$has_action  = ! empty( $header_action['text'] ) && ! empty( $header_action['url'] );
 
 	ob_start();
 	?>
-	<section class="service-card-grid-section">
+	<section class="service-card-grid-section"<?php echo $section_id ? ' id="' . esc_attr( $section_id ) . '"' : ''; ?>>
 		<div class="container">
-			<?php if ( $title ) : ?>
-				<div class="section-header section-header--center">
-					<h2 class="section-header__heading"><?php echo esc_html( $title ); ?></h2>
-					<?php if ( $subtitle ) : ?>
-						<p class="section-header__subtitle"><?php echo esc_html( $subtitle ); ?></p>
+			<?php if ( $title || $eyebrow ) : ?>
+				<div class="section-header service-card-grid-header<?php echo esc_attr( $align_class ); ?>">
+					<div class="service-card-grid-header__intro">
+						<?php if ( $eyebrow ) : ?>
+							<p class="section-header__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
+						<?php endif; ?>
+						<?php if ( $title ) : ?>
+							<h2 class="section-header__heading"><?php echo esc_html( $title ); ?></h2>
+						<?php endif; ?>
+						<?php if ( $subtitle ) : ?>
+							<p class="section-header__subtitle"><?php echo esc_html( $subtitle ); ?></p>
+						<?php endif; ?>
+					</div>
+					<?php if ( $has_action ) : ?>
+						<a class="service-card-grid-header__link" href="<?php echo esc_url( $header_action['url'] ); ?>">
+							<?php echo esc_html( $header_action['text'] ); ?>
+							<span aria-hidden="true">&rarr;</span>
+						</a>
 					<?php endif; ?>
 				</div>
 			<?php endif; ?>

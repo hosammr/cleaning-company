@@ -19,10 +19,12 @@
  * @param string   $description   CTA description (optional).
  * @param string   $button_text   Button label.
  * @param string   $button_url    Button link URL.
- * @param string   $style         'primary' (default) or 'secondary'.
+ * @param string   $style         'primary' (default), 'secondary', or 'light'.
  * @param string[] $trust_bullets Optional list of trust bullet texts below the button.
+ * @param string   $eyebrow       Optional small eyebrow label above the heading.
+ * @param array    $secondary     Optional secondary CTA with 'text' and 'url' keys.
  */
-function hds_cta_section( string $heading, string $description = '', string $button_text = '', string $button_url = '', string $style = 'primary', array $trust_bullets = [] ): string {
+function hds_cta_section( string $heading, string $description = '', string $button_text = '', string $button_url = '', string $style = 'primary', array $trust_bullets = array(), string $eyebrow = '', array $secondary = array() ): string {
 	if ( ! $button_text ) {
 		$button_text = __( 'Offerte aanvragen', 'hds' );
 	}
@@ -30,19 +32,29 @@ function hds_cta_section( string $heading, string $description = '', string $but
 		$button_url = home_url( '/offerte-aanvragen/' );
 	}
 
-	$style_class = 'secondary' === $style ? 'cta-banner--secondary' : '';
+	$style_class = 'secondary' === $style ? 'cta-banner--secondary' : ( 'light' === $style ? 'cta-banner--light' : '' );
 
 	ob_start();
 	?>
 	<section class="cta-banner <?php echo esc_attr( $style_class ); ?>">
 		<div class="container">
+			<?php if ( $eyebrow ) : ?>
+				<p class="cta-banner__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
+			<?php endif; ?>
 			<h2 class="cta-banner__heading"><?php echo esc_html( $heading ); ?></h2>
 			<?php if ( $description ) : ?>
 				<p class="cta-banner__description"><?php echo esc_html( $description ); ?></p>
 			<?php endif; ?>
-			<a href="<?php echo esc_url( $button_url ); ?>" class="btn btn-cta">
-				<?php echo esc_html( $button_text ); ?>
-			</a>
+			<div class="cta-banner__actions">
+				<a href="<?php echo esc_url( $button_url ); ?>" class="btn btn-cta">
+					<?php echo esc_html( $button_text ); ?>
+				</a>
+				<?php if ( ! empty( $secondary['text'] ) && ! empty( $secondary['url'] ) ) : ?>
+					<a href="<?php echo esc_url( $secondary['url'] ); ?>" class="btn cta-banner__secondary">
+						<?php echo esc_html( $secondary['text'] ); ?>
+					</a>
+				<?php endif; ?>
+			</div>
 			<?php if ( $trust_bullets ) : ?>
 				<ul class="cta-banner__trust">
 					<?php foreach ( $trust_bullets as $bullet ) : ?>
@@ -372,31 +384,222 @@ function hds_render_usp_grid( array $items, string $heading, string $subtitle = 
 }
 
 /**
- * Render the homepage USP section.
+ * Render the homepage trust strip.
  *
- * @return string Complete USP section HTML.
+ * Compact benefit strip shown directly below the hero. All claims come
+ * from verified project content (USPs and the service area statement).
+ *
+ * @return string Trust strip section HTML.
  */
-function hds_render_usp_section(): string {
-	$usp_items = [
-		[
-			'title'       => __( 'Vast opgeleid personeel', 'hds' ),
-			'description' => __( 'Onze medewerkers zijn in vaste dienst en volledig opgeleid.', 'hds' ),
-		],
-		[
-			'title'       => __( 'Veiligheid & Certificering', 'hds' ),
-			'description' => __( 'OSB-gecertificeerd. Wij werken volgens de hoogste veiligheidsnormen.', 'hds' ),
-		],
-		[
-			'title'       => __( 'Een aanspreekpunt', 'hds' ),
-			'description' => __( 'U heeft altijd één vast aanspreekpunt voor al uw vragen.', 'hds' ),
-		],
-	];
-
-	return hds_render_usp_grid(
-		$usp_items,
-		__( 'Waarom Hamdoun Schoonmaak?', 'hds' ),
-				__( 'Daarom kiezen bedrijven in de provincie Groningen voor Hamdoun Schoonmaak als vaste schoonmaakpartner.', 'hds' )
+function hds_render_trust_strip(): string {
+	$items = array(
+		__( 'Vast opgeleid personeel', 'hds' ),
+		__( 'Betrouwbaar en flexibel', 'hds' ),
+		__( 'Eén vast aanspreekpunt', 'hds' ),
+		__( 'Actief in de provincie Groningen', 'hds' ),
 	);
+
+	ob_start();
+	?>
+	<section class="hds-trust-strip" aria-label="<?php esc_attr_e( 'Waar u op kunt rekenen', 'hds' ); ?>">
+		<div class="container">
+			<ul class="hds-trust-strip__list">
+				<?php foreach ( $items as $item ) : ?>
+					<li class="hds-trust-strip__item">
+						<span class="hds-trust-strip__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 256 256" fill="none"><path d="M216 72l-104 104-72-72" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+						<span class="hds-trust-strip__label"><?php echo esc_html( $item ); ?></span>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+	</section>
+	<?php
+	return ob_get_clean();
+}
+
+/**
+ * Render the homepage "Why Hamdoun Schoonmaak" section.
+ *
+ * Two-column layout: copy with verified benefits on the left,
+ * large image on the right. All claims come from verified project
+ * content (USPs, service pages, and the About page values).
+ *
+ * @return string Why section HTML.
+ */
+function hds_render_why_section(): string {
+	$benefits = array(
+		__( 'Vast opgeleid personeel', 'hds' ),
+		__( 'Eén vast aanspreekpunt', 'hds' ),
+		__( 'Flexibele dienstverlening', 'hds' ),
+		__( 'Professionele werkwijze', 'hds' ),
+		__( 'Duurzame dienstverlening', 'hds' ),
+	);
+
+	$image_url = home_url( '/wp-content/uploads/2026/08/Hero-Image.png' );
+
+	ob_start();
+	?>
+	<section class="hds-why-section">
+		<div class="container">
+			<div class="hds-why-grid">
+				<div class="hds-why-content">
+					<p class="hds-why-eyebrow"><?php esc_html_e( 'Waarom Hamdoun Schoonmaak', 'hds' ); ?></p>
+					<h2 class="hds-why-heading"><?php esc_html_e( 'Uw betrouwbare schoonmaakpartner in Groningen', 'hds' ); ?></h2>
+					<p class="hds-why-text"><?php esc_html_e( 'Daarom kiezen bedrijven in de provincie Groningen voor Hamdoun Schoonmaak als vaste schoonmaakpartner.', 'hds' ); ?></p>
+					<ul class="hds-why-benefits">
+						<?php foreach ( $benefits as $benefit ) : ?>
+							<li class="hds-why-benefits__item">
+								<span class="hds-why-benefits__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 256 256" fill="none"><path d="M216 72l-104 104-72-72" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+								<span><?php echo esc_html( $benefit ); ?></span>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+					<p class="hds-why-cta">
+						<a class="btn btn--primary" href="<?php echo esc_url( home_url( '/over-hds/' ) ); ?>">
+							<?php esc_html_e( 'Meer over Hamdoun', 'hds' ); ?>
+							<span aria-hidden="true">&rarr;</span>
+						</a>
+					</p>
+				</div>
+				<div class="hds-why-media">
+					<img
+						src="<?php echo esc_url( $image_url ); ?>"
+						alt="<?php esc_attr_e( 'Professioneel schoonmaakwerk door Hamdoun Schoonmaak', 'hds' ); ?>"
+						loading="lazy"
+						width="1024"
+						height="768"
+					>
+				</div>
+			</div>
+		</div>
+	</section>
+	<?php
+	return ob_get_clean();
+}
+
+/**
+ * Render the homepage quality / trust section.
+ *
+ * Dark-blue section with four benefit blocks. No statistics or
+ * unverified claims — only verified project content is used.
+ *
+ * @return string Quality section HTML.
+ */
+function hds_render_quality_section(): string {
+	$blocks = array(
+		array(
+			'icon'  => '<svg width="32" height="32" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M216 112c0 48-32 88-88 104-56-16-88-56-88-104V64l88-32 88 32Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M160 112l-32 32-24-24" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+			'title' => __( 'Professionele aanpak', 'hds' ),
+			'desc'  => __( 'Professionele schoonmaakdiensten voor bedrijven en organisaties.', 'hds' ),
+		),
+		array(
+			'icon'  => '<svg width="32" height="32" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M128 128a40 40 0 1 0 0-80 40 40 0 0 0 0 80ZM60 216c8-32 36-52 68-52s60 20 68 52" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+			'title' => __( 'Eén vast aanspreekpunt', 'hds' ),
+			'desc'  => __( 'U heeft altijd één vast aanspreekpunt voor al uw vragen.', 'hds' ),
+		),
+		array(
+			'icon'  => '<svg width="32" height="32" viewBox="0 0 256 256" fill="none" aria-hidden="true"><rect x="40" y="56" width="176" height="160" rx="16" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 104h176M96 48v32M160 48v32" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+			'title' => __( 'Flexibele dienstverlening', 'hds' ),
+			'desc'  => __( 'Werkzaamheden afgestemd op uw openingstijden en bedrijfsprocessen.', 'hds' ),
+		),
+		array(
+			'icon'  => '<svg width="32" height="32" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M128 48a48 48 0 0 0-48 48c0 36 48 96 48 96s48-60 48-96a48 48 0 0 0-48-48Zm0 72a24 24 0 1 0 0-48 24 24 0 0 0 0 48Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+			'title' => __( 'Actief in de provincie Groningen', 'hds' ),
+			'desc'  => __( 'Bedrijven in de provincie Groningen kiezen ons als vaste schoonmaakpartner.', 'hds' ),
+		),
+	);
+
+	ob_start();
+	?>
+	<section class="hds-quality-section">
+		<div class="container">
+			<div class="section-header section-header--center hds-quality-header">
+				<h2 class="section-header__heading"><?php esc_html_e( 'Kwaliteit die u kunt vertrouwen', 'hds' ); ?></h2>
+				<p class="section-header__subtitle"><?php esc_html_e( 'Wij werken volgens de hoogste veiligheidsnormen, met vast opgeleid personeel.', 'hds' ); ?></p>
+			</div>
+			<div class="hds-quality-grid">
+				<?php foreach ( $blocks as $block ) : ?>
+					<article class="hds-quality-card">
+						<span class="hds-quality-card__icon" aria-hidden="true"><?php echo $block['icon']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+						<h3 class="hds-quality-card__title"><?php echo esc_html( $block['title'] ); ?></h3>
+						<p class="hds-quality-card__desc"><?php echo esc_html( $block['desc'] ); ?></p>
+					</article>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</section>
+	<?php
+	return ob_get_clean();
+}
+
+/**
+ * Render the homepage service gallery slider.
+ *
+ * Visual-first horizontal slider showing the homepage service images.
+ * Lightweight: CSS scroll-snap for touch swiping plus minimal vanilla JS
+ * for prev/next, pagination and keyboard support (assets/js/main.js).
+ *
+ * @return string Gallery section HTML.
+ */
+function hds_render_service_gallery(): string {
+	$services = hds_get_visible_service_pages();
+
+	if ( empty( $services ) ) {
+		return '';
+	}
+
+	ob_start();
+	?>
+	<section class="hds-slider-section" aria-labelledby="hds-slider-heading">
+		<div class="container">
+			<div class="section-header section-header--center">
+				<p class="section-header__eyebrow"><?php esc_html_e( 'Onze diensten', 'hds' ); ?></p>
+				<h2 class="section-header__heading" id="hds-slider-heading"><?php esc_html_e( 'Onze schoonmaakdiensten in beeld', 'hds' ); ?></h2>
+			</div>
+			<div class="hds-slider">
+				<div class="hds-slider__viewport" tabindex="0" role="region" aria-roledescription="<?php esc_attr_e( 'carrousel', 'hds' ); ?>" aria-label="<?php esc_attr_e( 'Onze schoonmaakdiensten in beeld', 'hds' ); ?>">
+					<ul class="hds-slider__track">
+						<?php foreach ( $services as $service ) : ?>
+							<li class="hds-slider__slide">
+								<figure class="hds-slider__figure">
+									<?php
+									$image_id = get_post_thumbnail_id( $service );
+									if ( ! $image_id ) {
+										$image_id = get_post_meta( $service->ID, 'hds_hero_image', true );
+									}
+									if ( $image_id ) {
+										echo wp_get_attachment_image( (int) $image_id, 'hds-card', false, array( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image escapes internally.
+											'alt'     => get_the_title( $service ),
+											'loading' => 'lazy',
+										) );
+									} else {
+										echo '<span class="hds-slider__placeholder" aria-hidden="true"></span>';
+									}
+									?>
+									<figcaption class="hds-slider__caption">
+										<a href="<?php echo esc_url( get_permalink( $service ) ); ?>">
+											<?php echo esc_html( get_the_title( $service ) ); ?>
+										</a>
+									</figcaption>
+								</figure>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+				<div class="hds-slider__controls">
+					<button type="button" class="hds-slider__arrow hds-slider__arrow--prev" aria-label="<?php esc_attr_e( 'Vorige dienst', 'hds' ); ?>">
+						<svg aria-hidden="true" width="20" height="20" viewBox="0 0 256 256" fill="none"><path d="M160 48l-80 80 80 80" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</button>
+					<div class="hds-slider__dots" role="group" aria-label="<?php esc_attr_e( 'Kies een dienst', 'hds' ); ?>"></div>
+					<button type="button" class="hds-slider__arrow hds-slider__arrow--next" aria-label="<?php esc_attr_e( 'Volgende dienst', 'hds' ); ?>">
+						<svg aria-hidden="true" width="20" height="20" viewBox="0 0 256 256" fill="none"><path d="M96 48l80 80-80 80" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					</button>
+				</div>
+			</div>
+		</div>
+	</section>
+	<?php
+	return ob_get_clean();
 }
 
 /**
