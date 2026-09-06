@@ -683,3 +683,49 @@ function hds_render_service_intro( array $intro ): string {
 	<?php
 	return ob_get_clean();
 }
+
+/**
+ * Render the homepage HAMDOUN branding video section.
+ *
+ * Two-column layout: copy on the left, the approved HAMDOUN branding V4
+ * video on the right. The video is the visual centerpiece; the copy
+ * reinforces the brand after the services grid.
+ *
+ * Reduced motion: autoplay is suppressed from assets/js/main.js so the
+ * poster is shown as the visual fallback.
+ *
+ * @return string Branding video section HTML.
+ */
+function hds_render_branding_video_section(): string {
+	$video_dir = get_template_directory_uri() . '/assets/videos';
+
+	ob_start();
+	?>
+	<section class="hds-branding-video" aria-labelledby="hds-branding-video-heading">
+		<div class="container">
+			<div class="hds-branding-video__grid">
+				<div class="hds-branding-video__content">
+					<p class="hds-branding-video__eyebrow"><?php esc_html_e( 'Onze identiteit', 'hds' ); ?></p>
+					<h2 id="hds-branding-video-heading" class="hds-branding-video__heading"><?php esc_html_e( 'Vakmanschap begint met aandacht voor detail', 'hds' ); ?></h2>
+					<p class="hds-branding-video__text"><?php esc_html_e( 'Bij Hamdoun staat kwaliteit centraal. Van het kleinste detail tot onze professionele uitstraling.', 'hds' ); ?></p>
+				</div>
+				<div class="hds-branding-video__media">
+					<video
+						class="hds-branding-video__player"
+						autoplay
+						muted
+						loop
+						playsinline
+						preload="metadata"
+						poster="<?php echo esc_url( $video_dir . '/hamdoun-branding-v4-poster.jpg' ); ?>"
+						aria-label="<?php esc_attr_e( 'HAMDOUN branding video', 'hds' ); ?>"
+					>
+						<source src="<?php echo esc_url( $video_dir . '/hamdoun-branding-v4.mp4' ); ?>" type="video/mp4">
+					</video>
+				</div>
+			</div>
+		</div>
+	</section>
+	<?php
+	return ob_get_clean();
+}

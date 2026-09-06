@@ -623,4 +623,14 @@
 
 	initServiceSliders();
 
+/* ── Branding Video: autoplay + reduced motion ── */
+	document.querySelectorAll( '.hds-branding-video__player' ).forEach( function ( video ) {
+		if ( window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ) {
+			video.removeAttribute( 'autoplay' );
+			video.pause();
+		} else if ( video.hasAttribute( 'autoplay' ) ) {
+			video.play().catch( function () {} );
+		}
+	} );
+
 }() );

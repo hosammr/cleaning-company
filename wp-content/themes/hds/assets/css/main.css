@@ -243,6 +243,25 @@ body.admin-bar .site-header {
 	}
 }
 
+/* Very narrow screens: the header row (logo + menu toggle + actions)
+   overflows the 288px content width at ≤361px. Shrink the logo to the
+   same 44px used in the compact scrolled state and tighten the row gap.
+   --hds-header-height is updated so the mobile menu overlay stays flush. */
+@media (width <= 361px) {
+	:root {
+		--hds-header-height: calc(44px + var(--wp--preset--spacing--4) * 2);
+	}
+
+	.site-header-inner {
+		gap: var(--wp--preset--spacing--3);
+	}
+
+	.site-logo img {
+		height: 44px;
+		max-height: 44px;
+	}
+}
+
 /* ── Header Search Panel ── */
 .header-search-panel {
 	background: var(--wp--preset--color--white);
@@ -2508,6 +2527,71 @@ body.admin-bar .site-header {
 	box-shadow: 0 4px 12px rgb(18 59 93 / 10%), 0 24px 48px rgb(18 59 93 / 16%);
 	object-fit: cover;
 	width: 100%;
+}
+
+/* ── Homepage: HAMDOUN Branding Video ── */
+.hds-branding-video {
+	background: var(--wp--preset--color--white);
+	padding-block: var(--wp--preset--spacing--16);
+}
+
+.hds-branding-video__grid {
+	align-items: center;
+	display: grid;
+	gap: var(--wp--preset--spacing--12);
+	grid-template-columns: 2fr 3fr;
+}
+
+.hds-branding-video__content,
+.hds-branding-video__media {
+	min-width: 0;
+}
+
+.hds-branding-video__eyebrow {
+	color: #2e7d32;
+	font-size: var(--wp--preset--font-size--s);
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	margin-bottom: var(--wp--preset--spacing--3);
+	text-transform: uppercase;
+}
+
+.hds-branding-video__heading {
+	font-size: var(--wp--preset--font-size--3-xl);
+	line-height: 1.25;
+	margin-bottom: var(--wp--preset--spacing--4);
+	overflow-wrap: break-word;
+}
+
+.hds-branding-video__text {
+	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--l);
+	line-height: 1.65;
+	margin: 0;
+	max-width: 48ch;
+}
+
+.hds-branding-video__media {
+	border-radius: 16px;
+	box-shadow: 0 4px 12px rgb(18 59 93 / 10%), 0 24px 48px rgb(18 59 93 / 16%);
+	overflow: hidden;
+}
+
+.hds-branding-video__player {
+	aspect-ratio: 16 / 9;
+	background: #000;
+	box-sizing: border-box;
+	display: block;
+	height: auto;
+	max-width: 100%;
+	width: 100%;
+}
+
+@media (width < 1024px) {
+	.hds-branding-video__grid {
+		gap: var(--wp--preset--spacing--10);
+		grid-template-columns: 1fr;
+	}
 }
 
 /* ── Homepage: Quality Section ── */

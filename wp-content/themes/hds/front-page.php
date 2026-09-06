@@ -62,6 +62,10 @@ get_header();
 		);
 	}
 
+	// HAMDOUN branding video — placed directly after the services grid.
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Section HTML is composed from escaped fragments.
+	echo hds_render_branding_video_section();
+
 	// Why Hamdoun Schoonmaak — two-column section.
 	echo hds_render_why_section(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
