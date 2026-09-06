@@ -435,7 +435,7 @@ function hds_render_why_section(): string {
 		__( 'Duurzame dienstverlening', 'hds' ),
 	);
 
-	$image_url = home_url( '/wp-content/uploads/2026/08/Hero-Image.png' );
+	$image_url = home_url( '/wp-content/uploads/2026/08/Bedrijf.png' );
 
 	ob_start();
 	?>
@@ -464,10 +464,10 @@ function hds_render_why_section(): string {
 				<div class="hds-why-media">
 					<img
 						src="<?php echo esc_url( $image_url ); ?>"
-						alt="<?php esc_attr_e( 'Professioneel schoonmaakwerk door Hamdoun Schoonmaak', 'hds' ); ?>"
+						alt="<?php esc_attr_e( 'Hamdoun Schoonmaak bedrijfsvoertuigen en team', 'hds' ); ?>"
 						loading="lazy"
-						width="1024"
-						height="768"
+						width="1254"
+						height="1254"
 					>
 				</div>
 			</div>

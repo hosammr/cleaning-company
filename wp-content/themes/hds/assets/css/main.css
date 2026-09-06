@@ -2453,7 +2453,7 @@ body.admin-bar .site-header {
 	align-items: center;
 	display: grid;
 	gap: var(--wp--preset--spacing--12);
-	grid-template-columns: 1.05fr 0.95fr;
+	grid-template-columns: 1fr 1fr;
 }
 
 .hds-why-eyebrow {
@@ -2522,10 +2522,11 @@ body.admin-bar .site-header {
 }
 
 .hds-why-media img {
-	aspect-ratio: 4 / 3;
+	aspect-ratio: 1 / 1;
 	border-radius: 16px;
 	box-shadow: 0 4px 12px rgb(18 59 93 / 10%), 0 24px 48px rgb(18 59 93 / 16%);
 	object-fit: cover;
+	object-position: center;
 	width: 100%;
 }
 
@@ -3752,6 +3753,10 @@ body.admin-bar .site-header {
 	.hds-why-grid {
 		gap: var(--wp--preset--spacing--10);
 		grid-template-columns: 1fr;
+	}
+
+	.hds-why-media img {
+		aspect-ratio: 1 / 1;
 	}
 
 	.header-cta {
