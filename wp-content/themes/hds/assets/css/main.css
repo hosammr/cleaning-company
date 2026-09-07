@@ -1355,6 +1355,24 @@ body.admin-bar .site-header {
 	transform: translateX(4px);
 }
 
+/* ── Homepage Service Grid: light cyan card treatment ── */
+#onze-diensten .hds-service-card {
+	background: #eaf9fc;
+}
+
+#onze-diensten .hds-service-card__title a {
+	color: #123b5d;
+}
+
+#onze-diensten .hds-service-card__title a:hover,
+#onze-diensten .hds-service-card__title a:focus {
+	color: var(--wp--preset--color--primary-dark);
+}
+
+#onze-diensten .hds-service-card__excerpt {
+	color: #123b5d;
+}
+
 /* ── Service Card Grid Section ── */
 .service-card-grid-section {
 	background: var(--wp--preset--color--white);
