@@ -548,6 +548,17 @@ function hds_render_service_gallery(): string {
 		return '';
 	}
 
+	$slider_alts = array(
+		'kantoor-schoonmaak'                => __( 'Kantoorreiniging door Hamdoun Schoonmaak', 'hds' ),
+		'glasbewassing'                     => __( 'Glasbewassing door Hamdoun Schoonmaak', 'hds' ),
+		'scholen-en-kinderopvang-reiniging' => __( 'Schoonmaak van scholen en kinderopvang door Hamdoun Schoonmaak', 'hds' ),
+		'gevelreiniging'                    => __( 'Gevelreiniging door Hamdoun Schoonmaak', 'hds' ),
+		'vloeronderhoud'                    => __( 'Vloeronderhoud door Hamdoun Schoonmaak', 'hds' ),
+		'oplevering-schoonmaak'             => __( 'Oplevering schoonmaak door Hamdoun Schoonmaak', 'hds' ),
+		'reguliere-schoonmaak'              => __( 'Reguliere schoonmaak door Hamdoun Schoonmaak', 'hds' ),
+		'vve-service'                       => __( 'VVE service door Hamdoun Schoonmaak', 'hds' ),
+	);
+
 	ob_start();
 	?>
 	<section class="hds-slider-section" aria-labelledby="hds-slider-heading">
@@ -563,13 +574,17 @@ function hds_render_service_gallery(): string {
 							<li class="hds-slider__slide">
 								<figure class="hds-slider__figure">
 									<?php
-									$image_id = get_post_thumbnail_id( $service );
+									$image_id = (int) get_post_meta( $service->ID, 'hds_slider_image', true );
+									if ( ! $image_id ) {
+										$image_id = get_post_thumbnail_id( $service );
+									}
 									if ( ! $image_id ) {
 										$image_id = get_post_meta( $service->ID, 'hds_hero_image', true );
 									}
 									if ( $image_id ) {
-										echo wp_get_attachment_image( (int) $image_id, 'hds-card', false, array( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image escapes internally.
-											'alt'     => get_the_title( $service ),
+										$alt = isset( $slider_alts[ $service->post_name ] ) ? $slider_alts[ $service->post_name ] : get_the_title( $service );
+										echo wp_get_attachment_image( (int) $image_id, 'medium_large', false, array( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image escapes internally.
+											'alt'     => $alt,
 											'loading' => 'lazy',
 										) );
 									} else {

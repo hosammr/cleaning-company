@@ -2697,17 +2697,28 @@ body.admin-bar .site-header {
 
 .hds-slider__figure {
 	margin: 0;
+	position: relative;
+}
+
+.hds-slider__figure::after {
+	background: linear-gradient(to top, rgb(0 0 0 / 45%), rgb(0 0 0 / 0%) 55%);
+	border-radius: 12px;
+	content: '';
+	inset: 0;
+	pointer-events: none;
+	position: absolute;
 }
 
 .hds-slider__figure img {
-	aspect-ratio: 4 / 3;
+	aspect-ratio: 3 / 2;
 	border-radius: 12px;
+	display: block;
 	object-fit: cover;
 	width: 100%;
 }
 
 .hds-slider__placeholder {
-	aspect-ratio: 4 / 3;
+	aspect-ratio: 3 / 2;
 	background: var(--wp--preset--color--light-gray);
 	border-radius: 12px;
 	display: block;
@@ -2715,19 +2726,27 @@ body.admin-bar .site-header {
 }
 
 .hds-slider__caption {
-	font-size: var(--wp--preset--font-size--m);
-	font-weight: 600;
-	margin-top: var(--wp--preset--spacing--3);
+	bottom: var(--wp--preset--spacing--4);
+	color: #67d9ff;
+	font-size: clamp(1.125rem, 1rem + 0.5vw, 1.5rem);
+	font-weight: 700;
+	left: var(--wp--preset--spacing--4);
+	line-height: 1.15;
+	margin: 0;
+	max-width: calc(100% - 2 * var(--wp--preset--spacing--4));
+	position: absolute;
+	text-shadow: 0 1px 3px rgb(0 0 0 / 45%);
+	z-index: 1;
 }
 
 .hds-slider__caption a {
-	color: var(--wp--preset--color--dark-gray);
+	color: inherit;
 	text-decoration: none;
 }
 
 .hds-slider__caption a:hover,
 .hds-slider__caption a:focus {
-	color: var(--wp--preset--color--primary);
+	color: #9fe9ff;
 	text-decoration: underline;
 	text-underline-offset: 3px;
 }
