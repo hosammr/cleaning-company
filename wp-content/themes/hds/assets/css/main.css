@@ -2062,7 +2062,7 @@ body.admin-bar .site-header {
 	justify-content: center;
 	min-height: 78vh;
 	overflow: hidden;
-	padding: var(--wp--preset--spacing--24) var(--wp--preset--spacing--4) !important;
+	padding: var(--wp--preset--spacing--24) max(var(--wp--preset--spacing--4), calc((100% - var(--wp--style--global--wide-size)) / 2 + var(--wp--preset--spacing--4))) !important;
 	position: relative;
 	text-align: left;
 }
@@ -2070,9 +2070,9 @@ body.admin-bar .site-header {
 .hero-section::before {
 	background: linear-gradient(
 		90deg,
-		rgb(10 34 61 / 92%) 0%,
-		rgb(10 34 61 / 78%) 42%,
-		rgb(10 34 61 / 40%) 100%
+		rgb(18 59 93 / 72%) 0%,
+		rgb(18 59 93 / 46%) 48%,
+		rgb(18 59 93 / 18%) 100%
 	);
 	inset: 0;
 	content: '';
@@ -2102,12 +2102,15 @@ body.admin-bar .site-header {
 /* The !important flags below override WordPress core's constrained-layout
    rule, which centers block children with margin auto !important. */
 .hero-section h1 {
-	max-width: 720px;
-	margin-bottom: var(--wp--preset--spacing--4);
+	font-size: clamp(2.5rem, 2.25rem + 1.1vw, 3.25rem);
+	line-height: 1.1;
+	max-width: 700px;
+	margin-bottom: var(--wp--preset--spacing--5);
 	margin-left: 0 !important;
 	margin-right: auto !important;
 	overflow-wrap: break-word;
 	text-align: left !important;
+	text-wrap: balance;
 }
 
 .hero-section h1::before {
@@ -2117,22 +2120,24 @@ body.admin-bar .site-header {
 	font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 	font-size: var(--wp--preset--font-size--s);
 	font-weight: 700;
-	letter-spacing: 0.14em;
+	letter-spacing: 0.18em;
 	line-height: 1.6;
-	margin-bottom: var(--wp--preset--spacing--4);
+	margin-bottom: var(--wp--preset--spacing--5);
 }
 
 /* The !important flags below override WordPress core's constrained-layout
    rule, which centers block children with margin auto !important. */
 .hero-section p {
-	color: rgb(255 255 255 / 90%);
+	color: rgb(255 255 255 / 94%);
 	font-size: var(--wp--preset--font-size--l);
+	line-height: 1.7;
 	margin-bottom: var(--wp--preset--spacing--6);
 	margin-left: 0 !important;
 	margin-right: auto !important;
-	max-width: 580px;
+	max-width: 560px;
 	overflow-wrap: break-word;
 	text-align: left !important;
+	text-shadow: 0 1px 2px rgb(0 0 0 / 30%);
 }
 
 .hero-section .wp-block-buttons {
@@ -2145,8 +2150,8 @@ body.admin-bar .site-header {
 .hero-section .wp-block-button__link {
 	border-radius: var(--hds-border-radius);
 	font-size: var(--wp--preset--font-size--l);
-	font-weight: 600;
-	padding: 0.875rem 2.5rem;
+	font-weight: 700;
+	padding: 0.8125rem 2.25rem;
 	transition: background-color 250ms ease, color 250ms ease, border-color 250ms ease, transform 250ms ease;
 }
 
@@ -2178,14 +2183,14 @@ body.admin-bar .site-header {
 @media (width < 1024px) {
 	.hero-section {
 		min-height: 62vh;
-		padding: var(--wp--preset--spacing--16) var(--wp--preset--spacing--6) !important;
+		padding: var(--wp--preset--spacing--16) var(--wp--preset--spacing--4) !important;
 	}
 
 	.hero-section::before {
 		background: linear-gradient(
 			to bottom,
-			rgb(10 34 61 / 88%) 0%,
-			rgb(10 34 61 / 74%) 100%
+			rgb(18 59 93 / 64%) 0%,
+			rgb(18 59 93 / 42%) 100%
 		);
 	}
 
@@ -2212,7 +2217,7 @@ body.admin-bar .site-header {
 	}
 
 	.hero-section h1 {
-		font-size: clamp(1.5rem, 6vw, 2rem);
+		font-size: clamp(1.375rem, 5vw, 1.875rem);
 		line-height: 1.2;
 		margin-left: auto !important;
 		margin-right: auto !important;
