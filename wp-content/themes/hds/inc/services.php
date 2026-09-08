@@ -417,8 +417,6 @@ function hds_get_services(): array {
 			'seo_description' => __( 'Professionele opleverschoonmaak door Hamdoun Schoonmaak. Grondige reiniging na bouw, verbouwing en renovatie voor een vlekkeloze eindoplevering. Vrijblijvende offerte aanvragen.', 'hds' ),
 		],
 
-		// PLACEHOLDER CONTENT (F9-D): client copy for this service is pending.
-		// Only generic wording is used — no company-specific facts are claimed.
 		'scholen-en-kinderopvang-reiniging' => [
 			'title'           => __( 'Scholen en Kinderopvang reiniging', 'hds' ),
 			'subtitle'        => __( 'Schoonmaak voor scholen en kinderopvanglocaties, afgestemd op het gebruik van de ruimtes.', 'hds' ),
@@ -428,46 +426,45 @@ function hds_get_services(): array {
 			'intro'           => [
 				'eyebrow'     => __( 'Onze dienst', 'hds' ),
 				'title'       => __( 'Schoonmaak voor scholen en kinderopvang', 'hds' ),
-				'intro_text'  => __( 'Een schone en hygiënische omgeving draagt bij aan een prettige en gezonde leer- en speelomgeving.', 'hds' ),
+				'intro_text'  => __( 'Een schone omgeving draagt bij aan een prettige leer- en speelomgeving.', 'hds' ),
 				'paragraphs'  => [
-					__( 'In scholen en kinderopvanglocaties worden ruimtes intensief gebruikt. Wij stemmen de schoonmaak af op het gebouw, het gebruik van de ruimtes en de wensen van de locatie.', 'hds' ),
-					__( 'De werkzaamheden en de frequentie bepalen wij volledig in overleg met u. Zo ontvangen kinderen, medewerkers en bezoekers elke dag een schone en verzorgde omgeving.', 'hds' ),
+					__( 'Wij hebben praktische ervaring met schoonmaakwerk in scholen en kinderopvanglocaties. Deze ervaring hebben wij opgedaan in het basisonderwijs, het voortgezet onderwijs en in de kinderopvang.', 'hds' ),
+					__( 'Onze medewerkers voeren de werkzaamheden zorgvuldig uit volgens de afspraken die wij met de locatie hebben gemaakt. Zo blijft de omgeving schoon en verzorgd voor kinderen, medewerkers en bezoekers.', 'hds' ),
 				],
-				'benefits'    => hds_get_default_intro_benefits(),
+				'benefits'    => [
+					__( 'Ervaring met basisscholen en middelbare scholen', 'hds' ),
+					__( 'Ervaring met kinderopvang', 'hds' ),
+					__( 'Schoonmaak volgens de gemaakte afspraken', 'hds' ),
+					__( 'Vrijblijvende offerte', 'hds' ),
+				],
 			],
 			'checklist'       => [
-				[ 'text' => __( 'Dagelijkse of periodieke schoonmaak van klaslokalen, groepsruimtes en gemeenschappelijke ruimtes', 'hds' ) ],
-				[ 'text' => __( 'Reinigen en desinfecteren van sanitaire voorzieningen en het aanvullen van verbruiksartikelen', 'hds' ) ],
-				[ 'text' => __( 'Stofzuigen en dweilen van vloeren in alle ruimtes', 'hds' ) ],
-				[ 'text' => __( 'Afnemen van tafels, bureaus en overige oppervlakken', 'hds' ) ],
-				[ 'text' => __( 'Leegmaken van prullenbakken en gescheiden afvalverwerking', 'hds' ) ],
-				[ 'text' => __( 'Reinigen van pantry\'s en personeelsruimtes', 'hds' ) ],
+				[ 'text' => __( 'Reiniging van de klaslokalen, waar kinderen en docenten gebruik van maken', 'hds' ) ],
+				[ 'text' => __( 'Schoonmaak van de sanitaire ruimtes, zoals toiletten en wastafels', 'hds' ) ],
+				[ 'text' => __( 'Reiniging van de speelruimtes, waar kinderen spelen en verblijven', 'hds' ) ],
+				[ 'text' => __( 'Schoonmaak van de gangen binnen de locatie', 'hds' ) ],
 			],
-			'industries'      => [],
+			'industries'      => [ 'basisscholen', 'middelbare-scholen', 'kinderopvang' ],
 			'faq'             => [
 				[
-					'q' => __( 'Voor welke locaties is deze schoonmaak geschikt?', 'hds' ),
-					'a' => __( 'Voor scholen en kinderopvanglocaties. Wij stemmen de werkzaamheden af op het gebouw en het gebruik van de ruimtes.', 'hds' ),
+					'q' => __( 'Voor welke locaties is deze schoonmaak bedoeld?', 'hds' ),
+					'a' => __( 'Voor basisscholen, middelbare scholen en kinderopvanglocaties. Wij hebben in deze omgevingen praktische schoonmaakervaring opgedaan.', 'hds' ),
 				],
 				[
-					'q' => __( 'Hoe vaak wordt er schoongemaakt?', 'hds' ),
-					'a' => __( 'De frequentie bepalen wij volledig in overleg met u, afgestemd op de locatie en het gebruik. Wij adviseren u graag over een passende planning.', 'hds' ),
+					'q' => __( 'Welke ruimtes maken jullie schoon?', 'hds' ),
+					'a' => __( 'Wij reinigen klaslokalen, sanitaire ruimtes, speelruimtes en gangen. De werkzaamheden stemmen wij af op de wensen van de locatie.', 'hds' ),
 				],
 				[
-					'q' => __( 'Kunnen de werkzaamheden buiten openingstijden plaatsvinden?', 'hds' ),
-					'a' => __( 'Ja. Wij kunnen alle werkzaamheden uitvoeren buiten de openingstijden van de locatie, zodat kinderen en medewerkers geen hinder ondervinden.', 'hds' ),
-				],
-				[
-					'q' => __( 'Zijn jullie medewerkers gescreend?', 'hds' ),
-					'a' => __( 'Ja, al onze schoonmaakmedewerkers zijn in vaste dienst, volledig opgeleid en beschikken over een VOG-verklaring (Verklaring Omtrent Gedrag).', 'hds' ),
+					'q' => __( 'Hoe bepalen jullie de planning?', 'hds' ),
+					'a' => __( 'Samen met de locatie bepalen wij de werkzaamheden en het moment van schoonmaken. Wij voeren de werkzaamheden uit volgens de afspraken die met u zijn gemaakt.', 'hds' ),
 				],
 				[
 					'q' => __( 'Kan ik een vrijblijvende offerte aanvragen?', 'hds' ),
 					'a' => __( 'Ja. Wij maken graag een vrijblijvende offerte op maat. Tijdens de kennismaking bespreken wij uw wensen en stellen wij een passend voorstel op.', 'hds' ),
 				],
 			],
-			'seo_title'       => __( 'Scholen en kinderopvang reiniging | Schoonmaak op maat | Hamdoun Schoonmaak', 'hds' ), // PLACEHOLDER (F9-D)
-			'seo_description' => __( 'Schoonmaak voor scholen en kinderopvanglocaties. Werkzaamheden en frequentie in overleg, afgestemd op het gebruik van de ruimtes. Vrijblijvende offerte.', 'hds' ), // PLACEHOLDER (F9-D)
+			'seo_title'       => __( 'Schoonmaak van scholen en kinderopvang | Hamdoun Schoonmaak', 'hds' ),
+			'seo_description' => __( 'Schoonmaak van scholen en kinderopvanglocaties door Hamdoun Schoonmaak. Ervaring met basisscholen, middelbare scholen en kinderopvang. Wij reinigen klaslokalen, sanitair, speelruimtes en gangen. Vrijblijvende offerte.', 'hds' ),
 		],
 	];
 }

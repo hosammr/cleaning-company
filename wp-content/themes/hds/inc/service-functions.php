@@ -342,6 +342,9 @@ function hds_get_industry_data(): array {
 		'retail'                   => __( 'Retail', 'hds' ),
 		'overheid'                 => __( 'Overheid', 'hds' ),
 		'bedrijfsverzamelgebouwen' => __( 'Bedrijfsverzamelgebouwen', 'hds' ),
+		'basisscholen'             => __( 'Basisscholen', 'hds' ),
+		'middelbare-scholen'       => __( 'Middelbare scholen', 'hds' ),
+		'kinderopvang'             => __( 'Kinderopvang', 'hds' ),
 	];
 }
 
