@@ -20,7 +20,7 @@ function hds_get_service_url_map(): array {
 		'gevelreiniging'           => __( 'Gevelreiniging', 'hds' ),
 		'reguliere-schoonmaak'     => __( 'Reguliere Schoonmaak', 'hds' ),
 		'vloeronderhoud'           => __( 'Vloeronderhoud', 'hds' ),
-		'vve-service'              => __( 'VVE Service', 'hds' ),
+		'vve-service'              => __( 'VvE Service', 'hds' ),
 			'oplevering-schoonmaak'    => __( 'Oplevering Schoonmaak', 'hds' ),
 			'kantoor-schoonmaak'           => __( 'Kantoor schoonmaak', 'hds' ),
 			'scholen-en-kinderopvang-reiniging'   => __( 'Scholen en Kinderopvang reiniging', 'hds' ),
@@ -311,3 +311,131 @@ function hds_get_service_by_slug( string $slug ): ?\WP_Post {
 	$page = get_page_by_path( $slug );
 	return ( $page && $page->post_status === 'publish' ) ? $page : null;
 }
+
+/**
+ * Get the Dutch label for a single industry slug.
+ *
+ * Maps only the industry slugs that actually occur in hds_get_services().
+ * Unknown slugs return null so callers can safely skip unsupported groups.
+ *
+ * @param string $slug Industry slug.
+ * @return string|null Dutch label, or null when the slug is not supported.
+ */
+function hds_get_industry_label( string $slug ): ?string {
+	$labels = hds_get_industry_data();
+	return $labels[ $slug ] ?? null;
+}
+
+/**
+ * Get the industry slug → Dutch label map.
+ *
+ * Only the slugs present in inc/services.php are mapped. No unsupported
+ * industries are invented.
+ *
+ * @return array<string, string>
+ */
+function hds_get_industry_data(): array {
+	return [
+		'kantoren'                 => __( 'Kantoren', 'hds' ),
+		'zorginstellingen'         => __( 'Zorginstellingen', 'hds' ),
+		'scholen'                  => __( 'Scholen', 'hds' ),
+		'retail'                   => __( 'Retail', 'hds' ),
+		'overheid'                 => __( 'Overheid', 'hds' ),
+		'bedrijfsverzamelgebouwen' => __( 'Bedrijfsverzamelgebouwen', 'hds' ),
+	];
+}
+
+/**
+ * Get the canonical "Waarom Hamdoun?" company strengths.
+ *
+ * These are the five established company strengths used on the homepage.
+ * The homepage output (hds_render_why_section) is left untouched; this
+ * helper provides a single safe data source for the service pages so the
+ * copy cannot drift.
+ *
+ * @return array<int, string> List of Dutch strength labels.
+ */
+function hds_get_why_hamdoun_strengths(): array {
+	return [
+		__( 'Vast opgeleid personeel', 'hds' ),
+		__( 'Eén vast aanspreekpunt', 'hds' ),
+		__( 'Flexibele dienstverlening', 'hds' ),
+		__( 'Professionele werkwijze', 'hds' ),
+		__( 'Duurzame dienstverlening', 'hds' ),
+	];
+}
+
+/**
+ * Get the approved generic service workflow steps.
+ *
+ * Used as the Phase-1 default for every service until service-specific
+ * workflows are supplied. The steps only reflect the existing approved
+ * content and do not invent any new claims.
+ *
+ * @return array<int, array{title:string, description:string}>
+ */
+function hds_get_default_workflow(): array {
+	return [
+		[ 'title' => __( 'Aanvraag', 'hds' ), 'description' => __( 'Neem contact met ons op en vertel ons uw wensen.', 'hds' ) ],
+		[ 'title' => __( 'Vrijblijvende offerte', 'hds' ), 'description' => __( 'Wij analyseren uw situatie en sturen een duidelijke offerte.', 'hds' ) ],
+		[ 'title' => __( 'Planning', 'hds' ), 'description' => __( 'Samen plannen we de werkzaamheden op een geschikt moment.', 'hds' ) ],
+		[ 'title' => __( 'Uitvoering', 'hds' ), 'description' => __( 'Ons team voert de werkzaamheden zorgvuldig en volgens afspraak uit.', 'hds' ) ],
+	];
+}
+
+/**
+ * Normalize the VvE service display title.
+ *
+ * The stored page title and menu items still use the legacy all-caps
+ * "VVE" abbreviation. Correct it at render time so the proper Dutch
+ * abbreviation "VvE" is shown everywhere without altering stored data.
+ *
+ * @param string $title   The post title.
+ * @param int    $post_id Post ID.
+ * @return string
+ */
+function hds_normalize_vve_service_title( string $title, int $post_id = 0 ): string {
+	if ( $post_id && 'vve-service' === get_post_field( 'post_name', $post_id ) && preg_match( '/\bVVE\b/', $title ) ) {
+		return __( 'VvE service', 'hds' );
+	}
+	return $title;
+}
+add_filter( 'the_title', 'hds_normalize_vve_service_title', 10, 2 );
+
+/**
+ * Normalize the VvE service document title.
+ *
+ * The browser tab title (and OG title, which reuses it) still carries the
+ * legacy all-caps "VVE" from the stored page title. Correct it at render
+ * time so no incorrect abbreviation remains, without altering stored data.
+ *
+ * @param array $title Document title parts.
+ * @return array
+ */
+function hds_normalize_vve_service_document_title( array $title ): array {
+	if ( is_page() && 'vve-service' === get_post_field( 'post_name', get_queried_object_id() ) && isset( $title['title'] ) && preg_match( '/\bVVE\b/', $title['title'] ) ) {
+		$title['title'] = __( 'VvE service', 'hds' );
+	}
+	return $title;
+}
+add_filter( 'document_title_parts', 'hds_normalize_vve_service_document_title' );
+
+/**
+ * Normalize the VvE menu item label.
+ *
+ * Mirrors hds_normalize_vve_service_title() for navigation items so the
+ * header, mobile and footer menus show "VvE service" instead of "VVE Service".
+ *
+ * @param \WP_Post $menu_item Menu item object.
+ * @return \WP_Post
+ */
+function hds_normalize_vve_service_menu_title( \WP_Post $menu_item ): \WP_Post {
+	if ( isset( $menu_item->title, $menu_item->object_id ) && preg_match( '/\bVVE\b/', $menu_item->title ) ) {
+		$linked = (int) $menu_item->object_id;
+		if ( $linked && 'vve-service' === get_post_field( 'post_name', $linked ) ) {
+			$menu_item->title = __( 'VvE service', 'hds' );
+		}
+	}
+	return $menu_item;
+}
+add_filter( 'wp_setup_nav_menu_item', 'hds_normalize_vve_service_menu_title' );

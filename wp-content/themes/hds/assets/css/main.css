@@ -871,9 +871,16 @@ body.admin-bar .site-header {
 
 .service-intro__grid {
 	display: grid;
-	gap: 80px;
+	gap: clamp(2rem, 4vw, 3.5rem);
 	grid-template-columns: 9fr 5fr;
 	text-align: left;
+}
+
+.service-intro__media img {
+	border-radius: var(--hds-border-radius);
+	box-shadow: var(--wp--preset--shadow--md);
+	object-fit: cover;
+	width: 100%;
 }
 
 
@@ -917,6 +924,230 @@ body.admin-bar .site-header {
 @media (width <= 767px) {
 	.service-intro__grid {
 		grid-template-columns: 1fr;
+	}
+}
+
+/* ── Service Checklist (Wat valt onder deze dienst?) ── */
+.service-checklist {
+	background: var(--wp--preset--color--light-gray);
+	padding-block: var(--wp--preset--spacing--12);
+}
+
+.service-checklist__header {
+	margin-bottom: var(--wp--preset--spacing--8);
+	text-align: center;
+}
+
+.service-checklist__eyebrow {
+	color: var(--wp--preset--color--primary);
+	font-size: var(--wp--preset--font-size--s);
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	margin: 0 0 var(--wp--preset--spacing--3);
+	text-transform: uppercase;
+}
+
+.service-checklist__title {
+	font-size: var(--wp--preset--font-size--3-xl);
+	line-height: 1.3;
+	margin: 0;
+}
+
+.service-checklist__list {
+	display: grid;
+	gap: var(--wp--preset--spacing--4);
+	grid-template-columns: repeat(2, 1fr);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.service-checklist__item {
+	align-items: flex-start;
+	background: var(--wp--preset--color--white);
+	border-radius: var(--hds-border-radius);
+	box-shadow: var(--wp--preset--shadow--sm);
+	display: flex;
+	gap: var(--wp--preset--spacing--4);
+	padding: var(--wp--preset--spacing--5);
+}
+
+.service-checklist__icon {
+	align-items: center;
+	background: var(--wp--preset--color--primary);
+	border-radius: 50%;
+	color: var(--wp--preset--color--white);
+	display: inline-flex;
+	flex-shrink: 0;
+	height: 32px;
+	justify-content: center;
+	width: 32px;
+}
+
+.service-checklist__text {
+	color: var(--wp--preset--color--dark-gray);
+	font-size: var(--wp--preset--font-size--m);
+	line-height: 1.6;
+}
+
+/* ── Service Why Hamdoun (Waarom Hamdoun?) ── */
+.service-why {
+	padding-block: var(--wp--preset--spacing--12);
+}
+
+.service-why__header {
+	margin-bottom: var(--wp--preset--spacing--8);
+	text-align: center;
+}
+
+.service-why__eyebrow {
+	color: var(--wp--preset--color--primary);
+	font-size: var(--wp--preset--font-size--s);
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	margin: 0 0 var(--wp--preset--spacing--3);
+	text-transform: uppercase;
+}
+
+.service-why__title {
+	font-size: var(--wp--preset--font-size--3-xl);
+	line-height: 1.3;
+	margin: 0;
+}
+
+.service-why__list {
+	display: grid;
+	gap: var(--wp--preset--spacing--5);
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.service-why__item {
+	align-items: flex-start;
+	background: var(--wp--preset--color--white);
+	border: 1px solid rgb(18 59 93 / 8%);
+	border-radius: var(--hds-border-radius);
+	box-shadow: var(--wp--preset--shadow--sm);
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--3);
+	min-height: 100%;
+	padding: var(--wp--preset--spacing--6);
+	text-align: center;
+}
+
+.service-why__icon {
+	align-items: center;
+	background: rgb(52 168 83 / 12%);
+	border-radius: 50%;
+	color: var(--wp--preset--color--secondary);
+	display: inline-flex;
+	flex-shrink: 0;
+	height: 48px;
+	justify-content: center;
+	margin-inline: auto;
+	width: 48px;
+}
+
+.service-why__label {
+	color: var(--wp--preset--color--dark-gray);
+	font-size: var(--wp--preset--font-size--l);
+	font-weight: 700;
+	line-height: 1.3;
+}
+
+/* ── Service Audience (Voor wie is deze dienst?) ── */
+.service-audience {
+	background: var(--wp--preset--color--light-gray);
+	padding-block: var(--wp--preset--spacing--12);
+}
+
+.service-audience__header {
+	margin-bottom: var(--wp--preset--spacing--8);
+	text-align: center;
+}
+
+.service-audience__eyebrow {
+	color: var(--wp--preset--color--primary);
+	font-size: var(--wp--preset--font-size--s);
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	margin: 0 0 var(--wp--preset--spacing--3);
+	text-transform: uppercase;
+}
+
+.service-audience__title {
+	font-size: var(--wp--preset--font-size--3-xl);
+	line-height: 1.3;
+	margin: 0 0 var(--wp--preset--spacing--4);
+}
+
+.service-audience__intro {
+	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--m);
+	line-height: 1.6;
+	margin: 0 auto;
+	max-width: 620px;
+}
+
+.service-audience__list {
+	display: grid;
+	gap: var(--wp--preset--spacing--4);
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.service-audience__item {
+	align-items: center;
+	background: var(--wp--preset--color--white);
+	border-radius: var(--hds-border-radius);
+	box-shadow: var(--wp--preset--shadow--sm);
+	display: flex;
+	font-size: var(--wp--preset--font-size--m);
+	font-weight: 600;
+	justify-content: center;
+	padding: var(--wp--preset--spacing--5);
+	text-align: center;
+}
+
+/* ── Service Visual Break ── */
+.service-visual-break__media img {
+	display: block;
+	height: auto;
+	max-height: 60vh;
+	object-fit: cover;
+	width: 100%;
+}
+
+/* ── Service Sections Responsive ── */
+@media (width <= 767px) {
+	.service-checklist__list {
+		grid-template-columns: 1fr;
+	}
+
+	.service-why__list {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.service-audience__list {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (width <= 480px) {
+	.service-why__list,
+	.service-audience__list {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (width >= 768px) {
+	.service-audience__item:only-child {
+		grid-column: 1 / -1;
 	}
 }
 
@@ -1426,6 +1657,11 @@ body.admin-bar .site-header {
 .cross-sell-section {
 	background: var(--wp--preset--color--light-gray);
 	padding-block: var(--wp--preset--spacing--12);
+}
+
+.cross-sell-section .service-card-grid-section {
+	background: transparent;
+	padding-block: 0;
 }
 
 .service-cross-sell {
@@ -2347,6 +2583,53 @@ body.admin-bar .site-header {
 .service-hero .btn-cta:focus-visible {
 	background: var(--wp--preset--color--primary-dark);
 	color: var(--wp--preset--color--white);
+}
+
+/* Image-based hero (service pages). The background-image hero used by
+   other templates is left untouched. */
+.service-hero--image {
+	background: #123B5D;
+}
+
+.service-hero--image::before {
+	background: rgb(0 0 0 / 62%);
+	display: block;
+	z-index: 1;
+}
+
+.service-hero--image .service-hero__media {
+	inset: 0;
+	position: absolute;
+	z-index: 0;
+}
+
+.service-hero--image .service-hero__media img {
+	height: 100%;
+	object-fit: cover;
+	width: 100%;
+}
+
+.service-hero.service-hero--image .container {
+	color: var(--wp--preset--color--white);
+	z-index: 2;
+}
+
+.service-hero.service-hero--image .service-hero__eyebrow {
+	color: var(--wp--preset--color--white);
+	font-weight: 700;
+	text-shadow: 0 1px 2px rgb(0 0 0 / 45%), 0 2px 10px rgb(0 0 0 / 35%);
+}
+
+.service-hero.service-hero--image .service-subtitle {
+	color: var(--wp--preset--color--white);
+	font-weight: 500;
+	opacity: 1;
+	text-shadow: 0 1px 2px rgb(0 0 0 / 45%), 0 2px 10px rgb(0 0 0 / 35%);
+}
+
+.service-hero--image .btn-cta {
+	background: var(--wp--preset--color--secondary);
+	color: var(--wp--preset--color--black);
 }
 
 @media (min-width: 782px) {

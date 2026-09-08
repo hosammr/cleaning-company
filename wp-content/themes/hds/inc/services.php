@@ -13,25 +13,31 @@
  * Return all cleaning service definitions, keyed by page slug.
  *
  * Each service shape:
- *   title           — H1 and meta title
- *   subtitle        — hero subtitle paragraph
- *   hero_image      — media attachment ID (0 = none)
- *   eyebrow         — optional hero eyebrow label
- *   intro           — array { title, paragraphs[], benefits[] }
- *   checklist       — array of { text: string } for the "What's included" section
- *   industries      — string[] of industry slugs (see hds_get_industry_data)
- *   faq             — array of { q: string, a: string }
- *   seo_title       — <title> override
- *   seo_description — meta description override
+ *   title              — H1 and meta title
+ *   subtitle           — hero subtitle paragraph
+ *   hero_image         — media attachment ID (0 = none)
+ *   visual_break_image — media attachment ID for the Visual Break section (0 = none)
+ *   eyebrow            — optional hero eyebrow label
+ *   intro              — array { title, paragraphs[], benefits[] }
+ *   checklist          — array of { text: string } for the "What's included" section
+ *   industries         — string[] of industry slugs (see hds_get_industry_data)
+ *   faq                — array of { q: string, a: string }
+ *   seo_title          — <title> override
+ *   seo_description    — meta description override
+ *
+ * Workflow and audience are resolved by the template: workflow falls back
+ * to hds_get_default_workflow(), audience is derived from `industries`
+ * via hds_get_industry_data().
  *
  * @return array<string, array>
  */
 function hds_get_services(): array {
 	return [
 		'kantoor-schoonmaak' => [
-			'title'           => __( 'Kantoor schoonmaak', 'hds' ),
+			'title'           => __( 'Kantoorreiniging', 'hds' ),
 			'subtitle'        => __( 'Professionele kantoorreiniging op maat voor een schone, gezonde en representatieve werkomgeving.', 'hds' ),
 			'hero_image'      => 0,
+			'visual_break_image' => 361,
 			'eyebrow'         => __( 'Kantoorreiniging', 'hds' ),
 			'intro'           => [
 				'eyebrow'     => __( 'Onze dienst', 'hds' ),
@@ -82,6 +88,7 @@ function hds_get_services(): array {
 			'title'           => __( 'Glasbewassing', 'hds' ),
 			'subtitle'        => __( 'Professionele glasbewassing voor bedrijfspanden, kantoren en commercieel vastgoed. Strak resultaat, veilig uitgevoerd.', 'hds' ),
 			'hero_image'      => 0,
+			'visual_break_image' => 362,
 			'eyebrow'         => __( 'Glasbewassing', 'hds' ),
 			'intro'           => [
 				'eyebrow'     => __( 'Onze dienst', 'hds' ),
@@ -139,6 +146,7 @@ function hds_get_services(): array {
 			'title'           => __( 'Gevelreiniging', 'hds' ),
 			'subtitle'        => __( 'Gevelreiniging voor particuliere woningen en laagbouw met goed bereikbare gevels.', 'hds' ),
 			'hero_image'      => 0,
+			'visual_break_image' => 364,
 			'eyebrow'         => __( 'Gevelreiniging', 'hds' ),
 			'intro'           => [
 				'eyebrow'     => __( 'Onze dienst', 'hds' ),
@@ -188,6 +196,7 @@ function hds_get_services(): array {
 			'title'           => __( 'Reguliere schoonmaak', 'hds' ),
 			'subtitle'        => __( 'Betrouwbare reguliere schoonmaak op maat voor uw bedrijf.', 'hds' ),
 			'hero_image'      => 0,
+			'visual_break_image' => 370,
 			'eyebrow'         => __( 'Reguliere schoonmaak', 'hds' ),
 			'intro'           => [
 				'eyebrow'     => __( 'Onze dienst', 'hds' ),
@@ -245,6 +254,7 @@ function hds_get_services(): array {
 			'title'           => __( 'Vloeronderhoud', 'hds' ),
 			'subtitle'        => __( 'Vakkundig vloeronderhoud voor een duurzame en representatieve uitstraling.', 'hds' ),
 			'hero_image'      => 0,
+			'visual_break_image' => 366,
 			'eyebrow'         => __( 'Vloeronderhoud', 'hds' ),
 			'intro'           => [
 				'eyebrow'     => __( 'Onze dienst', 'hds' ),
@@ -295,6 +305,7 @@ function hds_get_services(): array {
 			'title'           => __( 'VvE service', 'hds' ),
 			'subtitle'        => __( 'Complete schoonmaakdiensten voor Verenigingen van Eigenaren.', 'hds' ),
 			'hero_image'      => 0,
+			'visual_break_image' => 371,
 			'eyebrow'         => __( 'Onze dienst', 'hds' ),
 			'intro'           => [
 				'eyebrow'     => __( 'Onze dienst', 'hds' ),
@@ -352,6 +363,7 @@ function hds_get_services(): array {
 			'title'           => __( 'Oplevering schoonmaak', 'hds' ),
 			'subtitle'        => __( 'Grondige opleverschoonmaak voor een vlekkeloze eindoplevering.', 'hds' ),
 			'hero_image'      => 0,
+			'visual_break_image' => 367,
 			'eyebrow'         => __( 'Opleverschoonmaak', 'hds' ),
 			'intro'           => [
 				'eyebrow'     => __( 'Onze dienst', 'hds' ),
@@ -411,6 +423,7 @@ function hds_get_services(): array {
 			'title'           => __( 'Scholen en Kinderopvang reiniging', 'hds' ),
 			'subtitle'        => __( 'Schoonmaak voor scholen en kinderopvanglocaties, afgestemd op het gebruik van de ruimtes.', 'hds' ),
 			'hero_image'      => 0,
+			'visual_break_image' => 363,
 			'eyebrow'         => __( 'Scholen en kinderopvang', 'hds' ),
 			'intro'           => [
 				'eyebrow'     => __( 'Onze dienst', 'hds' ),

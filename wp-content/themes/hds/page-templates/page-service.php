@@ -2,6 +2,16 @@
 /**
  * Template Name: Service
  *
+ * Shared service detail page template. All eight HDS service pages use
+ * this single template. Every section is rendered from the service data
+ * in inc/services.php (via hds_get_service()), so there is no duplicated
+ * markup between the service pages.
+ *
+ * Rendering order:
+ *   hero → breadcrumbs → intro → checklist → workflow → why hamdoun
+ *   → visual break (if image) → audience (if data) → related services
+ *   → testimonials (if available) → FAQ → final CTA
+ *
  * @package HDS
  */
 
@@ -38,12 +48,21 @@ get_header();
 		$hero_image_url = wp_get_attachment_image_url( $hero_image_id, 'hds-hero' );
 	}
 	if ( ! $hero_image_url ) {
+		$hero_image_id = 0;
 		$hero_image_url = HDS_URI . '/screenshot.png';
 	}
+	$hero_image_alt = $service ? sprintf(
+		/* translators: %s: service name. */
+		__( '%s door Hamdoun Schoonmaak', 'hds' ),
+		$hero_title
+	) : '';
+
 	set_query_var( 'hero_title', $hero_title );
 	set_query_var( 'hero_eyebrow', $hero_eyebrow );
 	set_query_var( 'hero_subtitle', $hero_subtitle );
 	set_query_var( 'hero_image_url', $hero_image_url );
+	set_query_var( 'hero_image_id', $hero_image_id );
+	set_query_var( 'hero_image_alt', $hero_image_alt );
 	set_query_var( 'hero_cta_text', $hero_cta_text );
 	set_query_var( 'hero_cta_url', $hero_cta_url );
 	get_template_part( 'parts/hero' );
@@ -58,103 +77,91 @@ get_header();
 	}
 	?>
 
-	<div class="container">
-		<div class="service-content">
-			<?php
-			while ( have_posts() ) :
-				the_post();
-				the_content();
-			endwhile;
-			?>
-		</div>
-	</div>
+	<?php
+	$checklist = $service['checklist'] ?? [];
+	echo hds_render_service_checklist( $checklist, __( 'Onze dienst', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	?>
 
-		<?php
-		echo hds_render_usp_grid(
-			[
-				[ 'title' => __( 'Betrouwbare service', 'hds' ), 'description' => __( 'Afspraak is afspraak. Wij leveren constante kwaliteit volgens een duidelijke planning.', 'hds' ) ],
-				[ 'title' => __( 'Ervaren medewerkers', 'hds' ), 'description' => __( 'Professionele schoonmakers met ervaring in uiteenlopende sectoren.', 'hds' ) ],
-				[ 'title' => __( 'Flexibele planning', 'hds' ), 'description' => __( 'Werkzaamheden afgestemd op uw openingstijden en bedrijfsprocessen.', 'hds' ) ],
-				[ 'title' => __( 'Duurzame werkwijze', 'hds' ), 'description' => __( 'Wij werken met professionele producten en milieubewuste schoonmaakmethoden.', 'hds' ) ],
-			],
-			__( 'Waarom kiezen voor Hamdoun Schoonmaak', 'hds' ),
-			''
-		); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		?>
+	<?php
+	$workflow = ! empty( $service['workflow'] ) ? $service['workflow'] : hds_get_default_workflow();
+	echo hds_render_process_timeline( __( 'Onze werkwijze', 'hds' ), $workflow ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	?>
 
-		<?php
-		echo hds_render_process_timeline(
-			__( 'Onze werkwijze', 'hds' ),
-			[
-				[ 'title' => __( 'Aanvraag', 'hds' ), 'description' => __( 'Neem contact met ons op en vertel ons uw wensen.', 'hds' ) ],
-				[ 'title' => __( 'Vrijblijvende offerte', 'hds' ), 'description' => __( 'Wij analyseren uw situatie en sturen een duidelijke offerte.', 'hds' ) ],
-				[ 'title' => __( 'Planning', 'hds' ), 'description' => __( 'Samen plannen we de werkzaamheden op een geschikt moment.', 'hds' ) ],
-				[ 'title' => __( 'Uitvoering', 'hds' ), 'description' => __( 'Ons team voert de werkzaamheden zorgvuldig en volgens afspraak uit.', 'hds' ) ],
-			]
-		); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		?>
+	<?php
+	echo hds_render_why_hamdoun_section( __( 'Waarom Hamdoun', 'hds' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	?>
 
-		<section class="service-cross-sell">
+	<?php
+	$visual_break_id = (int) ( $service['visual_break_image'] ?? 0 );
+	echo hds_render_service_visual_break( $visual_break_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	?>
+
+	<?php
+	$industries = $service['industries'] ?? [];
+	echo hds_render_service_audience( $industries ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	?>
+
+	<section class="service-cross-sell">
 		<?php echo hds_render_cross_sell_section(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</section>
 
-		<?php
-		$related_testimonial_ids = get_posts( [
-			'post_type'      => 'hds_testimonial',
-			'posts_per_page' => 3,
-			'post_status'    => 'publish',
-			'fields'         => 'ids',
-			'meta_key'       => 'hds_related_service', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
-			'meta_value'     => get_the_ID(), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
-		] );
-		if ( ! empty( $related_testimonial_ids ) ) :
-			?>
-			<section class="home-testimonials" aria-labelledby="service-testimonials-heading">
-				<div class="container">
-					<?php
-					echo hds_section_header(
-						__( 'Wat onze klanten zeggen', 'hds' ),
-						'',
-						'center'
-					); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo do_blocks( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						'<!-- wp:hds/testimonial {"count":3,"showRating":true,"selectedItems":' . wp_json_encode( $related_testimonial_ids ) . '} /-->'
-					);
-					?>
-				</div>
-			</section>
-		<?php endif; ?>
+	<?php
+	$related_testimonial_ids = get_posts( [
+		'post_type'      => 'hds_testimonial',
+		'posts_per_page' => 3,
+		'post_status'    => 'publish',
+		'fields'         => 'ids',
+		'meta_key'       => 'hds_related_service', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+		'meta_value'     => get_the_ID(), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+	] );
+	if ( ! empty( $related_testimonial_ids ) ) :
+		?>
+		<section class="home-testimonials" aria-labelledby="service-testimonials-heading">
+			<div class="container">
+				<?php
+				echo hds_section_header(
+					__( 'Wat onze klanten zeggen', 'hds' ),
+					'',
+					'center'
+				); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo do_blocks( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					'<!-- wp:hds/testimonial {"count":3,"showRating":true,"selectedItems":' . wp_json_encode( $related_testimonial_ids ) . '} /-->'
+				);
+				?>
+			</div>
+		</section>
+	<?php endif; ?>
 
-			<?php
-			$service_faq = $service['faq'] ?? [];
-			$faq_items   = ! empty( $service_faq ) ? $service_faq : [
-				[ 'q' => __( 'Hoe vaak adviseren jullie schoonmaak?', 'hds' ), 'a' => __( 'Dit is afhankelijk van uw bedrijf, bezoekersaantallen en wensen. Wij adviseren u graag.', 'hds' ) ],
-				[ 'q' => __( 'Werken jullie buiten kantooruren?', 'hds' ), 'a' => __( 'Ja. Wij kunnen werkzaamheden uitvoeren buiten uw openingstijden.', 'hds' ) ],
-				[ 'q' => __( 'Gebruiken jullie milieuvriendelijke producten?', 'hds' ), 'a' => __( 'Ja. Waar mogelijk gebruiken wij professionele en milieubewuste schoonmaakmiddelen.', 'hds' ) ],
-				[ 'q' => __( 'Kan ik een vrijblijvende offerte aanvragen?', 'hds' ), 'a' => __( 'Ja. Wij maken graag een offerte op maat zonder verplichtingen.', 'hds' ) ],
-				[ 'q' => __( 'Zijn jullie diensten beschikbaar voor zowel kleine als grote bedrijven?', 'hds' ), 'a' => __( 'Ja. Wij werken voor organisaties van iedere omvang.', 'hds' ) ],
-			];
-			?>
-			<section class="hds-faq-section" aria-labelledby="hds-faq-heading">
-				<div class="container">
-					<header class="hds-faq-header">
-						<h2 id="hds-faq-heading"><?php esc_html_e( 'Veelgestelde vragen', 'hds' ); ?></h2>
-						<p class="hds-faq-header__intro"><?php esc_html_e( 'Hier vindt u antwoorden op de meest gestelde vragen over onze schoonmaakdiensten.', 'hds' ); ?></p>
-					</header>
-					<div class="hds-faq-list">
-						<?php foreach ( $faq_items as $faq_item ) : ?>
-							<details class="hds-faq-item">
-								<summary class="hds-faq-item__question">
-									<?php echo esc_html( $faq_item['q'] ); ?>
-								</summary>
-								<div class="hds-faq-item__answer">
-									<p><?php echo esc_html( $faq_item['a'] ); ?></p>
-								</div>
-							</details>
-						<?php endforeach; ?>
-					</div>
-				</div>
-			</section>
+	<?php
+	$service_faq = $service['faq'] ?? [];
+	$faq_items   = ! empty( $service_faq ) ? $service_faq : [
+		[ 'q' => __( 'Hoe vaak adviseren jullie schoonmaak?', 'hds' ), 'a' => __( 'Dit is afhankelijk van uw bedrijf, bezoekersaantallen en wensen. Wij adviseren u graag.', 'hds' ) ],
+		[ 'q' => __( 'Werken jullie buiten kantooruren?', 'hds' ), 'a' => __( 'Ja. Wij kunnen werkzaamheden uitvoeren buiten uw openingstijden.', 'hds' ) ],
+		[ 'q' => __( 'Gebruiken jullie milieuvriendelijke producten?', 'hds' ), 'a' => __( 'Ja. Waar mogelijk gebruiken wij professionele en milieubewuste schoonmaakmiddelen.', 'hds' ) ],
+		[ 'q' => __( 'Kan ik een vrijblijvende offerte aanvragen?', 'hds' ), 'a' => __( 'Ja. Wij maken graag een offerte op maat zonder verplichtingen.', 'hds' ) ],
+		[ 'q' => __( 'Zijn jullie diensten beschikbaar voor zowel kleine als grote bedrijven?', 'hds' ), 'a' => __( 'Ja. Wij werken voor organisaties van iedere omvang.', 'hds' ) ],
+	];
+	?>
+	<section class="hds-faq-section" aria-labelledby="hds-faq-heading">
+		<div class="container">
+			<header class="hds-faq-header">
+				<h2 id="hds-faq-heading"><?php esc_html_e( 'Veelgestelde vragen', 'hds' ); ?></h2>
+				<p class="hds-faq-header__intro"><?php esc_html_e( 'Hier vindt u antwoorden op de meest gestelde vragen over onze schoonmaakdiensten.', 'hds' ); ?></p>
+			</header>
+			<div class="hds-faq-list">
+				<?php foreach ( $faq_items as $faq_item ) : ?>
+					<details class="hds-faq-item">
+						<summary class="hds-faq-item__question">
+							<?php echo esc_html( $faq_item['q'] ); ?>
+						</summary>
+						<div class="hds-faq-item__answer">
+							<p><?php echo esc_html( $faq_item['a'] ); ?></p>
+						</div>
+					</details>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</section>
 
 	<?php
 	echo hds_cta_section(

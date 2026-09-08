@@ -556,7 +556,7 @@ function hds_render_service_gallery(): string {
 		'vloeronderhoud'                    => __( 'Vloeronderhoud door Hamdoun Schoonmaak', 'hds' ),
 		'oplevering-schoonmaak'             => __( 'Oplevering schoonmaak door Hamdoun Schoonmaak', 'hds' ),
 		'reguliere-schoonmaak'              => __( 'Reguliere schoonmaak door Hamdoun Schoonmaak', 'hds' ),
-		'vve-service'                       => __( 'VVE service door Hamdoun Schoonmaak', 'hds' ),
+		'vve-service'                       => __( 'VvE service door Hamdoun Schoonmaak', 'hds' ),
 	);
 
 	ob_start();
@@ -659,13 +659,15 @@ function hds_render_process_timeline( string $heading, array $steps ): string {
  * Render the Service Introduction section.
  *
  * Centered eyebrow + heading + intro sentence above a two-column layout.
- * Left: paragraphs, Right: benefit checklist.
+ * Left: paragraphs, Right: benefit checklist or optional supporting image.
  * Reads content from the service's `intro` data in services.php.
  *
  * @param array $intro Intro data with 'eyebrow', 'title', 'intro_text', 'paragraphs', and 'benefits' keys.
+ * @param array $image Optional supporting image data with 'id' and 'alt' keys. Skipped when empty.
  * @return string Service introduction section HTML.
  */
-function hds_render_service_intro( array $intro ): string {
+function hds_render_service_intro( array $intro, array $image = array() ): string {
+	$has_image = ! empty( $image['id'] );
 	ob_start();
 	?>
 	<section class="service-intro">
@@ -677,13 +679,27 @@ function hds_render_service_intro( array $intro ): string {
 			<?php if ( ! empty( $intro['intro_text'] ) ) : ?>
 				<p class="service-intro__intro-text"><?php echo esc_html( $intro['intro_text'] ); ?></p>
 			<?php endif; ?>
-			<div class="service-intro__grid">
+			<div class="service-intro__grid<?php echo $has_image ? ' service-intro__grid--has-image' : ''; ?>">
 				<div class="service-intro__content">
 					<?php foreach ( $intro['paragraphs'] as $paragraph ) : ?>
 						<p class="service-intro__text"><?php echo esc_html( $paragraph ); ?></p>
 					<?php endforeach; ?>
 				</div>
-				<?php if ( ! empty( $intro['benefits'] ) ) : ?>
+				<?php if ( $has_image ) : ?>
+					<div class="service-intro__media">
+						<?php
+						echo wp_get_attachment_image( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							(int) $image['id'],
+							'hds-content',
+							false,
+							[
+								'alt'     => $image['alt'] ?? '',
+								'loading' => 'lazy',
+							]
+						);
+						?>
+					</div>
+				<?php elseif ( ! empty( $intro['benefits'] ) ) : ?>
 					<div class="service-intro__benefits">
 						<ul class="service-intro__benefit-list">
 							<?php foreach ( $intro['benefits'] as $benefit ) : ?>
@@ -693,6 +709,177 @@ function hds_render_service_intro( array $intro ): string {
 					</div>
 				<?php endif; ?>
 			</div>
+		</div>
+	</section>
+	<?php
+	return ob_get_clean();
+}
+
+/**
+ * Render the "Wat valt onder deze dienst?" checklist section.
+ *
+ * Renders the service-specific checklist as a two-column card list.
+ * The section is only rendered when valid checklist data is present;
+ * empty checklists are skipped entirely.
+ *
+ * @param array  $checklist Array of { text: string } items.
+ * @param string $eyebrow   Optional eyebrow label.
+ * @return string Section HTML, or an empty string when no items exist.
+ */
+function hds_render_service_checklist( array $checklist, string $eyebrow = '' ): string {
+	$items = array_values( array_filter( $checklist, fn( $item ) => ! empty( $item['text'] ) ) );
+	if ( empty( $items ) ) {
+		return '';
+	}
+
+	ob_start();
+	?>
+	<section class="service-checklist" aria-labelledby="service-checklist-heading">
+		<div class="container">
+			<header class="service-checklist__header">
+				<?php if ( $eyebrow ) : ?>
+					<p class="service-checklist__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
+				<?php endif; ?>
+				<h2 id="service-checklist-heading" class="service-checklist__title"><?php esc_html_e( 'Wat valt onder deze dienst?', 'hds' ); ?></h2>
+			</header>
+			<ul class="service-checklist__list">
+				<?php foreach ( $items as $item ) : ?>
+					<li class="service-checklist__item">
+						<span class="service-checklist__icon" aria-hidden="true">
+							<svg width="20" height="20" viewBox="0 0 256 256" fill="none"><path d="M216 72l-104 104-72-72" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						</span>
+						<span class="service-checklist__text"><?php echo esc_html( $item['text'] ); ?></span>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+	</section>
+	<?php
+	return ob_get_clean();
+}
+
+/**
+ * Render the "Voor wie is deze dienst?" audience section.
+ *
+ * Maps the service `industries` slugs to their Dutch labels via
+ * hds_get_industry_data(). Unknown slugs are skipped. The section is
+ * only rendered when at least one supported industry is present.
+ *
+ * @param array $industries Array of industry slugs.
+ * @return string Section HTML, or an empty string when no supported industries exist.
+ */
+function hds_render_service_audience( array $industries ): string {
+	$labels = [];
+	foreach ( $industries as $slug ) {
+		$label = hds_get_industry_label( $slug );
+		if ( null !== $label ) {
+			$labels[] = $label;
+		}
+	}
+	$labels = array_values( array_unique( $labels ) );
+
+	if ( empty( $labels ) ) {
+		return '';
+	}
+
+	ob_start();
+	?>
+	<section class="service-audience" aria-labelledby="service-audience-heading">
+		<div class="container">
+			<header class="service-audience__header">
+				<p class="service-audience__eyebrow"><?php esc_html_e( 'Onze dienst', 'hds' ); ?></p>
+				<h2 id="service-audience-heading" class="service-audience__title"><?php esc_html_e( 'Voor wie is deze dienst?', 'hds' ); ?></h2>
+				<p class="service-audience__intro"><?php esc_html_e( 'Wij leveren deze dienst voor de volgende sectoren en organisaties.', 'hds' ); ?></p>
+			</header>
+			<ul class="service-audience__list">
+				<?php foreach ( $labels as $label ) : ?>
+					<li class="service-audience__item"><?php echo esc_html( $label ); ?></li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+	</section>
+	<?php
+	return ob_get_clean();
+}
+
+/**
+ * Render the "Waarom Hamdoun?" strengths section for service pages.
+ *
+ * Renders the five canonical company strengths from
+ * hds_get_why_hamdoun_strengths() as a clean card grid. This is a
+ * service-page-only component and does not touch the homepage
+ * hds_render_why_section() output.
+ *
+ * @param string $eyebrow Optional eyebrow label.
+ * @return string Section HTML.
+ */
+function hds_render_why_hamdoun_section( string $eyebrow = '' ): string {
+	$strengths = hds_get_why_hamdoun_strengths();
+	if ( empty( $strengths ) ) {
+		return '';
+	}
+
+	ob_start();
+	?>
+	<section class="service-why" aria-labelledby="service-why-heading">
+		<div class="container">
+			<header class="service-why__header">
+				<?php if ( $eyebrow ) : ?>
+					<p class="service-why__eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
+				<?php endif; ?>
+				<h2 id="service-why-heading" class="service-why__title"><?php esc_html_e( 'Waarom Hamdoun?', 'hds' ); ?></h2>
+			</header>
+			<ul class="service-why__list">
+				<?php foreach ( $strengths as $strength ) : ?>
+					<li class="service-why__item">
+						<span class="service-why__icon" aria-hidden="true">
+							<svg width="22" height="22" viewBox="0 0 256 256" fill="none"><path d="M216 72l-104 104-72-72" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						</span>
+						<span class="service-why__label"><?php echo esc_html( $strength ); ?></span>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+	</section>
+	<?php
+	return ob_get_clean();
+}
+
+/**
+ * Render the Visual Break section (large service image).
+ *
+ * Only rendered when an approved image attachment ID is supplied. When
+ * no image exists the section is skipped entirely — no placeholder is
+ * shown. Dedicated Visual Break images are expected to be added later.
+ *
+ * @param int    $image_id Attachment ID of the Visual Break image.
+ * @param string $alt      Accessible alt text.
+ * @return string Section HTML, or an empty string when no image is supplied.
+ */
+function hds_render_service_visual_break( int $image_id = 0, string $alt = '' ): string {
+	if ( ! $image_id || ! wp_get_attachment_image_url( $image_id, 'full' ) ) {
+		return '';
+	}
+
+	if ( '' === $alt ) {
+		$alt = wp_get_attachment_caption( $image_id ) ?: '';
+	}
+
+	ob_start();
+	?>
+	<section class="service-visual-break" aria-hidden="false">
+		<div class="service-visual-break__media">
+			<?php
+			echo wp_get_attachment_image( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				(int) $image_id,
+				'full',
+				false,
+				[
+					'alt'     => $alt,
+					'loading' => 'lazy',
+				]
+			);
+			?>
 		</div>
 	</section>
 	<?php
