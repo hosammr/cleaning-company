@@ -345,6 +345,8 @@ function hds_get_industry_data(): array {
 		'basisscholen'             => __( 'Basisscholen', 'hds' ),
 		'middelbare-scholen'       => __( 'Middelbare scholen', 'hds' ),
 		'kinderopvang'             => __( 'Kinderopvang', 'hds' ),
+		'woningen'                 => __( 'Woningen', 'hds' ),
+		'winkelpanden'             => __( 'Winkelpanden', 'hds' ),
 	];
 }
 
