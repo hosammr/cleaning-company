@@ -132,42 +132,37 @@ function hds_get_service_schema( int $post_id ): array {
 /**
  * Build FAQPage schema for service template pages.
  *
- * Matches the hardcoded FAQ items in page-templates/page-service.php.
+ * Derives from the same service-specific FAQ data as the visible FAQ
+ * renderer in page-templates/page-service.php (hds_get_service()).
+ * Returns an empty array when the service has no FAQ items, so no
+ * FAQPage schema is emitted without matching visible FAQ content.
  */
 function hds_get_service_faq_schema(): array {
-	$faq_items = [
-		[
-			'question' => __( 'Hoe vaak adviseren jullie schoonmaak?', 'hds' ),
-			'answer'   => __( 'Dit is afhankelijk van uw bedrijf, bezoekersaantallen en wensen. Wij adviseren u graag.', 'hds' ),
-		],
-		[
-			'question' => __( 'Werken jullie buiten kantooruren?', 'hds' ),
-			'answer'   => __( 'Ja. Wij kunnen werkzaamheden uitvoeren buiten uw openingstijden.', 'hds' ),
-		],
-		[
-			'question' => __( 'Gebruiken jullie milieuvriendelijke producten?', 'hds' ),
-			'answer'   => __( 'Ja. Waar mogelijk gebruiken wij professionele en milieubewuste schoonmaakmiddelen.', 'hds' ),
-		],
-		[
-			'question' => __( 'Kan ik een vrijblijvende offerte aanvragen?', 'hds' ),
-			'answer'   => __( 'Ja. Wij maken graag een offerte op maat zonder verplichtingen.', 'hds' ),
-		],
-		[
-			'question' => __( 'Zijn jullie diensten beschikbaar voor zowel kleine als grote bedrijven?', 'hds' ),
-			'answer'   => __( 'Ja. Wij werken voor organisaties van iedere omvang.', 'hds' ),
-		],
-	];
+	$slug      = get_post_field( 'post_name', get_the_ID() );
+	$service   = hds_get_service( $slug );
+	$faq_items = $service['faq'] ?? [];
+
+	if ( empty( $faq_items ) ) {
+		return [];
+	}
 
 	$questions = [];
 	foreach ( $faq_items as $item ) {
+		if ( empty( $item['q'] ) || empty( $item['a'] ) ) {
+			continue;
+		}
 		$questions[] = [
 			'@type'          => 'Question',
-			'name'           => $item['question'],
+			'name'           => $item['q'],
 			'acceptedAnswer' => [
 				'@type' => 'Answer',
-				'text'  => $item['answer'],
+				'text'  => $item['a'],
 			],
 		];
+	}
+
+	if ( empty( $questions ) ) {
+		return [];
 	}
 
 	return [

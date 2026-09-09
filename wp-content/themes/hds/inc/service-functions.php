@@ -396,14 +396,15 @@ function hds_get_default_workflow(): array {
  * The stored page title and menu items still use the legacy all-caps
  * "VVE" abbreviation. Correct it at render time so the proper Dutch
  * abbreviation "VvE" is shown everywhere without altering stored data.
+ * Also normalizes the stored "VvE service" casing to "VvE Service".
  *
  * @param string $title   The post title.
  * @param int    $post_id Post ID.
  * @return string
  */
 function hds_normalize_vve_service_title( string $title, int $post_id = 0 ): string {
-	if ( $post_id && 'vve-service' === get_post_field( 'post_name', $post_id ) && preg_match( '/\bVVE\b/', $title ) ) {
-		return __( 'VvE service', 'hds' );
+	if ( $post_id && 'vve-service' === get_post_field( 'post_name', $post_id ) && preg_match( '/\bVvE\b/i', $title ) ) {
+		return __( 'VvE Service', 'hds' );
 	}
 	return $title;
 }
@@ -415,13 +416,14 @@ add_filter( 'the_title', 'hds_normalize_vve_service_title', 10, 2 );
  * The browser tab title (and OG title, which reuses it) still carries the
  * legacy all-caps "VVE" from the stored page title. Correct it at render
  * time so no incorrect abbreviation remains, without altering stored data.
+ * Also normalizes the stored "VvE service" casing to "VvE Service".
  *
  * @param array $title Document title parts.
  * @return array
  */
 function hds_normalize_vve_service_document_title( array $title ): array {
-	if ( is_page() && 'vve-service' === get_post_field( 'post_name', get_queried_object_id() ) && isset( $title['title'] ) && preg_match( '/\bVVE\b/', $title['title'] ) ) {
-		$title['title'] = __( 'VvE service', 'hds' );
+	if ( is_page() && 'vve-service' === get_post_field( 'post_name', get_queried_object_id() ) && isset( $title['title'] ) && preg_match( '/\bVvE\b/i', $title['title'] ) ) {
+		$title['title'] = __( 'VvE Service', 'hds' );
 	}
 	return $title;
 }

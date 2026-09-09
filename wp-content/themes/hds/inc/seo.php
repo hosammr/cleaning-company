@@ -62,6 +62,17 @@ function hds_add_default_meta_description(): void {
 			);
 			return;
 		}
+
+		if ( is_page_template( 'page-templates/page-service.php' ) ) {
+			$service = hds_get_service( get_post_field( 'post_name', get_queried_object_id() ) );
+			if ( $service && ! empty( $service['seo_description'] ) ) {
+				printf(
+					'<meta name="description" content="%s">' . "\n",
+					esc_attr( $service['seo_description'] )
+				);
+				return;
+			}
+		}
 	}
 
 	$description = is_singular()
