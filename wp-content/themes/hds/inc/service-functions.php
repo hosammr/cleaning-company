@@ -347,6 +347,8 @@ function hds_get_industry_data(): array {
 		'kinderopvang'             => __( 'Kinderopvang', 'hds' ),
 		'woningen'                 => __( 'Woningen', 'hds' ),
 		'winkelpanden'             => __( 'Winkelpanden', 'hds' ),
+		'winkels'                  => __( 'Winkels', 'hds' ),
+		'vve'                      => __( "VvE's", 'hds' ),
 	];
 }
 
