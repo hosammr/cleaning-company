@@ -789,7 +789,7 @@ function hds_render_service_audience( array $industries ): string {
 			<header class="service-audience__header">
 				<p class="service-audience__eyebrow"><?php esc_html_e( 'Onze dienst', 'hds' ); ?></p>
 				<h2 id="service-audience-heading" class="service-audience__title"><?php esc_html_e( 'Voor wie is deze dienst?', 'hds' ); ?></h2>
-				<p class="service-audience__intro"><?php esc_html_e( 'Wij leveren deze dienst voor de volgende sectoren en organisaties.', 'hds' ); ?></p>
+				<p class="service-audience__intro"><?php esc_html_e( 'Deze dienst is geschikt voor de volgende klanten en locaties.', 'hds' ); ?></p>
 			</header>
 			<ul class="service-audience__list">
 				<?php foreach ( $labels as $label ) : ?>
