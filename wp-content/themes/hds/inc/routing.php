@@ -48,3 +48,21 @@ function hds_template_body_classes( array $classes ): array {
 	return $classes;
 }
 add_filter( 'body_class', 'hds_template_body_classes' );
+
+/**
+ * 301-redirect removed pages to their approved destinations.
+ */
+function hds_redirect_removed_pages(): void {
+	$path = untrailingslashit( (string) wp_parse_url( (string) ( $_SERVER['REQUEST_URI'] ?? '' ), PHP_URL_PATH ) );
+
+	$redirects = [
+		'/glas-en-gevel' => '/glasbewassing/',
+		'/downloads'     => '/kwaliteit-en-veiligheid/',
+	];
+
+	if ( isset( $redirects[ $path ] ) ) {
+		wp_safe_redirect( home_url( $redirects[ $path ] ), 301 );
+		exit;
+	}
+}
+add_action( 'template_redirect', 'hds_redirect_removed_pages' );

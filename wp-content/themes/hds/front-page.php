@@ -75,6 +75,9 @@ get_header();
 	// Service image slider.
 	echo hds_render_service_gallery(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
+	// Client logo strip — confirmed opdrachtgevers (social proof).
+	echo do_blocks( '<!-- wp:hds/client-logos {"variant":"strip"} /-->' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
 	// Section 4: Client Logo Carousel (conditional — renders only if testimonials CPT has entries)
 	$has_testimonials = get_posts( [
 		'post_type'      => 'hds_testimonial',

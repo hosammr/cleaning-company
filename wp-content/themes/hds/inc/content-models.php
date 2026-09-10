@@ -67,20 +67,6 @@ function hds_get_testimonial_model_schema(): array {
 }
 
 /**
- * Download Content Model.
- *
- * Page: /downloads/ (standard Page with Default template)
- * Content: list of download links or embedded PDFs
- * No custom post type needed.
- */
-function hds_init_download_content_model(): array {
-	return [
-		[ 'core/heading', [ 'level' => 2, 'content' => __( 'Downloads', 'hds' ) ] ],
-		[ 'core/list',    [] ],
-	];
-}
-
-/**
  * Hero Section Content Model.
  *
  * Managed via: Block Pattern "hds/hero-section" inserted on any page.

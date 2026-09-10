@@ -20,7 +20,6 @@ get_header();
 				<h2><?php esc_html_e( 'Mogelijk bent u op zoek naar:', 'hds' ); ?></h2>
 				<ul>
 					<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'hds' ); ?></a></li>
-					<li><a href="<?php echo esc_url( home_url( '/glas-en-gevel/' ) ); ?>"><?php esc_html_e( 'Glas & Gevel', 'hds' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php esc_html_e( 'Contact', 'hds' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/offerte-aanvragen/' ) ); ?>"><?php esc_html_e( 'Offerte Aanvragen', 'hds' ); ?></a></li>
 				</ul>

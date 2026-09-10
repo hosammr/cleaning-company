@@ -75,7 +75,6 @@ class HDS_Config {
 				'blog_enabled'            => true,
 				'comments_enabled'        => false,
 				'vacancies_enabled'       => true,
-				'downloads_page'          => false,
 				'team_members'            => false,
 				'debug_toolbar'           => defined( 'WP_DEBUG' ) && WP_DEBUG,
 			],

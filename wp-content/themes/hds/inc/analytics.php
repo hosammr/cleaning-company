@@ -186,7 +186,6 @@ function hds_download_tracking( string $content ): string {
 	);
 }
 add_filter( 'the_content', 'hds_download_tracking' );
-add_filter( 'hds_downloads_output', 'hds_download_tracking' );
 
 /**
  * WooCommerce add-to-cart event tracking.

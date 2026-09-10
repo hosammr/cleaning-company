@@ -126,7 +126,7 @@ function hds_truncate( string $text, int $length = 100, string $suffix = '...' )
  * Fallback for the footer-about nav menu when no menu is assigned.
  *
  * Renders the Over HDS links: Over HDS, Kwaliteit & Veiligheid,
- * Referenties, Downloads, Offerte aanvragen.
+ * Referenties, Offerte aanvragen.
  *
  * @param array $args wp_nav_menu() arguments.
  */
@@ -136,7 +136,6 @@ function hds_footer_about_fallback( array $args ): void {
 		home_url( '/kwaliteit-en-veiligheid/' ) => __( 'Kwaliteit & Veiligheid', 'hds' ),
 		home_url( '/referenties/' )             => __( 'Referenties', 'hds' ),
 		home_url( '/veelgestelde-vragen/' )     => __( 'Veelgestelde Vragen', 'hds' ),
-		home_url( '/downloads/' )               => __( 'Downloads', 'hds' ),
 		home_url( '/offerte-aanvragen/' )       => __( 'Offerte aanvragen', 'hds' ),
 	];
 

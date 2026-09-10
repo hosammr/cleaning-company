@@ -229,8 +229,19 @@
 
 		dropdownParents.forEach( function ( link ) {
 			link.addEventListener( 'keydown', function ( e ) {
-				if ( window.innerWidth > 1023 && e.key === 'Enter' && this.parentNode.classList.contains( 'menu-item-has-children' ) ) {
+				if (
+					window.innerWidth > 1023 &&
+					( e.key === 'Enter' || e.key === ' ' ) &&
+					this.parentNode.classList.contains( 'menu-item-has-children' )
+				) {
 					e.preventDefault();
+					const parent = this.parentNode;
+					if ( parent.classList.contains( 'is-open' ) ) {
+						closeDropdown( parent );
+					} else {
+						closeSiblingDropdowns( parent );
+						openDropdown( parent );
+					}
 				}
 			} );
 

@@ -56,6 +56,13 @@ function hds_register_custom_blocks(): void {
 			'icon'      => 'phone',
 			'category'  => 'hds-content',
 		],
+		'client-logos' => [
+			'render'    => 'hds_render_client_logos',
+			'title'     => __( 'HDS Opdrachtgevers', 'hds' ),
+			'desc'      => __( 'Toon de bevestigde opdrachtgevers met hun logo en externe website.', 'hds' ),
+			'icon'      => 'businessperson',
+			'category'  => 'hds-content',
+		],
 	];
 
 	foreach ( $blocks as $name => $config ) {
@@ -103,6 +110,9 @@ function hds_get_block_attributes( string $block ): array {
 			'showKVK'     => [ 'type' => 'boolean', 'default' => true ],
 			'showHours'   => [ 'type' => 'boolean', 'default' => false ],
 			'showSocial'  => [ 'type' => 'boolean', 'default' => false ],
+		],
+		'client-logos' => [
+			'variant' => [ 'type' => 'string', 'default' => 'grid' ],
 		],
 	];
 
@@ -369,6 +379,100 @@ function hds_render_contact_info( array $attributes, string $content, \WP_Block 
 			</div>
 		<?php endif; ?>
 	</div>
+	<?php
+	return ob_get_clean();
+}
+
+/**
+ * Render hds/client-logos block.
+ *
+ * Renders the confirmed client references. Two variants:
+ *   - 'grid'  — full card grid with logo + name + external link (referenties page)
+ *   - 'strip' — compact homepage logo strip with a CTA button
+ *
+ * @param array  $attributes Block attributes.
+ * @param string $content    Saved block content.
+ * @param WP_Block $block    Block instance.
+ */
+function hds_render_client_logos( array $attributes = array(), string $content = '', \WP_Block $block = null ): string {
+	$variant = $attributes['variant'] ?? 'grid';
+
+	$clients = array(
+		array(
+			'name' => 'Switch Network',
+			'url'  => 'https://switchnetwork.nl/',
+			'file' => 'switch-network.png',
+			'alt'  => 'Switch Network logo',
+		),
+		array(
+			'name' => 'SDeal',
+			'url'  => 'https://www.sdeal.nl/',
+			'file' => 'sdeal.svg',
+			'alt'  => 'SDeal logo',
+		),
+		array(
+			'name' => 'Jongerenzorg',
+			'url'  => 'https://jongerenzorg.nl/',
+			'file' => 'jongerenzorg.svg',
+			'alt'  => 'Jongerenzorg logo',
+		),
+		array(
+			'name' => 'Eskom',
+			'url'  => 'https://www.eskom.co.za/',
+			'file' => 'eskom.jpg',
+			'alt'  => 'Eskom logo',
+		),
+		array(
+			'name' => 'Broscars',
+			'url'  => 'https://www.broscars.nl/',
+			'file' => 'broscars.png',
+			'alt'  => 'Broscars logo',
+		),
+		array(
+			'name' => 'Hasret',
+			'url'  => 'https://www.hasret1.nl/',
+			'file' => 'hasret.png',
+			'alt'  => 'Hasret logo',
+		),
+	);
+
+	$logo_base = home_url( '/wp-content/uploads/client-logos/' );
+
+	ob_start();
+	?>
+	<?php if ( 'strip' === $variant ) : ?>
+		<div class="hds-clients-strip">
+			<h2 class="hds-clients-strip__heading"><?php esc_html_e( 'Onze opdrachtgevers', 'hds' ); ?></h2>
+<ul class="hds-clients-strip__list">
+				<?php foreach ( $clients as $client ) : ?>
+					<li class="hds-clients-strip__item<?php echo ! empty( $client['dark'] ) ? ' hds-clients-strip__item--dark' : ''; ?>">
+						<a href="<?php echo esc_url( $client['url'] ); ?>" target="_blank" rel="noopener noreferrer">
+							<img src="<?php echo esc_url( $logo_base . $client['file'] ); ?>" alt="<?php echo esc_attr( $client['alt'] ); ?>" loading="lazy">
+						</a>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+			<p class="hds-clients-strip__action">
+				<a href="<?php echo esc_url( home_url( '/referenties/' ) ); ?>" class="btn btn--outline"><?php esc_html_e( 'Bekijk alle opdrachtgevers', 'hds' ); ?></a>
+			</p>
+		</div>
+	<?php else : ?>
+		<div class="hds-clients">
+			<p class="hds-clients__intro"><?php esc_html_e( 'Wij werken voor verschillende bedrijven en organisaties in Groningen en daarbuiten. Hieronder vindt u een selectie van onze opdrachtgevers.', 'hds' ); ?></p>
+			<ul class="hds-clients__grid">
+				<?php foreach ( $clients as $client ) : ?>
+					<li class="hds-clients__card<?php echo ! empty( $client['dark'] ) ? ' hds-clients__card--dark' : ''; ?>">
+						<a href="<?php echo esc_url( $client['url'] ); ?>" target="_blank" rel="noopener noreferrer">
+							<span class="hds-clients__logo">
+								<img src="<?php echo esc_url( $logo_base . $client['file'] ); ?>" alt="<?php echo esc_attr( $client['alt'] ); ?>" loading="lazy">
+							</span>
+							<span class="hds-clients__name"><?php echo esc_html( $client['name'] ); ?></span>
+						</a>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+	<?php endif; ?>
 	<?php
 	return ob_get_clean();
 }

@@ -334,36 +334,6 @@ function hds_register_block_patterns(): void {
 		]
 	);
 
-	// Downloads Card List
-	register_block_pattern(
-		'hds/downloads-card-list',
-		[
-			'title'       => __( 'Downloads Kaartenlijst', 'hds' ),
-			'categories'  => [ 'hds-patterns' ],
-			'content'     => '<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|8","bottom":"var:preset|spacing|8"}}},"className":"downloads-list","layout":{"type":"constrained"}} -->
-<div class="wp-block-group downloads-list" style="padding-top:var(--wp--preset--spacing--8);padding-bottom:var(--wp--preset--spacing--8)">
-<!-- wp:group {"className":"download-card","style":{"spacing":{"padding":{"top":"var:preset|spacing|6","bottom":"var:preset|spacing|6","left":"var:preset|spacing|6","right":"var:preset|spacing|6"}},"border":{"width":"1px"}},"borderColor":"light-gray","backgroundColor":"white","layout":{"type":"constrained"}} -->
-<div class="wp-block-group download-card has-border-color has-light-gray-border-color has-background has-white-background-color" style="border-width:1px;padding-top:var(--wp--preset--spacing--6);padding-bottom:var(--wp--preset--spacing--6);padding-left:var(--wp--preset--spacing--6);padding-right:var(--wp--preset--spacing--6)">
-<!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">Documentnaam</h3>
-<!-- /wp:heading -->
-<!-- wp:paragraph -->
-<p>Beschrijving van het document. Bestandstype en grootte toevoegen.</p>
-<!-- /wp:paragraph -->
-<!-- wp:buttons -->
-<div class="wp-block-buttons">
-<!-- wp:button {"className":"is-style-secondary"} -->
-<div class="wp-block-button is-style-secondary"><a class="wp-block-button__link wp-element-button" href="#">Download</a></div>
-<!-- /wp:button -->
-</div>
-<!-- /wp:buttons -->
-</div>
-<!-- /wp:group -->
-</div>
-<!-- /wp:group -->',
-		]
-	);
-
 	// Vacancy Page Intro
 	register_block_pattern(
 		'hds/vacancy-intro',
