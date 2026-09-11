@@ -644,4 +644,17 @@
 		}
 	} );
 
+/* ── Form file inputs: show the selected filename ── */
+	document.querySelectorAll( '.hds-quote-form__file' ).forEach( function ( fileInput ) {
+		const fileNameEl = fileInput.parentElement ? fileInput.parentElement.querySelector( '[data-hds-file-name]' ) : null;
+		if ( ! fileNameEl ) {
+			return;
+		}
+
+		fileInput.addEventListener( 'change', function () {
+			const file = fileInput.files && fileInput.files[ 0 ];
+			fileNameEl.textContent = file ? file.name : '';
+		} );
+	} );
+
 }() );

@@ -77,6 +77,7 @@ class HDS_Config {
 				'vacancies_enabled'       => true,
 				'team_members'            => false,
 				'debug_toolbar'           => defined( 'WP_DEBUG' ) && WP_DEBUG,
+				'form_min_submit_seconds' => 3,
 			],
 			'theme' => [
 				'version'           => HDS_VERSION,

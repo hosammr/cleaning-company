@@ -17,16 +17,29 @@
 function hds_render_quote_form(): string {
 	$errors   = [];
 	$success  = false;
+	$data     = [];
 	$submitted = isset( $_POST['hds_quote_submit'] ) && wp_verify_nonce( $_POST['hds_quote_nonce'] ?? '', 'hds_quote_form' );
 
 	if ( $submitted ) {
-		$data   = hds_quote_sanitize_submission( $_POST );
-		$errors = hds_quote_validate_submission( $data, $_FILES );
+		$hds_ts = isset( $_POST['hds_form_ts'] ) ? (int) $_POST['hds_form_ts'] : 0;
 
-		if ( empty( $errors ) ) {
-			$attachment = hds_quote_handle_upload( $_FILES );
-			$sent       = hds_quote_send_notification( $data, $attachment );
-			$success    = true;
+		if ( ! empty( $_POST['hds_website'] ) || $hds_ts <= 0 || ( time() - $hds_ts ) < (int) HDS_Config::get( 'features.form_min_submit_seconds', 3 ) ) {
+			$errors['security'] = __( 'Uw aanvraag kon niet worden verzonden. Probeer het opnieuw of neem telefonisch contact met ons op.', 'hds' );
+		} else {
+			$data   = hds_quote_sanitize_submission( $_POST );
+			$errors = hds_quote_validate_submission( $data, $_FILES );
+
+			if ( empty( $errors ) ) {
+				$dup_key = 'hds_form_dup_' . md5( 'offerte|' . $data['hds_qf_email'] . '|' . $data['hds_qf_bedrijf'] . '|' . $data['hds_qf_message'] );
+
+				if ( ! get_transient( $dup_key ) ) {
+					set_transient( $dup_key, 1, 60 );
+					$attachment = hds_quote_handle_upload( $_FILES );
+					$sent       = hds_quote_send_notification( $data, $attachment );
+				}
+
+				$success = true;
+			}
 		}
 	}
 
@@ -34,37 +47,85 @@ function hds_render_quote_form(): string {
 
 	if ( $success ) :
 		?>
-		<div class="hds-notification hds-notification--success" role="status">
+		<div class="hds-notification hds-notification--success" role="status" tabindex="-1" id="hds-quote-form-success">
 			<span class="hds-notification__icon" aria-hidden="true">&#10003;</span>
 			<div class="hds-notification__message">
 				<p><strong><?php esc_html_e( 'Uw offerteaanvraag is verstuurd!', 'hds' ); ?></strong></p>
 				<p><?php esc_html_e( 'Wij nemen binnen één werkdag contact met u op. Heeft u dringend een offerte nodig? Bel ons dan op', 'hds' ); ?> <?php echo hds_get_phone_link(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 			</div>
 		</div>
+		<script>
+		( function () {
+			function hdsFocusQuoteSuccess() {
+				var el = document.getElementById( 'hds-quote-form-success' );
+				if ( el ) {
+					el.focus();
+				}
+			}
+			if ( document.readyState === 'complete' ) {
+				hdsFocusQuoteSuccess();
+			} else {
+				window.addEventListener( 'load', hdsFocusQuoteSuccess );
+			}
+		}() );
+		</script>
 		<?php
 		return ob_get_clean();
 	endif;
 
 	if ( ! empty( $errors ) ) :
 		?>
-		<div class="hds-notification hds-notification--error" role="alert">
+		<div class="hds-notification hds-notification--error" role="alert" tabindex="-1" id="hds-quote-form-errors">
 			<span class="hds-notification__icon" aria-hidden="true">&#10007;</span>
 			<div class="hds-notification__message">
 				<p><strong><?php esc_html_e( 'Niet alle velden zijn correct ingevuld.', 'hds' ); ?></strong></p>
 				<ul>
-					<?php foreach ( $errors as $error ) : ?>
-						<li><?php echo esc_html( $error ); ?></li>
+					<?php foreach ( $errors as $error_key => $error ) : ?>
+						<li id="hds-qf-error-<?php echo esc_attr( $error_key ); ?>"><?php echo esc_html( $error ); ?></li>
 					<?php endforeach; ?>
 				</ul>
 			</div>
 		</div>
+		<script>
+		( function () {
+			function hdsFocusQuoteErrors() {
+				var el = document.getElementById( 'hds-quote-form-errors' );
+				if ( el ) {
+					el.focus();
+				}
+			}
+			if ( document.readyState === 'complete' ) {
+				hdsFocusQuoteErrors();
+			} else {
+				window.addEventListener( 'load', hdsFocusQuoteErrors );
+			}
+		}() );
+		</script>
 		<?php
 	endif;
 
-	$values = $submitted ? $data : [];
+	$values = $submitted && isset( $data ) ? $data : [];
+
+	$hds_quote_error_attrs = static function ( string $key ) use ( $errors ): string {
+		return isset( $errors[ $key ] )
+			? ' aria-invalid="true" aria-describedby="hds-qf-inline-error-' . esc_attr( $key ) . ' hds-qf-error-' . esc_attr( $key ) . '"'
+			: '';
+	};
+
+	$hds_quote_inline_error = static function ( string $key ) use ( $errors ): string {
+		if ( ! isset( $errors[ $key ] ) ) {
+			return '';
+		}
+		return '<p class="hds-quote-form__error" id="hds-qf-inline-error-' . esc_attr( $key ) . '">' . esc_html( $errors[ $key ] ) . '</p>';
+	};
 	?>
 	<form method="post" action="#offerte-formulier" class="hds-quote-form" enctype="multipart/form-data" novalidate>
 		<?php wp_nonce_field( 'hds_quote_form', 'hds_quote_nonce' ); ?>
+		<div class="hds-honeypot" aria-hidden="true">
+			<label for="hds-qf-website"><?php esc_html_e( 'Website', 'hds' ); ?></label>
+			<input type="text" id="hds-qf-website" name="hds_website" tabindex="-1" autocomplete="off" value="">
+		</div>
+		<input type="hidden" name="hds_form_ts" value="<?php echo (int) time(); ?>">
 
 		<fieldset class="hds-quote-form__fieldset">
 			<legend class="hds-quote-form__legend"><?php esc_html_e( 'Uw gegevens', 'hds' ); ?></legend>
@@ -74,14 +135,16 @@ function hds_render_quote_form(): string {
 					<label for="hds-qf-bedrijf" class="hds-quote-form__label">
 						<?php esc_html_e( 'Bedrijfsnaam', 'hds' ); ?> <span class="hds-quote-form__required" aria-hidden="true">*</span>
 					</label>
-					<input type="text" id="hds-qf-bedrijf" name="hds_qf_bedrijf" class="hds-quote-form__input" value="<?php echo esc_attr( $values['hds_qf_bedrijf'] ?? '' ); ?>" required aria-required="true">
+					<input type="text" id="hds-qf-bedrijf" name="hds_qf_bedrijf" class="hds-quote-form__input" value="<?php echo esc_attr( $values['hds_qf_bedrijf'] ?? '' ); ?>" required aria-required="true"<?php echo $hds_quote_error_attrs( 'hds_qf_bedrijf' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+					<?php echo $hds_quote_inline_error( 'hds_qf_bedrijf' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 				</div>
 
 				<div class="hds-quote-form__field">
 					<label for="hds-qf-contact" class="hds-quote-form__label">
 						<?php esc_html_e( 'Contactpersoon', 'hds' ); ?> <span class="hds-quote-form__required" aria-hidden="true">*</span>
 					</label>
-					<input type="text" id="hds-qf-contact" name="hds_qf_contact" class="hds-quote-form__input" value="<?php echo esc_attr( $values['hds_qf_contact'] ?? '' ); ?>" required aria-required="true">
+					<input type="text" id="hds-qf-contact" name="hds_qf_contact" class="hds-quote-form__input" value="<?php echo esc_attr( $values['hds_qf_contact'] ?? '' ); ?>" required aria-required="true"<?php echo $hds_quote_error_attrs( 'hds_qf_contact' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+					<?php echo $hds_quote_inline_error( 'hds_qf_contact' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 				</div>
 			</div>
 
@@ -90,7 +153,8 @@ function hds_render_quote_form(): string {
 					<label for="hds-qf-email" class="hds-quote-form__label">
 						<?php esc_html_e( 'E-mailadres', 'hds' ); ?> <span class="hds-quote-form__required" aria-hidden="true">*</span>
 					</label>
-					<input type="email" id="hds-qf-email" name="hds_qf_email" class="hds-quote-form__input" value="<?php echo esc_attr( $values['hds_qf_email'] ?? '' ); ?>" required aria-required="true">
+					<input type="email" id="hds-qf-email" name="hds_qf_email" class="hds-quote-form__input" value="<?php echo esc_attr( $values['hds_qf_email'] ?? '' ); ?>" required aria-required="true"<?php echo $hds_quote_error_attrs( 'hds_qf_email' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+					<?php echo $hds_quote_inline_error( 'hds_qf_email' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 				</div>
 
 				<div class="hds-quote-form__field">
@@ -107,19 +171,21 @@ function hds_render_quote_form(): string {
 					<label for="hds-qf-postcode" class="hds-quote-form__label">
 						<?php esc_html_e( 'Postcode', 'hds' ); ?> <span class="hds-quote-form__required" aria-hidden="true">*</span>
 					</label>
-					<input type="text" id="hds-qf-postcode" name="hds_qf_postcode" class="hds-quote-form__input" value="<?php echo esc_attr( $values['hds_qf_postcode'] ?? '' ); ?>" maxlength="7" placeholder="1234 AB" required aria-required="true">
+					<input type="text" id="hds-qf-postcode" name="hds_qf_postcode" class="hds-quote-form__input" value="<?php echo esc_attr( $values['hds_qf_postcode'] ?? '' ); ?>" maxlength="7" placeholder="1234 AB" required aria-required="true"<?php echo $hds_quote_error_attrs( 'hds_qf_postcode' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+					<?php echo $hds_quote_inline_error( 'hds_qf_postcode' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 				</div>
 
 				<div class="hds-quote-form__field">
 					<label for="hds-qf-type" class="hds-quote-form__label">
 						<?php esc_html_e( 'Type bedrijfspand', 'hds' ); ?> <span class="hds-quote-form__required" aria-hidden="true">*</span>
 					</label>
-					<select id="hds-qf-type" name="hds_qf_type" class="hds-quote-form__select" required aria-required="true">
+					<select id="hds-qf-type" name="hds_qf_type" class="hds-quote-form__select" required aria-required="true"<?php echo $hds_quote_error_attrs( 'hds_qf_type' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 						<option value=""><?php esc_html_e( '— Maak een keuze —', 'hds' ); ?></option>
 						<?php foreach ( hds_quote_building_types() as $value => $label ) : ?>
 							<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $values['hds_qf_type'] ?? '', $value ); ?>><?php echo esc_html( $label ); ?></option>
 						<?php endforeach; ?>
 					</select>
+					<?php echo $hds_quote_inline_error( 'hds_qf_type' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 			</div>
 		</fieldset>
@@ -128,21 +194,24 @@ function hds_render_quote_form(): string {
 			<legend class="hds-quote-form__legend"><?php esc_html_e( 'Uw wensen', 'hds' ); ?></legend>
 
 			<div class="hds-quote-form__field">
-				<span class="hds-quote-form__label">
-					<?php esc_html_e( 'Gewenste diensten', 'hds' ); ?> <span class="hds-quote-form__required" aria-hidden="true">*</span>
-				</span>
-				<div class="hds-quote-form__checklist">
-					<?php
-					$selected_services = $values['hds_qf_services'] ?? [];
-					foreach ( hds_quote_services() as $value => $label ) :
-						$id = 'hds-qf-svc-' . sanitize_title( $value );
-						?>
-						<label for="<?php echo esc_attr( $id ); ?>" class="hds-quote-form__checkbox-label">
-							<input type="checkbox" id="<?php echo esc_attr( $id ); ?>" name="hds_qf_services[]" value="<?php echo esc_attr( $value ); ?>" class="hds-quote-form__checkbox" <?php checked( in_array( $value, $selected_services, true ) ); ?>>
-							<?php echo esc_html( $label ); ?>
-						</label>
-					<?php endforeach; ?>
-				</div>
+				<fieldset class="hds-quote-form__checkbox-group"<?php echo $hds_quote_error_attrs( 'hds_qf_services' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+					<legend class="hds-quote-form__label">
+						<?php esc_html_e( 'Gewenste diensten', 'hds' ); ?> <span class="hds-quote-form__required" aria-hidden="true">*</span>
+					</legend>
+					<div class="hds-quote-form__checklist">
+						<?php
+						$selected_services = $values['hds_qf_services'] ?? [];
+						foreach ( hds_quote_services() as $value => $label ) :
+							$id = 'hds-qf-svc-' . sanitize_title( $value );
+							?>
+							<label for="<?php echo esc_attr( $id ); ?>" class="hds-quote-form__checkbox-label">
+								<input type="checkbox" id="<?php echo esc_attr( $id ); ?>" name="hds_qf_services[]" value="<?php echo esc_attr( $value ); ?>" class="hds-quote-form__checkbox" <?php checked( in_array( $value, $selected_services, true ) ); ?>>
+								<?php echo esc_html( $label ); ?>
+							</label>
+						<?php endforeach; ?>
+					</div>
+					<?php echo $hds_quote_inline_error( 'hds_qf_services' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				</fieldset>
 			</div>
 
 			<div class="hds-quote-form__row">
@@ -150,19 +219,21 @@ function hds_render_quote_form(): string {
 					<label for="hds-qf-surface" class="hds-quote-form__label">
 						<?php esc_html_e( 'Oppervlakte (m²)', 'hds' ); ?> <span class="hds-quote-form__required" aria-hidden="true">*</span>
 					</label>
-					<input type="number" id="hds-qf-surface" name="hds_qf_surface" class="hds-quote-form__input" value="<?php echo esc_attr( $values['hds_qf_surface'] ?? '' ); ?>" min="1" step="1" required aria-required="true">
+					<input type="number" id="hds-qf-surface" name="hds_qf_surface" class="hds-quote-form__input" value="<?php echo esc_attr( $values['hds_qf_surface'] ?? '' ); ?>" min="1" step="1" required aria-required="true"<?php echo $hds_quote_error_attrs( 'hds_qf_surface' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+					<?php echo $hds_quote_inline_error( 'hds_qf_surface' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 
 				<div class="hds-quote-form__field">
 					<label for="hds-qf-frequency" class="hds-quote-form__label">
 						<?php esc_html_e( 'Frequentie', 'hds' ); ?> <span class="hds-quote-form__required" aria-hidden="true">*</span>
 					</label>
-					<select id="hds-qf-frequency" name="hds_qf_frequency" class="hds-quote-form__select" required aria-required="true">
+					<select id="hds-qf-frequency" name="hds_qf_frequency" class="hds-quote-form__select" required aria-required="true"<?php echo $hds_quote_error_attrs( 'hds_qf_frequency' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 						<option value=""><?php esc_html_e( '— Maak een keuze —', 'hds' ); ?></option>
 						<?php foreach ( hds_quote_frequencies() as $value => $label ) : ?>
 							<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $values['hds_qf_frequency'] ?? '', $value ); ?>><?php echo esc_html( $label ); ?></option>
 						<?php endforeach; ?>
 					</select>
+					<?php echo $hds_quote_inline_error( 'hds_qf_frequency' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 			</div>
 
@@ -174,12 +245,19 @@ function hds_render_quote_form(): string {
 					<input type="date" id="hds-qf-start" name="hds_qf_start" class="hds-quote-form__input" value="<?php echo esc_attr( $values['hds_qf_start'] ?? '' ); ?>">
 				</div>
 
-				<div class="hds-quote-form__field">
+<div class="hds-quote-form__field">
 					<label for="hds-qf-file" class="hds-quote-form__label">
 						<?php esc_html_e( 'Bestand bijvoegen', 'hds' ); ?>
 					</label>
-					<input type="file" id="hds-qf-file" name="hds_qf_file" class="hds-quote-form__file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
-					<p class="hds-quote-form__hint"><?php esc_html_e( 'Optioneel. Voeg een plattegrond, foto of situatieschets toe voor een nauwkeurigere offerte. Toegestaan: PDF, JPG, PNG, DOC (max. 5 MB).', 'hds' ); ?></p>
+					<div class="hds-quote-form__file-control">
+						<input type="file" id="hds-qf-file" name="hds_qf_file" class="hds-quote-form__file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" aria-describedby="hds-qf-file-hint<?php echo isset( $errors['hds_qf_file'] ) ? ' hds-qf-inline-error-hds_qf_file hds-qf-error-hds_qf_file' : ''; ?>"<?php echo isset( $errors['hds_qf_file'] ) ? ' aria-invalid="true"' : ''; ?>>
+						<label for="hds-qf-file" class="hds-quote-form__file-button">
+							<span class="hds-quote-form__file-button-text"><?php esc_html_e( 'Kies een bestand', 'hds' ); ?></span>
+							<span class="hds-quote-form__file-name" data-hds-file-name><?php esc_html_e( 'Geen bestand gekozen', 'hds' ); ?></span>
+						</label>
+						<p class="hds-quote-form__hint" id="hds-qf-file-hint"><?php esc_html_e( 'Optioneel. Voeg een plattegrond, foto of situatieschets toe voor een nauwkeurigere offerte. Toegestaan: PDF, JPG, JPEG, PNG, DOC, DOCX (max. 5 MB).', 'hds' ); ?></p>
+						<?php echo $hds_quote_inline_error( 'hds_qf_file' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					</div>
 				</div>
 			</div>
 
@@ -194,7 +272,7 @@ function hds_render_quote_form(): string {
 		<fieldset class="hds-quote-form__fieldset">
 			<div class="hds-quote-form__field">
 				<label for="hds-qf-privacy" class="hds-quote-form__checkbox-label hds-quote-form__checkbox-label--block">
-					<input type="checkbox" id="hds-qf-privacy" name="hds_qf_privacy" value="1" class="hds-quote-form__checkbox" required aria-required="true">
+					<input type="checkbox" id="hds-qf-privacy" name="hds_qf_privacy" value="1" class="hds-quote-form__checkbox" required aria-required="true"<?php echo $hds_quote_error_attrs( 'hds_qf_privacy' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 					<?php
 					printf(
 						/* translators: %s: URL to privacy policy page */
@@ -204,6 +282,7 @@ function hds_render_quote_form(): string {
 					?>
 					<span class="hds-quote-form__required" aria-hidden="true">*</span>
 				</label>
+				<?php echo $hds_quote_inline_error( 'hds_qf_privacy' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</div>
 		</fieldset>
 
@@ -266,43 +345,43 @@ function hds_quote_validate_submission( array $data, array $files ): array {
 
 	foreach ( $required as $key => $message ) {
 		if ( empty( $data[ $key ] ) && $data[ $key ] !== 0 ) {
-			$errors[] = $message;
+			$errors[ $key ] = $message;
 		}
 	}
 
 	if ( empty( $data['hds_qf_services'] ) ) {
-		$errors[] = __( 'Selecteer minimaal één gewenste dienst.', 'hds' );
+		$errors['hds_qf_services'] = __( 'Selecteer minimaal één gewenste dienst.', 'hds' );
 	}
 
 	if ( ! empty( $data['hds_qf_email'] ) && ! is_email( $data['hds_qf_email'] ) ) {
-		$errors[] = __( 'Vul een geldig e-mailadres in.', 'hds' );
+		$errors['hds_qf_email'] = __( 'Vul een geldig e-mailadres in.', 'hds' );
 	}
 
 	if ( ! empty( $data['hds_qf_postcode'] ) && ! hds_quote_validate_postcode( $data['hds_qf_postcode'] ) ) {
-		$errors[] = __( 'Vul een geldige Nederlandse postcode in (bijv. 1234 AB).', 'hds' );
+		$errors['hds_qf_postcode'] = __( 'Vul een geldige Nederlandse postcode in (bijv. 1234 AB).', 'hds' );
 	}
 
 	if ( ! empty( $data['hds_qf_type'] ) && ! array_key_exists( $data['hds_qf_type'], hds_quote_building_types() ) ) {
-		$errors[] = __( 'Selecteer een geldig type bedrijfspand.', 'hds' );
+		$errors['hds_qf_type'] = __( 'Selecteer een geldig type bedrijfspand.', 'hds' );
 	}
 
 	if ( ! empty( $data['hds_qf_frequency'] ) && ! array_key_exists( $data['hds_qf_frequency'], hds_quote_frequencies() ) ) {
-		$errors[] = __( 'Selecteer een geldige frequentie.', 'hds' );
+		$errors['hds_qf_frequency'] = __( 'Selecteer een geldige frequentie.', 'hds' );
 	}
 
 	if ( empty( $data['hds_qf_privacy'] ) ) {
-		$errors[] = __( 'U moet akkoord gaan met de privacyverklaring.', 'hds' );
+		$errors['hds_qf_privacy'] = __( 'U moet akkoord gaan met de privacyverklaring.', 'hds' );
 	}
 
 	if ( ! empty( $files['hds_qf_file']['name'] ) ) {
 		$max_size = 5 * 1024 * 1024; // 5 MB
 		if ( $files['hds_qf_file']['size'] > $max_size ) {
-			$errors[] = __( 'Het bestand is te groot. Maximum is 5 MB.', 'hds' );
+			$errors['hds_qf_file'] = __( 'Het bestand is te groot. Maximum is 5 MB.', 'hds' );
 		}
 		$allowed = [ 'pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx' ];
 		$ext     = strtolower( pathinfo( $files['hds_qf_file']['name'], PATHINFO_EXTENSION ) );
 		if ( ! in_array( $ext, $allowed, true ) ) {
-			$errors[] = __( 'Ongeldig bestandsformaat. Toegestaan: PDF, JPG, PNG, DOC.', 'hds' );
+			$errors['hds_qf_file'] = __( 'Ongeldig bestandsformaat. Toegestaan: PDF, JPG, JPEG, PNG, DOC, DOCX.', 'hds' );
 		}
 	}
 

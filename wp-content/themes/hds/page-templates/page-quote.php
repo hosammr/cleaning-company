@@ -3,7 +3,7 @@
  * Template Name: Offerte Aanvragen
  *
  * Quote request page with Gravity Forms integration.
- * Layout: Hero → Process → USP → Trust strip → Form → CTA.
+ * Layout: Hero → Trust strip → Form → Process → USP → CTA.
  * Form rendered via the_content() (Gravity Forms shortcode).
  * MPS-001 G1.2: 13 fields including multi-checkbox, file upload, postcode validation.
  *
@@ -35,7 +35,57 @@ get_header();
 	?>
 
 	<?php
-	// 2. Zo werkt het — compact three-step process.
+	// 2. Trust strip — compact reassurance row.
+	?>
+	<section class="quote-trust-strip" aria-label="<?php esc_attr_e( 'Waarom u gerust een offerte kunt aanvragen', 'hds' ); ?>">
+		<div class="container">
+			<ul class="quote-trust-strip__list">
+				<li class="quote-trust-strip__item">
+					<span class="quote-trust-strip__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 256 256" fill="none"><path d="M216 72l-104 104-72-72" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+					<span class="quote-trust-strip__label"><?php esc_html_e( 'Vrijblijvend', 'hds' ); ?></span>
+				</li>
+				<li class="quote-trust-strip__item">
+					<span class="quote-trust-strip__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 256 256" fill="none"><path d="M216 72l-104 104-72-72" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+					<span class="quote-trust-strip__label"><?php esc_html_e( 'Reactie binnen één werkdag', 'hds' ); ?></span>
+				</li>
+				<li class="quote-trust-strip__item">
+					<span class="quote-trust-strip__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 256 256" fill="none"><path d="M216 72l-104 104-72-72" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+					<span class="quote-trust-strip__label"><?php esc_html_e( 'Geen verplichtingen', 'hds' ); ?></span>
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<?php
+	// 3. Form section — Gravity Forms via the_content().
+	?>
+	<div class="container">
+		<div class="quote-page">
+			<?php
+			echo hds_section_header(
+				__( 'Offerte aanvragen', 'hds' ),
+				__( 'Vul onderstaand formulier in en wij nemen contact met u op.', 'hds' ),
+				'center'
+			); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			?>
+			<div class="quote-intro" id="offerte-formulier">
+				<?php
+				while ( have_posts() ) :
+					the_post();
+					$raw_content = get_the_content();
+					if ( hds_has_plugin_form( $raw_content ) ) :
+						the_content();
+					else :
+						echo hds_render_quote_form(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					endif;
+				endwhile;
+				?>
+			</div>
+		</div>
+	</div>
+
+	<?php
+	// 4. Zo werkt het — compact three-step process.
 	?>
 	<section class="quote-process-section" aria-labelledby="quote-process-heading">
 		<div class="container">
@@ -73,7 +123,7 @@ get_header();
 	</section>
 
 	<?php
-	// 3. Why request a quotation? — reuse hds_usp_card.
+	// 5. Why request a quotation? — reuse hds_usp_card.
 	?>
 	<section class="hds-usp-section" aria-labelledby="quote-usp-heading">
 		<div class="container">
@@ -101,56 +151,6 @@ get_header();
 			</div>
 		</div>
 	</section>
-
-	<?php
-	// 4. Trust strip — compact reassurance row.
-	?>
-	<section class="quote-trust-strip" aria-label="<?php esc_attr_e( 'Waarom u gerust een offerte kunt aanvragen', 'hds' ); ?>">
-		<div class="container">
-			<ul class="quote-trust-strip__list">
-				<li class="quote-trust-strip__item">
-					<span class="quote-trust-strip__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 256 256" fill="none"><path d="M216 72l-104 104-72-72" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-					<span class="quote-trust-strip__label"><?php esc_html_e( 'Vrijblijvend', 'hds' ); ?></span>
-				</li>
-				<li class="quote-trust-strip__item">
-					<span class="quote-trust-strip__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 256 256" fill="none"><path d="M216 72l-104 104-72-72" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-					<span class="quote-trust-strip__label"><?php esc_html_e( 'Reactie binnen één werkdag', 'hds' ); ?></span>
-				</li>
-				<li class="quote-trust-strip__item">
-					<span class="quote-trust-strip__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 256 256" fill="none"><path d="M216 72l-104 104-72-72" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-					<span class="quote-trust-strip__label"><?php esc_html_e( 'Geen verplichtingen', 'hds' ); ?></span>
-				</li>
-			</ul>
-		</div>
-	</section>
-
-	<?php
-	// 5. Form section — Gravity Forms via the_content().
-	?>
-	<div class="container">
-		<div class="quote-page">
-			<?php
-			echo hds_section_header(
-				__( 'Offerte aanvragen', 'hds' ),
-				__( 'Vul onderstaand formulier in en wij nemen contact met u op.', 'hds' ),
-				'center'
-			); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			?>
-			<div class="quote-intro" id="offerte-formulier">
-				<?php
-				while ( have_posts() ) :
-					the_post();
-					$raw_content = get_the_content();
-					if ( hds_has_plugin_form( $raw_content ) ) :
-						the_content();
-					else :
-						echo hds_render_quote_form(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					endif;
-				endwhile;
-				?>
-			</div>
-		</div>
-	</div>
 
 	<?php
 	// 6. Final CTA — direct phone contact.
