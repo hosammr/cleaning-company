@@ -4362,6 +4362,246 @@ body.admin-bar .site-header {
 	font-size: var(--wp--preset--font-size--s);
 }
 
+/* ── Over Hamdoun — Presentation ── */
+.page-slug-over-hds .service-hero {
+	min-height: 340px;
+	padding-block: clamp(3rem, 8vw, 5rem);
+}
+
+@media (min-width: 782px) {
+	.page-slug-over-hds .service-hero {
+		min-height: 400px;
+	}
+}
+
+.page-slug-over-hds .service-hero h1 {
+	font-size: clamp(2rem, 4.5vw, var(--wp--preset--font-size--5-xl));
+	letter-spacing: -0.02em;
+	margin-bottom: var(--wp--preset--spacing--5);
+	text-shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 2px 12px rgb(0 0 0 / 35%);
+}
+
+.page-slug-over-hds .service-hero .btn-cta {
+	background: var(--wp--preset--color--secondary);
+	color: var(--wp--preset--color--black);
+}
+
+.page-slug-over-hds .service-hero .btn-cta:hover,
+.page-slug-over-hds .service-hero .btn-cta:focus-visible {
+	background: #319a4d;
+	background: color-mix(in srgb, var(--wp--preset--color--secondary) 90%, var(--wp--preset--color--black));
+	color: var(--wp--preset--color--black);
+}
+
+.page-slug-over-hds .hds-about-intro {
+	padding-block: var(--wp--preset--spacing--8) var(--wp--preset--spacing--12);
+}
+
+.page-slug-over-hds .hds-about-intro__grid {
+	align-items: center;
+	display: grid;
+	gap: var(--wp--preset--spacing--8) var(--wp--preset--spacing--10);
+	grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
+}
+
+.page-slug-over-hds .hds-about-intro__text {
+	max-width: 720px;
+}
+
+.page-slug-over-hds .hds-about-intro__media {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--5);
+}
+
+.page-slug-over-hds .hds-about-intro__frame {
+	position: relative;
+	width: 274px;
+}
+
+.page-slug-over-hds .hds-about-intro__panel {
+	background: rgb(26 115 232 / 6%);
+	border: 1px solid rgb(26 115 232 / 12%);
+	border-radius: 16px;
+	inset: 16px -16px -16px;
+	position: absolute;
+}
+
+.page-slug-over-hds .hds-about-intro__video {
+	background: var(--wp--preset--color--light-gray);
+	border-radius: 16px;
+	box-shadow: var(--wp--preset--shadow--md);
+	display: block;
+	height: auto;
+	position: relative;
+	width: 100%;
+	z-index: 1;
+}
+
+.page-slug-over-hds .hds-about-intro__badge {
+	align-items: center;
+	background: var(--wp--preset--color--white);
+	border: 2px solid var(--wp--preset--color--primary);
+	border-radius: 50%;
+	bottom: 14px;
+	color: var(--wp--preset--color--primary);
+	display: flex;
+	height: 52px;
+	justify-content: center;
+	position: absolute;
+	right: -8px;
+	width: 52px;
+	z-index: 2;
+}
+
+.page-slug-over-hds .hds-about-intro__callout {
+	align-items: center;
+	color: var(--wp--preset--color--dark-gray);
+	display: flex;
+	font-size: var(--wp--preset--font-size--s);
+	font-weight: 600;
+	gap: var(--wp--preset--spacing--2);
+	justify-content: center;
+	margin: 0;
+}
+
+.page-slug-over-hds .hds-about-intro__callout-icon {
+	color: var(--wp--preset--color--primary);
+	display: inline-flex;
+	flex-shrink: 0;
+}
+
+.page-slug-over-hds .hds-about-highlights {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--wp--preset--spacing--3) var(--wp--preset--spacing--8);
+	justify-content: center;
+	list-style: none;
+	margin: var(--wp--preset--spacing--8) 0 0;
+	padding: 0;
+}
+
+.page-slug-over-hds .hds-about-highlights__item {
+	align-items: center;
+	display: flex;
+	gap: var(--wp--preset--spacing--2);
+}
+
+.page-slug-over-hds .hds-about-highlights__icon {
+	color: var(--wp--preset--color--primary);
+	display: inline-flex;
+	flex-shrink: 0;
+}
+
+.page-slug-over-hds .hds-about-highlights__label {
+	color: var(--wp--preset--color--dark-gray);
+	font-weight: 600;
+}
+
+@media (width < 1024px) {
+	.page-slug-over-hds .hds-about-intro__grid {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 300px);
+	}
+
+	.page-slug-over-hds .hds-about-intro__frame {
+		width: 260px;
+	}
+}
+
+@media (width <= 767px) {
+	.page-slug-over-hds .hds-about-intro__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.page-slug-over-hds .hds-about-intro__frame {
+		width: 250px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.page-slug-over-hds .hds-about-intro__grid {
+		align-items: flex-start;
+	}
+
+	.page-slug-over-hds .hds-about-intro__media {
+		padding-top: 105px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.page-slug-over-hds .hds-about-intro__frame {
+		display: none;
+	}
+
+	.page-slug-over-hds .hds-about-intro__media {
+		padding-top: 0;
+	}
+
+	.page-slug-over-hds .hds-about-intro__grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.page-slug-over-hds .hds-usp-section[aria-labelledby="about-values"] .hds-usp-card {
+	background: rgb(26 115 232 / 4%);
+	border: 1px solid rgb(26 115 232 / 12%);
+	box-shadow: var(--wp--preset--shadow--sm);
+	padding: var(--wp--preset--spacing--6);
+	text-align: center;
+}
+
+.page-slug-over-hds .hds-usp-section[aria-labelledby="about-values"] .hds-usp-card::before {
+	display: none;
+}
+
+.page-slug-over-hds .hds-usp-section[aria-labelledby="about-values"] .hds-usp-card__icon {
+	align-items: center;
+	background: rgb(26 115 232 / 8%);
+	border-radius: var(--hds-border-radius);
+	color: var(--wp--preset--color--primary);
+	display: inline-flex;
+	height: 56px;
+	justify-content: center;
+	margin-bottom: var(--wp--preset--spacing--4);
+	width: 56px;
+}
+
+.page-slug-over-hds .hds-why-points {
+	display: grid;
+	gap: var(--wp--preset--spacing--3);
+	list-style: none;
+	margin: 0 auto;
+	max-width: 680px;
+	padding: 0;
+}
+
+.page-slug-over-hds .hds-why-points__item {
+	align-items: center;
+	background: var(--wp--preset--color--light-gray);
+	border-radius: var(--hds-border-radius);
+	display: flex;
+	gap: var(--wp--preset--spacing--3);
+	padding: var(--wp--preset--spacing--4) var(--wp--preset--spacing--5);
+}
+
+.page-slug-over-hds .hds-why-points__icon {
+	align-items: center;
+	background: rgb(26 115 232 / 8%);
+	border-radius: 50%;
+	color: var(--wp--preset--color--primary);
+	display: inline-flex;
+	flex-shrink: 0;
+	height: 36px;
+	justify-content: center;
+	width: 36px;
+}
+
+.page-slug-over-hds .hds-why-points__item > span:last-child {
+	color: var(--wp--preset--color--dark-gray);
+	font-weight: 600;
+}
+
 /* ── About Page ── */
 .about-content {
 	margin-bottom: var(--wp--preset--spacing--8);

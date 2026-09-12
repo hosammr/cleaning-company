@@ -35,10 +35,10 @@ function hds_get_about_sections( string $slug ): array {
 				'heading'      => __( 'Onze kernwaarden', 'hds' ),
 				'content_type' => 'cards',
 				'items'        => [
-					[ 'title' => __( 'Betrouwbaarheid', 'hds' ), 'description' => __( 'Afspraak is afspraak. U kunt op ons rekenen, elke dag weer.', 'hds' ) ],
-					[ 'title' => __( 'Kwaliteit', 'hds' ), 'description' => __( 'Wij leveren consequent hoge kwaliteit met oog voor detail.', 'hds' ) ],
-					[ 'title' => __( 'Flexibiliteit', 'hds' ), 'description' => __( 'Wij stemmen onze werkzaamheden af op uw planning en bedrijfsprocessen.', 'hds' ) ],
-					[ 'title' => __( 'Duurzaamheid', 'hds' ), 'description' => __( 'Milieubewust werken met professionele producten en methoden.', 'hds' ) ],
+					[ 'title' => __( 'Betrouwbaarheid', 'hds' ), 'description' => __( 'Afspraak is afspraak. U kunt op ons rekenen, elke dag weer.', 'hds' ), 'icon' => 'shield' ],
+					[ 'title' => __( 'Kwaliteit', 'hds' ), 'description' => __( 'Wij leveren consequent hoge kwaliteit met oog voor detail.', 'hds' ), 'icon' => 'award' ],
+					[ 'title' => __( 'Flexibiliteit', 'hds' ), 'description' => __( 'Wij stemmen onze werkzaamheden af op uw planning en bedrijfsprocessen.', 'hds' ), 'icon' => 'refresh' ],
+					[ 'title' => __( 'Duurzaamheid', 'hds' ), 'description' => __( 'Milieubewust werken met professionele producten en methoden.', 'hds' ), 'icon' => 'leaf' ],
 				],
 			],
 			[
@@ -86,6 +86,7 @@ get_header();
 	<?php hds_breadcrumbs(); ?>
 
 	<?php
+	$slug           = get_post_field( 'post_name' );
 	$hero_title     = get_the_title();
 	$hero_subtitle  = get_post_meta( get_the_ID(), 'hds_subtitle', true );
 	$hero_image_id  = (int) get_post_meta( get_the_ID(), 'hds_hero_image', true );
@@ -102,6 +103,43 @@ get_header();
 	get_template_part( 'parts/hero' );
 	?>
 
+	<?php if ( 'over-hds' === $slug ) : ?>
+	<section class="hds-about-intro">
+		<div class="container">
+			<div class="hds-about-intro__grid">
+				<div class="hds-about-intro__text">
+					<?php
+					while ( have_posts() ) :
+						the_post();
+						the_content();
+					endwhile;
+					?>
+				</div>
+<div class="hds-about-intro__media">
+				<div class="hds-about-intro__frame" aria-hidden="true">
+					<span class="hds-about-intro__panel"></span>
+					<video class="hds-about-intro__video" src="<?php echo esc_url( get_template_directory_uri() . '/assets/videos/hamdoun-animation.mp4' ); ?>" muted loop autoplay playsinline preload="metadata" tabindex="-1"></video>
+					<span class="hds-about-intro__badge"><?php echo hds_svg_icon( 'shield', 24 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+				</div>
+				<p class="hds-about-intro__callout">
+					<span class="hds-about-intro__callout-icon" aria-hidden="true"><?php echo hds_svg_icon( 'check', 16 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+					<span><?php esc_html_e( 'Actief in de provincie Groningen', 'hds' ); ?></span>
+				</p>
+			</div>
+		</div>
+		<ul class="hds-about-highlights" aria-label="<?php esc_attr_e( 'Waar u op kunt rekenen', 'hds' ); ?>">
+			<li class="hds-about-highlights__item">
+				<span class="hds-about-highlights__icon" aria-hidden="true"><?php echo hds_svg_icon( 'check', 16 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+				<span class="hds-about-highlights__label"><?php esc_html_e( 'Vast opgeleid personeel', 'hds' ); ?></span>
+			</li>
+			<li class="hds-about-highlights__item">
+				<span class="hds-about-highlights__icon" aria-hidden="true"><?php echo hds_svg_icon( 'check', 16 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+				<span class="hds-about-highlights__label"><?php esc_html_e( 'Betrouwbaar en flexibel', 'hds' ); ?></span>
+			</li>
+		</ul>
+		</div>
+	</section>
+	<?php else : ?>
 	<div class="container">
 		<div class="about-content">
 			<?php
@@ -112,9 +150,9 @@ get_header();
 			?>
 		</div>
 	</div>
+	<?php endif; ?>
 
 	<?php
-	$slug     = get_post_field( 'post_name' );
 	$sections = hds_get_about_sections( $slug );
 
 	foreach ( $sections as $section ) :
@@ -125,7 +163,22 @@ get_header();
 				<header class="hds-usp-header">
 					<h2 id="<?php echo esc_attr( $section_id ); ?>"><?php echo esc_html( $section['heading'] ); ?></h2>
 				</header>
-				<?php if ( 'paragraphs' === $section['content_type'] ) : ?>
+				<?php if ( 'over-hds' === $slug && 'values' === $section['key'] ) : ?>
+					<div class="hds-usp-grid">
+						<?php foreach ( $section['items'] as $card ) : ?>
+							<?php echo hds_usp_card( $card['title'], $card['description'], hds_svg_icon( $card['icon'] ?? '', 22 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						<?php endforeach; ?>
+					</div>
+				<?php elseif ( 'over-hds' === $slug && 'why' === $section['key'] ) : ?>
+					<ul class="hds-why-points">
+						<?php foreach ( hds_get_why_hamdoun_strengths() as $point ) : ?>
+							<li class="hds-why-points__item">
+								<span class="hds-why-points__icon" aria-hidden="true"><?php echo hds_svg_icon( 'check', 20 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+								<span><?php echo esc_html( $point ); ?></span>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				<?php elseif ( 'paragraphs' === $section['content_type'] ) : ?>
 					<?php foreach ( $section['items'] as $paragraph ) : ?>
 						<p class="about-mission-text"><?php echo esc_html( $paragraph ); ?></p>
 					<?php endforeach; ?>
@@ -139,6 +192,15 @@ get_header();
 			</div>
 		</section>
 	<?php endforeach; ?>
+
+	<?php if ( 'over-hds' === $slug ) : ?>
+		<?php
+		echo hds_render_process_timeline( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			__( 'Onze werkwijze', 'hds' ),
+			hds_get_default_workflow()
+		);
+		?>
+	<?php endif; ?>
 
 	<?php
 	echo hds_cta_section(

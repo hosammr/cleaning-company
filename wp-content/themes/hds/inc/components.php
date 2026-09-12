@@ -170,7 +170,7 @@ function hds_card( string $content, string $class = '', bool $clickable = false 
  *
  * Feather-style stroke icons, consistent with the existing header/footer SVGs.
  *
- * @param string $name Icon name: phone, smartphone, mail, clock.
+ * @param string $name Icon name: phone, smartphone, mail, clock, check, shield, award, refresh, leaf.
  * @param int    $size Icon size in pixels.
  * @return string Inline SVG markup.
  */
@@ -180,6 +180,11 @@ function hds_svg_icon( string $name, int $size = 20 ): string {
 		'smartphone' => '<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>',
 		'mail'       => '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>',
 		'clock'      => '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+		'check'      => '<polyline points="20 6 9 17 4 12"/>',
+		'shield'     => '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+		'award'      => '<circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>',
+		'refresh'    => '<polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>',
+		'leaf'       => '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
 	];
 
 	if ( ! isset( $icons[ $name ] ) ) {
