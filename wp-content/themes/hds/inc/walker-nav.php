@@ -21,17 +21,32 @@ class HDS_Walker_Nav_Menu extends \Walker_Nav_Menu {
 	private array $submenu_labels = [];
 
 	/**
+	 * Parent item IDs per depth, used to generate sub-menu IDs.
+	 *
+	 * @var array<int,int>
+	 */
+	private array $submenu_parent_ids = [];
+
+	/**
 	 * Start level — wrap sub-menus with ARIA.
 	 */
 	public function start_lvl( &$output, $depth = 0, $args = null ): void {
 		$indent  = str_repeat( "\t", $depth );
 		$classes = [ 'sub-menu' ];
-		$class_names = implode( ' ', $classes );
 
 		$parent_title = $this->submenu_labels[ $depth ] ?? '';
-		$aria_label   = $parent_title ? trim( $parent_title ) . ' ' . __( 'submenu', 'hds' ) : __( 'submenu', 'hds' );
+		$parent_id    = $this->submenu_parent_ids[ $depth ] ?? 0;
 
-		$output .= "\n{$indent}<ul class=\"" . esc_attr( $class_names ) . "\" aria-label=\"" . esc_attr( $aria_label ) . "\">\n";
+		if ( $parent_title ) {
+			$classes[] = 'sub-menu--' . sanitize_title( $parent_title );
+		}
+
+		$class_names = implode( ' ', $classes );
+		$id_attr     = $parent_id ? ' id="sub-menu-' . esc_attr( $parent_id ) . '"' : '';
+
+		$aria_label = $parent_title ? trim( $parent_title ) . ' ' . __( 'submenu', 'hds' ) : __( 'submenu', 'hds' );
+
+		$output .= "\n{$indent}<ul{$id_attr} class=\"" . esc_attr( $class_names ) . "\" aria-label=\"" . esc_attr( $aria_label ) . "\">\n";
 	}
 
 	/**
@@ -69,6 +84,7 @@ class HDS_Walker_Nav_Menu extends \Walker_Nav_Menu {
 		if ( $args->walker->has_children ) {
 			$atts['aria-haspopup'] = 'true';
 			$atts['aria-expanded'] = 'false';
+			$atts['aria-controls'] = 'sub-menu-' . $data_object->ID;
 		}
 
 		$atts = apply_filters( 'nav_menu_link_attributes', $atts, $data_object, $args, $depth );
@@ -85,7 +101,8 @@ class HDS_Walker_Nav_Menu extends \Walker_Nav_Menu {
 		$title = apply_filters( 'nav_menu_item_title', $title, $data_object, $args, $depth );
 
 		if ( $args->walker->has_children ) {
-			$this->submenu_labels[ $depth ] = $title;
+			$this->submenu_labels[ $depth ]       = $title;
+			$this->submenu_parent_ids[ $depth ]   = $data_object->ID;
 		}
 
 		$item_output  = $args->before;

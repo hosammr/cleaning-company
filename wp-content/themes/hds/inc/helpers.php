@@ -22,6 +22,50 @@ function hds_get_phone_secondary(): string {
 }
 
 /**
+ * Get the company phone number in international format (+31 …) for tel: links.
+ *
+ * Converts a national Dutch number (e.g. "0622272811") to the E.164-style
+ * international form used in `tel:` links (e.g. "+31622272811").
+ *
+ * @param string $phone Optional number to convert; defaults to the header phone.
+ * @return string International phone number, or '' when empty.
+ */
+function hds_get_phone_intl( string $phone = '' ): string {
+	$phone = preg_replace( '/[^\d+]/', '', $phone ?: hds_get_phone() );
+
+	if ( '' === $phone ) {
+		return '';
+	}
+
+	if ( str_starts_with( $phone, '+' ) ) {
+		return $phone;
+	}
+
+	if ( str_starts_with( $phone, '0' ) ) {
+		return '+31' . substr( $phone, 1 );
+	}
+
+	return '+31' . $phone;
+}
+
+/**
+ * Get a human-readable phone number for display (e.g. "+31 6 2227 2811").
+ *
+ * @param string $phone Optional number to format; defaults to the header phone.
+ * @return string Formatted display phone number.
+ */
+function hds_get_phone_display( string $phone = '' ): string {
+	$digits = ltrim( preg_replace( '/[^\d]/', '', $phone ?: hds_get_phone_intl() ), '+' );
+
+	// Format Dutch numbers as "+31 6 2227 2811".
+	if ( str_starts_with( $digits, '31' ) && 11 === strlen( $digits ) ) {
+		return '+31 ' . $digits[2] . ' ' . implode( ' ', str_split( substr( $digits, 3 ), 4 ) );
+	}
+
+	return $phone ?: hds_get_phone();
+}
+
+/**
  * Get company email.
  */
 function hds_get_email(): string {
@@ -59,6 +103,49 @@ function hds_get_asset_version(): string {
 	return defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG
 		? (string) time()
 		: HDS_VERSION;
+}
+
+/**
+ * Get the attachment ID for an image by its filename.
+ *
+ * Matches the exact basename first (e.g. "hamdoun-veilig-werken.webp"),
+ * then falls back to the filename stem so renamed uploads (e.g.
+ * "hamdoun-veilig-werken-1.png") still resolve.
+ *
+ * @param string $filename Image filename, with or without a path.
+ * @return int Attachment ID, or 0 when no matching attachment exists.
+ */
+function hds_get_attachment_id_by_filename( string $filename ): int {
+	if ( '' === $filename ) {
+		return 0;
+	}
+
+	$basename = basename( $filename );
+	$stem     = pathinfo( $basename, PATHINFO_FILENAME );
+
+	$args = array(
+		'post_type'      => 'attachment',
+		'post_status'    => 'inherit',
+		'posts_per_page' => 1,
+		'fields'         => 'ids',
+		'no_found_rows'  => true,
+		'meta_key'       => '_wp_attached_file', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+		'meta_value'     => $basename,
+		'meta_compare'   => 'LIKE',
+	);
+
+	$query = new \WP_Query( $args );
+
+	if ( empty( $query->posts ) && '' !== $stem ) {
+		$args['meta_value'] = $stem;
+		$query              = new \WP_Query( $args );
+	}
+
+	if ( empty( $query->posts ) ) {
+		return 0;
+	}
+
+	return (int) $query->posts[0];
 }
 
 /**
