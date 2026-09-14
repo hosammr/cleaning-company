@@ -5260,10 +5260,117 @@ body.admin-bar .site-header {
 .legal-page {
 	max-width: 800px;
 	margin-inline: auto;
+	padding-top: var(--wp--preset--spacing--8);
+}
+
+.legal-page h1 {
+	color: var(--wp--preset--color--dark-gray);
+	font-size: var(--wp--preset--font-size--3-xl);
+	font-weight: 700;
+	line-height: 1.25;
+	margin: 0 0 var(--wp--preset--spacing--8);
 }
 
 .legal-content {
 	margin-bottom: var(--wp--preset--spacing--8);
+}
+
+.legal-content h2 {
+	color: var(--wp--preset--color--dark-gray);
+	font-size: var(--wp--preset--font-size--2-xl);
+	font-weight: 700;
+	line-height: 1.3;
+	margin: var(--wp--preset--spacing--10) 0 var(--wp--preset--spacing--4);
+}
+
+.legal-content h3 {
+	color: var(--wp--preset--color--dark-gray);
+	font-size: var(--wp--preset--font-size--l);
+	font-weight: 600;
+	line-height: 1.4;
+	margin: var(--wp--preset--spacing--8) 0 var(--wp--preset--spacing--3);
+}
+
+.legal-content h4 {
+	color: var(--wp--preset--color--dark-gray);
+	font-size: var(--wp--preset--font-size--m);
+	font-weight: 600;
+	margin: var(--wp--preset--spacing--6) 0 var(--wp--preset--spacing--2);
+}
+
+.legal-content p {
+	color: var(--wp--preset--color--dark-gray);
+	line-height: 1.7;
+	margin: 0 0 var(--wp--preset--spacing--4);
+}
+
+.legal-content ul,
+.legal-content ol {
+	margin: 0 0 var(--wp--preset--spacing--4);
+	padding-left: 1.375rem;
+}
+
+.legal-content li {
+	color: var(--wp--preset--color--dark-gray);
+	line-height: 1.7;
+	margin-bottom: var(--wp--preset--spacing--2);
+}
+
+.legal-content ul ul,
+.legal-content ol ol,
+.legal-content ul ol,
+.legal-content ol ul {
+	margin-bottom: 0;
+	margin-top: var(--wp--preset--spacing--2);
+}
+
+.legal-content a {
+	color: var(--wp--preset--color--primary);
+	text-decoration: underline;
+	text-decoration-color: rgb(26 115 232 / 40%);
+	text-underline-offset: 3px;
+}
+
+.legal-content a:hover {
+	color: var(--wp--preset--color--primary-dark);
+	text-decoration-color: currentcolor;
+}
+
+.legal-content blockquote {
+	border-left: 3px solid var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--dark-gray);
+	margin: var(--wp--preset--spacing--6) 0;
+	padding: var(--wp--preset--spacing--2) var(--wp--preset--spacing--5);
+}
+
+.legal-content blockquote p {
+	margin-bottom: 0;
+}
+
+.legal-content hr {
+	border: 0;
+	border-top: 1px solid var(--wp--preset--color--light-gray);
+	margin: var(--wp--preset--spacing--8) 0;
+}
+
+.legal-content table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.legal-content th,
+.legal-content td {
+	border: 1px solid var(--wp--preset--color--light-gray);
+	line-height: 1.5;
+	overflow-wrap: anywhere;
+	padding: var(--wp--preset--spacing--2) var(--wp--preset--spacing--3);
+	text-align: left;
+	vertical-align: top;
+}
+
+.legal-content th {
+	background: var(--wp--preset--color--light-gray);
+	font-weight: 600;
 }
 
 .legal-updated {

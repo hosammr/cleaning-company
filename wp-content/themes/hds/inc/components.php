@@ -270,6 +270,9 @@ function hds_cookie_banner(): string {
 				<a href="<?php echo esc_url( home_url( '/privacyverklaring/' ) ); ?>" class="hds-cookie-banner__link">
 					<?php esc_html_e( 'Privacyverklaring', 'hds' ); ?>
 				</a>
+				<a href="<?php echo esc_url( home_url( '/cookiebeleid/' ) ); ?>" class="hds-cookie-banner__link">
+					<?php esc_html_e( 'Cookiebeleid', 'hds' ); ?>
+				</a>
 			</div>
 		</div>
 	</div>
