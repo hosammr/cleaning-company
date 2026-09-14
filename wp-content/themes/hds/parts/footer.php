@@ -65,19 +65,8 @@
 					$contact_fixed  = hds_get_phone_secondary();
 					$contact_email  = hds_get_email();
 
-					$contact_format = static function ( string $raw ): string {
-						$digits = preg_replace( '/[^\d]/', '', $raw );
-						if ( 10 === strlen( $digits ) && str_starts_with( $digits, '06' ) ) {
-							return preg_replace( '/^(\d{2})(\d{4})(\d{4})$/', '$1 $2 $3', $digits );
-						}
-						if ( 10 === strlen( $digits ) ) {
-							return preg_replace( '/^(\d{3})(\d{3})(\d{4})$/', '$1 $2 $3', $digits );
-						}
-						return $raw;
-					};
-
-					$contact_mobile_display = $contact_format( $contact_mobile );
-					$contact_fixed_display  = $contact_format( $contact_fixed );
+					$contact_mobile_display = hds_format_phone( $contact_mobile );
+					$contact_fixed_display  = hds_format_phone( $contact_fixed );
 					?>
 					<div class="footer-contact__item footer-contact__item--mobile">
 						<a href="<?php echo esc_url( 'tel:' . hds_get_phone_intl( $contact_mobile ) ); ?>" class="footer-contact__link">

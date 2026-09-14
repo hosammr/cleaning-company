@@ -79,6 +79,16 @@ function hds_get_localbusiness_schema(): array {
 	$phone     = hds_get_phone();
 	$email     = hds_get_email();
 
+	$same_as = array_map(
+		'esc_url',
+		array_values( array_unique( array_filter( [
+			get_theme_mod( 'hds_facebook_url' ),
+			get_theme_mod( 'hds_instagram_url' ),
+			get_theme_mod( 'hds_tiktok_url' ),
+			get_theme_mod( 'hds_gbp_url' ),
+		] ) ) )
+	);
+
 	$schema = [
 		'@context'        => 'https://schema.org',
 		'@type'           => 'HomeAndConstructionBusiness',
@@ -86,11 +96,19 @@ function hds_get_localbusiness_schema(): array {
 		'name'            => get_bloginfo( 'name' ),
 		'description'     => get_bloginfo( 'description' ),
 		'url'             => home_url(),
-		'telephone'       => $phone,
+		'telephone'       => hds_get_phone_intl( $phone ),
 		'email'           => $email,
 		'priceRange'      => '€€',
 		'image'           => has_custom_logo() ? wp_get_attachment_image_url( get_theme_mod( 'custom_logo' ), 'full' ) : '',
-	];
+		'openingHours'    => [
+			'Mo-Fr 08:00-17:00',
+			'Sa 12:00-17:00',
+		],
+		'areaServed'      => [
+			'@type' => 'State',
+			'name'  => 'Groningen',
+		],
+	] + ( $same_as ? [ 'sameAs' => $same_as ] : [] );
 
 	if ( $address && $postal ) {
 		$parts = explode( ' ', $postal, 2 );

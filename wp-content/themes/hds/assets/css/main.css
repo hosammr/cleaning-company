@@ -1476,30 +1476,6 @@ body.admin-bar .site-header {
 	padding: var(--wp--preset--spacing--6);
 }
 
-.contact-info-item {
-	margin-bottom: var(--wp--preset--spacing--4);
-}
-
-.contact-info-item h3 {
-	font-size: var(--wp--preset--font-size--m);
-	margin-bottom: var(--wp--preset--spacing--1);
-}
-
-.contact-form-placeholder {
-	background: var(--wp--preset--color--light-gray);
-	border: 2px dashed var(--wp--preset--color--gray);
-	border-radius: var(--hds-border-radius);
-	min-height: 320px;
-	padding: var(--wp--preset--spacing--6);
-}
-
-.contact-form-placeholder__note {
-	color: var(--wp--preset--color--gray);
-	font-size: var(--wp--preset--font-size--s);
-	margin: 0;
-	text-align: center;
-}
-
 .contact-service-area-text {
 	color: var(--wp--preset--color--dark-gray);
 	font-size: var(--wp--preset--font-size--l);
@@ -2305,26 +2281,35 @@ body.admin-bar .site-header {
 }
 
 .page-template-page-contact .service-hero {
-	min-height: 340px;
-	padding-block: clamp(3rem, 8vw, 5rem);
+	min-height: 400px;
+	padding-block: clamp(4.5rem, 10vw, 7rem);
 }
 
 @media (min-width: 782px) {
 	.page-template-page-contact .service-hero {
-		min-height: 400px;
+		min-height: 460px;
 	}
 }
 
 .page-template-page-contact .service-hero h1 {
-	font-size: clamp(2rem, 4.5vw, var(--wp--preset--font-size--5-xl));
+	font-size: clamp(2.25rem, 5vw, var(--wp--preset--font-size--5-xl));
 	letter-spacing: -0.02em;
 	margin-bottom: var(--wp--preset--spacing--5);
+	margin-inline: auto;
+	max-width: 14ch;
 	text-shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 2px 12px rgb(0 0 0 / 35%);
+}
+
+.page-template-page-contact .service-hero .service-subtitle {
+	margin-inline: auto;
+	max-width: 56ch;
 }
 
 .page-template-page-contact .service-hero .btn-cta {
 	background: var(--wp--preset--color--secondary);
 	color: var(--wp--preset--color--black);
+	min-height: 52px;
+	padding-inline: 2rem;
 }
 
 .page-template-page-contact .service-hero .btn-cta:hover,
@@ -2335,7 +2320,8 @@ body.admin-bar .site-header {
 }
 
 .page-template-page-contact .hds-usp-section[aria-labelledby="contact-info-heading"] {
-	padding-bottom: var(--wp--preset--spacing--8);
+	background: var(--wp--preset--color--light-gray);
+	padding-block: var(--wp--preset--spacing--12);
 }
 
 .page-template-page-contact .hds-usp-section[aria-labelledby="contact-form-heading"] {
@@ -2366,18 +2352,24 @@ body.admin-bar .site-header {
 }
 
 .page-template-page-contact .hds-usp-section[aria-labelledby="contact-info-heading"] .hds-usp-card {
-	background: rgb(26 115 232 / 4%);
-	border: 1px solid rgb(26 115 232 / 12%);
+	background: var(--wp--preset--color--white);
+	border: 1px solid rgb(26 115 232 / 10%);
 	border-radius: var(--hds-border-radius);
 	box-shadow: var(--wp--preset--shadow--sm);
-	padding: var(--wp--preset--spacing--6);
+	padding: var(--wp--preset--spacing--8);
+	transition: box-shadow var(--hds-transition-base), transform var(--hds-transition-base);
+}
+
+.page-template-page-contact .hds-usp-section[aria-labelledby="contact-info-heading"] .hds-usp-card:hover {
+	box-shadow: var(--wp--preset--shadow--md);
+	transform: translateY(-2px);
 }
 
 .page-template-page-contact .hds-usp-section[aria-labelledby="contact-info-heading"] .hds-usp-card__title {
 	align-items: center;
 	display: flex;
 	gap: var(--wp--preset--spacing--3);
-	margin-bottom: var(--wp--preset--spacing--4);
+	margin-bottom: var(--wp--preset--spacing--6);
 }
 
 .page-template-page-contact .hds-usp-card__title .hds-icon {
@@ -2444,10 +2436,11 @@ body.admin-bar .site-header {
 	color: var(--wp--preset--color--primary);
 	display: flex;
 	flex: 1;
-	font-size: var(--wp--preset--font-size--l);
+	font-size: var(--wp--preset--font-size--xl);
 	font-weight: 600;
-	justify-content: center;
+	justify-content: flex-start;
 	line-height: 1.4;
+	margin-bottom: var(--wp--preset--spacing--2);
 	min-width: 0;
 	overflow-wrap: anywhere;
 	text-decoration: none;
@@ -2457,17 +2450,72 @@ body.admin-bar .site-header {
 	text-decoration: underline;
 }
 
+.page-template-page-contact .hds-contact-social__title {
+	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--xs);
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	margin: var(--wp--preset--spacing--6) 0 var(--wp--preset--spacing--4);
+	text-transform: uppercase;
+}
+
+.page-template-page-contact .hds-contact-social {
+	display: flex;
+	gap: var(--wp--preset--spacing--3);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.page-template-page-contact .hds-contact-social__link {
+	align-items: center;
+	background: var(--wp--preset--color--light-gray);
+	border-radius: 50%;
+	color: var(--wp--preset--color--primary-dark);
+	display: inline-flex;
+	height: 44px;
+	justify-content: center;
+	transition: background var(--hds-transition-speed) var(--hds-transition-easing), color var(--hds-transition-fast);
+	width: 44px;
+}
+
+.page-template-page-contact .hds-contact-social__link:hover {
+	color: var(--wp--preset--color--white);
+}
+
+.page-template-page-contact .hds-contact-social__link--facebook:hover {
+	background: #1877f2;
+}
+
+.page-template-page-contact .hds-contact-social__link--instagram:hover {
+	background: #e4405f;
+}
+
+.page-template-page-contact .hds-contact-social__link--tiktok:hover {
+	background: #fe2c55;
+}
+
 .page-template-page-contact .hds-contact-hours {
 	display: grid;
-	gap: var(--wp--preset--spacing--2);
+	grid-template-columns: repeat(3, minmax(0, 1fr));
 	margin: 0;
 }
 
 .page-template-page-contact .hds-contact-hours__row {
-	align-items: baseline;
+	align-items: flex-start;
 	display: flex;
-	gap: var(--wp--preset--spacing--4);
-	justify-content: space-between;
+	flex-direction: column;
+	gap: var(--wp--preset--spacing--1);
+	justify-content: flex-start;
+	padding: 0 var(--wp--preset--spacing--6);
+}
+
+.page-template-page-contact .hds-contact-hours__row:first-child {
+	padding-left: 0;
+}
+
+.page-template-page-contact .hds-contact-hours__row:not(:first-child) {
+	border-left: 1px solid var(--wp--preset--color--light-gray);
 }
 
 .page-template-page-contact .hds-contact-hours__row dt {
@@ -2477,12 +2525,37 @@ body.admin-bar .site-header {
 
 .page-template-page-contact .hds-contact-hours__row dd {
 	color: var(--wp--preset--color--dark-gray);
+	font-size: var(--wp--preset--font-size--l);
+	font-weight: 700;
 	margin: 0;
 	white-space: nowrap;
 }
 
 .page-template-page-contact .hds-contact-hours__row--closed dd {
 	color: var(--wp--preset--color--gray);
+}
+
+.page-template-page-contact .hds-contact-hours-panel {
+	background: var(--wp--preset--color--white);
+	border: 1px solid rgb(26 115 232 / 10%);
+	border-radius: var(--hds-border-radius);
+	box-shadow: var(--wp--preset--shadow--sm);
+	margin-top: var(--wp--preset--spacing--6);
+	padding: var(--wp--preset--spacing--8);
+}
+
+.page-template-page-contact .hds-contact-hours-panel__title {
+	align-items: center;
+	color: var(--wp--preset--color--dark-gray);
+	display: flex;
+	font-size: var(--wp--preset--font-size--l);
+	font-weight: 700;
+	gap: var(--wp--preset--spacing--3);
+	margin: 0 0 var(--wp--preset--spacing--6);
+}
+
+.page-template-page-contact .hds-contact-hours-panel__title .hds-icon {
+	color: var(--wp--preset--color--primary);
 }
 
 .page-template-page-contact .contact-info-block h3 {
@@ -2550,6 +2623,79 @@ body.admin-bar .site-header {
 @media (min-width: 900px) {
 	.page-template-page-contact .hds-usp-section[aria-labelledby="contact-info-heading"] .hds-usp-grid {
 		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+/* ── Contact Page — Design Batch 1 (page-scoped additions) ── */
+
+.page-template-page-contact .hds-usp-section[aria-labelledby="contact-service-area-heading"] {
+	background: var(--wp--preset--color--light-gray);
+	padding-block: var(--wp--preset--spacing--12);
+}
+
+.page-template-page-contact .about-content {
+	margin-inline: auto;
+	max-width: 720px;
+	padding-top: var(--wp--preset--spacing--12);
+	text-align: center;
+}
+
+.page-template-page-contact .about-content p {
+	color: var(--wp--preset--color--dark-gray);
+	font-size: var(--wp--preset--font-size--m);
+	line-height: 1.7;
+}
+
+.page-template-page-contact .hds-contact-form-intro {
+	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--m);
+	line-height: 1.6;
+	margin: calc(-1 * var(--wp--preset--spacing--3)) 0 var(--wp--preset--spacing--8);
+}
+
+.page-template-page-contact .hds-quote-form__input,
+.page-template-page-contact .hds-quote-form__textarea {
+	border-radius: 6px;
+	min-height: 50px;
+	padding: 12px 16px;
+}
+
+.page-template-page-contact .hds-quote-form__textarea {
+	min-height: 160px;
+}
+
+.page-template-page-contact .hds-quote-form__submit {
+	min-height: 52px;
+	padding-inline: 2.5rem;
+}
+
+.page-template-page-contact .contact-info-block {
+	border: 1px solid var(--wp--preset--color--light-gray);
+}
+
+.page-template-page-contact .contact-service-area-text {
+	max-width: 640px;
+}
+
+.page-template-page-contact .cta-banner {
+	padding-block: var(--wp--preset--spacing--12);
+}
+
+@media (width <= 600px) {
+	.page-template-page-contact .hds-contact-hours {
+		gap: var(--wp--preset--spacing--3);
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.page-template-page-contact .hds-contact-hours__row,
+	.page-template-page-contact .hds-contact-hours__row:first-child {
+		padding: 0 0 var(--wp--preset--spacing--3);
+	}
+
+	.page-template-page-contact .hds-contact-hours__row:not(:first-child) {
+		border-left: none;
+		border-top: 1px solid var(--wp--preset--color--light-gray);
+		padding-top: var(--wp--preset--spacing--3);
 	}
 }
 
@@ -3035,16 +3181,6 @@ body.admin-bar .site-header {
 
 .category-landing-content h2 {
 	overflow-wrap: break-word;
-}
-
-/* ── Contact Info Address ── */
-.contact-info-item address {
-	font-style: normal;
-	margin: 0;
-}
-
-.contact-info-item strong {
-	font-size: var(--wp--preset--font-size--s);
 }
 
 /* ── Front Page Hero ── */

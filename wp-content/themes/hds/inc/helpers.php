@@ -66,6 +66,26 @@ function hds_get_phone_display( string $phone = '' ): string {
 }
 
 /**
+ * Format a Dutch phone number for display (e.g. "06 2227 2811", "050 234 0009").
+ *
+ * @param string $raw Phone number in any national format.
+ * @return string Nationally formatted phone number, or the input when it cannot be formatted.
+ */
+function hds_format_phone( string $raw ): string {
+	$digits = preg_replace( '/[^\d]/', '', $raw );
+
+	if ( 10 === strlen( $digits ) && str_starts_with( $digits, '06' ) ) {
+		return preg_replace( '/^(\d{2})(\d{4})(\d{4})$/', '$1 $2 $3', $digits );
+	}
+
+	if ( 10 === strlen( $digits ) ) {
+		return preg_replace( '/^(\d{3})(\d{3})(\d{4})$/', '$1 $2 $3', $digits );
+	}
+
+	return $raw;
+}
+
+/**
  * Get company email.
  */
 function hds_get_email(): string {
@@ -166,14 +186,14 @@ function hds_get_service_pages( int $count = 99 ): array {
  * Get a formatted phone link.
  */
 function hds_get_phone_link( string $phone = '', array $attrs = [] ): string {
-	$phone   = $phone ?: hds_get_phone();
-	$url     = 'tel:' . hds_esc_tel( $phone );
-	$text    = esc_html( $phone );
-	$attr_str = 'aria-label="' . esc_attr( sprintf( __( 'Bel %s', 'hds' ), $phone ) ) . '"';
+	$phone    = $phone ?: hds_get_phone();
+	$display  = hds_format_phone( $phone );
+	$url      = 'tel:' . hds_get_phone_intl( $phone );
+	$attr_str = 'aria-label="' . esc_attr( sprintf( __( 'Bel %s', 'hds' ), $display ) ) . '"';
 	foreach ( $attrs as $key => $val ) {
 		$attr_str .= ' ' . esc_attr( $key ) . '="' . esc_attr( $val ) . '"';
 	}
-	return sprintf( '<a href="%s" %s>%s</a>', esc_url( $url ), $attr_str, $text );
+	return sprintf( '<a href="%s" %s>%s</a>', esc_url( $url ), $attr_str, esc_html( $display ) );
 }
 
 /**
