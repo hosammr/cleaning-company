@@ -18,9 +18,11 @@ function hds_render_quote_form(): string {
 	$errors   = [];
 	$success  = false;
 	$data     = [];
-	$submitted = isset( $_POST['hds_quote_submit'] ) && wp_verify_nonce( $_POST['hds_quote_nonce'] ?? '', 'hds_quote_form' );
+	$submitted = isset( $_POST['hds_quote_submit'] );
 
-	if ( $submitted ) {
+	if ( $submitted && ! wp_verify_nonce( $_POST['hds_quote_nonce'] ?? '', 'hds_quote_form' ) ) {
+		$errors['security'] = __( 'Uw aanvraag kon niet worden verzonden. Vernieuw de pagina en probeer het opnieuw.', 'hds' );
+	} elseif ( $submitted ) {
 		$hds_ts = isset( $_POST['hds_form_ts'] ) ? (int) $_POST['hds_form_ts'] : 0;
 
 		if ( ! empty( $_POST['hds_website'] ) || $hds_ts <= 0 || ( time() - $hds_ts ) < (int) HDS_Config::get( 'features.form_min_submit_seconds', 3 ) ) {
@@ -36,6 +38,10 @@ function hds_render_quote_form(): string {
 					set_transient( $dup_key, 1, 60 );
 					$attachment = hds_quote_handle_upload( $_FILES );
 					$sent       = hds_quote_send_notification( $data, $attachment );
+
+					if ( $sent && '' !== $attachment && file_exists( $attachment ) ) {
+						unlink( $attachment );
+					}
 				}
 
 				$success = true;
@@ -136,7 +142,7 @@ function hds_render_quote_form(): string {
 						<?php esc_html_e( 'Bedrijfsnaam', 'hds' ); ?> <span class="hds-quote-form__required" aria-hidden="true">*</span>
 					</label>
 					<input type="text" id="hds-qf-bedrijf" name="hds_qf_bedrijf" class="hds-quote-form__input" value="<?php echo esc_attr( $values['hds_qf_bedrijf'] ?? '' ); ?>" required aria-required="true"<?php echo $hds_quote_error_attrs( 'hds_qf_bedrijf' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-					<?php echo $hds_quote_inline_error( 'hds_qf_bedrijf' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+					<?php echo $hds_quote_inline_error( 'hds_qf_bedrijf' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 
 				<div class="hds-quote-form__field">
@@ -144,7 +150,7 @@ function hds_render_quote_form(): string {
 						<?php esc_html_e( 'Contactpersoon', 'hds' ); ?> <span class="hds-quote-form__required" aria-hidden="true">*</span>
 					</label>
 					<input type="text" id="hds-qf-contact" name="hds_qf_contact" class="hds-quote-form__input" value="<?php echo esc_attr( $values['hds_qf_contact'] ?? '' ); ?>" required aria-required="true"<?php echo $hds_quote_error_attrs( 'hds_qf_contact' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-					<?php echo $hds_quote_inline_error( 'hds_qf_contact' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+					<?php echo $hds_quote_inline_error( 'hds_qf_contact' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 			</div>
 
@@ -154,7 +160,7 @@ function hds_render_quote_form(): string {
 						<?php esc_html_e( 'E-mailadres', 'hds' ); ?> <span class="hds-quote-form__required" aria-hidden="true">*</span>
 					</label>
 					<input type="email" id="hds-qf-email" name="hds_qf_email" class="hds-quote-form__input" value="<?php echo esc_attr( $values['hds_qf_email'] ?? '' ); ?>" required aria-required="true"<?php echo $hds_quote_error_attrs( 'hds_qf_email' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-					<?php echo $hds_quote_inline_error( 'hds_qf_email' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+					<?php echo $hds_quote_inline_error( 'hds_qf_email' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 
 				<div class="hds-quote-form__field">
@@ -172,7 +178,7 @@ function hds_render_quote_form(): string {
 						<?php esc_html_e( 'Postcode', 'hds' ); ?> <span class="hds-quote-form__required" aria-hidden="true">*</span>
 					</label>
 					<input type="text" id="hds-qf-postcode" name="hds_qf_postcode" class="hds-quote-form__input" value="<?php echo esc_attr( $values['hds_qf_postcode'] ?? '' ); ?>" maxlength="7" placeholder="1234 AB" required aria-required="true"<?php echo $hds_quote_error_attrs( 'hds_qf_postcode' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-					<?php echo $hds_quote_inline_error( 'hds_qf_postcode' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+					<?php echo $hds_quote_inline_error( 'hds_qf_postcode' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 
 				<div class="hds-quote-form__field">
@@ -273,15 +279,14 @@ function hds_render_quote_form(): string {
 			<div class="hds-quote-form__field">
 				<label for="hds-qf-privacy" class="hds-quote-form__checkbox-label hds-quote-form__checkbox-label--block">
 					<input type="checkbox" id="hds-qf-privacy" name="hds_qf_privacy" value="1" class="hds-quote-form__checkbox" required aria-required="true"<?php echo $hds_quote_error_attrs( 'hds_qf_privacy' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-					<?php
-					printf(
-						/* translators: %s: URL to privacy policy page */
-						esc_html__( 'Ik ga akkoord met de %s.', 'hds' ),
-						'<a href="' . esc_url( home_url( '/privacyverklaring/' ) ) . '" target="_blank" rel="noopener">' . esc_html__( 'privacyverklaring', 'hds' ) . '</a>'
-					);
-					?>
+					<?php esc_html_e( 'Ik ga akkoord met de privacyverklaring', 'hds' ); ?>
 					<span class="hds-quote-form__required" aria-hidden="true">*</span>
 				</label>
+				<p class="hds-quote-form__hint" id="hds-qf-privacy-note">
+					<a href="<?php echo esc_url( home_url( '/privacyverklaring/' ) ); ?>" target="_blank" rel="noopener noreferrer">
+						<?php esc_html_e( 'Lees de privacyverklaring', 'hds' ); ?>
+					</a>
+				</p>
 				<?php echo $hds_quote_inline_error( 'hds_qf_privacy' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</div>
 		</fieldset>
@@ -314,7 +319,10 @@ function hds_quote_sanitize_submission( array $post ): array {
 		'hds_qf_phone'     => sanitize_text_field( wp_unslash( $post['hds_qf_phone'] ?? '' ) ),
 		'hds_qf_postcode'  => sanitize_text_field( wp_unslash( $post['hds_qf_postcode'] ?? '' ) ),
 		'hds_qf_type'      => sanitize_text_field( wp_unslash( $post['hds_qf_type'] ?? '' ) ),
-		'hds_qf_services'  => array_map( 'sanitize_text_field', wp_unslash( $post['hds_qf_services'] ?? [] ) ),
+		'hds_qf_services'  => array_values( array_intersect(
+			array_map( 'sanitize_text_field', wp_unslash( $post['hds_qf_services'] ?? [] ) ),
+			array_keys( hds_quote_services() )
+		) ),
 		'hds_qf_surface'   => absint( wp_unslash( $post['hds_qf_surface'] ?? 0 ) ),
 		'hds_qf_frequency' => sanitize_text_field( wp_unslash( $post['hds_qf_frequency'] ?? '' ) ),
 		'hds_qf_start'     => sanitize_text_field( wp_unslash( $post['hds_qf_start'] ?? '' ) ),
@@ -344,7 +352,7 @@ function hds_quote_validate_submission( array $data, array $files ): array {
 	];
 
 	foreach ( $required as $key => $message ) {
-		if ( empty( $data[ $key ] ) && $data[ $key ] !== 0 ) {
+		if ( empty( $data[ $key ] ) ) {
 			$errors[ $key ] = $message;
 		}
 	}
@@ -359,6 +367,17 @@ function hds_quote_validate_submission( array $data, array $files ): array {
 
 	if ( ! empty( $data['hds_qf_postcode'] ) && ! hds_quote_validate_postcode( $data['hds_qf_postcode'] ) ) {
 		$errors['hds_qf_postcode'] = __( 'Vul een geldige Nederlandse postcode in (bijv. 1234 AB).', 'hds' );
+	}
+
+	if ( ! empty( $data['hds_qf_surface'] ) && 1 > $data['hds_qf_surface'] ) {
+		$errors['hds_qf_surface'] = __( 'Vul een geldige oppervlakte in (minimaal 1 m²).', 'hds' );
+	}
+
+	if ( ! empty( $data['hds_qf_start'] ) ) {
+		$start_parts = array_map( 'intval', explode( '-', $data['hds_qf_start'] ) );
+		if ( 3 !== count( $start_parts ) || ! checkdate( $start_parts[1] ?? 0, $start_parts[2] ?? 0, $start_parts[0] ?? 0 ) ) {
+			$errors['hds_qf_start'] = __( 'Vul een geldige startdatum in.', 'hds' );
+		}
 	}
 
 	if ( ! empty( $data['hds_qf_type'] ) && ! array_key_exists( $data['hds_qf_type'], hds_quote_building_types() ) ) {

@@ -59,30 +59,32 @@ get_header();
 	<?php
 	// 3. Form section — Gravity Forms via the_content().
 	?>
-	<div class="container">
-		<div class="quote-page">
-			<?php
-			echo hds_section_header(
-				__( 'Offerte aanvragen', 'hds' ),
-				__( 'Vul onderstaand formulier in en wij nemen contact met u op.', 'hds' ),
-				'center'
-			); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			?>
-			<div class="quote-intro" id="offerte-formulier">
+	<section class="quote-form-section">
+		<div class="container">
+			<div class="quote-page">
 				<?php
-				while ( have_posts() ) :
-					the_post();
-					$raw_content = get_the_content();
-					if ( hds_has_plugin_form( $raw_content ) ) :
-						the_content();
-					else :
-						echo hds_render_quote_form(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					endif;
-				endwhile;
+				echo hds_section_header(
+					__( 'Offerte aanvragen', 'hds' ),
+					__( 'Vul onderstaand formulier in en wij nemen contact met u op.', 'hds' ),
+					'center'
+				); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				?>
+				<div class="quote-intro" id="offerte-formulier">
+					<?php
+					while ( have_posts() ) :
+						the_post();
+						$raw_content = get_the_content();
+						if ( hds_has_plugin_form( $raw_content ) ) :
+							the_content();
+						else :
+							echo hds_render_quote_form(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						endif;
+					endwhile;
+					?>
+				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 
 	<?php
 	// 4. Zo werkt het — compact three-step process.
@@ -166,8 +168,8 @@ get_header();
 					<span class="quote-contact-cta__icon" aria-hidden="true">
 						<svg width="28" height="28" viewBox="0 0 256 256" fill="none"><path d="M224 152v32a16 16 0 0 1-17.6 16C123.8 197.3 58.7 132.2 56 49.6A16 16 0 0 1 72 32h32a16 16 0 0 1 16 13.6c1.4 11.6 4.2 22.8 8.4 33.4a16 16 0 0 1-3.6 16.9l-11.2 11.2a112.6 112.6 0 0 0 54.1 54.1l11.2-11.2a16 16 0 0 1 16.9-3.6c10.6 4.2 21.8 7 33.4 8.4A16 16 0 0 1 224 152Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>
 					</span>
-					<a class="quote-contact-cta__phone" href="tel:<?php echo esc_attr( hds_esc_tel( hds_get_phone() ) ); ?>"><?php echo esc_html( hds_get_phone() ); ?></a>
-					<a class="btn btn-cta" href="tel:<?php echo esc_attr( hds_esc_tel( hds_get_phone() ) ); ?>"><?php esc_html_e( 'Bel ons direct', 'hds' ); ?></a>
+					<a class="quote-contact-cta__phone" href="<?php echo esc_url( 'tel:' . hds_get_phone_intl( hds_get_phone() ) ); ?>"><?php echo esc_html( hds_format_phone( hds_get_phone() ) ); ?></a>
+					<a class="btn btn-cta" href="<?php echo esc_url( 'tel:' . hds_get_phone_intl( hds_get_phone() ) ); ?>"><?php esc_html_e( 'Bel ons direct', 'hds' ); ?></a>
 					<p class="quote-contact-cta__email">
 						<?php esc_html_e( 'Of stuur een e-mail naar', 'hds' ); ?>
 						<?php echo hds_get_email_link(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>

@@ -2046,6 +2046,8 @@ body.admin-bar .site-header {
 .page-template-page-quote .service-hero .btn-cta {
 	background: var(--wp--preset--color--secondary);
 	color: var(--wp--preset--color--black);
+	min-height: 52px;
+	padding-inline: 2rem;
 }
 
 .page-template-page-quote .service-hero .btn-cta:hover,
@@ -2191,8 +2193,11 @@ body.admin-bar .site-header {
 
 /* ── Quote USP Cards ── */
 .page-template-page-quote .hds-usp-card {
+	background: var(--wp--preset--color--white);
 	border: 1px solid var(--wp--preset--color--light-gray);
+	border-radius: var(--hds-border-radius);
 	box-shadow: var(--wp--preset--shadow--sm);
+	padding: var(--wp--preset--spacing--6);
 	transition: transform var(--hds-transition-speed) var(--hds-transition-easing),
 		box-shadow var(--hds-transition-speed) var(--hds-transition-easing);
 }
@@ -2252,13 +2257,16 @@ body.admin-bar .site-header {
 	background: var(--wp--preset--color--white);
 	border: 1px solid var(--wp--preset--color--light-gray);
 	border-radius: var(--hds-border-radius);
-	box-shadow: var(--wp--preset--shadow--lg);
+	box-shadow: var(--wp--preset--shadow--sm);
 	padding: var(--wp--preset--spacing--6);
 }
 
-.page-template-page-quote .hds-quote-form__fieldset + .hds-quote-form__fieldset {
-	border-top: 1px solid var(--wp--preset--color--light-gray);
-	padding-top: var(--wp--preset--spacing--6);
+@media (min-width: 600px) {
+	.page-template-page-quote .quote-intro form,
+	.page-template-page-quote .quote-intro .gform_wrapper,
+	.page-template-page-quote .quote-intro .wpcf7-form {
+		padding: var(--wp--preset--spacing--8);
+	}
 }
 
 .page-template-page-contact .hds-quote-form {
@@ -2267,11 +2275,6 @@ body.admin-bar .site-header {
 	border-radius: var(--hds-border-radius);
 	box-shadow: var(--wp--preset--shadow--lg);
 	padding: var(--wp--preset--spacing--6);
-}
-
-.page-template-page-contact .hds-quote-form__fieldset + .hds-quote-form__fieldset {
-	border-top: 1px solid var(--wp--preset--color--light-gray);
-	padding-top: var(--wp--preset--spacing--8);
 }
 
 /* ── Contact Page — Presentation ── */
@@ -2653,22 +2656,6 @@ body.admin-bar .site-header {
 	margin: calc(-1 * var(--wp--preset--spacing--3)) 0 var(--wp--preset--spacing--8);
 }
 
-.page-template-page-contact .hds-quote-form__input,
-.page-template-page-contact .hds-quote-form__textarea {
-	border-radius: 6px;
-	min-height: 50px;
-	padding: 12px 16px;
-}
-
-.page-template-page-contact .hds-quote-form__textarea {
-	min-height: 160px;
-}
-
-.page-template-page-contact .hds-quote-form__submit {
-	min-height: 52px;
-	padding-inline: 2.5rem;
-}
-
 .page-template-page-contact .contact-info-block {
 	border: 1px solid var(--wp--preset--color--light-gray);
 }
@@ -2766,6 +2753,12 @@ body.admin-bar .site-header {
 	color: var(--wp--preset--color--white);
 }
 
+@media (width >= 782px) and (width < 1200px) {
+	.page-template-page-quote .quote-contact-cta__grid {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
+	}
+}
+
 /* ── Quote Page — Micro-interactions ── */
 @media (hover: hover) and (pointer: fine) {
 	.page-template-page-quote .quote-process__step:hover,
@@ -2822,6 +2815,40 @@ body.admin-bar .site-header {
 	}
 }
 
+/* ── Quote Page — Design Batch 1 ── */
+
+.page-template-page-quote .service-hero .service-subtitle {
+	margin-inline: auto;
+	max-width: 56ch;
+}
+
+.page-template-page-quote .quote-form-section {
+	background: var(--wp--preset--color--light-gray);
+	padding-block: var(--wp--preset--spacing--12);
+}
+
+.page-template-page-quote .quote-form-section .section-header__subtitle {
+	margin-inline: auto;
+	max-width: 560px;
+}
+
+.page-template-page-quote .hds-usp-section[aria-labelledby="quote-usp-heading"] {
+	background: var(--wp--preset--color--light-gray);
+	padding-block: var(--wp--preset--spacing--12);
+}
+
+.page-template-page-quote .quote-contact-cta .btn-cta {
+	background: transparent;
+	border: 2px solid rgb(255 255 255 / 70%);
+	color: var(--wp--preset--color--white);
+}
+
+.page-template-page-quote .quote-contact-cta .btn-cta:hover,
+.page-template-page-quote .quote-contact-cta .btn-cta:focus-visible {
+	background: rgb(255 255 255 / 12%);
+	color: var(--wp--preset--color--white);
+}
+
 /* ── Quote Form ── */
 .hds-quote-form {
 	text-align: left;
@@ -2840,6 +2867,11 @@ body.admin-bar .site-header {
 	margin: 0 0 var(--wp--preset--spacing--6);
 	min-width: 0;
 	padding: 0;
+}
+
+.hds-quote-form__fieldset + .hds-quote-form__fieldset {
+	border-top: 1px solid var(--wp--preset--color--light-gray);
+	padding-top: var(--wp--preset--spacing--8);
 }
 
 .hds-quote-form__legend {
@@ -2882,11 +2914,11 @@ body.admin-bar .site-header {
 .hds-quote-form__select,
 .hds-quote-form__textarea {
 	border: 1px solid var(--wp--preset--color--gray);
-	border-radius: 4px;
+	border-radius: 6px;
 	font-family: inherit;
 	font-size: var(--wp--preset--font-size--m);
-	min-height: 44px;
-	padding: var(--wp--preset--spacing--2) var(--wp--preset--spacing--3);
+	min-height: 50px;
+	padding: 12px 16px;
 	width: 100%;
 }
 
@@ -2910,7 +2942,7 @@ body.admin-bar .site-header {
 }
 
 .hds-quote-form__textarea {
-	min-height: 100px;
+	min-height: 160px;
 	resize: vertical;
 }
 
@@ -3092,7 +3124,8 @@ body.admin-bar .site-header {
 	align-items: center;
 	gap: var(--wp--preset--spacing--3);
 	font-size: var(--wp--preset--font-size--l);
-	padding: 1rem 3rem;
+	min-height: 52px;
+	padding: 1rem 2.5rem;
 }
 
 .hds-quote-form__submit:hover .hds-quote-form__submit-arrow {
