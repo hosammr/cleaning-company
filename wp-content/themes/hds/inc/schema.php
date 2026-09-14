@@ -44,6 +44,7 @@ function hds_get_organization_schema(): array {
 	$same_as = [];
 	$facebook  = get_theme_mod( 'hds_facebook_url' );
 	$instagram = get_theme_mod( 'hds_instagram_url' );
+	$tiktok    = get_theme_mod( 'hds_tiktok_url' );
 	$gbp       = get_theme_mod( 'hds_gbp_url' );
 
 	if ( $facebook ) {
@@ -51,6 +52,9 @@ function hds_get_organization_schema(): array {
 	}
 	if ( $instagram ) {
 		$same_as[] = esc_url( $instagram );
+	}
+	if ( $tiktok ) {
+		$same_as[] = esc_url( $tiktok );
 	}
 	if ( $gbp ) {
 		$same_as[] = esc_url( $gbp );

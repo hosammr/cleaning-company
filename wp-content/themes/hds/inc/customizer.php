@@ -25,6 +25,7 @@ function hds_customizer_register( $wp_customize ): void {
 		'hds_btw'           => __( 'BTW-nummer', 'hds' ),
 		'hds_facebook_url'  => __( 'Facebook URL', 'hds' ),
 		'hds_instagram_url' => __( 'Instagram URL', 'hds' ),
+		'hds_tiktok_url'    => __( 'TikTok URL', 'hds' ),
 		'hds_gbp_url'       => __( 'Google Business Profile URL', 'hds' ),
 	];
 
