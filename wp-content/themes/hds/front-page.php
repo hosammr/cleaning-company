@@ -7,10 +7,13 @@
  *   2. Trust strip (server-rendered)
  *   3. Service card grid (server-rendered, conditional)
  *   4. Why Hamdoun Schoonmaak (server-rendered)
- *   5. Quality / trust section (server-rendered)
- *   6. Testimonials (conditional — hidden without real data)
- *   7. Offerte CTA banner
- *   8. Latest Blog Posts (conditional)
+ *   5. Branding video (server-rendered)
+ *   6. Quality / safety section (server-rendered)
+ *   7. Service image gallery (server-rendered, conditional)
+ *   8. Client logo strip (server-rendered)
+ *   9. Testimonials (conditional — hidden without real data)
+ *  10. Offerte CTA banner
+ *  11. Latest Blog Posts (conditional)
  *
  * ADR D-015: Conditional sections are hidden when they have no data.
  *
@@ -62,14 +65,15 @@ get_header();
 		);
 	}
 
-	// HAMDOUN branding video — placed directly after the services grid.
-	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Section HTML is composed from escaped fragments.
-	echo hds_render_branding_video_section();
-
 	// Why Hamdoun Schoonmaak — two-column section.
 	echo hds_render_why_section(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
-	// Quality / trust section.
+	// HAMDOUN branding video — company story after the customer-facing
+	// reasons, before the quality & safety section.
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Section HTML is composed from escaped fragments.
+	echo hds_render_branding_video_section();
+
+	// Quality / safety section.
 	echo hds_render_quality_section(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 	// Service image slider.

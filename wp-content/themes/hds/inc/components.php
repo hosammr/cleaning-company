@@ -460,10 +460,10 @@ function hds_render_trust_strip(): string {
  */
 function hds_render_why_section(): string {
 	$benefits = array(
-		__( 'Vast opgeleid personeel', 'hds' ),
-		__( 'Eén vast aanspreekpunt', 'hds' ),
-		__( 'Flexibele dienstverlening', 'hds' ),
-		__( 'Professionele werkwijze', 'hds' ),
+		__( 'Vakbekwaam en ervaren team', 'hds' ),
+		__( 'Persoonlijk contact en korte lijnen', 'hds' ),
+		__( 'Flexibele inzet voor uw situatie', 'hds' ),
+		__( 'Professionele en verzorgde uitvoering', 'hds' ),
 		__( 'Duurzame dienstverlening', 'hds' ),
 	);
 
@@ -520,24 +520,24 @@ function hds_render_why_section(): string {
 function hds_render_quality_section(): string {
 	$blocks = array(
 		array(
-			'icon'  => '<svg width="32" height="32" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M216 112c0 48-32 88-88 104-56-16-88-56-88-104V64l88-32 88 32Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M160 112l-32 32-24-24" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-			'title' => __( 'Professionele aanpak', 'hds' ),
-			'desc'  => __( 'Professionele schoonmaakdiensten voor bedrijven en organisaties.', 'hds' ),
+			'icon'  => '<svg width="32" height="32" viewBox="0 0 256 256" fill="none" aria-hidden="true"><circle cx="128" cy="128" r="96" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><polyline points="88 128 116 156 168 104" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+			'title' => __( 'Kwaliteit en controle', 'hds' ),
+			'desc'  => __( 'Wij controleren onze werkzaamheden en leveren werk van een constant niveau.', 'hds' ),
+		),
+		array(
+			'icon'  => '<svg width="32" height="32" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M216 112c0 48-32 88-88 104-56-16-88-56-88-104V64l88-32 88 32Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+			'title' => __( 'Veilig werken', 'hds' ),
+			'desc'  => __( 'Wij werken veilig en volgens de geldende veiligheidsnormen.', 'hds' ),
 		),
 		array(
 			'icon'  => '<svg width="32" height="32" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M128 128a40 40 0 1 0 0-80 40 40 0 0 0 0 80ZM60 216c8-32 36-52 68-52s60 20 68 52" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-			'title' => __( 'Eén vast aanspreekpunt', 'hds' ),
-			'desc'  => __( 'U heeft altijd één vast aanspreekpunt voor al uw vragen.', 'hds' ),
+			'title' => __( 'Vakbekwaam en opgeleid', 'hds' ),
+			'desc'  => __( 'Ons team wordt opgeleid en bijgeschoold om vakbekwaam te blijven.', 'hds' ),
 		),
 		array(
-			'icon'  => '<svg width="32" height="32" viewBox="0 0 256 256" fill="none" aria-hidden="true"><rect x="40" y="56" width="176" height="160" rx="16" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 104h176M96 48v32M160 48v32" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-			'title' => __( 'Flexibele dienstverlening', 'hds' ),
-			'desc'  => __( 'Werkzaamheden afgestemd op uw openingstijden en bedrijfsprocessen.', 'hds' ),
-		),
-		array(
-			'icon'  => '<svg width="32" height="32" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M128 48a48 48 0 0 0-48 48c0 36 48 96 48 96s48-60 48-96a48 48 0 0 0-48-48Zm0 72a24 24 0 1 0 0-48 24 24 0 0 0 0 48Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-			'title' => __( 'Actief in de provincie Groningen', 'hds' ),
-			'desc'  => __( 'Bedrijven in de provincie Groningen kiezen ons als vaste schoonmaakpartner.', 'hds' ),
+			'icon'  => '<svg width="32" height="32" viewBox="0 0 256 256" fill="none" aria-hidden="true"><rect x="40" y="48" width="176" height="160" rx="16" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><polyline points="72 104 88 120 120 88" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><line x1="144" y1="104" x2="192" y2="104" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><line x1="144" y1="136" x2="192" y2="136" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><line x1="144" y1="168" x2="192" y2="168" stroke="currentColor" stroke-width="12" stroke-linecap="round"/></svg>',
+			'title' => __( 'Duidelijke werkwijze', 'hds' ),
+			'desc'  => __( 'U weet precies wat u van ons kunt verwachten; wij leggen afspraken helder vast.', 'hds' ),
 		),
 	);
 
@@ -547,7 +547,7 @@ function hds_render_quality_section(): string {
 		<div class="container">
 			<div class="section-header section-header--center hds-quality-header">
 				<h2 class="section-header__heading"><?php esc_html_e( 'Kwaliteit die u kunt vertrouwen', 'hds' ); ?></h2>
-				<p class="section-header__subtitle"><?php esc_html_e( 'Wij werken volgens de hoogste veiligheidsnormen, met vast opgeleid personeel.', 'hds' ); ?></p>
+				<p class="section-header__subtitle"><?php esc_html_e( 'Kwaliteit en veiligheid staan centraal in onze werkwijze. Ons team is vakbekwaam en opgeleid en werkt volgens een duidelijke aanpak.', 'hds' ); ?></p>
 			</div>
 			<div class="hds-quality-grid">
 				<?php foreach ( $blocks as $block ) : ?>
@@ -558,6 +558,12 @@ function hds_render_quality_section(): string {
 					</article>
 				<?php endforeach; ?>
 			</div>
+			<p class="hds-quality-cta">
+				<a class="btn btn--white" href="<?php echo esc_url( home_url( '/kwaliteit-en-veiligheid/' ) ); ?>">
+					<?php esc_html_e( 'Meer over kwaliteit & veiligheid', 'hds' ); ?>
+					<span aria-hidden="true">&rarr;</span>
+				</a>
+			</p>
 		</div>
 	</section>
 	<?php

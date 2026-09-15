@@ -1744,6 +1744,12 @@ body.admin-bar .site-header {
 	color: #123b5d;
 }
 
+/* Homepage service grid: neutral band so the cyan cards read as
+   navigation against the white Why section below it. */
+.service-card-grid-section#onze-diensten {
+	background: var(--wp--preset--color--light-gray);
+}
+
 /* ── Service Card Grid Section ── */
 .service-card-grid-section {
 	background: var(--wp--preset--color--white);
@@ -3719,7 +3725,7 @@ body.admin-bar .site-header {
 
 /* ── Homepage: Why Section ── */
 .hds-why-section {
-	background: rgb(18 59 93 / 3%);
+	background: var(--wp--preset--color--white);
 	padding-block: var(--wp--preset--spacing--16);
 }
 
@@ -3806,7 +3812,7 @@ body.admin-bar .site-header {
 
 /* ── Homepage: HAMDOUN Branding Video ── */
 .hds-branding-video {
-	background: var(--wp--preset--color--white);
+	background: rgb(18 59 93 / 4%);
 	padding-block: var(--wp--preset--spacing--16);
 }
 
@@ -3933,6 +3939,11 @@ body.admin-bar .site-header {
 	font-size: var(--wp--preset--font-size--s);
 	line-height: 1.6;
 	margin: 0;
+}
+
+.hds-quality-cta {
+	margin-top: var(--wp--preset--spacing--10);
+	text-align: center;
 }
 
 /* ── Homepage: Service Slider ── */
