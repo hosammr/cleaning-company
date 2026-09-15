@@ -133,11 +133,23 @@ function hds_get_service_schema( int $post_id ): array {
 		return [];
 	}
 
+	$description = wp_trim_words( wp_strip_all_tags( get_the_excerpt( $post ) ?: $post->post_content ), 30, '...' );
+
+	// Service pages render entirely from the approved service data in
+	// inc/services.php and carry no excerpt/body content. Fall back to the
+	// approved service description so the Service schema is never empty.
+	if ( '' === $description && 'page-templates/page-service.php' === get_page_template_slug( $post ) ) {
+		$service = hds_get_service( $post->post_name );
+		if ( $service && ! empty( $service['seo_description'] ) ) {
+			$description = $service['seo_description'];
+		}
+	}
+
 	return [
 		'@context'    => 'https://schema.org',
 		'@type'       => 'Service',
 		'name'        => get_the_title( $post ),
-		'description' => wp_trim_words( wp_strip_all_tags( get_the_excerpt( $post ) ?: $post->post_content ), 30, '...' ),
+		'description' => $description,
 		'provider'    => [
 			'@type' => 'Organization',
 			'name'  => get_bloginfo( 'name' ),
