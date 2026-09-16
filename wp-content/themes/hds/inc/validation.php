@@ -138,44 +138,84 @@ function hds_validate_person_name( string $value ): string {
  *
  * This hook mimics ACF's field-level validation at the WordPress save
  * lifecycle. Each post meta field is re-validated before being saved.
+ *
+ * Security posture:
+ *
+ * The hds_* meta fields are edited exclusively in the Block Editor
+ * sidebar panels (assets/js/meta-panels.js) and saved through the REST
+ * API, which is already protected by the REST nonce and the per-field
+ * auth_callback registered in inc/custom-fields.php. That flow never
+ * submits a classic-form nonce, so it is skipped here without error.
+ *
+ * This handler remains as a defensive fallback for classic form
+ * submissions. Those are only processed when they carry a valid
+ * dedicated nonce. Any future classic meta box must render
+ * wp_nonce_field( 'hds_save_meta_fields', 'hds_meta_nonce' ) to be
+ * processed by this handler.
  */
 function hds_validate_post_meta_on_save( int $post_id ): void {
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 		return;
 	}
 
+	if ( wp_is_post_revision( $post_id ) ) {
+		return;
+	}
+
 	$post_type = get_post_type( $post_id );
 
-	if ( $post_type === 'page' && isset( $_POST['hds_subtitle'] ) ) {
-		update_post_meta( $post_id, 'hds_subtitle', hds_validate_subtitle( $_POST['hds_subtitle'] ) );
+	if ( 'page' === $post_type ) {
+		$capability = 'edit_page';
+	} elseif ( 'hds_testimonial' === $post_type || 'hds_vacancy' === $post_type ) {
+		$capability = 'edit_post';
+	} else {
+		return;
 	}
 
-	if ( $post_type === 'page' && isset( $_POST['hds_cta_override'] ) ) {
-		update_post_meta( $post_id, 'hds_cta_override', hds_validate_cta_text( $_POST['hds_cta_override'] ) );
+	if ( ! current_user_can( $capability, $post_id ) ) {
+		return;
 	}
 
-	if ( $post_type === 'page' && isset( $_POST['hds_service_icon'] ) ) {
-		update_post_meta( $post_id, 'hds_service_icon', hds_validate_icon_slug( $_POST['hds_service_icon'] ) );
+	if ( ! isset( $_POST['hds_meta_nonce'] ) ) {
+		return;
 	}
 
-	if ( $post_type === 'hds_testimonial' && isset( $_POST['hds_star_rating'] ) ) {
-		update_post_meta( $post_id, 'hds_star_rating', hds_validate_star_rating( $_POST['hds_star_rating'] ) );
+	if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['hds_meta_nonce'] ) ), 'hds_save_meta_fields' ) ) {
+		return;
 	}
 
-	if ( $post_type === 'hds_testimonial' && isset( $_POST['hds_author_name'] ) ) {
-		update_post_meta( $post_id, 'hds_author_name', hds_validate_person_name( $_POST['hds_author_name'] ) );
+	$posted = wp_unslash( $_POST );
+
+	if ( 'page' === $post_type && isset( $posted['hds_subtitle'] ) ) {
+		update_post_meta( $post_id, 'hds_subtitle', hds_validate_subtitle( $posted['hds_subtitle'] ) );
 	}
 
-	if ( $post_type === 'hds_vacancy' && isset( $_POST['hds_application_email'] ) ) {
-		update_post_meta( $post_id, 'hds_application_email', hds_validate_email( $_POST['hds_application_email'] ) );
+	if ( 'page' === $post_type && isset( $posted['hds_cta_override'] ) ) {
+		update_post_meta( $post_id, 'hds_cta_override', hds_validate_cta_text( $posted['hds_cta_override'] ) );
 	}
 
-	if ( $post_type === 'hds_vacancy' && isset( $_POST['hds_deadline'] ) ) {
-		update_post_meta( $post_id, 'hds_deadline', hds_validate_date( $_POST['hds_deadline'] ) );
+	if ( 'page' === $post_type && isset( $posted['hds_service_icon'] ) ) {
+		update_post_meta( $post_id, 'hds_service_icon', hds_validate_icon_slug( $posted['hds_service_icon'] ) );
 	}
 
-	if ( $post_type === 'hds_vacancy' && isset( $_POST['hds_is_active'] ) ) {
-		update_post_meta( $post_id, 'hds_is_active', hds_validate_is_active( $_POST['hds_is_active'] ) );
+	if ( 'hds_testimonial' === $post_type && isset( $posted['hds_star_rating'] ) ) {
+		update_post_meta( $post_id, 'hds_star_rating', hds_validate_star_rating( $posted['hds_star_rating'] ) );
+	}
+
+	if ( 'hds_testimonial' === $post_type && isset( $posted['hds_author_name'] ) ) {
+		update_post_meta( $post_id, 'hds_author_name', hds_validate_person_name( $posted['hds_author_name'] ) );
+	}
+
+	if ( 'hds_vacancy' === $post_type && isset( $posted['hds_application_email'] ) ) {
+		update_post_meta( $post_id, 'hds_application_email', hds_validate_email( $posted['hds_application_email'] ) );
+	}
+
+	if ( 'hds_vacancy' === $post_type && isset( $posted['hds_deadline'] ) ) {
+		update_post_meta( $post_id, 'hds_deadline', hds_validate_date( $posted['hds_deadline'] ) );
+	}
+
+	if ( 'hds_vacancy' === $post_type && isset( $posted['hds_is_active'] ) ) {
+		update_post_meta( $post_id, 'hds_is_active', hds_validate_is_active( $posted['hds_is_active'] ) );
 	}
 }
 add_action( 'save_post', 'hds_validate_post_meta_on_save', 10, 1 );

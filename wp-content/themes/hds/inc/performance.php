@@ -10,11 +10,13 @@
 
 /**
  * Add WebP support to image uploads.
+ *
+ * SVG support is intentionally not registered here: it is registered —
+ * and capability-gated to users with `unfiltered_html` — in
+ * inc/setup.php via hds_allow_svg_uploads(). Adding it here too would
+ * bypass that gate.
  */
 function hds_add_webp_support( array $mimes ): array {
-	if ( HDS_Config::is_enabled( 'performance.enable_svg_upload' ) ) {
-		$mimes['svg']  = 'image/svg+xml';
-	}
 	$mimes['webp'] = 'image/webp';
 	return $mimes;
 }

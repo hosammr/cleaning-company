@@ -19,6 +19,17 @@
 
   <rule ref="WordPress-Core">
     <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+    <!--
+      Intentional project convention: the theme uses short array syntax
+      ([]) throughout. WordPress-Core forbids it. In WPCS 3.1 the rule
+      is enforced by Universal.Arrays.DisallowShortArraySyntax, so BOTH
+      sniff codes are excluded — the previous phpcs.xml only referenced
+      the legacy Generic.* code (and used an ineffective standalone
+      <severity>0</severity> rule), which produced ~1100 false-positive
+      errors on every run.
+    -->
+    <exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
+    <exclude name="Universal.Arrays.DisallowShortArraySyntax"/>
   </rule>
   <rule ref="WordPress-Docs"/>
   <rule ref="WordPress.Security"/>
@@ -27,10 +38,6 @@
   <rule ref="WordPress.WP"/>
 
   <rule ref="PHPCompatibilityWP"/>
-
-  <rule ref="Generic.Arrays.DisallowShortArraySyntax">
-    <severity>0</severity>
-  </rule>
 
   <rule ref="WordPress.WP.I18n">
     <properties>

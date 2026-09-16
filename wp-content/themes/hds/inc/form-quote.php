@@ -20,7 +20,7 @@ function hds_render_quote_form(): string {
 	$data     = [];
 	$submitted = isset( $_POST['hds_quote_submit'] );
 
-	if ( $submitted && ! wp_verify_nonce( $_POST['hds_quote_nonce'] ?? '', 'hds_quote_form' ) ) {
+	if ( $submitted && ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['hds_quote_nonce'] ?? '' ) ), 'hds_quote_form' ) ) {
 		$errors['security'] = __( 'Uw aanvraag kon niet worden verzonden. Vernieuw de pagina en probeer het opnieuw.', 'hds' );
 	} elseif ( $submitted ) {
 		$hds_ts = isset( $_POST['hds_form_ts'] ) ? (int) $_POST['hds_form_ts'] : 0;
@@ -37,9 +37,12 @@ function hds_render_quote_form(): string {
 				if ( ! get_transient( $dup_key ) ) {
 					set_transient( $dup_key, 1, 60 );
 					$attachment = hds_quote_handle_upload( $_FILES );
-					$sent       = hds_quote_send_notification( $data, $attachment );
+					hds_quote_send_notification( $data, $attachment );
 
-					if ( $sent && '' !== $attachment && file_exists( $attachment ) ) {
+					// Always remove the temporary attachment, whether the
+					// mail was sent or not. No quote upload may remain on
+					// disk after the request.
+					if ( '' !== $attachment && file_exists( $attachment ) ) {
 						unlink( $attachment );
 					}
 				}
@@ -394,13 +397,25 @@ function hds_quote_validate_submission( array $data, array $files ): array {
 
 	if ( ! empty( $files['hds_qf_file']['name'] ) ) {
 		$max_size = 5 * 1024 * 1024; // 5 MB
-		if ( $files['hds_qf_file']['size'] > $max_size ) {
+		if ( isset( $files['hds_qf_file']['size'] ) && (int) $files['hds_qf_file']['size'] > $max_size ) {
 			$errors['hds_qf_file'] = __( 'Het bestand is te groot. Maximum is 5 MB.', 'hds' );
 		}
-		$allowed = [ 'pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx' ];
+		$allowed = hds_quote_allowed_file_types();
 		$ext     = strtolower( pathinfo( $files['hds_qf_file']['name'], PATHINFO_EXTENSION ) );
-		if ( ! in_array( $ext, $allowed, true ) ) {
+		if ( ! array_key_exists( $ext, $allowed ) ) {
 			$errors['hds_qf_file'] = __( 'Ongeldig bestandsformaat. Toegestaan: PDF, JPG, JPEG, PNG, DOC, DOCX.', 'hds' );
+		} else {
+			$tmp_name = isset( $files['hds_qf_file']['tmp_name'] ) ? (string) $files['hds_qf_file']['tmp_name'] : '';
+			if ( '' !== $tmp_name && is_readable( $tmp_name ) && function_exists( 'finfo_open' ) ) {
+				$finfo     = finfo_open( FILEINFO_MIME_TYPE );
+				$real_mime = $finfo ? (string) finfo_file( $finfo, $tmp_name ) : '';
+				if ( $finfo ) {
+					finfo_close( $finfo );
+				}
+				if ( ! in_array( $real_mime, $allowed[ $ext ], true ) ) {
+					$errors['hds_qf_file'] = __( 'De inhoud van het bestand komt niet overeen met het toegestane bestandsformaat.', 'hds' );
+				}
+			}
 		}
 	}
 
@@ -418,30 +433,79 @@ function hds_quote_validate_postcode( string $postcode ): bool {
 }
 
 /**
+ * Allowed file types for the quote form, per extension.
+ *
+ * Maps lowercase extension to the real MIME type(s) accepted for that
+ * extension (verified via finfo, not trusted from the client).
+ *
+ * @return array<string, string[]> Extension => accepted MIME types.
+ */
+function hds_quote_allowed_file_types(): array {
+	return [
+		'pdf'  => [ 'application/pdf' ],
+		'jpg'  => [ 'image/jpeg' ],
+		'jpeg' => [ 'image/jpeg' ],
+		'png'  => [ 'image/png' ],
+		'doc'  => [ 'application/msword' ],
+		'docx' => [ 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ],
+	];
+}
+
+/**
  * Handle file upload for quote form.
  *
+ * Moves the uploaded file into the system temporary directory — never
+ * into the public WordPress uploads tree — after re-validating size,
+ * extension and real MIME type. The caller attaches the returned path
+ * to wp_mail() and is responsible for deleting the file after the send
+ * attempt, so no public URL for the attachment ever exists.
+ *
  * @param array $files $_FILES array.
- * @return string Empty string or path to uploaded file.
+ * @return string Empty string or path to the temporary file.
  */
 function hds_quote_handle_upload( array $files ): string {
-	if ( empty( $files['hds_qf_file']['tmp_name'] ) ) {
+	$files = wp_unslash( $files );
+
+	if ( empty( $files['hds_qf_file']['tmp_name'] ) || empty( $files['hds_qf_file']['name'] ) ) {
 		return '';
 	}
 
-	if ( ! function_exists( 'wp_handle_upload' ) ) {
-		require_once ABSPATH . 'wp-admin/includes/file.php';
-	}
+	$tmp_name = (string) $files['hds_qf_file']['tmp_name'];
+	$name     = (string) $files['hds_qf_file']['name'];
+	$size     = isset( $files['hds_qf_file']['size'] ) ? (int) $files['hds_qf_file']['size'] : 0;
+	$max_size = 5 * 1024 * 1024; // 5 MB
+	$allowed  = hds_quote_allowed_file_types();
+	$ext      = strtolower( pathinfo( $name, PATHINFO_EXTENSION ) );
 
-	$upload = wp_handle_upload(
-		$files['hds_qf_file'],
-		[ 'test_form' => false ]
-	);
-
-	if ( isset( $upload['error'] ) ) {
+	if ( $size <= 0 || $size > $max_size || ! array_key_exists( $ext, $allowed ) ) {
 		return '';
 	}
 
-	return $upload['file'] ?? '';
+	if ( ! is_readable( $tmp_name ) ) {
+		return '';
+	}
+
+	$real_mime = '';
+	if ( function_exists( 'finfo_open' ) ) {
+		$finfo = finfo_open( FILEINFO_MIME_TYPE );
+		if ( $finfo ) {
+			$real_mime = (string) finfo_file( $finfo, $tmp_name );
+			finfo_close( $finfo );
+		}
+	}
+
+	if ( ! in_array( $real_mime, $allowed[ $ext ], true ) ) {
+		return '';
+	}
+
+	$safe_base = pathinfo( sanitize_file_name( $name ), PATHINFO_FILENAME );
+	$dest      = sys_get_temp_dir() . '/hds-quote-' . wp_generate_password( 12, false, false ) . '-' . $safe_base . '.' . $ext;
+
+	if ( ! copy( $tmp_name, $dest ) ) {
+		return '';
+	}
+
+	return $dest;
 }
 
 /**
