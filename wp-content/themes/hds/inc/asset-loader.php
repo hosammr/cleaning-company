@@ -91,9 +91,11 @@ function hds_preload_assets(): void {
 	$logo_id = get_theme_mod( 'custom_logo' );
 
 	if ( $logo_id ) {
-		$logo_url = wp_get_attachment_image_url( (int) $logo_id, 'full' );
+		$logo_url    = wp_get_attachment_image_url( (int) $logo_id, 'full' );
+		$logo_srcset = wp_get_attachment_image_srcset( (int) $logo_id, 'full' );
+		$logo_sizes  = wp_get_attachment_image_sizes( (int) $logo_id, 'full' );
 		if ( $logo_url ) {
-			echo '<link rel="preload" href="' . esc_url( $logo_url ) . '" as="image" type="' . esc_attr( get_post_mime_type( (int) $logo_id ) ) . '">' . "\n";
+			echo '<link rel="preload" href="' . esc_url( $logo_url ) . '" as="image" type="' . esc_attr( get_post_mime_type( (int) $logo_id ) ) . '" imagesrcset="' . esc_attr( $logo_srcset ) . '" imagesizes="' . esc_attr( $logo_sizes ) . '">' . "\n";
 		}
 	}
 

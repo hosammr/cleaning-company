@@ -257,10 +257,10 @@ body.admin-bar .site-header {
 }
 
 /* Very narrow screens: the header row (logo + menu toggle + actions)
-   overflows the 288px content width at ≤361px. Shrink the logo to the
+   overflows the 288px content width at ≤377px. Shrink the logo to the
    same 44px used in the compact scrolled state and tighten the row gap.
    --hds-header-height is updated so the mobile menu overlay stays flush. */
-@media (width <= 361px) {
+@media (width <= 377px) {
 	:root {
 		--hds-header-height: calc(44px + var(--wp--preset--spacing--4) * 2);
 	}
