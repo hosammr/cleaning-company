@@ -34,10 +34,12 @@ function hds_render_quote_form(): string {
 			if ( empty( $errors ) ) {
 				$dup_key = 'hds_form_dup_' . md5( 'offerte|' . $data['hds_qf_email'] . '|' . $data['hds_qf_bedrijf'] . '|' . $data['hds_qf_message'] );
 
-				if ( ! get_transient( $dup_key ) ) {
+				if ( get_transient( $dup_key ) ) {
+					$errors['duplicate'] = __( 'U heeft dit verzoek onlangs al verzonden. Controleer uw inbox of neem telefonisch contact met ons op.', 'hds' );
+				} else {
 					set_transient( $dup_key, 1, 60 );
 					$attachment = hds_quote_handle_upload( $_FILES );
-					hds_quote_send_notification( $data, $attachment );
+					$sent       = hds_quote_send_notification( $data, $attachment );
 
 					// Always remove the temporary attachment, whether the
 					// mail was sent or not. No quote upload may remain on
@@ -45,9 +47,14 @@ function hds_render_quote_form(): string {
 					if ( '' !== $attachment && file_exists( $attachment ) ) {
 						unlink( $attachment );
 					}
-				}
 
-				$success = true;
+					if ( $sent ) {
+						$success = true;
+					} else {
+						delete_transient( $dup_key );
+						$errors['mail'] = __( 'Uw aanvraag kon niet worden verzonden. Probeer het opnieuw of neem telefonisch contact met ons op.', 'hds' );
+					}
+				}
 			}
 		}
 	}
@@ -594,6 +601,7 @@ function hds_quote_building_types(): array {
  */
 function hds_quote_services(): array {
 	return [
+		'kantoor-schoonmaak'     => __( 'Kantoorreiniging', 'hds' ),
 		'glasbewassing'          => __( 'Glasbewassing', 'hds' ),
 		'gevelreiniging'         => __( 'Gevelreiniging', 'hds' ),
 		'reguliere-schoonmaak'   => __( 'Reguliere schoonmaak', 'hds' ),

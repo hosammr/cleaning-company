@@ -63,11 +63,11 @@ get_header();
 		<div class="container">
 			<div class="quote-page">
 				<?php
-				echo hds_section_header(
+				echo hds_section_header( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					__( 'Offerte aanvragen', 'hds' ),
 					__( 'Vul onderstaand formulier in en wij nemen contact met u op.', 'hds' ),
 					'center'
-				); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				);
 				?>
 				<div class="quote-intro" id="offerte-formulier">
 					<?php
@@ -134,21 +134,21 @@ get_header();
 			</div>
 			<div class="hds-usp-grid">
 				<?php
-				echo hds_usp_card(
+				echo hds_usp_card( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					__( 'Vrijblijvend', 'hds' ),
 					__( 'Een offerte aanvragen is geheel vrijblijvend en verplicht u tot niets.', 'hds' ),
 					'<svg width="32" height="32" viewBox="0 0 256 256" fill="none" aria-hidden="true"><path d="M87.8 69.6c-13.2-14.8-32.4-23.2-54.2-22.3C14.8 48.5 0 64.4 0 83.3v89.4c0 18.9 14.8 34.8 33.6 36.1 21.8 1 41-7.4 54.2-22.3L122 152h12l34.2 34.6c13.2 14.8 32.4 23.2 54.2 22.3 18.9-1.3 33.6-17.2 33.6-36.1V83.3c0-18.9-14.8-34.8-33.6-36.1-21.8-1-41 7.4-54.2 22.3L134 104h-12L87.8 69.6Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-				); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo hds_usp_card(
+				);
+				echo hds_usp_card( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					__( 'Op maat', 'hds' ),
 					__( 'Iedere offerte wordt afgestemd op uw specifieke wensen en bedrijfssituatie.', 'hds' ),
 					'<svg width="32" height="32" viewBox="0 0 256 256" fill="none" aria-hidden="true"><rect x="26" y="80" width="60" height="128" rx="8" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><rect x="98" y="40" width="60" height="168" rx="8" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><rect x="170" y="104" width="60" height="104" rx="8" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-				); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo hds_usp_card(
+				);
+				echo hds_usp_card( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					__( 'Snelle reactie', 'hds' ),
 					__( 'Wij streven ernaar binnen één werkdag te reageren op uw aanvraag.', 'hds' ),
 					'<svg width="32" height="32" viewBox="0 0 256 256" fill="none" aria-hidden="true"><circle cx="128" cy="128" r="96" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><polyline points="128 72 128 128 168 152" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-				); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				);
 				?>
 			</div>
 		</div>

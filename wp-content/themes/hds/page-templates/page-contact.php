@@ -123,6 +123,10 @@ if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' === $_SERVER['REQUEST_METHOD'
 				( 'sollicitatie' === $hds_form_mode ? $hds_posted['motivation'] : $hds_posted['message'] )
 			);
 
+			// Tracks whether the mail was actually accepted by the transport.
+			// null = duplicate submission (already handled by the prior request).
+			$hds_mail_sent = null;
+
 			if ( ! get_transient( $hds_dup_key ) ) {
 				set_transient( $hds_dup_key, 1, 60 );
 
@@ -157,7 +161,7 @@ if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' === $_SERVER['REQUEST_METHOD'
 						}
 					}
 
-					wp_mail( $to, $subject_line, $body, $headers, $attachments );
+					$hds_mail_sent = (bool) wp_mail( $to, $subject_line, $body, $headers, $attachments );
 
 					if ( '' !== $cv_cleanup && file_exists( $cv_cleanup ) ) {
 						unlink( $cv_cleanup );
@@ -175,14 +179,19 @@ if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' === $_SERVER['REQUEST_METHOD'
 					}
 					$body .= '<p><strong>' . esc_html__( 'Bericht', 'hds' ) . ':</strong><br>' . nl2br( esc_html( $hds_posted['message'] ) ) . '</p>';
 
-					wp_mail( $to, $subject_line, $body, $headers );
+					$hds_mail_sent = (bool) wp_mail( $to, $subject_line, $body, $headers );
 				}
 			}
 
-			$hds_redirect_url = add_query_arg(
-				array( 'hds_success' => '1' ),
-				get_permalink()
-			) . '#contactformulier';
+			if ( null === $hds_mail_sent || $hds_mail_sent ) {
+				$hds_redirect_url = add_query_arg(
+					array( 'hds_success' => '1' ),
+					get_permalink()
+				) . '#contactformulier';
+			} else {
+				delete_transient( $hds_dup_key );
+				$hds_errors['mail'] = __( 'Uw bericht kon niet worden verzonden. Probeer het opnieuw of neem telefonisch contact met ons op.', 'hds' );
+			}
 		}
 	}
 }
