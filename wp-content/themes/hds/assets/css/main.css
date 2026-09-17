@@ -256,11 +256,11 @@ body.admin-bar .site-header {
 	}
 }
 
-/* Very narrow screens: the header row (logo + menu toggle + actions)
-   overflows the 288px content width at ≤377px. Shrink the logo to the
+/* Narrow screens: the header row (logo + menu toggle + actions)
+   overflows the container from ~393px down. Shrink the logo to the
    same 44px used in the compact scrolled state and tighten the row gap.
    --hds-header-height is updated so the mobile menu overlay stays flush. */
-@media (width <= 377px) {
+@media (width <= 393px) {
 	:root {
 		--hds-header-height: calc(44px + var(--wp--preset--spacing--4) * 2);
 	}
@@ -446,6 +446,13 @@ body.admin-bar .site-header {
 	transform: rotate(225deg);
 }
 
+@media (width >= 1024px) {
+	.primary-menu > li > a {
+		display: inline-block;
+		padding-block: 2px;
+	}
+}
+
 @keyframes hds-dropdown-in {
 	from {
 		opacity: 0;
@@ -565,8 +572,11 @@ body.admin-bar .site-header {
 }
 
 .footer-menu a {
+	align-items: center;
 	color: var(--wp--preset--color--light-gray);
+	display: inline-flex;
 	font-size: var(--wp--preset--font-size--s);
+	min-height: 24px;
 	text-decoration: none;
 	transition: color var(--hds-transition-fast);
 }
@@ -5239,6 +5249,19 @@ body.admin-bar .site-header {
 .faq-page {
 	max-width: 800px;
 	margin-inline: auto;
+}
+
+/* Small screens: plain content H1s (Search results, FAQ) use the global
+   48px size which overflows narrow containers. Clamp and allow wrapping
+   on phones only; desktop/tablet typography stays unchanged. */
+@media (width <= 400px) {
+	.search h1,
+	.faq-page h1,
+	.search-result-item h2 {
+		font-size: clamp(1.5rem, 9vw, 2.5rem);
+		line-height: 1.25;
+		overflow-wrap: break-word;
+	}
 }
 
 .faq-intro {

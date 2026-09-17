@@ -85,6 +85,18 @@ function hds_add_defer_attribute( string $tag, string $handle ): string {
 add_filter( 'script_loader_tag', 'hds_add_defer_attribute', 10, 2 );
 
 /**
+ * Keep the custom logo image srcset selection in sync with the header
+ * preload: the logo renders ~44–60px tall (~142–193px wide), but WP emits
+ * a generic 100vw sizes default that forces a large candidate. Pin the
+ * sizes to the real rendered slot so both the <img> and the preload pick
+ * the same small candidate.
+ */
+function hds_fix_custom_logo_sizes( string $html ): string {
+	return preg_replace( '/\ssizes="[^"]*"/', ' sizes="200px"', $html, 1 );
+}
+add_filter( 'get_custom_logo', 'hds_fix_custom_logo_sizes' );
+
+/**
  * Preload critical above-the-fold assets.
  */
 function hds_preload_assets(): void {
@@ -93,7 +105,7 @@ function hds_preload_assets(): void {
 	if ( $logo_id ) {
 		$logo_url    = wp_get_attachment_image_url( (int) $logo_id, 'full' );
 		$logo_srcset = wp_get_attachment_image_srcset( (int) $logo_id, 'full' );
-		$logo_sizes  = wp_get_attachment_image_sizes( (int) $logo_id, 'full' );
+		$logo_sizes  = '200px';
 		if ( $logo_url ) {
 			echo '<link rel="preload" href="' . esc_url( $logo_url ) . '" as="image" type="' . esc_attr( get_post_mime_type( (int) $logo_id ) ) . '" imagesrcset="' . esc_attr( $logo_srcset ) . '" imagesizes="' . esc_attr( $logo_sizes ) . '">' . "\n";
 		}
