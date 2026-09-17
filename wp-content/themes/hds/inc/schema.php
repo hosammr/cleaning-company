@@ -66,7 +66,7 @@ function hds_get_organization_schema(): array {
 		'name'     => get_bloginfo( 'name' ),
 		'url'      => home_url(),
 		'email'    => hds_get_email(),
-		'telephone'=> hds_get_phone(),
+		'telephone'=> hds_get_phone_intl( hds_get_phone() ),
 	] + ( $same_as ? [ 'sameAs' => $same_as ] : [] );
 }
 
@@ -156,8 +156,8 @@ function hds_get_service_schema( int $post_id ): array {
 		],
 		'url'         => get_permalink( $post ),
 		'areaServed'  => [
-			'@type' => 'City',
-			'name'  => hds_get_postal_city() ?: __( 'Provincie Groningen', 'hds' ),
+			'@type' => 'State',
+			'name'  => __( 'Groningen', 'hds' ),
 		],
 		'serviceType' => get_the_title( $post ),
 	];

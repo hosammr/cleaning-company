@@ -121,6 +121,7 @@ add_action( 'init', 'hds_register_block_pattern_categories' );
  */
 require_once HDS_DIR . '/inc/setup.php';
 require_once HDS_DIR . '/inc/config.php';
+require_once HDS_DIR . '/inc/locale.php';
 require_once HDS_DIR . '/inc/helpers.php';
 require_once HDS_DIR . '/inc/sanitize.php';
 require_once HDS_DIR . '/inc/validation.php';
