@@ -17,6 +17,16 @@
  *                              this, so their output stays unchanged.
  *   string $hero_image_alt   — Accessible alt text for the <img>.
  *
+ * Background-hero pages may additionally set:
+ *   array  $hero_image_srcset — Width => URL map of generated candidates for the
+ *                                responsive background. When set, the background
+ *                                hero switches candidates via scoped max-width
+ *                                media queries; the plain $hero_image_url remains
+ *                                the fallback and the default above all breakpoints.
+ *   string $hero_image_media_max — Optional single max-width (e.g. "679px"). When
+ *                                set, the smallest candidate is served below this
+ *                                width and the fallback image at and above it.
+ *
  * @package HDS
  */
 
@@ -24,8 +34,10 @@ if ( empty( $hero_title ) ) {
 	return;
 }
 
-$hero_image_id = isset( $hero_image_id ) ? (int) $hero_image_id : 0;
-$has_img       = $hero_image_id && wp_get_attachment_image_url( $hero_image_id, 'hds-hero' );
+$hero_image_id        = isset( $hero_image_id ) ? (int) $hero_image_id : 0;
+$has_img              = $hero_image_id && wp_get_attachment_image_url( $hero_image_id, 'hds-hero' );
+$hero_image_srcset    = isset( $hero_image_srcset ) ? array_filter( (array) $hero_image_srcset ) : array();
+$hero_image_media_max = isset( $hero_image_media_max ) ? $hero_image_media_max : '';
 ?>
 
 <?php if ( $has_img ) : ?>
@@ -57,7 +69,49 @@ $has_img       = $hero_image_id && wp_get_attachment_image_url( $hero_image_id, 
 		</div>
 	</section>
 <?php else : ?>
-	<section class="service-hero"<?php echo $hero_image_url ? ' style="background-image:url(' . esc_url( $hero_image_url ) . ')"' : ''; ?>>
+	<?php
+	$hero_class = 'service-hero';
+	$hero_style = $hero_image_url ? ' style="background-image:url(' . esc_url( $hero_image_url ) . ')"' : '';
+	$hero_gate  = '';
+
+	if ( $hero_image_url && $hero_image_srcset ) {
+		$hero_class = 'service-hero service-hero--responsive';
+
+		$candidates = array();
+		foreach ( $hero_image_srcset as $width => $src_url ) {
+			$candidates[ (int) $width ] = esc_url( $src_url );
+		}
+		ksort( $candidates );
+
+		$media_max = trim( (string) $hero_image_media_max );
+
+		if ( '' !== $media_max && preg_match( '/^\d+(?:\.\d+)?px$/i', $media_max ) ) {
+			// Single mandatory breakpoint: serve the smallest candidate below the
+			// gate width, keep the fallback (hero_image_url) at and above it.
+			$smallest  = $candidates[ min( array_keys( $candidates ) ) ];
+			$hero_gate = '<style>@media (max-width:' . $media_max . '){.service-hero--responsive{background-image:url(' . $smallest . ') !important;}}</style>';
+		} elseif ( count( $candidates ) > 1 ) {
+			// Width-based candidates: largest stays the default (inline fallback),
+			// each smaller candidate is served below its own max-width breakpoint.
+			// Rules are emitted largest-first so the narrowest query wins.
+			$widths = array_keys( $candidates );
+			rsort( $widths, SORT_NUMERIC );
+			$largest = $widths[0];
+			$rules   = array();
+			foreach ( $widths as $width ) {
+				if ( $width === $largest ) {
+					continue;
+				}
+				$rules[] = '@media (max-width:' . $width . 'px){.service-hero--responsive{background-image:url(' . $candidates[ $width ] . ') !important;}}';
+			}
+			if ( $rules ) {
+				$hero_gate = '<style>' . implode( '', $rules ) . '</style>';
+			}
+		}
+	}
+	?>
+	<?php echo $hero_gate; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- esc_url() applied per candidate above. ?>
+	<section class="<?php echo esc_attr( $hero_class ); ?>"<?php echo $hero_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- esc_url() applied to every URL in $hero_style above. ?>>
 		<div class="container">
 			<?php if ( ! empty( $hero_eyebrow ) ) : ?>
 				<p class="service-hero__eyebrow"><?php echo esc_html( $hero_eyebrow ); ?></p>

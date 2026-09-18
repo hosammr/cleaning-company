@@ -18,16 +18,26 @@ get_header();
 
 	<?php
 	// 1. Hero — compact variant with the assigned hds_hero_image as background.
-	$hero_title     = __( 'Vraag vrijblijvend een offerte aan', 'hds' );
-	$hero_subtitle  = __( 'Ontvang binnen één werkdag een vrijblijvende offerte op maat voor uw bedrijf.', 'hds' );
-	$hero_image_id  = (int) get_post_meta( get_queried_object_id(), 'hds_hero_image', true );
-	$hero_image_url = $hero_image_id ? wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ) : '';
-	$hero_cta_text  = __( 'Direct aanvragen', 'hds' );
-	$hero_cta_url   = '#offerte-formulier';
+	$hero_title        = __( 'Vraag vrijblijvend een offerte aan', 'hds' );
+	$hero_subtitle     = __( 'Ontvang binnen één werkdag een vrijblijvende offerte op maat voor uw bedrijf.', 'hds' );
+	$hero_image_id     = (int) get_post_meta( get_queried_object_id(), 'hds_hero_image', true );
+	$hero_image_url    = $hero_image_id ? wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ) : '';
+	$hero_image_srcset = array();
+	if ( $hero_image_id ) {
+		$hero_image_srcset = array(
+			768  => wp_get_attachment_image_url( $hero_image_id, 'medium_large' ),
+			1600 => wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ),
+		);
+	}
+	$hero_image_media_max = '679px';
+	$hero_cta_text        = __( 'Direct aanvragen', 'hds' );
+	$hero_cta_url         = '#offerte-formulier';
 
 	set_query_var( 'hero_title', $hero_title );
 	set_query_var( 'hero_subtitle', $hero_subtitle );
 	set_query_var( 'hero_image_url', $hero_image_url );
+	set_query_var( 'hero_image_srcset', $hero_image_srcset );
+	set_query_var( 'hero_image_media_max', $hero_image_media_max );
 	set_query_var( 'hero_cta_text', $hero_cta_text );
 	set_query_var( 'hero_cta_url', $hero_cta_url );
 
