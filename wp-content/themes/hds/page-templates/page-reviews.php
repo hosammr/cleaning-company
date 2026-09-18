@@ -25,15 +25,24 @@ get_header();
 		if ( '' === trim( (string) $hero_subtitle ) ) {
 			$hero_subtitle = __( 'Een selectie van bedrijven en organisaties waarvoor Hamdoun Schoonmaak werkzaamheden uitvoert of heeft uitgevoerd.', 'hds' );
 		}
-		$hero_image_id  = (int) get_post_meta( get_the_ID(), 'hds_hero_image', true );
-		$hero_image_url = $hero_image_id ? wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ) : '';
-		$hero_cta_text  = __( 'Vrijblijvende offerte', 'hds' );
-		$hero_cta_url   = home_url( '/offerte-aanvragen/' );
+		$hero_image_id     = (int) get_post_meta( get_the_ID(), 'hds_hero_image', true );
+		$hero_image_url    = $hero_image_id ? wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ) : '';
+		$hero_image_srcset = array();
+		if ( $hero_image_id ) {
+			$hero_image_srcset = array(
+				768 => wp_get_attachment_image_url( $hero_image_id, 'medium_large' ),
+			);
+		}
+		$hero_image_media_max = '820px';
+		$hero_cta_text        = __( 'Vrijblijvende offerte', 'hds' );
+		$hero_cta_url         = home_url( '/offerte-aanvragen/' );
 
 		set_query_var( 'hero_title', $hero_title );
 		set_query_var( 'hero_eyebrow', $hero_eyebrow );
 		set_query_var( 'hero_subtitle', $hero_subtitle );
 		set_query_var( 'hero_image_url', $hero_image_url );
+		set_query_var( 'hero_image_srcset', $hero_image_srcset );
+		set_query_var( 'hero_image_media_max', $hero_image_media_max );
 		set_query_var( 'hero_cta_text', $hero_cta_text );
 		set_query_var( 'hero_cta_url', $hero_cta_url );
 
