@@ -39,6 +39,71 @@ function hds_responsive_image_sizes( array $sizes, array $size ): array {
 }
 
 /**
+ * Add the smaller generated candidates to the hero image srcset.
+ *
+ * WordPress only emits a `srcset` when at least two generated candidates
+ * share the aspect ratio of the requested size. The hero attachments are
+ * stored at 1983×793 (ratio 2.5:1) with an 'hds-hero' size of 1600×793
+ * (ratio ≈2.02:1), so the standard candidate loop matches only the
+ * requested size itself and WordPress drops the srcset entirely. That made
+ * every viewport download the full 1600px candidate.
+ *
+ * The hero is rendered with `object-fit: cover` into a fixed, full-width
+ * box, so the candidate aspect ratio does not affect the visual result —
+ * the smaller generated candidates can be added back safely. The 'large'
+ * (1024px) candidate is intentionally left out: on viewports 1024–1599px
+ * it would be selected over the current 1600×793 'hds-hero' file and change
+ * the hero crop, which must stay unchanged.
+ *
+ * @param array  $sources      Image srcset sources, keyed by width.
+ * @param array  $size_array   Requested [width, height].
+ * @param string $image_src    The src of the requested size.
+ * @param array  $image_meta   Attachment metadata.
+ * @param int    $attachment_id Attachment ID.
+ * @return array Updated sources.
+ */
+function hds_add_hero_srcset_candidates( array $sources, array $size_array, string $image_src, array $image_meta, int $attachment_id ): array {
+	if ( array( 1600, 793 ) !== $size_array ) {
+		return $sources;
+	}
+
+	if ( empty( $image_meta['sizes'] ) || empty( $image_meta['file'] ) ) {
+		return $sources;
+	}
+
+	$dirname = _wp_get_attachment_relative_path( $image_meta['file'] );
+	if ( $dirname ) {
+		$dirname = trailingslashit( $dirname );
+	}
+
+	$upload_dir = wp_get_upload_dir();
+	$base_url   = trailingslashit( $upload_dir['baseurl'] ) . $dirname;
+
+	// Theme-registered candidates that safely fit a sub-1024px hero slot.
+	$candidate_widths = array( 300, 400, 768, 800 );
+
+	foreach ( $image_meta['sizes'] as $size_data ) {
+		if ( ! is_array( $size_data ) || empty( $size_data['file'] ) ) {
+			continue;
+		}
+
+		$width = (int) ( $size_data['width'] ?? 0 );
+		if ( ! in_array( $width, $candidate_widths, true ) || isset( $sources[ $width ] ) ) {
+			continue;
+		}
+
+		$sources[ $width ] = array(
+			'url'        => $base_url . $size_data['file'],
+			'descriptor' => 'w',
+			'value'      => $width,
+		);
+	}
+
+	return $sources;
+}
+add_filter( 'wp_calculate_image_srcset', 'hds_add_hero_srcset_candidates', 10, 5 );
+
+/**
  * Add fetchpriority="high" to LCP image (first contentful image on page).
  */
 function hds_add_fetchpriority( string $content ): string {
