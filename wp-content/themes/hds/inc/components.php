@@ -957,6 +957,7 @@ function hds_render_branding_video_section(): string {
 						loop
 						playsinline
 						preload="metadata"
+						loading="lazy"
 						poster="<?php echo esc_url( $video_dir . '/hamdoun-branding-v4-poster.jpg' ); ?>"
 						aria-label="<?php esc_attr_e( 'HAMDOUN branding video', 'hds' ); ?>"
 					>
