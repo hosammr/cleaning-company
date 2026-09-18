@@ -118,7 +118,7 @@ get_header();
 <div class="hds-about-intro__media">
 				<div class="hds-about-intro__frame" aria-hidden="true">
 					<span class="hds-about-intro__panel"></span>
-					<video class="hds-about-intro__video" src="<?php echo esc_url( get_template_directory_uri() . '/assets/videos/hamdoun-animation.mp4' ); ?>" muted loop autoplay playsinline preload="metadata" tabindex="-1"></video>
+					<video class="hds-about-intro__video" src="<?php echo esc_url( get_template_directory_uri() . '/assets/videos/hamdoun-animation.mp4' ); ?>" muted loop playsinline preload="none" width="360" height="640" tabindex="-1"></video>
 					<span class="hds-about-intro__badge"><?php echo hds_svg_icon( 'shield', 24 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 				</div>
 				<p class="hds-about-intro__callout">

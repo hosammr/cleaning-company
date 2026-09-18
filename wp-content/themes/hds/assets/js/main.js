@@ -644,6 +644,24 @@
 		}
 	} );
 
+/* ── About intro video: deferred playback near viewport ── */
+	const aboutVideo = document.querySelector( '.hds-about-intro__video' );
+
+	if ( aboutVideo && ! window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ) {
+		const aboutVideoObserver = new IntersectionObserver(
+			function ( entries ) {
+				entries.forEach( function ( entry ) {
+					if ( entry.isIntersecting ) {
+						aboutVideo.play().catch( function () {} );
+						aboutVideoObserver.disconnect();
+					}
+				} );
+			},
+			{ rootMargin: '200px 0px', threshold: 0 }
+		);
+		aboutVideoObserver.observe( aboutVideo );
+	}
+
 /* ── Form file inputs: show the selected filename ── */
 	document.querySelectorAll( '.hds-quote-form__file' ).forEach( function ( fileInput ) {
 		const fileNameEl = fileInput.parentElement ? fileInput.parentElement.querySelector( '[data-hds-file-name]' ) : null;
