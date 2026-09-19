@@ -16,16 +16,9 @@ function hds_enqueue_styles(): void {
 	$min     = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 	wp_enqueue_style(
-		'hds-google-fonts',
-		'https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75..100,300..800&family=Plus+Jakarta+Sans:wght@400..800&display=swap',
-		[],
-		null
-	);
-
-	wp_enqueue_style(
 		'hds-main',
 		HDS_URI . '/assets/css/main' . $min . '.css',
-		[ 'hds-google-fonts' ],
+		[],
 		$version
 	);
 
@@ -113,7 +106,7 @@ function hds_preload_assets(): void {
 
 	$font_dir = HDS_DIR . '/assets/fonts';
 	if ( is_dir( $font_dir ) ) {
-		$fonts = glob( $font_dir . '/*.woff2' );
+		$fonts = glob( $font_dir . '/*-latin.woff2' );
 		foreach ( $fonts as $font ) {
 			$font_url = HDS_URI . '/assets/fonts/' . basename( $font );
 			echo '<link rel="preload" href="' . esc_url( $font_url ) . '" as="font" type="font/woff2" crossorigin="anonymous">' . "\n";
@@ -126,8 +119,6 @@ add_action( 'wp_head', 'hds_preload_assets', 1 );
  * Preconnect to external origins for faster resource loading.
  */
 function hds_preconnect_origins(): void {
-	echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
-	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
 	echo '<link rel="preconnect" href="https://www.google.com">' . "\n";
 	echo '<link rel="preconnect" href="https://www.googletagmanager.com">' . "\n";
 	echo '<link rel="dns-prefetch" href="https://www.googletagmanager.com">' . "\n";
