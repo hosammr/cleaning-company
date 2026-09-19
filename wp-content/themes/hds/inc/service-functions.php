@@ -90,6 +90,76 @@ function hds_get_cross_sell_services(): array {
 }
 
 /**
+ * Get the WebP URL for a service-card image, or an empty string when the
+ * WebP derivative does not exist on disk.
+ *
+ * The service cards use the fixed 'hds-card' (400×300) size. When a matching
+ * `-400x300.webp` file has been generated next to the PNG derivative, this
+ * returns its URL so the card can be served as WebP to supporting browsers,
+ * with the original PNG as the fallback.
+ *
+ * @param int $image_id Attachment ID.
+ * @return string WebP URL, or '' when unavailable.
+ */
+function hds_get_service_card_webp_url( int $image_id ): string {
+	$meta = wp_get_attachment_metadata( $image_id );
+
+	if ( empty( $meta['file'] ) || empty( $meta['sizes']['hds-card']['file'] ) ) {
+		return '';
+	}
+
+	$card_file = $meta['sizes']['hds-card']['file'];
+	$webp_file = preg_replace( '/\.png$/i', '.webp', $card_file );
+
+	if ( $webp_file === $card_file ) {
+		return '';
+	}
+
+	$uploads   = wp_get_upload_dir();
+	$dirname   = _wp_get_attachment_relative_path( $meta['file'] );
+	$base_path = trailingslashit( $uploads['basedir'] ) . ( $dirname ? trailingslashit( $dirname ) : '' );
+
+	if ( ! file_exists( $base_path . $webp_file ) ) {
+		return '';
+	}
+
+	return trailingslashit( $uploads['baseurl'] ) . ( $dirname ? trailingslashit( $dirname ) : '' ) . $webp_file;
+}
+
+/**
+ * Render the service-card image.
+ *
+ * Emits a `<picture>` element with a WebP `<source>` when a WebP derivative
+ * exists, falling back to the WordPress-generated PNG `<img>` otherwise. The
+ * inner `<img>` always carries the PNG URL as its `src`, so browsers that do
+ * not support WebP receive the original PNG untouched.
+ *
+ * @param int    $image_id Attachment ID.
+ * @param string $alt      Accessible alt text.
+ * @return string Image HTML.
+ */
+function hds_render_service_card_image( int $image_id, string $alt ): string {
+	$img = wp_get_attachment_image( $image_id, 'hds-card', false, [
+		'alt'     => $alt,
+		'loading' => 'lazy',
+	] );
+
+	if ( '' === $img ) {
+		return '';
+	}
+
+	$webp_url = hds_get_service_card_webp_url( $image_id );
+	if ( '' === $webp_url ) {
+		return $img;
+	}
+
+	return '<picture>'
+		. '<source type="image/webp" srcset="' . esc_url( $webp_url ) . '">'
+		. $img
+		. '</picture>';
+}
+
+/**
  * Render the core service card HTML shared by templates and custom blocks.
  *
  * @param WP_Post $post       The service page post object.
@@ -121,10 +191,7 @@ function hds_render_service_card_core( \WP_Post $post, bool $show_image = true, 
 			<?php if ( $show_image ) : ?>
 				<div class="hds-service-card__image">
 					<?php if ( $image_id ) : ?>
-						<?php echo wp_get_attachment_image( (int) $image_id, 'hds-card', false, [
-							'alt'     => get_the_title( $post ),
-							'loading' => 'lazy',
-						] ); ?>
+						<?php echo hds_render_service_card_image( (int) $image_id, get_the_title( $post ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- hds_render_service_card_image escapes via wp_get_attachment_image / esc_url. ?>
 					<?php else : ?>
 						<div class="hds-service-card__placeholder" aria-hidden="true">
 							<?php if ( $show_icon && $icon ) : ?>
