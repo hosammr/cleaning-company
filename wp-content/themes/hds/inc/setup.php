@@ -12,6 +12,8 @@ function hds_register_image_sizes(): void {
 	add_image_size( 'hds-card',    400,  300, true );
 	add_image_size( 'hds-content', 800,  600, false );
 	add_image_size( 'hds-hero',   1600,  900, true );
+	// 400px-wide responsive candidate used by the homepage gallery slides and the Bedrijf image.
+	add_image_size( 'hds-gallery', 400, 0, false );
 
 	remove_image_size( '1536x1536' );
 	remove_image_size( '2048x2048' );

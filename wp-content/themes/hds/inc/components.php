@@ -468,6 +468,7 @@ function hds_render_why_section(): string {
 	);
 
 	$image_url = home_url( '/wp-content/uploads/2026/08/Bedrijf.png' );
+	$bedrijf_image_id = attachment_url_to_postid( $image_url );
 
 	ob_start();
 	?>
@@ -494,13 +495,25 @@ function hds_render_why_section(): string {
 					</p>
 				</div>
 				<div class="hds-why-media">
-					<img
-						src="<?php echo esc_url( $image_url ); ?>"
-						alt="<?php esc_attr_e( 'Hamdoun Schoonmaak bedrijfsvoertuigen en team', 'hds' ); ?>"
-						loading="lazy"
-						width="1254"
-						height="1254"
-					>
+					<?php if ( $bedrijf_image_id ) : ?>
+						<?php echo wp_get_attachment_image( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image escapes internally.
+							(int) $bedrijf_image_id,
+							'hds-gallery',
+							false,
+							[
+								'alt'     => __( 'Hamdoun Schoonmaak bedrijfsvoertuigen en team', 'hds' ),
+								'loading' => 'lazy',
+							]
+						); ?>
+					<?php else : ?>
+						<img
+							src="<?php echo esc_url( $image_url ); ?>"
+							alt="<?php esc_attr_e( 'Hamdoun Schoonmaak bedrijfsvoertuigen en team', 'hds' ); ?>"
+							loading="lazy"
+							width="1254"
+							height="1254"
+						>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>
