@@ -3308,22 +3308,36 @@ body.admin-bar .site-header {
 
 /* Responsive Hero background: candidates are 16:9, so composition is
    equivalent; the 768px rule comes after the 1024px rule so it wins at
-   <=768px. Browsers without media-query support keep the full-size fallback. */
+   <=768px. Browsers without media-query support keep the full-size fallback.
+   WebP is preferred via image-set(); the plain PNG declaration stays as the
+   universal fallback for browsers that do not support image-set(). */
 @media (min-width: 1025px) {
 	.hero-section {
 		background-image: url('/wp-content/uploads/2026/09/Hero-Image1-1600x900.png');
+		background-image: image-set(
+			url('/wp-content/uploads/2026/09/Hero-Image1-1600x900.webp') type('image/webp') 1x,
+			url('/wp-content/uploads/2026/09/Hero-Image1-1600x900.png') type('image/png') 1x
+		);
 	}
 }
 
 @media (max-width: 1024px) {
 	.hero-section {
 		background-image: url('/wp-content/uploads/2026/09/Hero-Image1-1024x576.png');
+		background-image: image-set(
+			url('/wp-content/uploads/2026/09/Hero-Image1-1024x576.webp') type('image/webp') 1x,
+			url('/wp-content/uploads/2026/09/Hero-Image1-1024x576.png') type('image/png') 1x
+		);
 	}
 }
 
 @media (max-width: 768px) {
 	.hero-section {
 		background-image: url('/wp-content/uploads/2026/09/Hero-Image1-768x432.png');
+		background-image: image-set(
+			url('/wp-content/uploads/2026/09/Hero-Image1-768x432.webp') type('image/webp') 1x,
+			url('/wp-content/uploads/2026/09/Hero-Image1-768x432.png') type('image/png') 1x
+		);
 	}
 }
 
