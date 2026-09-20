@@ -27,11 +27,72 @@
  *                                set, the smallest candidate is served below this
  *                                width and the fallback image at and above it.
  *
+ *  Background-hero delivery prefers a sibling .webp file per candidate via
+ *  CSS image-set() while keeping the PNG candidate as the universal fallback.
+ *  If the .webp file is absent the PNG is served as before.
+ *
  * @package HDS
  */
 
 if ( empty( $hero_title ) ) {
 	return;
+}
+
+if ( ! function_exists( 'hds_hero_webp_candidate' ) ) {
+	/**
+	 * Resolve the sibling WebP URL for a PNG hero candidate.
+	 *
+	 * Returns the WebP URL only when the corresponding .webp file already exists
+	 * in the uploads directory; otherwise returns '' so delivery degrades
+	 * gracefully to the PNG fallback (e.g. when the WebP file is absent).
+	 *
+	 * @param string $png_url Full URL of the PNG candidate.
+	 * @return string WebP URL, or '' when unavailable.
+	 */
+	function hds_hero_webp_candidate( string $png_url ): string {
+		if ( '' === $png_url ) {
+			return '';
+		}
+		$uploads = wp_get_upload_dir();
+		$baseurl = trailingslashit( $uploads['baseurl'] );
+		$basedir = trailingslashit( $uploads['basedir'] );
+		if ( 0 !== strpos( $png_url, $baseurl ) ) {
+			return '';
+		}
+		$relative = substr( $png_url, strlen( $baseurl ) );
+		$webp     = preg_replace( '/\.png$/i', '.webp', $relative );
+		if ( $webp === $relative || ! file_exists( $basedir . $webp ) ) {
+			return '';
+		}
+		return $baseurl . $webp;
+	}
+}
+
+/**
+ * Build the background-image declarations for a hero candidate.
+ *
+ * The plain PNG declaration is emitted first as the universal fallback,
+ * followed by an image-set() declaration that prefers the sibling WebP file.
+ * Browsers without image-set() support keep the PNG declaration; browsers
+ * that support image-set() but cannot decode image/webp select the PNG
+ * candidate via its type() hint. When $important is true each declaration
+ * receives !important so the scoped media-gate rules can override the
+ * inline fallback style.
+ *
+ * @param string $png_url   Full URL of the PNG candidate.
+ * @param bool   $important Whether to add !important to each declaration.
+ * @return string Semicolon-joined background-image declarations.
+ */
+function hds_hero_background_declarations( string $png_url, bool $important = false ): string {
+	$suffix = $important ? ' !important' : '';
+	$png    = esc_url( $png_url );
+	$webp   = hds_hero_webp_candidate( $png_url );
+
+	$declarations = array( "background-image:url('" . $png . "')" . $suffix );
+	if ( '' !== $webp ) {
+		$declarations[] = "background-image:image-set(url('" . esc_url( $webp ) . "') type('image/webp') 1x,url('" . $png . "') type('image/png') 1x)" . $suffix;
+	}
+	return implode( ';', $declarations );
 }
 
 $hero_image_id        = isset( $hero_image_id ) ? (int) $hero_image_id : 0;
@@ -71,7 +132,7 @@ $hero_image_media_max = isset( $hero_image_media_max ) ? $hero_image_media_max :
 <?php else : ?>
 	<?php
 	$hero_class = 'service-hero';
-	$hero_style = $hero_image_url ? ' style="background-image:url(' . esc_url( $hero_image_url ) . ')"' : '';
+	$hero_style = $hero_image_url ? ' style="' . hds_hero_background_declarations( $hero_image_url ) . '"' : '';
 	$hero_gate  = '';
 
 	if ( $hero_image_url && $hero_image_srcset ) {
@@ -79,7 +140,7 @@ $hero_image_media_max = isset( $hero_image_media_max ) ? $hero_image_media_max :
 
 		$candidates = array();
 		foreach ( $hero_image_srcset as $width => $src_url ) {
-			$candidates[ (int) $width ] = esc_url( $src_url );
+			$candidates[ (int) $width ] = (string) $src_url;
 		}
 		ksort( $candidates );
 
@@ -89,7 +150,7 @@ $hero_image_media_max = isset( $hero_image_media_max ) ? $hero_image_media_max :
 			// Single mandatory breakpoint: serve the smallest candidate below the
 			// gate width, keep the fallback (hero_image_url) at and above it.
 			$smallest  = $candidates[ min( array_keys( $candidates ) ) ];
-			$hero_gate = '<style>@media (max-width:' . $media_max . '){.service-hero--responsive{background-image:url(' . $smallest . ') !important;}}</style>';
+			$hero_gate = '<style>@media (max-width:' . $media_max . '){.service-hero--responsive{' . hds_hero_background_declarations( $smallest, true ) . '}}</style>';
 		} elseif ( count( $candidates ) > 1 ) {
 			// Width-based candidates: largest stays the default (inline fallback),
 			// each smaller candidate is served below its own max-width breakpoint.
@@ -102,7 +163,7 @@ $hero_image_media_max = isset( $hero_image_media_max ) ? $hero_image_media_max :
 				if ( $width === $largest ) {
 					continue;
 				}
-				$rules[] = '@media (max-width:' . $width . 'px){.service-hero--responsive{background-image:url(' . $candidates[ $width ] . ') !important;}}';
+				$rules[] = '@media (max-width:' . $width . 'px){.service-hero--responsive{' . hds_hero_background_declarations( $candidates[ $width ], true ) . '}}';
 			}
 			if ( $rules ) {
 				$hero_gate = '<style>' . implode( '', $rules ) . '</style>';
@@ -110,7 +171,7 @@ $hero_image_media_max = isset( $hero_image_media_max ) ? $hero_image_media_max :
 		}
 	}
 	?>
-	<?php echo $hero_gate; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- esc_url() applied per candidate above. ?>
+	<?php echo $hero_gate; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- esc_url() applied to every URL in $hero_gate above. ?>
 	<section class="<?php echo esc_attr( $hero_class ); ?>"<?php echo $hero_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- esc_url() applied to every URL in $hero_style above. ?>>
 		<div class="container">
 			<?php if ( ! empty( $hero_eyebrow ) ) : ?>
