@@ -104,6 +104,62 @@ function hds_add_hero_srcset_candidates( array $sources, array $size_array, stri
 add_filter( 'wp_calculate_image_srcset', 'hds_add_hero_srcset_candidates', 10, 5 );
 
 /**
+ * Build the WebP <source> for a Service Hero <img>.
+ *
+ * Only the eight Service Hero attachments (351–358) are eligible. The WebP
+ * <source> mirrors the exact PNG hero srcset candidates (300w, 400w, 768w,
+ * 800w, 1600w) with the same sizes expression. Every candidate WebP sibling
+ * must exist on disk; if any is missing the whole source is omitted so the
+ * PNG <img> remains the complete fallback and no broken URL is emitted.
+ *
+ * @param int $attachment_id Attachment ID.
+ * @return string <source> markup, or '' when ineligible or incomplete.
+ */
+function hds_service_hero_webp_source( int $attachment_id ): string {
+	$service_hero_ids = array( 351, 352, 353, 354, 355, 356, 357, 358 );
+	if ( ! in_array( $attachment_id, $service_hero_ids, true ) ) {
+		return '';
+	}
+
+	$meta = wp_get_attachment_metadata( $attachment_id );
+	if ( empty( $meta['file'] ) || empty( $meta['sizes'] ) || ! is_array( $meta['sizes'] ) ) {
+		return '';
+	}
+
+	$uploads = wp_get_upload_dir();
+	$dirname = _wp_get_attachment_relative_path( $meta['file'] );
+	$prefix  = $dirname ? trailingslashit( $dirname ) : '';
+	$basedir = trailingslashit( $uploads['basedir'] ) . $prefix;
+	$baseurl = trailingslashit( $uploads['baseurl'] ) . $prefix;
+
+	// Widths of the PNG hero srcset candidates (see hds_add_hero_srcset_candidates()).
+	$widths = array( 300, 400, 768, 800, 1600 );
+	$srcset = array();
+
+	foreach ( $widths as $width ) {
+		$size_file = '';
+		foreach ( $meta['sizes'] as $size_data ) {
+			if ( is_array( $size_data ) && isset( $size_data['width'], $size_data['file'] ) && (int) $size_data['width'] === $width ) {
+				$size_file = $size_data['file'];
+				break;
+			}
+		}
+		if ( '' === $size_file ) {
+			return ''; // Candidate not registered — the mirror would be incomplete.
+		}
+
+		$webp_file = preg_replace( '/\.png$/i', '.webp', $size_file );
+		if ( $webp_file === $size_file || ! file_exists( $basedir . $webp_file ) ) {
+			return ''; // Missing WebP sibling — keep the full PNG fallback.
+		}
+
+		$srcset[] = $baseurl . $webp_file . ' ' . $width . 'w';
+	}
+
+	return '<source type="image/webp" srcset="' . esc_attr( implode( ', ', $srcset ) ) . '" sizes="(max-width: 1600px) 100vw, 1600px">';
+}
+
+/**
  * Add fetchpriority="high" to LCP image (first contentful image on page).
  */
 function hds_add_fetchpriority( string $content ): string {

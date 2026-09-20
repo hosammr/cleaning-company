@@ -105,7 +105,8 @@ $hero_image_media_max = isset( $hero_image_media_max ) ? $hero_image_media_max :
 	<section class="service-hero service-hero--image">
 		<div class="service-hero__media" aria-hidden="true">
 			<?php
-			echo wp_get_attachment_image( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			$hero_webp_source = hds_service_hero_webp_source( $hero_image_id );
+			$hero_img         = wp_get_attachment_image( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				$hero_image_id,
 				'hds-hero',
 				false,
@@ -114,6 +115,12 @@ $hero_image_media_max = isset( $hero_image_media_max ) ? $hero_image_media_max :
 					'fetchpriority' => 'high',
 				]
 			);
+			if ( '' !== $hero_webp_source ) {
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $hero_webp_source is esc_attr()'d; $hero_img is escaped by wp_get_attachment_image().
+				echo '<picture>' . $hero_webp_source . $hero_img . '</picture>';
+			} else {
+				echo $hero_img; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			}
 			?>
 		</div>
 		<div class="container">
