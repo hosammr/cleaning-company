@@ -230,7 +230,7 @@ body.admin-bar .site-header {
 .site-header-actions {
 	align-items: center;
 	display: flex;
-	gap: var(--wp--preset--spacing--4);
+	gap: var(--wp--preset--spacing--3);
 }
 
 .header-phone {
@@ -411,7 +411,7 @@ body.admin-bar .site-header {
 
 .primary-menu {
 	display: flex;
-	gap: 1.75rem;
+	gap: 1.5rem;
 	justify-content: center;
 	list-style: none;
 	margin: 0;
@@ -421,7 +421,9 @@ body.admin-bar .site-header {
 
 .primary-menu a {
 	color: var(--wp--preset--color--dark-gray);
+	font-size: 0.95rem;
 	font-weight: 600;
+	line-height: 1.4;
 	text-decoration: none;
 }
 
@@ -3404,11 +3406,11 @@ body.admin-bar .site-header {
 .hero-section p {
 	color: rgb(255 255 255 / 94%);
 	font-size: var(--wp--preset--font-size--l);
-	line-height: 1.7;
+	line-height: 1.75;
 	margin-bottom: var(--wp--preset--spacing--6);
 	margin-left: 0 !important;
 	margin-right: auto !important;
-	max-width: 560px;
+	max-width: 600px;
 	overflow-wrap: break-word;
 	text-align: left !important;
 	text-shadow: 0 1px 2px rgb(0 0 0 / 30%);
