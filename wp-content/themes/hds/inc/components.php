@@ -496,7 +496,13 @@ function hds_render_why_section(): string {
 				</div>
 				<div class="hds-why-media">
 					<?php if ( $bedrijf_image_id ) : ?>
-						<?php echo wp_get_attachment_image( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image escapes internally.
+						<?php
+						$webp_source = hds_below_fold_webp_source( (int) $bedrijf_image_id, 'hds-gallery' );
+						if ( $webp_source ) {
+							echo '<picture>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							echo $webp_source; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						}
+						echo wp_get_attachment_image( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image escapes internally.
 							(int) $bedrijf_image_id,
 							'hds-gallery',
 							false,
@@ -504,7 +510,11 @@ function hds_render_why_section(): string {
 								'alt'     => __( 'Hamdoun Schoonmaak bedrijfsvoertuigen en team', 'hds' ),
 								'loading' => 'lazy',
 							]
-						); ?>
+						);
+						if ( $webp_source ) {
+							echo '</picture>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						}
+						?>
 					<?php else : ?>
 						<img
 							src="<?php echo esc_url( $image_url ); ?>"
@@ -633,11 +643,19 @@ function hds_render_service_gallery(): string {
 										$image_id = get_post_meta( $service->ID, 'hds_hero_image', true );
 									}
 									if ( $image_id ) {
-										$alt = isset( $slider_alts[ $service->post_name ] ) ? $slider_alts[ $service->post_name ] : get_the_title( $service );
+										$alt         = isset( $slider_alts[ $service->post_name ] ) ? $slider_alts[ $service->post_name ] : get_the_title( $service );
+										$webp_source = hds_below_fold_webp_source( (int) $image_id, 'medium_large' );
+										if ( $webp_source ) {
+											echo '<picture>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+											echo $webp_source; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+										}
 										echo wp_get_attachment_image( (int) $image_id, 'medium_large', false, array( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image escapes internally.
 											'alt'     => $alt,
 											'loading' => 'lazy',
 										) );
+										if ( $webp_source ) {
+											echo '</picture>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+										}
 									} else {
 										echo '<span class="hds-slider__placeholder" aria-hidden="true"></span>';
 									}

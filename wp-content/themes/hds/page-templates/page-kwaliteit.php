@@ -121,6 +121,11 @@ get_header();
 						$safety_image = hds_get_attachment_id_by_filename( 'hamdoun-veilig-werken-1.png' );
 					}
 					if ( $safety_image && wp_get_attachment_image_url( $safety_image, 'large' ) ) {
+						$webp_source = hds_below_fold_webp_source( $safety_image, 'large' );
+						if ( $webp_source ) {
+							echo '<picture>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							echo $webp_source; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						}
 						echo wp_get_attachment_image( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							$safety_image,
 							'large',
@@ -130,6 +135,9 @@ get_header();
 								'loading' => 'lazy',
 							)
 						);
+						if ( $webp_source ) {
+							echo '</picture>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						}
 					} else {
 						echo '<div class="kwaliteit-veilig__placeholder" aria-hidden="true"></div>';
 					}

@@ -160,6 +160,87 @@ function hds_service_hero_webp_source( int $attachment_id ): string {
 }
 
 /**
+ * Build the WebP <source> for a below-fold image.
+ *
+ * Only the below-fold attachments are eligible: the homepage gallery
+ * (329–336), the homepage Bedrijf image (397) and the Kwaliteit "Veilig
+ * werken" safety image (391). The <source> mirrors the exact WordPress-
+ * generated PNG srcset for the requested size (same width descriptors and
+ * the same sizes expression), so the browser selects the identical
+ * responsive candidate. Each WebP URL is emitted only when the sibling
+ * .webp file exists on disk; if any candidate is missing the whole source
+ * is omitted and the original PNG <img> remains the complete fallback.
+ *
+ * @param int    $attachment_id Attachment ID.
+ * @param string $size          Image size (e.g. 'medium_large', 'hds-gallery', 'large').
+ * @return string <source> markup, or '' when ineligible or incomplete.
+ */
+function hds_below_fold_webp_source( int $attachment_id, string $size ): string {
+	$eligible_ids = array(
+		329,
+		330,
+		331,
+		332,
+		333,
+		334,
+		335,
+		336,
+		397,
+		391,
+	);
+
+	if ( ! in_array( $attachment_id, $eligible_ids, true ) ) {
+		return '';
+	}
+
+	$png_srcset = wp_get_attachment_image_srcset( $attachment_id, $size );
+	if ( ! $png_srcset ) {
+		return '';
+	}
+
+	$sizes = wp_get_attachment_image_sizes( $attachment_id, $size );
+	if ( ! $sizes ) {
+		return '';
+	}
+
+	$uploads      = wp_get_upload_dir();
+	$source_items = preg_split( '/,\s*/', $png_srcset );
+	$webp_items   = array();
+
+	foreach ( $source_items as $source_item ) {
+		$parts = preg_split( '/\s+/', trim( $source_item ) );
+
+		if ( empty( $parts[0] ) ) {
+			return '';
+		}
+
+		$png_url = $parts[0];
+
+		if ( ! preg_match( '/\.png$/i', $png_url ) ) {
+			return '';
+		}
+
+		$webp_url  = preg_replace( '/\.png$/i', '.webp', $png_url );
+		$webp_file = str_replace( $uploads['baseurl'], $uploads['basedir'], $webp_url );
+
+		if ( $webp_url === $png_url || ! file_exists( $webp_file ) ) {
+			return '';
+		}
+
+		$descriptor   = isset( $parts[1] ) ? $parts[1] : '';
+		$webp_items[] = $webp_url . ( $descriptor ? ' ' . $descriptor : '' );
+	}
+
+	if ( empty( $webp_items ) ) {
+		return '';
+	}
+
+	return '<source type="image/webp" srcset="' .
+		esc_attr( implode( ', ', $webp_items ) ) .
+		'" sizes="' . esc_attr( $sizes ) . '">';
+}
+
+/**
  * Add fetchpriority="high" to LCP image (first contentful image on page).
  */
 function hds_add_fetchpriority( string $content ): string {
