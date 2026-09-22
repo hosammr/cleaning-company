@@ -77,3 +77,6 @@ desktop.ini
 
 # === QA artifacts ===
 /visual-qa/
+
+homepage.html
+visual-break-source/
