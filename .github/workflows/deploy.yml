@@ -22,11 +22,9 @@ env:
   NODE_VERSION: '20'
 
 jobs:
-  # ── Lint & Static Analysis ──
   lint:
     name: Lint & Static Analysis
     runs-on: ubuntu-24.04
-
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -94,12 +92,9 @@ jobs:
       - name: Run Stylelint
         run: npm run lint:css
 
-
-  # ── Pre-deploy Backup ──
   backup:
     name: Pre-deploy Backup
     needs: lint
-
     if: >-
       vars.DEPLOY_ENABLED == 'true' &&
       (
@@ -113,9 +108,7 @@ jobs:
           inputs.environment == 'production'
         )
       )
-
     runs-on: ubuntu-24.04
-
     environment:
       name: production
 
@@ -137,19 +130,46 @@ jobs:
 
             BACKUP_FILE="${BACKUP_DIR}/pre-deploy-$(date +%Y%m%d-%H%M%S).sql"
 
+            DB_NAME="$(wp config get DB_NAME --type=constant)"
+            DB_USER="$(wp config get DB_USER --type=constant)"
+            DB_PASS="$(wp config get DB_PASSWORD --type=constant)"
+            DB_HOST="$(wp config get DB_HOST --type=constant)"
+
+            DB_HOSTNAME="${DB_HOST}"
+            DB_PORT="3306"
+
+            if [[ "${DB_HOST}" == *:* ]]; then
+              DB_HOSTNAME="${DB_HOST%%:*}"
+              DB_PORT="${DB_HOST##*:}"
+            fi
+
             echo "Creating database backup: ${BACKUP_FILE}"
+            echo "Database: ${DB_NAME}"
+            echo "Database host: ${DB_HOSTNAME}"
+            echo "Database port: ${DB_PORT}"
 
-            wp db export "${BACKUP_FILE}"
+            MYSQL_PWD="${DB_PASS}" mysqldump \
+              --host="${DB_HOSTNAME}" \
+              --port="${DB_PORT}" \
+              --user="${DB_USER}" \
+              --single-transaction \
+              --quick \
+              --routines \
+              --triggers \
+              "${DB_NAME}" > "${BACKUP_FILE}"
+
+            unset DB_PASS
+
+            test -s "${BACKUP_FILE}"
+
             echo "Backup completed successfully."
+            ls -lh "${BACKUP_FILE}"
 
-
-  # ── Deploy ──
   deploy:
     name: Deploy
     needs:
       - lint
       - backup
-
     if: >-
       always() &&
       vars.DEPLOY_ENABLED == 'true' &&
@@ -158,9 +178,7 @@ jobs:
         needs.backup.result == 'success' ||
         needs.backup.result == 'skipped'
       )
-
     runs-on: ubuntu-24.04
-
     environment:
       name: >-
         ${{ github.event_name == 'workflow_dispatch'
