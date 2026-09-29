@@ -261,13 +261,53 @@ add_filter( 'document_title_separator', 'hds_document_title_separator' );
  * @return array
  */
 function hds_document_title_parts( array $title ): array {
-	if ( is_page_template( 'page-templates/page-service.php' ) ) {
-		$service = hds_get_service( get_post_field( 'post_name', get_queried_object_id() ) );
-		if ( $service && ! empty( $service['seo_title'] ) ) {
-			$title = [ 'title' => $service['seo_title'] ];
-		}
-	}
+        /*
+         * Service pages use the authoritative SEO title from inc/services.php.
+         * Keep this branch first so service titles are never overridden by the
+         * static-page map below.
+         */
+        if ( is_page_template( 'page-templates/page-service.php' ) ) {
+                $service = hds_get_service( get_post_field( 'post_name', get_queried_object_id() ) );
 
-	return apply_filters( 'hds_document_title_parts', $title );
+                if ( $service && ! empty( $service['seo_title'] ) ) {
+                        $title = [ 'title' => $service['seo_title'] ];
+                }
+
+                return apply_filters( 'hds_document_title_parts', $title );
+        }
+
+        /*
+         * Approved document titles for the homepage and static pages.
+         * Service pages are intentionally excluded because their titles are
+         * maintained in inc/services.php.
+         */
+        $static_titles = [
+                'over-hds'                => 'Over Hamdoun Schoonmaak | Schoonmaakbedrijf Groningen',
+                'referenties'             => 'Referenties | Hamdoun Schoonmaak Groningen',
+                'vacatures'               => 'Vacatures bij Hamdoun Schoonmaak | Groningen',
+                'kwaliteit-en-veiligheid' => 'Kwaliteit & Veiligheid | Hamdoun Schoonmaak',
+                'contact'                 => 'Contact | Hamdoun Schoonmaak Groningen',
+                'privacyverklaring'       => 'Privacyverklaring | Hamdoun Schoonmaak',
+                'algemene-voorwaarden'    => 'Algemene Voorwaarden | Hamdoun Schoonmaak',
+                'offerte-aanvragen'       => 'Offerte Aanvragen | Schoonmaakbedrijf Groningen',
+                'cookiebeleid'             => 'Cookiebeleid | Hamdoun Schoonmaak',
+                'veelgestelde-vragen'     => 'Veelgestelde Vragen over Schoonmaak | Hamdoun Schoonmaak',
+        ];
+
+        if ( is_front_page() ) {
+                $title = [
+                        'title' => 'Schoonmaakbedrijf Groningen | Hamdoun Schoonmaak',
+                ];
+        } elseif ( is_page() ) {
+                $slug = get_post_field( 'post_name', get_queried_object_id() );
+
+                if ( isset( $static_titles[ $slug ] ) ) {
+                        $title = [
+                                'title' => $static_titles[ $slug ],
+                        ];
+                }
+        }
+
+        return apply_filters( 'hds_document_title_parts', $title );
 }
 add_filter( 'document_title_parts', 'hds_document_title_parts', 20 );
