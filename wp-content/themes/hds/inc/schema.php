@@ -16,10 +16,6 @@ function hds_output_schema(): void {
 
 	$schemas[] = hds_get_organization_schema();
 
-	if ( is_front_page() || is_page( [ 'contact', 'over-hds' ] ) ) {
-		$schemas[] = hds_get_localbusiness_schema();
-	}
-
 	if ( is_page_template( 'page-templates/page-service.php' ) ) {
 		$schemas[] = hds_get_service_schema( get_the_ID() );
 		$schemas[] = hds_get_service_faq_schema();
