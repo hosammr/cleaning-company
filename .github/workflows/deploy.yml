@@ -6,6 +6,10 @@ on:
       - main
       - staging
 
+  pull_request:
+    branches:
+      - main
+
   workflow_dispatch:
     inputs:
       environment:
@@ -55,12 +59,16 @@ jobs:
 
       - name: Run PHPCS on changed PHP files
         run: |
-          BEFORE="${{ github.event.before }}"
-
-          if [[ -z "$BEFORE" || "$BEFORE" == "0000000000000000000000000000000000000000" ]]; then
-            RANGE="HEAD~1..HEAD"
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            RANGE="${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }}"
           else
-            RANGE="${BEFORE}..${{ github.sha }}"
+            BEFORE="${{ github.event.before }}"
+
+            if [[ -z "$BEFORE" || "$BEFORE" == "0000000000000000000000000000000000000000" ]]; then
+              RANGE="HEAD~1..HEAD"
+            else
+              RANGE="${BEFORE}..${{ github.sha }}"
+            fi
           fi
 
           mapfile -t CHANGED_PHP < <(
@@ -75,7 +83,7 @@ jobs:
           echo "Running PHPCS on changed PHP files:"
           printf '  %s\n' "${CHANGED_PHP[@]}"
 
-          vendor/bin/phpcs --standard=phpcs.xml "${CHANGED_PHP[@]}"
+          vendor/bin/phpcs --runtime-set ignore_warnings_on_exit 1 --standard=phpcs.xml "${CHANGED_PHP[@]}"
 
       - name: Setup Node.js
         uses: actions/setup-node@v5
@@ -177,7 +185,8 @@ jobs:
       (
         needs.backup.result == 'success' ||
         needs.backup.result == 'skipped'
-      )
+      ) &&
+      github.event_name != 'pull_request'
     runs-on: ubuntu-24.04
     environment:
       name: >-

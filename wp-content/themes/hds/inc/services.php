@@ -78,7 +78,7 @@ function hds_get_services(): array {
 				],
 			],
 			'seo_title'       => __( 'Kantoorreiniging | Schoonmaak van kantoren en werkplekken | Hamdoun Schoonmaak', 'hds' ),
-			'seo_description' => __( 'Kantoorreiniging door Hamdoun Schoonmaak. Wij reinigen kantoorruimtes, werkplekken, sanitaire ruimtes en keukens. Werkzaamheden afgestemd op uw wensen. Vrijblijvende offerte aanvragen.', 'hds' ),
+			'seo_description' => __( 'Kantoorreiniging door Hamdoun Schoonmaak. Wij reinigen kantoren, werkplekken, sanitair en keukens, afgestemd op uw wensen. Vraag vrijblijvend een offerte aan.', 'hds' ),
 		],
 
 		'glasbewassing' => [
@@ -125,7 +125,7 @@ function hds_get_services(): array {
 				],
 			],
 			'seo_title'       => __( 'Glasbewassing voor bedrijven | Hamdoun Schoonmaak', 'hds' ),
-			'seo_description' => __( 'Glasbewassing door Hamdoun Schoonmaak. Wij reinigen ramen, puien en glaspartijen, binnen en buiten. Werkzaamheden afgestemd op uw wensen. Vrijblijvende offerte aanvragen.', 'hds' ),
+			'seo_description' => __( 'Glasbewassing door Hamdoun Schoonmaak voor ramen, puien en glaspartijen, binnen en buiten. Afgestemd op uw wensen. Vraag vrijblijvend een offerte aan.', 'hds' ),
 		],
 
 		'gevelreiniging' => [
@@ -179,7 +179,7 @@ function hds_get_services(): array {
 				],
 			],
 			'seo_title'       => __( 'Gevelreiniging voor woningen en winkelpanden | Hamdoun Schoonmaak', 'hds' ),
-			'seo_description' => __( 'Gevelreiniging voor woningen en winkelpanden door Hamdoun Schoonmaak. Wij verwijderen groene aanslag, algen en vuil van laagbouw en goed bereikbare gevels. Vrijblijvende offerte aanvragen.', 'hds' ),
+			'seo_description' => __( 'Gevelreiniging voor woningen en winkelpanden door Hamdoun Schoonmaak. Gericht op laagbouw en goed bereikbare gevels. Vraag vrijblijvend een offerte aan.', 'hds' ),
 		],
 
 		'reguliere-schoonmaak' => [
@@ -286,7 +286,7 @@ function hds_get_services(): array {
 				],
 			],
 			'seo_title'       => __( 'Vloeronderhoud voor verschillende soorten vloeren | Hamdoun Schoonmaak', 'hds' ),
-			'seo_description' => __( 'Vloeronderhoud door Hamdoun Schoonmaak. Wij reinigen, polijsten, boenen, behandelen en beschermen vloeren van graniet, natuursteen, tegels en hout. Voor kantoren, winkels, scholen, kinderopvang, woningen en VvE\'s. Vrijblijvende offerte.', 'hds' ),
+			'seo_description' => __( 'Vloeronderhoud door Hamdoun Schoonmaak voor graniet, natuursteen, tegels en houten vloeren. Reinigen, polijsten, boenen en beschermen. Vrijblijvende offerte.', 'hds' ),
 		],
 
 		'vve-service' => [
@@ -342,7 +342,7 @@ function hds_get_services(): array {
 				],
 			],
 			'seo_title'       => __( 'VvE Service | Professionele schoonmaak voor VvE\'s | Hamdoun Schoonmaak', 'hds' ),
-			'seo_description' => __( 'Professionele VvE-schoonmaak door Hamdoun Schoonmaak. Schoonmaak van gemeenschappelijke ruimtes in appartementencomplexen en woongebouwen, afgestemd op uw VvE. Vrijblijvende offerte.', 'hds' ),
+			'seo_description' => __( 'Professionele VvE-schoonmaak door Hamdoun Schoonmaak voor gemeenschappelijke ruimtes in appartementencomplexen en woongebouwen. Afgestemd op uw VvE.', 'hds' ),
 		],
 
 		'oplevering-schoonmaak' => [
@@ -394,7 +394,7 @@ function hds_get_services(): array {
 				],
 			],
 			'seo_title'       => __( 'Oplevering Schoonmaak | Opleverschoonmaak na bouw en verbouwing | Hamdoun Schoonmaak', 'hds' ),
-			'seo_description' => __( 'Opleverschoonmaak door Hamdoun Schoonmaak. Wij verwijderen bouwstof en bouwresten en reinigen vloeren, oppervlakken, ramen en sanitair. Afgestemd op uw opleverschema. Vrijblijvende offerte aanvragen.', 'hds' ),
+			'seo_description' => __( 'Opleverschoonmaak door Hamdoun Schoonmaak na bouw, verbouwing of renovatie. Verwijderen van bouwstof en reinigen van vloeren, ramen en sanitair. Vraag een offerte aan.', 'hds' ),
 		],
 
 		'scholen-en-kinderopvang-reiniging' => [
@@ -444,7 +444,7 @@ function hds_get_services(): array {
 				],
 			],
 			'seo_title'       => __( 'Schoonmaak van scholen en kinderopvang | Hamdoun Schoonmaak', 'hds' ),
-			'seo_description' => __( 'Schoonmaak van scholen en kinderopvanglocaties door Hamdoun Schoonmaak. Ervaring met basisscholen, middelbare scholen en kinderopvang. Wij reinigen klaslokalen, sanitair, speelruimtes en gangen. Vrijblijvende offerte.', 'hds' ),
+			'seo_description' => __( 'Schoonmaak van scholen en kinderopvang door Hamdoun Schoonmaak. Reiniging van klaslokalen, sanitair, speelruimtes en gangen. Afgestemd op uw locatie.', 'hds' ),
 		],
 	];
 }

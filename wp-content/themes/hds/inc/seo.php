@@ -34,14 +34,17 @@ add_action( 'wp_head', 'hds_add_default_meta_description', 2 );
  *
  * Priority:
  * 1. Approved service seo_description (service pages)
- * 2. Existing page-specific description (page subtitle meta where set)
- * 3. Curated fallback for Contact, Offerte Aanvragen, Kwaliteit & Veiligheid
- * 4. Content-derived fallback
- * 5. Site tagline (non-singular)
+ * 2. Curated descriptions for approved static pages
+ * 3. Content-derived fallback
+ * 4. Site tagline (non-singular)
  *
  * @return string Description, or an empty string when none is available.
  */
 function hds_get_meta_description(): string {
+	if ( is_front_page() ) {
+		return __( 'Professionele schoonmaak- en onderhoudsdiensten in Groningen. Hamdoun Schoonmaak biedt maatwerk voor kantoren, bedrijven, scholen, VvE\'s en andere locaties.', 'hds' );
+	}
+
 	if ( is_page_template( 'page-templates/page-service.php' ) ) {
 		$service = hds_get_service( get_post_field( 'post_name', get_queried_object_id() ) );
 		if ( $service && ! empty( $service['seo_description'] ) ) {
@@ -81,20 +84,25 @@ function hds_get_page_specific_meta_description(): string {
 
 	$slug = get_post_field( 'post_name', get_queried_object_id() );
 
-	$subtitle = get_post_meta( get_queried_object_id(), 'hds_subtitle', true );
-	if ( is_string( $subtitle ) && '' !== trim( $subtitle ) ) {
-		return trim( $subtitle );
-	}
-
-	$curated = [
+	$descriptions = array(
+		'over-hds'                => __( 'Over Hamdoun Schoonmaak in Groningen. Maak kennis met onze missie, kernwaarden en werkwijze. Betrouwbaar, flexibel en gericht op kwaliteit.', 'hds' ),
+		'referenties'             => __( 'Bekijk onze referenties van opdrachtgevers van Hamdoun Schoonmaak. Ontdek voor welke organisaties wij schoonmaak- en onderhoudsdiensten verzorgen in de provincie Groningen.', 'hds' ),
+		'vacatures'               => __( 'Bekijk de actuele vacatures bij Hamdoun Schoonmaak in Groningen. Ontdek onze openstaande functies en mogelijkheden om ons team te versterken.', 'hds' ),
+		'kwaliteit-en-veiligheid' => __( 'Hamdoun Schoonmaak werkt zorgvuldig, met duidelijke afspraken en aandacht voor veiligheid. Lees hoe wij kwaliteit en veiligheid borgen.', 'hds' ),
 		'contact'                 => __( 'Neem contact op met Hamdoun Schoonmaak voor een vrijblijvende offerte, een vraag of een afspraak. Telefonisch bereikbaar op werkdagen van 08:00 tot 17:00.', 'hds' ),
 		'offerte-aanvragen'       => __( 'Vraag vrijblijvend een offerte aan bij Hamdoun Schoonmaak. Ontvang binnen één werkdag een offerte op maat voor uw bedrijf.', 'hds' ),
-		'kwaliteit-en-veiligheid' => __( 'Hamdoun Schoonmaak werkt zorgvuldig, met duidelijke afspraken en aandacht voor veiligheid. Lees hoe wij kwaliteit en veiligheid borgen.', 'hds' ),
-	];
+		'privacyverklaring'       => __( 'Lees de privacyverklaring van Hamdoun Schoonmaak en ontdek hoe wij omgaan met persoonsgegevens en privacy.', 'hds' ),
+		'algemene-voorwaarden'    => __( 'Lees de algemene voorwaarden van Hamdoun Schoonmaak voor informatie over onze dienstverlening en afspraken.', 'hds' ),
+		'cookiebeleid'            => __( 'Lees het cookiebeleid van Hamdoun Schoonmaak en ontdek hoe wij cookies en vergelijkbare technieken gebruiken.', 'hds' ),
+		'veelgestelde-vragen'     => __( 'Bekijk veelgestelde vragen over schoonmaak, onze diensten en werkwijze bij Hamdoun Schoonmaak.', 'hds' ),
+	);
 
-	return $curated[ $slug ] ?? '';
+	if ( isset( $descriptions[ $slug ] ) ) {
+		return $descriptions[ $slug ];
+	}
+
+	return '';
 }
-
 /**
  * Add Open Graph tags (Rank Math fallback).
  */
