@@ -4185,24 +4185,49 @@ body.admin-bar .site-header {
 .hds-slider__dots {
 	align-items: center;
 	display: flex;
-	gap: var(--wp--preset--spacing--2);
+	gap: 4px;
+	justify-content: center;
 }
 
 .hds-slider__dot {
+	align-items: center;
+	background: transparent;
+	border: 0;
+	border-radius: 50%;
+	cursor: pointer;
+	display: inline-flex;
+	height: 44px;
+	justify-content: center;
+	padding: 0;
+	position: relative;
+	width: 44px;
+}
+
+.hds-slider__dot::before {
 	background: transparent;
 	border: 1px solid rgb(18 59 93 / 25%);
-	border-radius: 999px;
-	cursor: pointer;
+	border-radius: 50%;
+	content: '';
 	height: 12px;
-	padding: 0;
 	transition: background var(--hds-transition-fast), border-color var(--hds-transition-fast), width var(--hds-transition-fast);
 	width: 12px;
 }
 
-.hds-slider__dot.is-active {
+.hds-slider__dot.is-active::before {
 	background: var(--wp--preset--color--primary);
 	border-color: var(--wp--preset--color--primary);
 	width: 28px;
+}
+
+@media (max-width: 374px) {
+	.hds-slider__dots {
+		gap: 0;
+	}
+
+	.hds-slider__dot {
+		height: 40px;
+		width: 40px;
+	}
 }
 
 @media (width < 1024px) {
