@@ -12,7 +12,7 @@
 				{ "name": "Accent", "slug": "accent", "color": "#ea8600" },
 				{ "name": "White", "slug": "white", "color": "#ffffff" },
 				{ "name": "Light Gray", "slug": "light-gray", "color": "#f5f5f5" },
-				{ "name": "Gray", "slug": "gray", "color": "#757575" },
+				{ "name": "Gray", "slug": "gray", "color": "#666666" },
 				{ "name": "Dark Gray", "slug": "dark-gray", "color": "#333333" },
 				{ "name": "Black", "slug": "black", "color": "#1a1a1a" },
 				{ "name": "Error", "slug": "error", "color": "#d32f2f" },

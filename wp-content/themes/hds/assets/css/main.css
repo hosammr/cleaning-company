@@ -858,7 +858,7 @@ body.admin-bar .site-header {
 .btn--outline {
 	background: transparent;
 	border: 2px solid var(--wp--preset--color--primary);
-	color: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--primary-dark);
 }
 
 .btn--outline:hover {
