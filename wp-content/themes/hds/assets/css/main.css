@@ -2176,6 +2176,46 @@ body.admin-bar .site-header {
 	}
 }
 
+/* ── Referenties — Google Review CTA ── */
+.references-review-cta {
+	background: var(--wp--preset--color--light-gray);
+	margin-top: var(--wp--preset--spacing--12);
+	padding-block: var(--wp--preset--spacing--12);
+}
+
+.references-review-cta__inner {
+	display: flex;
+	justify-content: center;
+}
+
+.references-review-cta__content {
+	max-width: 640px;
+	text-align: center;
+	width: 100%;
+}
+
+.references-review-cta__content h2 {
+	color: #123B5D;
+	margin-bottom: var(--wp--preset--spacing--4);
+	overflow-wrap: break-word;
+}
+
+.references-review-cta__content p {
+	color: var(--wp--preset--color--gray);
+	font-size: var(--wp--preset--font-size--l);
+	margin-bottom: var(--wp--preset--spacing--6);
+}
+
+.references-review-cta__button {
+	max-width: 100%;
+}
+
+@media (max-width: 781px) {
+	.references-review-cta {
+		padding-block: var(--wp--preset--spacing--10);
+	}
+}
+
 /* ── Quote Process ── */
 .quote-process-section {
 	padding-block: var(--wp--preset--spacing--12) var(--wp--preset--spacing--10);
