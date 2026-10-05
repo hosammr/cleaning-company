@@ -22,17 +22,17 @@ get_header();
 		$hero_title    = get_the_title();
 		$hero_eyebrow  = get_post_meta( get_the_ID(), 'hds_eyebrow', true );
 		$hero_subtitle = get_post_meta( get_the_ID(), 'hds_subtitle', true );
-		if ( '' === trim( (string) $hero_subtitle ) ) {
+	if ( '' === trim( (string) $hero_subtitle ) ) {
 			$hero_subtitle = __( 'Een selectie van bedrijven en organisaties waarvoor Hamdoun Schoonmaak werkzaamheden uitvoert of heeft uitgevoerd.', 'hds' );
-		}
+	}
 		$hero_image_id     = (int) get_post_meta( get_the_ID(), 'hds_hero_image', true );
 		$hero_image_url    = $hero_image_id ? wp_get_attachment_image_url( $hero_image_id, 'hds-hero' ) : '';
 		$hero_image_srcset = array();
-		if ( $hero_image_id ) {
+	if ( $hero_image_id ) {
 			$hero_image_srcset = array(
 				768 => wp_get_attachment_image_url( $hero_image_id, 'medium_large' ),
 			);
-		}
+	}
 		$hero_image_media_max = '820px';
 		$hero_cta_text        = __( 'Vrijblijvende offerte', 'hds' );
 		$hero_cta_url         = home_url( '/offerte-aanvragen/' );
@@ -92,12 +92,13 @@ get_header();
 
 	<?php
 	// 3. Final CTA — reuse hds_cta_section
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- hds_cta_section() returns trusted theme markup.
 	echo hds_cta_section(
 		__( 'Klaar om ook klant te worden?', 'hds' ),
 		__( 'Vraag vandaag nog een vrijblijvende offerte aan.', 'hds' ),
 		__( 'Offerte aanvragen', 'hds' ),
 		home_url( '/offerte-aanvragen/' )
-	); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	);
 	?>
 </main>
 
