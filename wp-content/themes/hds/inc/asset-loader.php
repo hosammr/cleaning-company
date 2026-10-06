@@ -9,24 +9,49 @@
  */
 
 /**
+ * Get a cache-busting version from an asset file's modification time.
+ *
+ * Uses the served bundle's mtime so unchanged assets keep a stable,
+ * long-cacheable version while changed assets automatically receive a new
+ * version. Results are cached per request and fall back to the theme asset
+ * version when the file is missing or unreadable.
+ *
+ * @param string $relative_path Asset path relative to the assets directory.
+ * @return string Cache-busting version string.
+ */
+function hds_get_asset_mtime_version( string $relative_path ): string {
+	static $versions = [];
+
+	if ( ! isset( $versions[ $relative_path ] ) ) {
+		$file  = HDS_DIR . '/assets/' . $relative_path;
+		$mtime = file_exists( $file ) ? filemtime( $file ) : false;
+
+		$versions[ $relative_path ] = false !== $mtime
+			? (string) $mtime
+			: hds_get_asset_version();
+	}
+
+	return $versions[ $relative_path ];
+}
+
+/**
  * Register and enqueue theme stylesheets.
  */
 function hds_enqueue_styles(): void {
-	$version = hds_get_asset_version();
-	$min     = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+	$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 	wp_enqueue_style(
 		'hds-main',
 		HDS_URI . '/assets/css/main' . $min . '.css',
 		[],
-		$version
+		hds_get_asset_mtime_version( 'css/main' . $min . '.css' )
 	);
 
 	wp_enqueue_style(
 		'hds-editor',
 		HDS_URI . '/assets/css/editor.css',
 		[],
-		$version
+		hds_get_asset_mtime_version( 'css/editor.css' )
 	);
 
 	$blocks_css = HDS_DIR . '/assets/css/blocks' . $min . '.css';
@@ -35,7 +60,7 @@ function hds_enqueue_styles(): void {
 			'hds-blocks',
 			HDS_URI . '/assets/css/blocks' . $min . '.css',
 			[ 'hds-main' ],
-			$version
+			hds_get_asset_mtime_version( 'css/blocks' . $min . '.css' )
 		);
 	}
 }
@@ -46,8 +71,8 @@ add_action( 'enqueue_block_editor_assets', 'hds_enqueue_styles' );
  * Register and enqueue theme scripts with defer.
  */
 function hds_enqueue_scripts(): void {
-	$version = hds_get_asset_version();
 	$min     = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+	$version = hds_get_asset_mtime_version( 'js/main' . $min . '.js' );
 
 	wp_enqueue_script(
 		'hds-main',
@@ -68,6 +93,9 @@ add_action( 'wp_enqueue_scripts', 'hds_enqueue_scripts' );
 
 /**
  * Add defer attribute to script tags.
+ *
+ * @param string $tag    The script tag markup.
+ * @param string $handle The script handle.
  */
 function hds_add_defer_attribute( string $tag, string $handle ): string {
 	if ( 'hds-main' === $handle ) {
@@ -83,6 +111,8 @@ add_filter( 'script_loader_tag', 'hds_add_defer_attribute', 10, 2 );
  * a generic 100vw sizes default that forces a large candidate. Pin the
  * sizes to the real rendered slot so both the <img> and the preload pick
  * the same small candidate.
+ *
+ * @param string $html The custom logo markup.
  */
 function hds_fix_custom_logo_sizes( string $html ): string {
 	return preg_replace( '/\ssizes="[^"]*"/', ' sizes="200px"', $html, 1 );
@@ -127,6 +157,8 @@ add_action( 'wp_head', 'hds_preconnect_origins', 1 );
 
 /**
  * Add loading="lazy" to all images that don't already have it.
+ *
+ * @param string $content The content to filter.
  */
 function hds_add_lazy_loading( string $content ): string {
 	if ( function_exists( 'wp_lazy_loading_enabled' ) && wp_lazy_loading_enabled( 'img', 'the_content' ) ) {
@@ -166,6 +198,8 @@ add_action( 'init', 'hds_disable_emoji_assets' );
 
 /**
  * Remove jQuery Migrate dependency.
+ *
+ * @param \WP_Scripts $scripts The scripts registry.
  */
 function hds_remove_jquery_migrate( \WP_Scripts $scripts ): void {
 	if ( ! is_admin() && isset( $scripts->registered['jquery'] ) ) {
