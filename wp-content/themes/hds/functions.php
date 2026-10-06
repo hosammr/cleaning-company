@@ -6,7 +6,7 @@
  */
 
 if ( ! defined( 'HDS_VERSION' ) ) {
-	define( 'HDS_VERSION', '1.0.0' );
+	define( 'HDS_VERSION', '1.0.1' );
 }
 
 if ( ! defined( 'HDS_DIR' ) ) {
