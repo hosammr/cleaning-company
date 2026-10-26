@@ -1,0 +1,33 @@
+name: PHPCS Gate Test
+
+on:
+  push:
+    branches:
+      - test/phpcs-gate-verification
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  phpcs-gate-test:
+    name: PHPCS Gate Test
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+          tools: composer:v2
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-progress
+
+      - name: Run isolated PHPCS gate tests
+        run: bash .github/scripts/test-phpcs-gate.sh
