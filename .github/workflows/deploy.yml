@@ -57,18 +57,23 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-interaction --no-progress
 
+      # Compare against the base commit and fail only on new findings.
+      # Warnings remain visible in the JSON report but do not fail the step.
       - name: Run PHPCS on changed PHP files
         run: |
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            RANGE="${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }}"
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+            RANGE="${BASE_SHA}...${{ github.event.pull_request.head.sha }}"
           else
             BEFORE="${{ github.event.before }}"
 
             if [[ -z "$BEFORE" || "$BEFORE" == "0000000000000000000000000000000000000000" ]]; then
-              RANGE="HEAD~1..HEAD"
+              BASE_SHA="HEAD~1"
             else
-              RANGE="${BEFORE}..${{ github.sha }}"
+              BASE_SHA="$BEFORE"
             fi
+
+            RANGE="${BASE_SHA}..${{ github.sha }}"
           fi
 
           mapfile -t CHANGED_PHP < <(
@@ -80,10 +85,43 @@ jobs:
             exit 0
           fi
 
-          echo "Running PHPCS on changed PHP files:"
+          echo "Running PHPCS on changed PHP files (new findings only):"
           printf '  %s\n' "${CHANGED_PHP[@]}"
 
-          vendor/bin/phpcs --runtime-set ignore_warnings_on_exit 1 --standard=phpcs.xml "${CHANGED_PHP[@]}"
+          set +e
+          vendor/bin/phpcs-changed \
+            --git \
+            --git-base "$BASE_SHA" \
+            --no-batch \
+            --standard=phpcs.xml \
+            --report=json \
+            "${CHANGED_PHP[@]}" > "$RUNNER_TEMP/phpcs-changed.json"
+          PHPCS_CHANGED_EXIT=$?
+          set -e
+
+          cat "$RUNNER_TEMP/phpcs-changed.json"
+
+          if [[ $PHPCS_CHANGED_EXIT -gt 1 ]]; then
+            echo "phpcs-changed failed unexpectedly with exit code $PHPCS_CHANGED_EXIT"
+            exit "$PHPCS_CHANGED_EXIT"
+          fi
+
+          php -r '
+            $data = json_decode( file_get_contents( $argv[1] ), true );
+            if ( ! is_array( $data ) ) {
+              fwrite( STDERR, "Invalid PHPCS JSON output\n" );
+              exit( 2 );
+            }
+            $errors = (int) ( $data["totals"]["errors"] ?? 0 );
+            if ( $errors > 0 ) {
+              fwrite( STDERR, "New PHPCS errors found: {$errors}\n" );
+              exit( 1 );
+            }
+            $warnings = (int) ( $data["totals"]["warnings"] ?? 0 );
+            if ( $warnings > 0 ) {
+              echo "New PHPCS warnings found: {$warnings} (non-blocking)\n";
+            }
+          ' "$RUNNER_TEMP/phpcs-changed.json"
 
       - name: Setup Node.js
         uses: actions/setup-node@v5
