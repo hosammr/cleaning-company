@@ -180,7 +180,9 @@ function hds_render_service_card_core( \WP_Post $post, bool $show_image = true, 
 
 	if ( '' === $excerpt ) {
 		$service = hds_get_service( $post->post_name );
-		if ( $service && ! empty( $service['subtitle'] ) ) {
+		if ( $service && ! empty( $service['card_excerpt'] ) ) {
+			$excerpt = $service['card_excerpt'];
+		} elseif ( $service && ! empty( $service['subtitle'] ) ) {
 			$excerpt = $service['subtitle'];
 		}
 	}

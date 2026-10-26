@@ -399,7 +399,8 @@ function hds_get_services(): array {
 
 		'scholen-en-kinderopvang-reiniging' => [
 			'title'           => __( 'Scholen en Kinderopvang reiniging', 'hds' ),
-			'subtitle'        => __( 'Schoonmaak voor scholen en kinderopvanglocaties, afgestemd op het gebruik van de ruimtes.', 'hds' ),
+			'subtitle'        => __( 'Schoonmaak voor scholen en kinderopvanglocaties in de provincie Groningen, afgestemd op het gebruik van de ruimtes.', 'hds' ),
+			'card_excerpt'    => __( 'Schoonmaak voor scholen en kinderopvanglocaties, afgestemd op het gebruik van de ruimtes.', 'hds' ),
 			'hero_image'      => 0,
 			'visual_break_image' => 363,
 			'eyebrow'         => __( 'Scholen en kinderopvang', 'hds' ),
