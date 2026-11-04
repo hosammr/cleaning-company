@@ -9,6 +9,26 @@ if ( ! defined( 'HDS_VERSION' ) ) {
 	define( 'HDS_VERSION', '1.0.0' );
 }
 
+/**
+ * Rollback Safety Mode.
+ *
+ * Enabled on the dedicated rollback/consent-safety-mode branch to block
+ * all theme-owned optional analytics and marketing tracking.
+ */
+if ( ! defined( 'HDS_ROLLBACK_SAFE_MODE' ) ) {
+	define( 'HDS_ROLLBACK_SAFE_MODE', true );
+}
+
+/**
+ * Whether Rollback Safety Mode is enforced.
+ *
+ * This is the authoritative security check on this branch. It always
+ * returns true, regardless of any earlier HDS_ROLLBACK_SAFE_MODE value.
+ */
+function hds_rsm_enabled(): bool {
+	return true;
+}
+
 if ( ! defined( 'HDS_DIR' ) ) {
 	define( 'HDS_DIR', get_template_directory() );
 }

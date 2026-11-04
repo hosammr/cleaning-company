@@ -16,10 +16,14 @@
  * Check whether the visitor has granted analytics consent.
  *
  * Reads the hds_cookie_consent cookie set by the cookie banner.
- * Returns false when no cookie exists yet or when the visitor
- * chose "Alleen functioneel".
+ * Returns false when no cookie exists yet, when the visitor chose
+ * "Alleen functioneel", or when Rollback Safety Mode is active.
  */
 function hds_analytics_consent_granted(): bool {
+	if ( hds_rsm_enabled() ) {
+		return false;
+	}
+
 	return isset( $_COOKIE['hds_cookie_consent'] )
 		&& 'accepted' === sanitize_text_field( wp_unslash( $_COOKIE['hds_cookie_consent'] ) );
 }
@@ -35,6 +39,10 @@ function hds_analytics_consent_granted(): bool {
  * "Accepteren" handler (consent update in main.js).
  */
 function hds_output_consent_defaults(): void {
+	if ( hds_rsm_enabled() ) {
+		return;
+	}
+
 	if ( ! HDS_Config::gtm_id() && ! HDS_Config::ga4_id() ) {
 		return;
 	}
@@ -56,12 +64,18 @@ function hds_output_consent_defaults(): void {
 	</script>
 	<?php
 }
-add_action( 'wp_head', 'hds_output_consent_defaults', 0 );
+if ( ! hds_rsm_enabled() ) {
+	add_action( 'wp_head', 'hds_output_consent_defaults', 0 );
+}
 
 /**
  * Output GTM container snippet in <head>.
  */
 function hds_output_gtm_head(): void {
+	if ( hds_rsm_enabled() ) {
+		return;
+	}
+
 	$gtm_id = HDS_Config::gtm_id();
 	if ( ! $gtm_id ) {
 		return;
@@ -76,12 +90,18 @@ function hds_output_gtm_head(): void {
 	</script>
 	<?php
 }
-add_action( 'wp_head', 'hds_output_gtm_head', 1 );
+if ( ! hds_rsm_enabled() ) {
+	add_action( 'wp_head', 'hds_output_gtm_head', 1 );
+}
 
 /**
  * Output GTM noscript fallback after <body>.
  */
 function hds_output_gtm_body(): void {
+	if ( hds_rsm_enabled() ) {
+		return;
+	}
+
 	$gtm_id = HDS_Config::gtm_id();
 	if ( ! $gtm_id ) {
 		return;
@@ -96,12 +116,18 @@ function hds_output_gtm_body(): void {
 		esc_attr( $gtm_id )
 	);
 }
-add_action( 'wp_body_open', 'hds_output_gtm_body', 1 );
+if ( ! hds_rsm_enabled() ) {
+	add_action( 'wp_body_open', 'hds_output_gtm_body', 1 );
+}
 
 /**
  * Output GA4 gtag snippet (falls back if GTM not active).
  */
 function hds_output_ga4(): void {
+	if ( hds_rsm_enabled() ) {
+		return;
+	}
+
 	$ga4_id = HDS_Config::ga4_id();
 	if ( ! $ga4_id || HDS_Config::gtm_id() ) {
 		return; // Don't double-load — GTM already handles GA4
@@ -116,12 +142,18 @@ function hds_output_ga4(): void {
 	</script>
 	<?php
 }
-add_action( 'wp_head', 'hds_output_ga4', 2 );
+if ( ! hds_rsm_enabled() ) {
+	add_action( 'wp_head', 'hds_output_ga4', 2 );
+}
 
 /**
  * Push a custom event to the dataLayer (GTM).
  */
 function hds_track_event( string $event_name, array $event_data = [] ): void {
+	if ( hds_rsm_enabled() ) {
+		return;
+	}
+
 	if ( ! HDS_Config::gtm_id() && ! HDS_Config::ga4_id() ) {
 		return;
 	}
@@ -136,39 +168,57 @@ function hds_track_event( string $event_name, array $event_data = [] ): void {
 
 	echo '<script>dataLayer = window.dataLayer || []; dataLayer.push(' . wp_json_encode( $data, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT ) . ');</script>' . "\n";
 }
-add_action( 'wp_footer', function () {
-	/**
-	 * Allow plugins/themes to push events before the closing body tag.
-	 */
-	do_action( 'hds_analytics_events' );
-}, 99 );
+if ( ! hds_rsm_enabled() ) {
+	add_action( 'wp_footer', function () {
+		/**
+		 * Allow plugins/themes to push events before the closing body tag.
+		 */
+		do_action( 'hds_analytics_events' );
+	}, 99 );
+}
 
 /**
  * Track phone clicks via data attribute hook.
  */
 function hds_phone_click_tracking( string $output, string $phone ): string {
+	if ( hds_rsm_enabled() ) {
+		return $output;
+	}
+
 	if ( ! HDS_Config::gtm_id() || ! hds_analytics_consent_granted() ) {
 		return $output;
 	}
 	return str_replace( '<a ', '<a data-event="phone_click" data-phone="' . esc_attr( $phone ) . '" ', $output );
 }
-add_filter( 'hds_phone_link', 'hds_phone_click_tracking', 10, 2 );
+if ( ! hds_rsm_enabled() ) {
+	add_filter( 'hds_phone_link', 'hds_phone_click_tracking', 10, 2 );
+}
 
 /**
  * Track email clicks via data attribute hook.
  */
 function hds_email_click_tracking( string $output, string $email ): string {
+	if ( hds_rsm_enabled() ) {
+		return $output;
+	}
+
 	if ( ! HDS_Config::gtm_id() || ! hds_analytics_consent_granted() ) {
 		return $output;
 	}
 	return str_replace( '<a ', '<a data-event="email_click" data-email="' . esc_attr( $email ) . '" ', $output );
 }
-add_filter( 'hds_email_link', 'hds_email_click_tracking', 10, 2 );
+if ( ! hds_rsm_enabled() ) {
+	add_filter( 'hds_email_link', 'hds_email_click_tracking', 10, 2 );
+}
 
 /**
  * Track file downloads (applied to PDF links).
  */
 function hds_download_tracking( string $content ): string {
+	if ( hds_rsm_enabled() ) {
+		return $content;
+	}
+
 	if ( ! HDS_Config::gtm_id() || ! hds_analytics_consent_granted() ) {
 		return $content;
 	}
@@ -185,12 +235,18 @@ function hds_download_tracking( string $content ): string {
 		$content
 	);
 }
-add_filter( 'the_content', 'hds_download_tracking' );
+if ( ! hds_rsm_enabled() ) {
+	add_filter( 'the_content', 'hds_download_tracking' );
+}
 
 /**
  * WooCommerce add-to-cart event tracking.
  */
 function hds_woocommerce_add_to_cart_event(): void {
+	if ( hds_rsm_enabled() ) {
+		return;
+	}
+
 	hds_track_event( 'add_to_cart', [
 		'product_id'   => get_the_ID(),
 		'product_name' => get_the_title(),
@@ -201,6 +257,10 @@ function hds_woocommerce_add_to_cart_event(): void {
  * WooCommerce purchase event tracking.
  */
 function hds_woocommerce_purchase_event( int $order_id ): void {
+	if ( hds_rsm_enabled() ) {
+		return;
+	}
+
 	if ( ! function_exists( 'wc_get_order' ) ) {
 		return;
 	}
@@ -223,16 +283,24 @@ function hds_woocommerce_purchase_event( int $order_id ): void {
 		}, $order->get_items() ),
 	] );
 }
-add_action( 'woocommerce_thankyou', 'hds_woocommerce_purchase_event', 10, 1 );
+if ( ! hds_rsm_enabled() ) {
+	add_action( 'woocommerce_thankyou', 'hds_woocommerce_purchase_event', 10, 1 );
+}
 
 /**
  * Search tracking — push event on search.
  */
 function hds_search_tracking(): void {
+	if ( hds_rsm_enabled() ) {
+		return;
+	}
+
 	if ( is_search() && get_search_query() ) {
 		hds_track_event( 'search', [
 			'search_term' => get_search_query(),
 		] );
 	}
 }
-add_action( 'wp_footer', 'hds_search_tracking', 50 );
+if ( ! hds_rsm_enabled() ) {
+	add_action( 'wp_footer', 'hds_search_tracking', 50 );
+}

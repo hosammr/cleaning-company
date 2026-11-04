@@ -238,14 +238,22 @@ function hds_grid( string $content, int $columns = 3, string $class = '' ): stri
  *
  * In production, Complianz Premium replaces this with its own banner.
  * This serves as a fallback and structural placeholder during development.
+ *
+ * In Rollback Safety Mode the legacy hds_cookie_consent cookie no longer
+ * suppresses this banner, because that cookie is not analytics consent.
+ * Complianz suppression is intentionally left unchanged: when the plugin
+ * is active it controls banner display, and RSM cannot guarantee that a
+ * banner is shown or control tracking injected by the plugin.
  */
 function hds_cookie_banner(): string {
 	if ( function_exists( 'cmplz_cookiebanner' ) ) {
 		return '';
 	}
 
-	if ( isset( $_COOKIE['hds_cookie_consent'] ) ) {
-		return '';
+	if ( ! hds_rsm_enabled() ) {
+		if ( isset( $_COOKIE['hds_cookie_consent'] ) ) {
+			return '';
+		}
 	}
 
 	ob_start();
@@ -257,15 +265,31 @@ function hds_cookie_banner(): string {
 					<?php esc_html_e( 'Deze website gebruikt cookies', 'hds' ); ?>
 				</h2>
 				<p id="hds-cookie-desc" class="hds-cookie-banner__description">
-					<?php esc_html_e( 'Wij gebruiken cookies om de website goed te laten werken en te analyseren. Door op "Accepteren" te klikken stemt u in met het gebruik van alle cookies.', 'hds' ); ?>
+					<?php if ( hds_rsm_enabled() ) : ?>
+						<?php esc_html_e( 'Deze website gebruikt alleen functionele cookies. Analytische en marketingcookies zijn op dit moment uitgeschakeld. De knoppen hieronder sluiten alleen deze melding; er wordt geen toestemming voor optionele cookies gegeven of opgeslagen.', 'hds' ); ?>
+					<?php else : ?>
+						<?php esc_html_e( 'Wij gebruiken cookies om de website goed te laten werken en te analyseren. Door op "Accepteren" te klikken stemt u in met het gebruik van alle cookies.', 'hds' ); ?>
+					<?php endif; ?>
 				</p>
 			</div>
 			<div class="hds-cookie-banner__actions">
 				<button type="button" class="btn btn--primary hds-cookie-banner__accept" data-action="accept">
-					<?php esc_html_e( 'Accepteren', 'hds' ); ?>
+					<?php
+					if ( hds_rsm_enabled() ) {
+						esc_html_e( 'Sluiten', 'hds' );
+					} else {
+						esc_html_e( 'Accepteren', 'hds' );
+					}
+	            ?>
 				</button>
 				<button type="button" class="btn btn--outline hds-cookie-banner__decline" data-action="decline">
-					<?php esc_html_e( 'Alleen functioneel', 'hds' ); ?>
+					<?php
+					if ( hds_rsm_enabled() ) {
+						esc_html_e( 'Sluiten', 'hds' );
+					} else {
+						esc_html_e( 'Alleen functioneel', 'hds' );
+					}
+	            ?>
 				</button>
 				<a href="<?php echo esc_url( home_url( '/privacyverklaring/' ) ); ?>" class="hds-cookie-banner__link">
 					<?php esc_html_e( 'Privacyverklaring', 'hds' ); ?>

@@ -149,6 +149,10 @@ add_action( 'wp_head', 'hds_preload_assets', 1 );
  * Preconnect to external origins for faster resource loading.
  */
 function hds_preconnect_origins(): void {
+	if ( hds_rsm_enabled() ) {
+		return;
+	}
+
 	echo '<link rel="preconnect" href="https://www.google.com">' . "\n";
 	echo '<link rel="preconnect" href="https://www.googletagmanager.com">' . "\n";
 	echo '<link rel="dns-prefetch" href="https://www.googletagmanager.com">' . "\n";
