@@ -399,40 +399,52 @@ function hds_render_client_logos( array $attributes = array(), string $content =
 
 	$clients = array(
 		array(
-			'name' => 'Switch Network',
-			'url'  => 'https://switchnetwork.nl/',
-			'file' => 'switch-network.png',
-			'alt'  => 'Switch Network logo',
+			'name'   => 'Switch Network',
+			'url'    => 'https://switchnetwork.nl/',
+			'file'   => 'switch-network.png',
+			'alt'    => 'Switch Network logo',
+			'width'  => 729,
+			'height' => 303,
 		),
 		array(
-			'name' => 'SDeal',
-			'url'  => 'https://www.sdeal.nl/',
-			'file' => 'sdeal.svg',
-			'alt'  => 'SDeal logo',
+			'name'   => 'SDeal',
+			'url'    => 'https://www.sdeal.nl/',
+			'file'   => 'sdeal.svg',
+			'alt'    => 'SDeal logo',
+			'width'  => 531,
+			'height' => 227,
 		),
 		array(
-			'name' => 'Jongerenzorg',
-			'url'  => 'https://jongerenzorg.nl/',
-			'file' => 'jongerenzorg.svg',
-			'alt'  => 'Jongerenzorg logo',
+			'name'   => 'Jongerenzorg',
+			'url'    => 'https://jongerenzorg.nl/',
+			'file'   => 'jongerenzorg.svg',
+			'alt'    => 'Jongerenzorg logo',
+			'width'  => 964,
+			'height' => 393,
 		),
 		array(
-			'name' => 'Eskom',
-			'url'  => 'https://www.eskom.co.za/',
-			'file' => 'eskom.jpg',
-			'alt'  => 'Eskom logo',
+			'name'   => 'Eskom',
+			'url'    => 'https://www.eskom.co.za/',
+			'file'   => 'eskom.jpg',
+			'alt'    => 'Eskom logo',
+			'width'  => 1971,
+			'height' => 696,
 		),
 		array(
-			'name' => 'Broscars',
-			'url'  => 'https://www.broscars.nl/',
-			'file' => 'broscars.png',
-			'alt'  => 'Broscars logo',
+			'name'   => 'Broscars',
+			'url'    => 'https://www.broscars.nl/',
+			'file'   => 'broscars.png',
+			'alt'    => 'Broscars logo',
+			'width'  => 321,
+			'height' => 250,
 		),
 		array(
-			'name' => 'Hasret',
-			'url'  => 'https://www.hasret1.nl/',
-			'file' => 'hasret.png',
-			'alt'  => 'Hasret logo',
+			'name'   => 'Hasret',
+			'url'    => 'https://www.hasret1.nl/',
+			'file'   => 'hasret.png',
+			'alt'    => 'Hasret logo',
+			'width'  => 257,
+			'height' => 101,
 		),
 	);
 
@@ -443,11 +455,17 @@ function hds_render_client_logos( array $attributes = array(), string $content =
 	<?php if ( 'strip' === $variant ) : ?>
 		<div class="hds-clients-strip">
 			<h2 class="hds-clients-strip__heading"><?php esc_html_e( 'Onze opdrachtgevers', 'hds' ); ?></h2>
-<ul class="hds-clients-strip__list">
+			<ul class="hds-clients-strip__list">
 				<?php foreach ( $clients as $client ) : ?>
 					<li class="hds-clients-strip__item<?php echo ! empty( $client['dark'] ) ? ' hds-clients-strip__item--dark' : ''; ?>">
 						<a href="<?php echo esc_url( $client['url'] ); ?>" target="_blank" rel="noopener noreferrer">
-							<img src="<?php echo esc_url( $logo_base . $client['file'] ); ?>" alt="<?php echo esc_attr( $client['alt'] ); ?>" loading="lazy">
+							<img
+								src="<?php echo esc_url( $logo_base . $client['file'] ); ?>"
+								alt="<?php echo esc_attr( $client['alt'] ); ?>"
+								width="<?php echo esc_attr( $client['width'] ); ?>"
+								height="<?php echo esc_attr( $client['height'] ); ?>"
+								loading="lazy"
+							>
 						</a>
 					</li>
 				<?php endforeach; ?>
@@ -464,7 +482,13 @@ function hds_render_client_logos( array $attributes = array(), string $content =
 					<li class="hds-clients__card<?php echo ! empty( $client['dark'] ) ? ' hds-clients__card--dark' : ''; ?>">
 						<a href="<?php echo esc_url( $client['url'] ); ?>" target="_blank" rel="noopener noreferrer">
 							<span class="hds-clients__logo">
-								<img src="<?php echo esc_url( $logo_base . $client['file'] ); ?>" alt="<?php echo esc_attr( $client['alt'] ); ?>" loading="lazy">
+								<img
+									src="<?php echo esc_url( $logo_base . $client['file'] ); ?>"
+									alt="<?php echo esc_attr( $client['alt'] ); ?>"
+									width="<?php echo esc_attr( $client['width'] ); ?>"
+									height="<?php echo esc_attr( $client['height'] ); ?>"
+									loading="lazy"
+								>
 							</span>
 							<span class="hds-clients__name"><?php echo esc_html( $client['name'] ); ?></span>
 						</a>
