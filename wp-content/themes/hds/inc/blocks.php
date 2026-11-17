@@ -2,7 +2,7 @@
 /**
  * Custom block registration.
  *
- * Four custom blocks that query dynamic data via server-side render:
+ * Five custom blocks that query dynamic data via server-side render:
  *   hds/service-card   — renders a single service card from a Page
  *   hds/testimonial    — renders testimonial cards from hds_testimonial CPT
  *   hds/job-listing    — renders job vacancy cards from hds_vacancy CPT
@@ -29,39 +29,39 @@ function hds_register_custom_blocks(): void {
 
 	$blocks = [
 		'service-card' => [
-			'render'    => 'hds_render_service_card',
-			'title'     => __( 'HDS Service Card', 'hds' ),
-			'desc'      => __( 'Toon een service kaart met icoon, titel, excerpt en link.', 'hds' ),
-			'icon'      => 'admin-page',
-			'category'  => 'hds-service',
+			'render'   => 'hds_render_service_card',
+			'title'    => __( 'HDS Service Card', 'hds' ),
+			'desc'     => __( 'Toon een service kaart met icoon, titel, excerpt en link.', 'hds' ),
+			'icon'     => 'admin-page',
+			'category' => 'hds-service',
 		],
 		'testimonial'  => [
-			'render'    => 'hds_render_testimonial',
-			'title'     => __( 'HDS Referenties', 'hds' ),
-			'desc'      => __( 'Toon referenties van klanten uit het hds_testimonial CPT.', 'hds' ),
-			'icon'      => 'format-quote',
-			'category'  => 'hds-service',
+			'render'   => 'hds_render_testimonial',
+			'title'    => __( 'HDS Referenties', 'hds' ),
+			'desc'     => __( 'Toon referenties van klanten uit het hds_testimonial CPT.', 'hds' ),
+			'icon'     => 'format-quote',
+			'category' => 'hds-service',
 		],
 		'job-listing'  => [
-			'render'    => 'hds_render_job_listing',
-			'title'     => __( 'HDS Vacatures', 'hds' ),
-			'desc'      => __( 'Toon openstaande vacatures met details en solliciteerknop.', 'hds' ),
-			'icon'      => 'businessperson',
-			'category'  => 'hds-service',
+			'render'   => 'hds_render_job_listing',
+			'title'    => __( 'HDS Vacatures', 'hds' ),
+			'desc'     => __( 'Toon openstaande vacatures met details en solliciteerknop.', 'hds' ),
+			'icon'     => 'businessperson',
+			'category' => 'hds-service',
 		],
 		'contact-info' => [
-			'render'    => 'hds_render_contact_info',
-			'title'     => __( 'HDS Contactgegevens', 'hds' ),
-			'desc'      => __( 'Toon bedrijfsgegevens uit de Customizer (telefoon, e-mail, adres, KVK, BTW).', 'hds' ),
-			'icon'      => 'phone',
-			'category'  => 'hds-content',
+			'render'   => 'hds_render_contact_info',
+			'title'    => __( 'HDS Contactgegevens', 'hds' ),
+			'desc'     => __( 'Toon bedrijfsgegevens uit de Customizer (telefoon, e-mail, adres, KVK, BTW).', 'hds' ),
+			'icon'     => 'phone',
+			'category' => 'hds-content',
 		],
 		'client-logos' => [
-			'render'    => 'hds_render_client_logos',
-			'title'     => __( 'HDS Opdrachtgevers', 'hds' ),
-			'desc'      => __( 'Toon de bevestigde opdrachtgevers met hun logo en externe website.', 'hds' ),
-			'icon'      => 'businessperson',
-			'category'  => 'hds-content',
+			'render'   => 'hds_render_client_logos',
+			'title'    => __( 'HDS Opdrachtgevers', 'hds' ),
+			'desc'     => __( 'Toon de bevestigde opdrachtgevers met hun logo en externe website.', 'hds' ),
+			'icon'     => 'businessperson',
+			'category' => 'hds-content',
 		],
 	];
 
@@ -76,43 +76,90 @@ function hds_register_custom_blocks(): void {
 			true
 		);
 
-		register_block_type( 'hds/' . $name, [
-			'editor_script'   => $handle,
-			'render_callback' => $config['render'],
-			'attributes'      => hds_get_block_attributes( $name ),
-		] );
+		register_block_type(
+			'hds/' . $name,
+			[
+				'editor_script'   => $handle,
+				'render_callback' => $config['render'],
+				'attributes'      => hds_get_block_attributes( $name ),
+			]
+		);
 	}
 }
 add_action( 'init', 'hds_register_custom_blocks' );
 
 /**
  * Get block attribute definitions.
+ *
+ * @param string $block Block name.
  */
 function hds_get_block_attributes( string $block ): array {
 	$attributes = [
 		'service-card' => [
-			'pageId'    => [ 'type' => 'integer', 'default' => 0 ],
-			'showImage' => [ 'type' => 'boolean', 'default' => false ],
+			'pageId'    => [
+				'type'    => 'integer',
+				'default' => 0,
+			],
+			'showImage' => [
+				'type'    => 'boolean',
+				'default' => false,
+			],
 		],
-		'testimonial' => [
-			'count'         => [ 'type' => 'integer', 'default' => 3 ],
-			'showRating'    => [ 'type' => 'boolean', 'default' => true ],
-			'selectedItems' => [ 'type' => 'array',   'default' => [] ],
+		'testimonial'  => [
+			'count'         => [
+				'type'    => 'integer',
+				'default' => 3,
+			],
+			'showRating'    => [
+				'type'    => 'boolean',
+				'default' => true,
+			],
+			'selectedItems' => [
+				'type'    => 'array',
+				'default' => [],
+			],
 		],
-		'job-listing' => [
-			'count'   => [ 'type' => 'integer', 'default' => 5 ],
-			'showAll' => [ 'type' => 'boolean', 'default' => true ],
+		'job-listing'  => [
+			'count'   => [
+				'type'    => 'integer',
+				'default' => 5,
+			],
+			'showAll' => [
+				'type'    => 'boolean',
+				'default' => true,
+			],
 		],
 		'contact-info' => [
-			'showPhone'   => [ 'type' => 'boolean', 'default' => true ],
-			'showEmail'   => [ 'type' => 'boolean', 'default' => true ],
-			'showAddress' => [ 'type' => 'boolean', 'default' => true ],
-			'showKVK'     => [ 'type' => 'boolean', 'default' => true ],
-			'showHours'   => [ 'type' => 'boolean', 'default' => false ],
-			'showSocial'  => [ 'type' => 'boolean', 'default' => false ],
+			'showPhone'   => [
+				'type'    => 'boolean',
+				'default' => true,
+			],
+			'showEmail'   => [
+				'type'    => 'boolean',
+				'default' => true,
+			],
+			'showAddress' => [
+				'type'    => 'boolean',
+				'default' => true,
+			],
+			'showKVK'     => [
+				'type'    => 'boolean',
+				'default' => true,
+			],
+			'showHours'   => [
+				'type'    => 'boolean',
+				'default' => false,
+			],
+			'showSocial'  => [
+				'type'    => 'boolean',
+				'default' => false,
+			],
 		],
 		'client-logos' => [
-			'variant' => [ 'type' => 'string', 'default' => 'grid' ],
+			'variant' => [
+				'type'    => 'string',
+				'default' => 'grid',
+			],
 		],
 	];
 
@@ -123,15 +170,19 @@ function hds_get_block_attributes( string $block ): array {
 
 /**
  * Render hds/service-card block.
+ *
+ * @param array    $attributes Block attributes.
+ * @param string   $content    Saved block content.
+ * @param WP_Block $block      Block instance.
  */
-function hds_render_service_card( array $attributes, string $content, \WP_Block $block ): string {
+function hds_render_service_card( array $attributes, string $content, WP_Block $block ): string {
 	$page_id = $attributes['pageId'] ?? 0;
 	if ( ! $page_id ) {
 		return '<p class="hds-block-empty">' . esc_html__( 'Selecteer een service pagina in de blokinstellingen.', 'hds' ) . '</p>';
 	}
 
 	$post = get_post( $page_id );
-	if ( ! $post || $post->post_type !== 'page' ) {
+	if ( ! $post || 'page' !== $post->post_type ) {
 		return '';
 	}
 
@@ -142,8 +193,12 @@ function hds_render_service_card( array $attributes, string $content, \WP_Block 
 
 /**
  * Render hds/testimonial block.
+ *
+ * @param array    $attributes Block attributes.
+ * @param string   $content    Saved block content.
+ * @param WP_Block $block      Block instance.
  */
-function hds_render_testimonial( array $attributes, string $content, \WP_Block $block ): string {
+function hds_render_testimonial( array $attributes, string $content, WP_Block $block ): string {
 	$count = $attributes['count'] ?? 3;
 
 	$args = [
@@ -172,24 +227,35 @@ function hds_render_testimonial( array $attributes, string $content, \WP_Block $
 	ob_start();
 	?>
 	<div class="hds-testimonial-grid">
-		<?php while ( $query->have_posts() ) : $query->the_post(); ?>
+		<?php
+		while ( $query->have_posts() ) :
+			$query->the_post();
+			?>
 			<blockquote class="hds-testimonial-card">
 				<p class="hds-testimonial-card__quote">
 					&ldquo;<?php echo esc_html( wp_strip_all_tags( get_the_content() ) ); ?>&rdquo;
 				</p>
 				<footer class="hds-testimonial-card__footer">
 					<cite class="hds-testimonial-card__author">
-						<?php echo esc_html( get_post_meta( get_the_ID(), 'hds_author_name', true ) ?: get_the_title() ); ?>
+						<?php
+						$author_name = get_post_meta( get_the_ID(), 'hds_author_name', true );
+						echo esc_html( ! empty( $author_name ) ? $author_name : get_the_title() );
+						?>
 					</cite>
 					<?php
 					$company = get_post_meta( get_the_ID(), 'hds_company_name', true );
-					if ( $company ) : ?>
+					if ( $company ) :
+						?>
 						<span class="hds-testimonial-card__company"><?php echo esc_html( $company ); ?></span>
 					<?php endif; ?>
 					<?php if ( $attributes['showRating'] ?? true ) : ?>
-						<div class="hds-testimonial-card__rating" aria-label="<?php printf( esc_attr__( '%d van 5 sterren', 'hds' ), (int) get_post_meta( get_the_ID(), 'hds_star_rating', true ) ); ?>">
+						<?php
+						$rating = (int) get_post_meta( get_the_ID(), 'hds_star_rating', true );
+						/* translators: %d: number of stars out of 5. */
+						$rating_label = sprintf( __( '%d van 5 sterren', 'hds' ), $rating );
+						?>
+						<div class="hds-testimonial-card__rating" aria-label="<?php echo esc_attr( $rating_label ); ?>">
 							<?php
-							$rating = (int) get_post_meta( get_the_ID(), 'hds_star_rating', true );
 							for ( $i = 1; $i <= 5; $i++ ) {
 								echo $i <= $rating ? '&#9733;' : '&#9734;';
 							}
@@ -207,8 +273,12 @@ function hds_render_testimonial( array $attributes, string $content, \WP_Block $
 
 /**
  * Render hds/job-listing block.
+ *
+ * @param array    $attributes Block attributes.
+ * @param string   $content    Saved block content.
+ * @param WP_Block $block      Block instance.
  */
-function hds_render_job_listing( array $attributes, string $content, \WP_Block $block ): string {
+function hds_render_job_listing( array $attributes, string $content, WP_Block $block ): string {
 	$count = $attributes['count'] ?? 5;
 
 	$args = [
@@ -238,7 +308,10 @@ function hds_render_job_listing( array $attributes, string $content, \WP_Block $
 	ob_start();
 	?>
 	<div class="hds-vacancy-list">
-		<?php while ( $query->have_posts() ) : $query->the_post(); ?>
+		<?php
+		while ( $query->have_posts() ) :
+			$query->the_post();
+			?>
 			<article class="hds-vacancy-card" itemscope itemtype="https://schema.org/JobPosting">
 				<h3 class="hds-vacancy-card__title" itemprop="title">
 					<?php the_title(); ?>
@@ -250,7 +323,8 @@ function hds_render_job_listing( array $attributes, string $content, \WP_Block $
 					$hours    = get_post_meta( get_the_ID(), 'hds_hours_per_week', true );
 					$deadline = get_post_meta( get_the_ID(), 'hds_deadline', true );
 
-					if ( $hours ) : ?>
+					if ( $hours ) :
+						?>
 						<div class="hds-vacancy-card__meta-item">
 							<dt><?php esc_html_e( 'Uren', 'hds' ); ?></dt>
 							<dd><?php echo esc_html( $hours ); ?> <?php esc_html_e( 'uur per week', 'hds' ); ?></dd>
@@ -271,8 +345,8 @@ function hds_render_job_listing( array $attributes, string $content, \WP_Block $
 				</dl>
 
 				<?php
-				$content      = get_the_content();
-				$intro        = wp_trim_words( wp_strip_all_tags( $content ), 35, '...' );
+				$content = get_the_content();
+				$intro   = wp_trim_words( wp_strip_all_tags( $content ), 35, '...' );
 				?>
 				<p class="hds-vacancy-card__intro"><?php echo esc_html( $intro ); ?></p>
 				<details class="hds-vacancy-card__details">
@@ -307,8 +381,12 @@ function hds_render_job_listing( array $attributes, string $content, \WP_Block $
 
 /**
  * Render hds/contact-info block.
+ *
+ * @param array    $attributes Block attributes.
+ * @param string   $content    Saved block content.
+ * @param WP_Block $block      Block instance.
  */
-function hds_render_contact_info( array $attributes, string $content, \WP_Block $block ): string {
+function hds_render_contact_info( array $attributes, string $content, WP_Block $block ): string {
 	$show_phone   = $attributes['showPhone'] ?? true;
 	$show_email   = $attributes['showEmail'] ?? true;
 	$show_address = $attributes['showAddress'] ?? true;
@@ -390,11 +468,11 @@ function hds_render_contact_info( array $attributes, string $content, \WP_Block 
  *   - 'grid'  — full card grid with logo + name + external link (referenties page)
  *   - 'strip' — compact homepage logo strip with a CTA button
  *
- * @param array  $attributes Block attributes.
- * @param string $content    Saved block content.
+ * @param array    $attributes Block attributes.
+ * @param string   $content    Saved block content.
  * @param WP_Block $block    Block instance.
  */
-function hds_render_client_logos( array $attributes = array(), string $content = '', \WP_Block $block = null ): string {
+function hds_render_client_logos( array $attributes = array(), string $content = '', WP_Block $block = null ): string {
 	$variant = $attributes['variant'] ?? 'grid';
 
 	$clients = array(
@@ -459,13 +537,7 @@ function hds_render_client_logos( array $attributes = array(), string $content =
 				<?php foreach ( $clients as $client ) : ?>
 					<li class="hds-clients-strip__item<?php echo ! empty( $client['dark'] ) ? ' hds-clients-strip__item--dark' : ''; ?>">
 						<a href="<?php echo esc_url( $client['url'] ); ?>" target="_blank" rel="noopener noreferrer">
-							<img
-								src="<?php echo esc_url( $logo_base . $client['file'] ); ?>"
-								alt="<?php echo esc_attr( $client['alt'] ); ?>"
-								width="<?php echo esc_attr( $client['width'] ); ?>"
-								height="<?php echo esc_attr( $client['height'] ); ?>"
-								loading="lazy"
-							>
+							<img src="<?php echo esc_url( $logo_base . $client['file'] ); ?>" alt="<?php echo esc_attr( $client['alt'] ); ?>" width="<?php echo esc_attr( $client['width'] ); ?>" height="<?php echo esc_attr( $client['height'] ); ?>" loading="lazy">
 						</a>
 					</li>
 				<?php endforeach; ?>
@@ -482,13 +554,7 @@ function hds_render_client_logos( array $attributes = array(), string $content =
 					<li class="hds-clients__card<?php echo ! empty( $client['dark'] ) ? ' hds-clients__card--dark' : ''; ?>">
 						<a href="<?php echo esc_url( $client['url'] ); ?>" target="_blank" rel="noopener noreferrer">
 							<span class="hds-clients__logo">
-								<img
-									src="<?php echo esc_url( $logo_base . $client['file'] ); ?>"
-									alt="<?php echo esc_attr( $client['alt'] ); ?>"
-									width="<?php echo esc_attr( $client['width'] ); ?>"
-									height="<?php echo esc_attr( $client['height'] ); ?>"
-									loading="lazy"
-								>
+								<img src="<?php echo esc_url( $logo_base . $client['file'] ); ?>" alt="<?php echo esc_attr( $client['alt'] ); ?>" width="<?php echo esc_attr( $client['width'] ); ?>" height="<?php echo esc_attr( $client['height'] ); ?>" loading="lazy">
 							</span>
 							<span class="hds-clients__name"><?php echo esc_html( $client['name'] ); ?></span>
 						</a>
