@@ -248,7 +248,7 @@ function hds_cookie_banner(): string {
 	$active_plugins = (array) get_option( 'active_plugins', [] );
 
 	$complianz_active = in_array(
-		'complianz-gdpr/complianz-gdpr.php',
+		'complianz-gdpr/complianz-gpdr.php',
 		$active_plugins,
 		true
 	);
