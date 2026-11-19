@@ -146,12 +146,11 @@ function hds_button( string $text, string $url = '#', string $style = 'primary',
 }
 
 /**
-/**
  * Render a card wrapper.
  *
- * @param string $content Pre-escaped content HTML.
- * @param string $class   Additional CSS classes.
- * @param bool   $link    If true, card is clickable (wraps entire card).
+ * @param string $content   Pre-escaped content HTML.
+ * @param string $class     Additional CSS classes.
+ * @param bool   $clickable If true, card is clickable (wraps entire card).
  */
 function hds_card( string $content, string $class = '', bool $clickable = false ): string {
 	$classes = 'hds-card';
@@ -355,6 +354,8 @@ function hds_search_form(): string {
 
 /**
  * Replace the default WordPress search form with the HDS version.
+ *
+ * @param string $form The default WordPress search form HTML.
  */
 function hds_replace_search_form( string $form ): string {
 	return hds_search_form();
@@ -690,10 +691,16 @@ function hds_render_service_gallery(): string {
 											echo '<picture>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 											echo $webp_source; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 										}
-										echo wp_get_attachment_image( (int) $image_id, 'medium_large', false, array( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image escapes internally.
-											'alt'     => $alt,
-											'loading' => 'lazy',
-										) );
+										// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image escapes internally.
+										echo wp_get_attachment_image(
+											(int) $image_id,
+											'medium_large',
+											false,
+											array(
+												'alt'     => $alt,
+												'loading' => 'lazy',
+											)
+										);
 										if ( $webp_source ) {
 											echo '</picture>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 										}
@@ -972,7 +979,8 @@ function hds_render_service_visual_break( int $image_id = 0, string $alt = '' ):
 	}
 
 	if ( '' === $alt ) {
-		$alt = wp_get_attachment_caption( $image_id ) ?: '';
+		$caption = wp_get_attachment_caption( $image_id );
+		$alt     = $caption ? $caption : '';
 	}
 
 	ob_start();
