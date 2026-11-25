@@ -240,7 +240,24 @@ function hds_grid( string $content, int $columns = 3, string $class = '' ): stri
  * This serves as a fallback and structural placeholder during development.
  */
 function hds_cookie_banner(): string {
-	if ( function_exists( 'cmplz_cookiebanner' ) ) {
+	$active_plugins = (array) get_option( 'active_plugins', [] );
+
+	$complianz_active = in_array(
+		'complianz-gdpr/complianz-gpdr.php',
+		$active_plugins,
+		true
+	);
+
+	// Also check network-activated plugins on multisite installations.
+	if ( ! $complianz_active && is_multisite() ) {
+		$network_plugins = (array) get_site_option( 'active_sitewide_plugins', [] );
+
+		$complianz_active = isset(
+			$network_plugins['complianz-gdpr/complianz-gpdr.php']
+		);
+	}
+
+	if ( $complianz_active || function_exists( 'cmplz_cookiebanner' ) ) {
 		return '';
 	}
 
